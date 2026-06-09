@@ -101,6 +101,12 @@ button{
     border-radius:8px;
     cursor:pointer;
     font-size:16px;
+    transition:0.2s;
+}
+
+button:hover{
+    opacity:0.85;
+    transform:scale(1.02);
 }
 
 .prev{
@@ -115,6 +121,11 @@ button{
 
 .finish{
     background:#198754;
+    color:white;
+}
+
+.back-home{
+    background:#fd7e14;
     color:white;
 }
 
@@ -138,6 +149,14 @@ button{
 
 .wrong{
     color:red;
+}
+
+.result-buttons{
+    display:flex;
+    gap:15px;
+    justify-content:center;
+    margin-top:25px;
+    flex-wrap:wrap;
 }
 </style>
 </head>
@@ -179,14 +198,33 @@ button{
     <p>Jawaban Salah: <span id="wrong"></span></p>
     <p>Nilai: <span id="score"></span></p>
     <br />
-    <button class="finish" onclick="location.reload()">
-        Ulangi Kuis
-    </button>
+    <div class="result-buttons">
+        <button class="finish" onclick="location.reload()">
+            🔄 Ulangi Kuis
+        </button>
+        <button class="back-home" onclick="goToHomePage()">
+            🏠 Kembali ke Halaman Utama
+        </button>
+    </div>
 </div>
 
 </div>
 
 <script>
+
+// ========== FUNGSI KEMBALI KE HALAMAN UTAMA ==========
+function goToHomePage() {
+    // ========== SESUAIKAN URL BERIKUT INI ==========
+    // Ganti "index.html" dengan halaman yang Anda tuju
+    
+    window.location.href = "index.html";
+    
+    // Alternatif lain (hapus tanda // pada salah satu):
+    // window.location.href = "dashboard.html";
+    // window.location.href = "../";
+    // window.history.back();
+    // window.location.href = "https://www.contohwebsite.com";
+}
 
 const questions = [
 
