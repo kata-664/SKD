@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>Kuis Online - Pilihan Acak</title>
+<title>Latihan 1 - Pengetahuan Umum</title>
 
 <style>
 *{
@@ -207,8 +208,15 @@ body{
 }
 
 /* Style Utama Kuis */
-h2{
-    margin-bottom:15px;
+.header-title{
+    text-align:center;
+    margin-bottom:20px;
+    padding-bottom:10px;
+    border-bottom:2px solid #0d6efd;
+}
+
+.header-title h2{
+    color:#0d6efd;
 }
 
 .info{
@@ -312,6 +320,7 @@ button:hover{
 
 .result h1{
     margin-bottom:20px;
+    color:#0d6efd;
 }
 
 .result p{
@@ -359,49 +368,42 @@ button:hover{
 
 <div class="container">
 
-<div id="startScreen" style="text-align:center;">
-    <h2>Selamat Datang</h2>
-    <p style="margin:20px 0;font-size:18px;">
-        Silahkan tekan tombol <b>Mulai</b> jika Anda telah siap untuk menjawab.
-    </p>
-    <p style="margin-bottom:20px;color:#dc3545;">
-        ⚠️ Setelah tombol Mulai ditekan, timer akan berjalan hingga kuis selesai.
-    </p>
-    <p style="margin-bottom:20px;color:#0d6efd; background:#e9ecef; padding:10px; border-radius:8px;">
-        🔄 Setiap memulai kuis, pilihan jawaban akan diacak!
-    </p>
-    <button class="finish" onclick="startQuiz()">
-        Mulai
-    </button>
+<div class="header-title">
+    <h2>📖 Latihan 1 - Pengetahuan Umum</h2>
 </div>
 
-<div id="quiz" style="display:none;">
+<div id="quiz">
     <div class="info">
         <span id="progress">Soal 1/10</span>
         <span id="timer">10:00</span>
+    </div>
+
+    <div class="acak-info" id="acakInfo">
+        🔄 Pilihan jawaban telah diacak!
     </div>
 
     <div class="question" id="question"></div>
     <div id="options"></div>
 
     <div class="buttons">
-        <button class="prev" onclick="prevQuestion()">Previous</button>
-        <button class="next" onclick="nextQuestion()">Next</button>
+        <button class="prev" onclick="prevQuestion()">◀ Previous</button>
+        <button id="nextFinishBtn" class="next" onclick="nextQuestion()">Next ▶</button>
     </div>
 </div>
 
 <div class="result" id="result">
-    <h1>Hasil Kuis</h1>
-    <p>Jawaban Benar: <span id="correct"></span></p>
-    <p>Jawaban Salah: <span id="wrong"></span></p>
-    <p>Nilai: <span id="score"></span></p>
+    <h1>📊 Hasil Kuis</h1>
+    <p>📝 Latihan 1 - Pengetahuan Umum</p>
+    <p>✅ Jawaban Benar: <span id="correct"></span></p>
+    <p>❌ Jawaban Salah: <span id="wrong"></span></p>
+    <p>⭐ Nilai: <span id="score"></span></p>
     <br />
     <div class="result-buttons">
         <button class="finish" onclick="restartQuiz()">
             🔄 Ulangi Kuis
         </button>
         <button class="back-home" onclick="goToHomePage()">
-            🏠 Kembali ke Halaman Utama
+            🏠 Kembali ke Menu Utama
         </button>
     </div>
 </div>
@@ -409,7 +411,7 @@ button:hover{
 </div>
 
 <!-- Tombol Sidebar -->
-<div class="sidebar-toggle">
+<div class="sidebar-toggle" id="sidebarToggle">
     <button class="btn-sidebar" onclick="toggleSidebar()">
         📋 Daftar Soal
     </button>
@@ -452,102 +454,103 @@ button:hover{
 
 <script>
 
-// ========== FUNGSI KEMBALI KE HALAMAN UTAMA ==========
+// ========== FUNGSI KEMBALI KE MENU UTAMA ==========
 function goToHomePage() {
     window.location.href = "index.html";
 }
 
-// Data soal asli (tidak berubah)
+// ========== DATA SOAL LATIHAN 1 ==========
 const originalQuestions = [
 
 {
 question:"Ibukota Indonesia adalah?",
 options:["Bandung","Jakarta","Medan","Surabaya","Makassar"],
-answer:1  // Jakarta (index ke-1 dari options asli)
+answer:1
 },
 
 {
-question:"2 + 2 = ?",
-options:["1","2","3","4","5"],
-answer:3  // 4 (index ke-3)
+question:"Gunung tertinggi di Indonesia?",
+options:["Kerinci","Rinjani","Bromo","Jayawijaya","Merbabu"],
+answer:3
 },
 
 {
-question:"Planet terbesar adalah?",
-options:["Mars","Jupiter","Venus","Bumi","Merkurius"],
-answer:1  // Jupiter (index ke-1)
+question:"Tarian dari Bali?",
+options:["Jaipong","Kecak","Tor-tor","Saman","Piring"],
+answer:1
 },
 
 {
-question:"Warna bendera Indonesia?",
-options:["Merah Putih","Merah Biru","Hijau Putih","Kuning Merah","Hitam Putih"],
-answer:0  // Merah Putih (index ke-0)
-},
-
-{
-question:"5 x 5 = ?",
-options:["10","15","20","25","30"],
-answer:3  // 25 (index ke-3)
-},
-
-{
-question:"Bahasa resmi Indonesia?",
-options:["Jawa","Sunda","Indonesia","Melayu","Bugis"],
-answer:2  // Indonesia (index ke-2)
-},
-
-{
-question:"Air membeku pada suhu?",
-options:["0°C","10°C","50°C","100°C","5°C"],
-answer:0  // 0°C (index ke-0)
-},
-
-{
-question:"Pulau terbesar di Indonesia?",
-options:["Jawa","Bali","Kalimantan","Madura","Lombok"],
-answer:2  // Kalimantan (index ke-2)
+question:"Presiden pertama Indonesia?",
+options:["Soeharto","BJ Habibie","Soekarno","Megawati","Gus Dur"],
+answer:2
 },
 
 {
 question:"Hari Kemerdekaan Indonesia?",
-options:["1 Juni","17 Agustus","28 Oktober","10 November","20 Mei"],
-answer:1  // 17 Agustus (index ke-1)
+options:["17 Agustus","1 Juni","28 Oktober","10 November","20 Mei"],
+answer:0
 },
 
 {
-question:"10 + 15 = ?",
-options:["20","25","30","35","40"],
-answer:1  // 25 (index ke-1)
+question:"Lambang negara Indonesia?",
+options:["Garuda","Banteng","Komodo","Elang","Merak"],
+answer:0
+},
+
+{
+question:"Semboyan negara Indonesia?",
+options:["Bhinneka Tunggal Ika","Bersatu Kita Teguh","Merdeka","Indonesia Raya","Jayalah Indonesiaku"],
+answer:0
+},
+
+{
+question:"Bahasa resmi Indonesia?",
+options:["Jawa","Sunda","Indonesia","Melayu","Inggris"],
+answer:2
+},
+
+{
+question:"Lagu kebangsaan Indonesia?",
+options:["Indonesia Pusaka","Indonesia Raya","Rayuan Pulau Kelapa","Tanah Airku","Garuda Pancasila"],
+answer:1
+},
+
+{
+question:"Bendera Indonesia warna?",
+options:["Merah Putih","Merah Biru","Hijau Putih","Kuning Merah","Hitam Putih"],
+answer:0
 }
 
 ];
 
-// Variabel untuk menyimpan soal yang sudah diacak pilihannya
+// Variabel untuk menyimpan soal yang sudah diacak
 let questions = [];
 let currentQuestion = 0;
-let userAnswers = Array(originalQuestions.length).fill(null);
+let userAnswers = [];
 let timerInterval = null;
-
+let time = 600;
 const prefixes = ["A", "B", "C", "D", "E"];
 
-// ========== FUNGSI UNTUK MENGACAK PILIHAN ==========
+// Cek apakah ada parameter seed dari index.html
+function getParameter(nama) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(nama);
+}
+
+// ========== FUNGSI MENGACAK PILIHAN ==========
 function shuffleOptions(questionData) {
-    // Buat array yang berisi pasangan (teks, index asli)
     const optionPairs = questionData.options.map((opt, idx) => ({
         text: opt,
         originalIndex: idx
     }));
     
-    // Acak array
     for(let i = optionPairs.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [optionPairs[i], optionPairs[j]] = [optionPairs[j], optionPairs[i]];
     }
     
-    // Buat options baru yang sudah diacak
     const shuffledOptions = optionPairs.map(pair => pair.text);
-    
-    // Cari index baru dari jawaban benar
     const newAnswerIndex = optionPairs.findIndex(pair => pair.originalIndex === questionData.answer);
     
     return {
@@ -557,33 +560,48 @@ function shuffleOptions(questionData) {
     };
 }
 
-// ========== FUNGSI UNTUK MENGACAK SEMUA SOAL ==========
 function shuffleAllQuestions() {
     questions = originalQuestions.map(q => shuffleOptions(q));
 }
 
-// ========== RESTART KUIS (tanpa reload halaman) ==========
-function restartQuiz() {
-    // Hentikan timer lama jika ada
-    if(timerInterval) clearInterval(timerInterval);
+// ========== INISIALISASI ==========
+function initQuiz() {
+    // Cek apakah ada parameter seed (berarti dari menu utama)
+    const seed = getParameter('seed');
     
-    // Acak ulang semua pilihan
-    shuffleAllQuestions();
+    if(seed) {
+        // Ada parameter seed, berarti buka dari menu utama → acak pilihan
+        shuffleAllQuestions();
+        document.getElementById("acakInfo").style.display = "block";
+    } else {
+        // Tidak ada parameter, tetap acak juga (agar konsisten)
+        shuffleAllQuestions();
+        document.getElementById("acakInfo").style.display = "block";
+    }
     
-    // Reset variabel
     currentQuestion = 0;
-    userAnswers = Array(originalQuestions.length).fill(null);
+    userAnswers = Array(questions.length).fill(null);
     
-    // Sembunyikan result, tampilkan quiz
-    document.getElementById("result").style.display = "none";
-    document.getElementById("quiz").style.display = "block";
-    document.querySelector('.sidebar-toggle').style.display = "block";
-    
-    // Load soal pertama
     loadQuestion();
     updateSoalGrid();
+    startTimer();
+}
+
+function restartQuiz() {
+    if(timerInterval) clearInterval(timerInterval);
     
-    // Start timer baru
+    // Acak ulang pilihan
+    shuffleAllQuestions();
+    
+    currentQuestion = 0;
+    userAnswers = Array(questions.length).fill(null);
+    
+    document.getElementById("result").style.display = "none";
+    document.getElementById("quiz").style.display = "block";
+    document.getElementById("sidebarToggle").style.display = "block";
+    
+    loadQuestion();
+    updateSoalGrid();
     startTimer();
 }
 
@@ -591,7 +609,6 @@ function restartQuiz() {
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
-    
     sidebar.classList.toggle('open');
     overlay.classList.toggle('show');
 }
@@ -601,27 +618,13 @@ function updateSoalGrid() {
     if(!grid) return;
     
     let html = '';
-    
     for(let i = 0; i < questions.length; i++) {
-        let statusClass = '';
+        let statusClass = 'unanswered';
+        if(userAnswers[i] !== null) statusClass = 'answered';
+        if(i === currentQuestion) statusClass = 'active';
         
-        if(userAnswers[i] !== null) {
-            statusClass = 'answered';
-        } else {
-            statusClass = 'unanswered';
-        }
-        
-        if(i === currentQuestion) {
-            statusClass = 'active';
-        }
-        
-        html += `
-            <div class="grid-soal ${statusClass}" onclick="goToSoal(${i})">
-                ${i + 1}
-            </div>
-        `;
+        html += `<div class="grid-soal ${statusClass}" onclick="goToSoal(${i})">${i + 1}</div>`;
     }
-    
     grid.innerHTML = html;
 }
 
@@ -632,88 +635,65 @@ function goToSoal(soalIndex) {
     toggleSidebar();
 }
 
-function loadQuestion(){
-    document.getElementById("progress").innerText =
-    `Soal ${currentQuestion+1}/${questions.length}`;
+function loadQuestion() {
+    document.getElementById("progress").innerText = `Soal ${currentQuestion+1}/${questions.length}`;
+    document.getElementById("question").innerText = questions[currentQuestion].question;
 
-    document.getElementById("question").innerText =
-    questions[currentQuestion].question;
-
-    let html="";
-
-    questions[currentQuestion].options.forEach((opt,index)=>{
-
-        let isChecked =
-        userAnswers[currentQuestion] === index
-        ? "checked"
-        : "";
-
+    let html = "";
+    questions[currentQuestion].options.forEach((opt, index) => {
+        let isChecked = (userAnswers[currentQuestion] === index) ? "checked" : "";
         html += `
         <label class="option">
-            <input
-                type="radio"
-                name="answer"
-                value="${index}"
-                ${isChecked}
-            >
-
-            <span class="choice-letter">
-                ${prefixes[index]}
-            </span>
-
-            <span class="choice-text">
-                ${opt}
-            </span>
+            <input type="radio" name="answer" value="${index}" ${isChecked}>
+            <span class="choice-letter">${prefixes[index]}</span>
+            <span class="choice-text">${opt}</span>
         </label>
         `;
     });
 
     document.getElementById("options").innerHTML = html;
-    
     updateSoalGrid();
-    updateButtons();
+    updateButtonText();
 }
 
-function saveAnswer(){
+function updateButtonText() {
+    const btn = document.getElementById("nextFinishBtn");
+    if(currentQuestion === questions.length-1) {
+        btn.innerText = "✅ Selesai";
+        btn.className = "finish";
+        btn.onclick = () => finishQuiz();
+    } else {
+        btn.innerText = "Next ▶";
+        btn.className = "next";
+        btn.onclick = () => nextQuestion();
+    }
+}
+
+function saveAnswer() {
     const selected = document.querySelector('input[name="answer"]:checked');
-    if(selected){
+    if(selected) {
         userAnswers[currentQuestion] = parseInt(selected.value);
         updateSoalGrid();
     }
 }
 
-function nextQuestion(){
+function nextQuestion() {
     saveAnswer();
-    if(currentQuestion < questions.length-1){
+    if(currentQuestion < questions.length-1) {
         currentQuestion++;
         loadQuestion();
     }
 }
 
-function prevQuestion(){
+function prevQuestion() {
     saveAnswer();
-    if(currentQuestion > 0){
+    if(currentQuestion > 0) {
         currentQuestion--;
         loadQuestion();
     }
 }
 
-function updateButtons(){
-    const btnArea = document.querySelector(".buttons");
-    if(currentQuestion === questions.length-1){
-        btnArea.innerHTML = `
-            <button class="prev" onclick="prevQuestion()">Previous</button>
-            <button class="finish" onclick="finishQuiz()">Selesai</button>
-        `;
-    } else {
-        btnArea.innerHTML = `
-            <button class="prev" onclick="prevQuestion()">Previous</button>
-            <button class="next" onclick="nextQuestion()">Next</button>
-        `;
-    }
-}
-
-function finishQuiz(){
+function finishQuiz() {
     if(timerInterval) clearInterval(timerInterval);
     saveAnswer();
 
@@ -731,34 +711,17 @@ function finishQuiz(){
     document.getElementById("wrong").innerText = wrong;
     document.getElementById("score").innerText = score;
     
-    document.querySelector('.sidebar-toggle').style.display = "none";
+    document.getElementById("sidebarToggle").style.display = "none";
 }
 
-function startQuiz(){
-    // Acak pilihan saat pertama kali mulai
-    shuffleAllQuestions();
-    
-    document.getElementById("startScreen").style.display = "none";
-    document.getElementById("quiz").style.display = "block";
-    document.querySelector('.sidebar-toggle').style.display = "block";
-    
-    currentQuestion = 0;
-    userAnswers = Array(originalQuestions.length).fill(null);
-    
-    loadQuestion();
-    updateSoalGrid();
-    startTimer();
-}
-
-let time = 600;
-function startTimer(){
+function startTimer() {
     if(timerInterval) clearInterval(timerInterval);
     time = 600;
     timerInterval = setInterval(() => {
         let minutes = Math.floor(time/60);
         let seconds = time%60;
         document.getElementById("timer").innerText = `${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
-        if(time <= 0){
+        if(time <= 0) {
             clearInterval(timerInterval);
             finishQuiz();
         }
@@ -766,8 +729,8 @@ function startTimer(){
     }, 1000);
 }
 
-// Inisialisasi awal
-document.querySelector('.sidebar-toggle').style.display = "none";
+// Jalankan quiz saat halaman dimuat
+initQuiz();
 
 </script>
 
