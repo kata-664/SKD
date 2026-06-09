@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>Latihan 1</title>
+<title>Latihan 1 - TWK, TIU, TKP</title>
 
 <style>
 *{
@@ -160,6 +160,19 @@ body{
     box-shadow:0 0 0 3px rgba(13,110,253,0.3);
 }
 
+/* Styling untuk grid TWK, TIU, TKP */
+.grid-soal.twk{
+    border-left: 4px solid #0d6efd;
+}
+
+.grid-soal.tiu{
+    border-left: 4px solid #fd7e14;
+}
+
+.grid-soal.tkp{
+    border-left: 4px solid #198754;
+}
+
 .sidebar-info{
     margin-top:20px;
     padding-top:20px;
@@ -219,10 +232,58 @@ body{
     color:#0d6efd;
 }
 
+/* Info Section dengan Label TWK, TIU, TKP */
+.info-section{
+    background:#f8f9fa;
+    padding:12px 15px;
+    border-radius:10px;
+    margin-bottom:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.progress-label{
+    font-weight:bold;
+    color:#0d6efd;
+    background:#e9ecef;
+    padding:5px 12px;
+    border-radius:20px;
+}
+
+.category-labels{
+    display:flex;
+    gap:15px;
+}
+
+.category-badge{
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.category-badge.twk{
+    background:#0d6efd;
+    color:white;
+}
+
+.category-badge.tiu{
+    background:#fd7e14;
+    color:white;
+}
+
+.category-badge.tkp{
+    background:#198754;
+    color:white;
+}
+
 .info{
     display:flex;
     justify-content:space-between;
-    margin-bottom:20px;
+    margin-bottom:15px;
     font-weight:bold;
 }
 
@@ -381,10 +442,41 @@ button:hover{
         padding:10px 18px;
         font-size:14px;
     }
+    
+    .info-section{
+        flex-direction:column;
+        text-align:center;
+    }
 }
 
 .acak-info{
     display:none;
+}
+
+/* Current category indicator */
+.current-category{
+    font-weight:bold;
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:13px;
+}
+
+.current-category.twk{
+    background:#0d6efd20;
+    color:#0d6efd;
+    border:1px solid #0d6efd;
+}
+
+.current-category.tiu{
+    background:#fd7e1420;
+    color:#fd7e14;
+    border:1px solid #fd7e14;
+}
+
+.current-category.tkp{
+    background:#19875420;
+    color:#198754;
+    border:1px solid #198754;
 }
 </style>
 </head>
@@ -397,6 +489,17 @@ button:hover{
 </div>
 
 <div id="quiz">
+    <!-- Info Section dengan label TWK, TIU, TKP -->
+    <div class="info-section">
+        <div class="progress-label" id="progressLabel">Soal 1/10</div>
+        <div class="category-labels">
+            <span class="category-badge twk">TWK (Soal 1-2)</span>
+            <span class="category-badge tiu">TIU (Soal 3-5)</span>
+            <span class="category-badge tkp">TKP (Soal 6-10)</span>
+        </div>
+        <div id="currentCategory" class="current-category twk">📍 TWK</div>
+    </div>
+
     <div class="info">
         <span id="progress">Soal 1/10</span>
         <span id="timer">10:00</span>
@@ -462,6 +565,20 @@ button:hover{
                     <span>Belum Dijawab</span>
                 </div>
             </div>
+            <div class="legend" style="margin-top:5px;">
+                <div class="legend-item">
+                    <div class="legend-color" style="background:#0d6efd;"></div>
+                    <span>TWK (Soal 1-2)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background:#fd7e14;"></div>
+                    <span>TIU (Soal 3-5)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background:#198754;"></div>
+                    <span>TKP (Soal 6-10)</span>
+                </div>
+            </div>
             <p style="margin-top:15px; font-size:12px; color:#666;">
                 💡 Klik nomor soal untuk langsung ke soal tersebut
             </p>
@@ -479,9 +596,34 @@ function goToHomePage() {
     window.location.href = "index.html";
 }
 
+// ========== FUNGSI UNTUK MENDAPATKAN KATEGORI SOAL ==========
+function getCategory(soalNumber) {
+    // TWK: soal 1-2
+    if(soalNumber >= 1 && soalNumber <= 2) {
+        return { name: "TWK", class: "twk", range: "Soal 1-2" };
+    }
+    // TIU: soal 3-5
+    else if(soalNumber >= 3 && soalNumber <= 5) {
+        return { name: "TIU", class: "tiu", range: "Soal 3-5" };
+    }
+    // TKP: soal 6-10
+    else {
+        return { name: "TKP", class: "tkp", range: "Soal 6-10" };
+    }
+}
+
+// ========== UPDATE KATEGORI YANG SEDANG AKTIF ==========
+function updateCurrentCategory(soalNumber) {
+    const category = getCategory(soalNumber);
+    const currentCategoryElem = document.getElementById("currentCategory");
+    currentCategoryElem.textContent = `📍 ${category.name}`;
+    currentCategoryElem.className = `current-category ${category.class}`;
+}
+
 // ========== DATA SOAL LATIHAN 1 ==========
 const originalQuestions = [
 
+// TWK (Soal 1-2)
 {
 question:"Ibukota Indonesia adalah?",
 options:["Bandung","Jakarta","Medan","Surabaya","Makassar"],
@@ -494,6 +636,7 @@ options:["Kerinci","Rinjani","Bromo","Jayawijaya","Merbabu"],
 answer:3
 },
 
+// TIU (Soal 3-5)
 {
 question:"Tarian dari Bali?",
 options:["Jaipong","Kecak","Tor-tor","Saman","Piring"],
@@ -512,6 +655,7 @@ options:["17 Agustus","1 Juni","28 Oktober","10 November","20 Mei"],
 answer:0
 },
 
+// TKP (Soal 6-10)
 {
 question:"Lambang negara Indonesia?",
 options:["Garuda","Banteng","Komodo","Elang","Merak"],
@@ -556,18 +700,15 @@ const prefixes = ["A", "B", "C", "D", "E"];
 function updateTimerColor(remainingTime) {
     const timerElement = document.getElementById("timer");
     
-    // Hapus semua kelas yang ada
     timerElement.classList.remove("timer-warning", "timer-danger", "timer-blink");
     
-    // Cek sisa waktu
-    if(remainingTime <= 20) { // Kurang dari 20 detik
+    if(remainingTime <= 20) {
         timerElement.classList.add("timer-blink");
-    } else if(remainingTime <= 120) { // 2 menit (120 detik)
+    } else if(remainingTime <= 120) {
         timerElement.classList.add("timer-danger");
-    } else if(remainingTime <= 300) { // 5 menit (300 detik)
+    } else if(remainingTime <= 300) {
         timerElement.classList.add("timer-warning");
     }
-    // Selain itu warna default (hitam)
 }
 
 // ========== FUNGSI MENGACAK PILIHAN ==========
@@ -643,7 +784,10 @@ function updateSoalGrid() {
         if(userAnswers[i] !== null) statusClass = 'answered';
         if(i === currentQuestion) statusClass = 'active';
         
-        html += `<div class="grid-soal ${statusClass}" onclick="goToSoal(${i})">${i + 1}</div>`;
+        // Tambahkan class kategori untuk border color
+        const category = getCategory(i+1);
+        
+        html += `<div class="grid-soal ${statusClass} ${category.class}" onclick="goToSoal(${i})">${i + 1}</div>`;
     }
     grid.innerHTML = html;
 }
@@ -656,8 +800,14 @@ function goToSoal(soalIndex) {
 }
 
 function loadQuestion() {
-    document.getElementById("progress").innerText = `Soal ${currentQuestion+1}/${questions.length}`;
+    const soalNumber = currentQuestion + 1;
+    
+    document.getElementById("progress").innerText = `Soal ${soalNumber}/${questions.length}`;
+    document.getElementById("progressLabel").innerText = `Soal ${soalNumber}/10`;
     document.getElementById("question").innerText = questions[currentQuestion].question;
+    
+    // Update kategori yang sedang aktif
+    updateCurrentCategory(soalNumber);
 
     let html = "";
     questions[currentQuestion].options.forEach((opt, index) => {
@@ -743,7 +893,6 @@ function startTimer() {
         
         document.getElementById("timer").innerText = `${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
         
-        // Update warna timer berdasarkan sisa waktu
         updateTimerColor(time);
         
         if(time <= 0) {
