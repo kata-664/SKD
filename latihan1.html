@@ -245,43 +245,42 @@ body{
     margin-bottom:20px;
     padding-bottom:10px;
     border-bottom:2px solid #0d6efd;
-}
-
-.header-title h2{
-    color:#0d6efd;
-}
-
-.info-section{
-    background:#f8f9fa;
-    padding:12px 15px;
-    border-radius:10px;
-    margin-bottom:20px;
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    justify-content:space-between;
     flex-wrap:wrap;
     gap:10px;
 }
 
-.category-info{
-    font-size:14px;
-    color:#495057;
+.header-title h2{
+    color:#0d6efd;
+    margin:0;
 }
 
-.category-info span{
+/* Kategori aktif di samping judul */
+.header-category{
     font-weight:bold;
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:13px;
 }
 
-.category-info .twk-text{
+.header-category.twk{
+    background:#6f42c120;
     color:#6f42c1;
+    border:1px solid #6f42c1;
 }
 
-.category-info .tiu-text{
+.header-category.tiu{
+    background:#8B451320;
     color:#8B4513;
+    border:1px solid #8B4513;
 }
 
-.category-info .tkp-text{
+.header-category.tkp{
+    background:#20c99720;
     color:#20c997;
+    border:1px solid #20c997;
 }
 
 .info{
@@ -446,7 +445,7 @@ button:hover{
         font-size:14px;
     }
     
-    .info-section{
+    .header-title{
         flex-direction:column;
         text-align:center;
     }
@@ -458,31 +457,6 @@ button:hover{
 
 .acak-info{
     display:none;
-}
-
-.current-category{
-    font-weight:bold;
-    padding:5px 12px;
-    border-radius:20px;
-    font-size:13px;
-}
-
-.current-category.twk{
-    background:#6f42c120;
-    color:#6f42c1;
-    border:1px solid #6f42c1;
-}
-
-.current-category.tiu{
-    background:#8B451320;
-    color:#8B4513;
-    border:1px solid #8B4513;
-}
-
-.current-category.tkp{
-    background:#20c99720;
-    color:#20c997;
-    border:1px solid #20c997;
 }
 
 /* Score display di hasil */
@@ -532,18 +506,10 @@ button:hover{
 
 <div class="header-title">
     <h2>📖 Latihan SKD 1</h2>
+    <div id="headerCategory" class="header-category twk">📍 TWK</div>
 </div>
 
 <div id="quiz">
-    <div class="info-section">
-        <div class="category-info">
-            📚 <span class="twk-text">TWK</span> (Soal 1-30, skor 5/soal) | 
-            <span class="tiu-text">TIU</span> (Soal 31-65, skor 5/soal) | 
-            <span class="tkp-text">TKP</span> (Soal 66-110, skor 1-5/soal)
-        </div>
-        <div id="currentCategory" class="current-category twk">📍 TWK</div>
-    </div>
-
     <div class="info">
         <span id="progress">Soal 1/110</span>
         <span id="timer">120:00</span>
@@ -645,11 +611,11 @@ function getCategory(soalNumber) {
     }
 }
 
-function updateCurrentCategory(soalNumber) {
+function updateHeaderCategory(soalNumber) {
     const category = getCategory(soalNumber);
-    const currentCategoryElem = document.getElementById("currentCategory");
-    currentCategoryElem.textContent = `📍 ${category.name}`;
-    currentCategoryElem.className = `current-category ${category.class}`;
+    const headerCategoryElem = document.getElementById("headerCategory");
+    headerCategoryElem.textContent = `📍 ${category.name}`;
+    headerCategoryElem.className = `header-category ${category.class}`;
 }
 
 function updateTimerColor(remainingTime) {
@@ -833,7 +799,6 @@ const tkpSoal = [
     {q:"Sikap empati terhadap rekan kerja?", opt:["Penting","Tidak penting","Biasa","Terserah","Membosankan"], a:0},
     {q:"Menyelesaikan pekerjaan tepat waktu disebut?", opt:["Profesional","Malas","Biasa","Lamban","Ceroboh"], a:0},
     {q:"Saat ada perubahan kebijakan, sikap terbaik?", opt:["Menolak","Menerima","Mengabaikan","Membangkang","Protes"], a:1},
-    {q:"Saat ada perubahan kebijakan, sikap terbaik?", opt:["Menolak","Menerima","Mengabaikan","Membangkang","Protes"], a:1},
     {q:"Integritas adalah?", opt:["Ketidakjujuran","Kejujuran dan konsistensi","Kebohongan","Kemunafikan","Kecurangan"], a:1}
 ];
 
@@ -864,7 +829,7 @@ let questions = [];
 let currentQuestion = 0;
 let userAnswers = [];
 let timerInterval = null;
-let time = 7200; // 120 menit (7200 detik) untuk 110 soal
+let time = 6000; // 100 menit (6000 detik) untuk 110 soal
 const prefixes = ["A", "B", "C", "D", "E"];
 
 function shuffleOptions(questionData) {
@@ -950,7 +915,7 @@ function loadQuestion() {
     
     document.getElementById("progress").innerText = `Soal ${soalNumber}/${questions.length}`;
     document.getElementById("question").innerText = questions[currentQuestion].question;
-    updateCurrentCategory(soalNumber);
+    updateHeaderCategory(soalNumber);
 
     let html = "";
     questions[currentQuestion].options.forEach((opt, index) => {
@@ -1038,7 +1003,7 @@ function finishQuiz() {
 
 function startTimer() {
     if(timerInterval) clearInterval(timerInterval);
-    time = 7200; // 120 menit
+    time = 6000; // 100 menit
     timerInterval = setInterval(() => {
         let minutes = Math.floor(time/60);
         let seconds = time%60;
