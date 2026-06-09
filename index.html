@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quiz App</title>
+<title>Quiz App - Menu Utama</title>
 
 <style>
 
@@ -64,10 +64,12 @@ body{
     font-size:18px;
     margin-bottom:12px;
     cursor:pointer;
+    transition:0.2s;
 }
 
 .menu-btn:hover{
-    opacity:.9;
+    opacity:0.9;
+    transform:scale(1.02);
 }
 
 .back-btn{
@@ -79,6 +81,11 @@ body{
     color:white;
     cursor:pointer;
     margin-top:20px;
+    transition:0.2s;
+}
+
+.back-btn:hover{
+    opacity:0.9;
 }
 
 h2{
@@ -100,12 +107,28 @@ p{
     font-size:16px;
     margin-bottom:10px;
     cursor:pointer;
+    transition:0.2s;
+}
+
+.quiz-item:hover{
+    opacity:0.9;
+    transform:scale(1.02);
 }
 
 .version{
     text-align:center;
     margin-top:20px;
     color:#999;
+}
+
+.info-acak{
+    background:#e9ecef;
+    padding:10px;
+    border-radius:8px;
+    font-size:12px;
+    color:#495057;
+    text-align:center;
+    margin-top:15px;
 }
 
 </style>
@@ -134,8 +157,12 @@ p{
             ℹ️ Tentang
         </button>
 
+        <div class="info-acak">
+            🔄 Setiap membuka kuis, pilihan jawaban akan diacak!
+        </div>
+
         <div class="version">
-            Version 1.0
+            Version 2.0
         </div>
 
     </div>
@@ -145,20 +172,20 @@ p{
 
         <h2>📚 Pilih Kuis</h2>
 
-        <button class="quiz-item" onclick="location.href='latihan1.html'">
-            Latihan 1
+        <button class="quiz-item" onclick="bukaKuis('latihan1.html')">
+            📖 Latihan 1 - Pengetahuan Umum
         </button>
 
-        <button class="quiz-item" onclick="location.href='latihan2.html'">
-            Latihan 2
+        <button class="quiz-item" onclick="bukaKuis('latihan2.html')">
+            🔢 Latihan 2 - Matematika Dasar
         </button>
 
-        <button class="quiz-item">
-            Latihan 3
+        <button class="quiz-item" onclick="bukaKuis('latihan3.html')">
+            🌍 Latihan 3 - Geografi
         </button>
 
-        <button class="quiz-item">
-            Latihan 4
+        <button class="quiz-item" onclick="bukaKuis('latihan4.html')">
+            🏛️ Latihan 4 - Sejarah
         </button>
 
         <button class="back-btn" onclick="showScreen('home')">
@@ -177,6 +204,8 @@ p{
         <p>3. Pilih jawaban yang paling benar.</p>
         <p>4. Gunakan tombol Next dan Previous untuk berpindah soal.</p>
         <p>5. Tekan tombol Selesai untuk melihat hasil nilai.</p>
+        <p>6. Setiap kuis memiliki timer 10 menit.</p>
+        <p>7. Gunakan tombol 📋 Daftar Soal untuk navigasi cepat.</p>
 
         <button class="back-btn" onclick="showScreen('home')">
             Kembali
@@ -196,12 +225,15 @@ p{
         </p>
 
         <p>
-            Aplikasi ini dibuat untuk membantu pengguna berlatih
-            mengerjakan soal pilihan ganda.
+            Fitur unggulan:
+            • Pengacakan pilihan jawaban setiap kuis dibuka
+            • Timer 10 menit
+            • Sidebar grid soal untuk navigasi
+            • Hasil nilai otomatis
         </p>
 
         <p>
-            Versi : 1.0
+            Versi : 2.0
         </p>
 
         <button class="back-btn" onclick="showScreen('home')">
@@ -215,21 +247,40 @@ p{
 <script>
 
 function showScreen(id){
-
-    let screens =
-    document.querySelectorAll(".screen");
-
-    screens.forEach(screen=>{
+    let screens = document.querySelectorAll(".screen");
+    screens.forEach(screen => {
         screen.classList.remove("active");
     });
-
-    document
-    .getElementById(id)
-    .classList.add("active");
+    document.getElementById(id).classList.add("active");
 }
+
+// Fungsi untuk membuka kuis dengan parameter acak
+function bukaKuis(halaman) {
+    // Tambahkan parameter random agar setiap kali buka, pilihannya berbeda
+    // Parameter ?acak=123456789 akan membuat file latihan bisa mendeteksi bahwa
+    // ini adalah bukaan baru dan perlu mengacak pilihan
+    
+    // Cara 1: Dengan parameter timestamp
+    const timestamp = new Date().getTime();
+    window.location.href = `${halaman}?seed=${timestamp}`;
+    
+    // Cara 2: Jika ingin tanpa parameter (cukup reload biasa)
+    // Tapi untuk pengacakan, file latihan harus sudah memiliki fitur acak di dalamnya
+    // window.location.href = halaman;
+}
+
+// Informasi untuk developer:
+// File latihan1.html, latihan2.html, dll harus sudah memiliki fitur:
+// 1. Pengacakan pilihan jawaban saat halaman dimuat
+// 2. Sidebar grid soal
+// 3. Timer 10 menit
+// 4. Tampilan hasil nilai
+
+// Jika file latihan belum memiliki fitur tersebut,
+// silakan gunakan kode latihan yang sudah saya buat sebelumnya
+// dengan menambahkan parameter 'seed' untuk trigger pengacakan
 
 </script>
 
 </body>
 </html>
-
