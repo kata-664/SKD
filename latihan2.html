@@ -226,6 +226,30 @@ body{
     font-weight:bold;
 }
 
+/* Timer normal (hitam) */
+#timer{
+    transition: color 0.3s ease;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Timer warna oranye (sisa 5 menit) */
+.timer-warning{
+    color: #fd7e14 !important;
+}
+
+/* Timer warna merah (sisa 2 menit) */
+.timer-danger{
+    color: #dc3545 !important;
+    animation: blink 1s ease infinite;
+}
+
+/* Efek blink untuk timer merah */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
 .question{
     font-size:20px;
     margin-bottom:15px;
@@ -388,6 +412,7 @@ button:hover{
     color:#495057;
     text-align:center;
     margin-bottom:15px;
+    display:none;
 }
 </style>
 </head>
@@ -404,10 +429,6 @@ button:hover{
         <span id="progress">Soal 1/10</span>
         <span id="timer">10:00</span>
     </div>
-
-    <!--<div class="acak-info" id="acakInfo">
-        🔄 Pilihan jawaban telah diacak!
-    </div>-->
 
     <div class="question" id="question"></div>
     <div id="questionImage" class="question-image"></div>
@@ -488,7 +509,6 @@ function goToHomePage() {
 }
 
 // ========== DATA SOAL LATIHAN 2 (GAMBAR) ==========
-// Ganti URL gambar sesuai dengan yang Anda miliki
 const originalQuestions = [
 
 {
@@ -501,7 +521,7 @@ const originalQuestions = [
         {text:"Hamster", image:"https://i.pinimg.com/736x/50/3b/98/503b98c96e10c5d83665d7e3b7ea9282.jpg"},
         {text:"Kura-kura", image:"https://i.pinimg.com/736x/c1/bf/d9/c1bfd9bfeb58229d7eedb983fbb6a995.jpg"}
     ],
-    answer:0  // Kucing
+    answer:0
 },
 
 {
@@ -514,7 +534,7 @@ const originalQuestions = [
         {text:"Semangka", image:"https://i.pinimg.com/736x/96/07/bd/9607bd0f8d18a4b307aa5d2e5e76ee3c.jpg"},
         {text:"Strawberry", image:"https://i.pinimg.com/736x/98/2c/7a/982c7a55cef284ae2b57c565cd68f64b.jpg"}
     ],
-    answer:0  // Apel
+    answer:0
 },
 
 {
@@ -527,7 +547,7 @@ const originalQuestions = [
         {text:"Kuning", image:"https://i.pinimg.com/736x/09/87/bb/0987bbdc73414823a5b7407ac77bc9dc.jpg"},
         {text:"Ungu", image:"https://i.pinimg.com/736x/7d/4c/3e/7d4c3e724d30215b9c6c381150360117.jpg"}
     ],
-    answer:0  // Merah
+    answer:0
 },
 
 {
@@ -540,7 +560,7 @@ const originalQuestions = [
         {text:"Kapal", image:"https://i.pinimg.com/736x/34/cc/86/34cc86f74db46e9b9f439965791b5c21.jpg"},
         {text:"Sepeda", image:"https://i.pinimg.com/736x/b6/f7/bd/b6f7bd931f9fa33c1e7dab74118a6847.jpg"}
     ],
-    answer:3  // Kapal
+    answer:3
 },
 
 {
@@ -553,7 +573,7 @@ const originalQuestions = [
         {text:"Harimau", image:"https://i.pinimg.com/736x/4e/5f/6a/4e5f6a7b8c9d0e1f2a3b4c5d6e7f8g9h.jpg"},
         {text:"Zebra", image:"https://i.pinimg.com/736x/5f/6a/7b/5f6a7b8c9d0e1f2a3b4c5d6e7f8g9h0i.jpg"}
     ],
-    answer:0  // Gajah
+    answer:0
 },
 
 {
@@ -566,7 +586,7 @@ const originalQuestions = [
         {text:"Gado-gado", image:"https://i.pinimg.com/736x/9d/0e/1f/9d0e1f2a3b4c5d6e7f8g9h0i1j2k3l4m.jpg"},
         {text:"Bakso", image:"https://i.pinimg.com/736x/0e/1f/2a/0e1f2a3b4c5d6e7f8g9h0i1j2k3l4m5n.jpg"}
     ],
-    answer:0  // Rendang
+    answer:0
 },
 
 {
@@ -579,7 +599,7 @@ const originalQuestions = [
         {text:"Sulawesi", image:"https://i.pinimg.com/736x/4c/5d/6e/4c5d6e7f8g9h0i1j2k3l4m5n6o7p8q9r.jpg"},
         {text:"Papua", image:"https://i.pinimg.com/736x/5d/6e/7f/5d6e7f8g9h0i1j2k3l4m5n6o7p8q9r0s.jpg"}
     ],
-    answer:0  // Jawa Barat (Angklung)
+    answer:0
 },
 
 {
@@ -592,7 +612,7 @@ const originalQuestions = [
         {text:"Kalimantan", image:"https://i.pinimg.com/736x/9h/0i/1j/9h0i1j2k3l4m5n6o7p8q9r0s1t2u3v4w.jpg"},
         {text:"Papua", image:"https://i.pinimg.com/736x/0i/1j/2k/0i1j2k3l4m5n6o7p8q9r0s1t2u3v4w5x.jpg"}
     ],
-    answer:0  // Jawa (Kebaya/Batik)
+    answer:0
 },
 
 {
@@ -605,7 +625,7 @@ const originalQuestions = [
         {text:"Papua", image:"https://i.pinimg.com/736x/4m/5n/6o/4m5n6o7p8q9r0s1t2u3v4w5x6y7z8a9b.jpg"},
         {text:"Sumatera", image:"https://i.pinimg.com/736x/5n/6o/7p/5n6o7p8q9r0s1t2u3v4w5x6y7z8a9b0c.jpg"}
     ],
-    answer:0  // Aceh (Tari Saman)
+    answer:0
 },
 
 {
@@ -618,7 +638,7 @@ const originalQuestions = [
         {text:"Honai", image:"https://i.pinimg.com/736x/9r/0s/1t/9r0s1t2u3v4w5x6y7z8a9b0c1d2e3f4g.jpg"},
         {text:"Lamin", image:"https://i.pinimg.com/736x/0s/1t/2u/0s1t2u3v4w5x6y7z8a9b0c1d2e3f4g5h.jpg"}
     ],
-    answer:0  // Gadang (Minangkabau)
+    answer:0
 }
 
 ];
@@ -631,10 +651,20 @@ let timerInterval = null;
 let time = 600;
 const prefixes = ["A", "B", "C", "D", "E"];
 
-// Cek apakah ada parameter seed dari index.html
-function getParameter(nama) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(nama);
+// ========== FUNGSI UPDATE WARNA TIMER ==========
+function updateTimerColor(remainingTime) {
+    const timerElement = document.getElementById("timer");
+    
+    // Hapus kelas yang ada
+    timerElement.classList.remove("timer-warning", "timer-danger");
+    
+    // Cek sisa waktu
+    if(remainingTime <= 120) { // 2 menit (120 detik)
+        timerElement.classList.add("timer-danger");
+    } else if(remainingTime <= 300) { // 5 menit (300 detik)
+        timerElement.classList.add("timer-warning");
+    }
+    // Selain itu warna default (hitam)
 }
 
 // ========== FUNGSI MENGACAK PILIHAN ==========
@@ -672,7 +702,6 @@ function shuffleAllQuestions() {
 // ========== INISIALISASI ==========
 function initQuiz() {
     shuffleAllQuestions();
-    //document.getElementById("acakInfo").style.display = "block";
     
     currentQuestion = 0;
     userAnswers = Array(questions.length).fill(null);
@@ -830,7 +859,13 @@ function startTimer() {
     timerInterval = setInterval(() => {
         let minutes = Math.floor(time/60);
         let seconds = time%60;
+        
+        // Update tampilan timer
         document.getElementById("timer").innerText = `${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
+        
+        // Update warna timer berdasarkan sisa waktu
+        updateTimerColor(time);
+        
         if(time <= 0) {
             clearInterval(timerInterval);
             finishQuiz();
