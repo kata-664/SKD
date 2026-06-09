@@ -134,63 +134,66 @@ body{
     font-weight:bold;
     font-size:16px;
     transition:0.2s;
-    border:2px solid #ddd;
+    border:2px solid #dee2e6;
+    background: #f8f9fa;
+    color: #495057;
 }
 
 .grid-soal:hover{
     transform:scale(1.05);
 }
 
-/* Warna untuk soal yang SUDAH DIJAWAB */
+/* ========== STATUS WARNA (FULL BACKGROUND) ========== */
+/* Soal yang SUDAH DIJAWAB */
 .grid-soal.answered{
     background: #198754;
     color: white;
     border-color: #198754;
 }
 
-/* Warna untuk soal yang BELUM DIJAWAB */
+/* Soal yang BELUM DIJAWAB */
 .grid-soal.unanswered{
     background: #dc3545;
     color: white;
     border-color: #dc3545;
 }
 
-/* Warna untuk soal yang SEDANG AKTIF */
+/* Soal yang SEDANG AKTIF */
 .grid-soal.active{
     background: #0d6efd;
     color: white;
     border-color: #0d6efd;
-    box-shadow: 0 0 0 3px rgba(13,110,253,0.5);
+    box-shadow: 0 0 0 3px rgba(13,110,253,0.3);
     transform: scale(1.02);
 }
 
-/* Styling untuk border kategori di sidebar (hanya border kiri) */
+/* ========== WARNA KATEGORI (HANYA BORDER KIRI) ========== */
+/* TWK - Border kiri UNGU */
 .grid-soal.twk{
-    border-left: 5px solid #0d6efd;
+    border-left: 5px solid #6f42c1;
 }
 
+/* TIU - Border kiri COKLAT */
 .grid-soal.tiu{
-    border-left: 5px solid #fd7e14;
+    border-left: 5px solid #8B4513;
 }
 
+/* TKP - Border kiri TEAL */
 .grid-soal.tkp{
-    border-left: 5px solid #198754;
+    border-left: 5px solid #20c997;
 }
 
-/* Untuk soal aktif, border kiri tetap sesuai kategori tapi lebih tebal */
+/* Untuk soal aktif, border kiri putih agar kontras */
 .grid-soal.active.twk{
-    border-left: 5px solid #fff;
-    border-left-color: #fff;
+    border-left: 5px solid #ffffff;
 }
 
 .grid-soal.active.tiu{
-    border-left: 5px solid #fff;
-    border-left-color: #fff;
+    border-left: 5px solid #ffffff;
 }
 
 .grid-soal.active.tkp{
-    border-left: 5px solid #fff;
-    border-left-color: #fff;
+    border-left: 5px solid #ffffff;
 }
 
 .sidebar-info{
@@ -275,15 +278,15 @@ body{
 }
 
 .category-info .twk-text{
-    color:#0d6efd;
+    color:#6f42c1;
 }
 
 .category-info .tiu-text{
-    color:#fd7e14;
+    color:#8B4513;
 }
 
 .category-info .tkp-text{
-    color:#198754;
+    color:#20c997;
 }
 
 .info{
@@ -468,21 +471,21 @@ button:hover{
 }
 
 .current-category.twk{
-    background:#0d6efd20;
-    color:#0d6efd;
-    border:1px solid #0d6efd;
+    background:#6f42c120;
+    color:#6f42c1;
+    border:1px solid #6f42c1;
 }
 
 .current-category.tiu{
-    background:#fd7e1420;
-    color:#fd7e14;
-    border:1px solid #fd7e14;
+    background:#8B451320;
+    color:#8B4513;
+    border:1px solid #8B4513;
 }
 
 .current-category.tkp{
-    background:#19875420;
-    color:#198754;
-    border:1px solid #198754;
+    background:#20c99720;
+    color:#20c997;
+    border:1px solid #20c997;
 }
 </style>
 </head>
@@ -495,7 +498,6 @@ button:hover{
 </div>
 
 <div id="quiz">
-    <!-- Info Section dengan label kategori -->
     <div class="info-section">
         <div class="category-info">
             📚 <span class="twk-text">TWK</span> (Soal 1-2) | 
@@ -572,16 +574,16 @@ button:hover{
             </div>
             <div class="legend" style="margin-top:5px;">
                 <div class="legend-item">
-                    <div class="legend-color" style="background:#0d6efd;"></div>
-                    <span>TWK (Soal 1-2)</span>
+                    <div class="legend-color" style="background:#6f42c1;"></div>
+                    <span>🟣 TWK (Soal 1-2)</span>
                 </div>
                 <div class="legend-item">
-                    <div class="legend-color" style="background:#fd7e14;"></div>
-                    <span>TIU (Soal 3-5)</span>
+                    <div class="legend-color" style="background:#8B4513;"></div>
+                    <span>🟤 TIU (Soal 3-5)</span>
                 </div>
                 <div class="legend-item">
-                    <div class="legend-color" style="background:#198754;"></div>
-                    <span>TKP (Soal 6-10)</span>
+                    <div class="legend-color" style="background:#20c997;"></div>
+                    <span>🟢 TKP (Soal 6-10)</span>
                 </div>
             </div>
             <p style="margin-top:15px; font-size:12px; color:#666;">
@@ -603,15 +605,12 @@ function goToHomePage() {
 
 // ========== FUNGSI UNTUK MENDAPATKAN KATEGORI SOAL ==========
 function getCategory(soalNumber) {
-    // TWK: soal 1-2
     if(soalNumber >= 1 && soalNumber <= 2) {
         return { name: "TWK", class: "twk", range: "Soal 1-2" };
     }
-    // TIU: soal 3-5
     else if(soalNumber >= 3 && soalNumber <= 5) {
         return { name: "TIU", class: "tiu", range: "Soal 3-5" };
     }
-    // TKP: soal 6-10
     else {
         return { name: "TKP", class: "tkp", range: "Soal 6-10" };
     }
@@ -623,6 +622,24 @@ function updateCurrentCategory(soalNumber) {
     const currentCategoryElem = document.getElementById("currentCategory");
     currentCategoryElem.textContent = `📍 ${category.name}`;
     currentCategoryElem.className = `current-category ${category.class}`;
+}
+
+// ========== FUNGSI UPDATE WARNA TIMER ==========
+function updateTimerColor(remainingTime) {
+    const timerElement = document.getElementById("timer");
+    
+    // Hapus semua kelas yang ada
+    timerElement.classList.remove("timer-warning", "timer-danger", "timer-blink");
+    
+    // Cek sisa waktu
+    if(remainingTime <= 20) { // Kurang dari 20 detik → KEDIP
+        timerElement.classList.add("timer-blink");
+    } else if(remainingTime <= 120) { // 2 menit (120 detik) → MERAH
+        timerElement.classList.add("timer-danger");
+    } else if(remainingTime <= 300) { // 5 menit (300 detik) → ORANYE
+        timerElement.classList.add("timer-warning");
+    }
+    // Selain itu warna default (hitam)
 }
 
 // ========== DATA SOAL LATIHAN 1 ==========
@@ -693,30 +710,13 @@ answer:0
 
 ];
 
-// Variabel untuk menyimpan soal yang sudah diacak
 let questions = [];
 let currentQuestion = 0;
 let userAnswers = [];
 let timerInterval = null;
-let time = 600;
+let time = 305;
 const prefixes = ["A", "B", "C", "D", "E"];
 
-// ========== FUNGSI UPDATE WARNA TIMER ==========
-function updateTimerColor(remainingTime) {
-    const timerElement = document.getElementById("timer");
-    
-    timerElement.classList.remove("timer-warning", "timer-danger", "timer-blink");
-    
-    if(remainingTime <= 20) {
-        timerElement.classList.add("timer-blink");
-    } else if(remainingTime <= 120) {
-        timerElement.classList.add("timer-danger");
-    } else if(remainingTime <= 300) {
-        timerElement.classList.add("timer-warning");
-    }
-}
-
-// ========== FUNGSI MENGACAK PILIHAN ==========
 function shuffleOptions(questionData) {
     const optionPairs = questionData.options.map((opt, idx) => ({
         text: opt,
@@ -742,13 +742,10 @@ function shuffleAllQuestions() {
     questions = originalQuestions.map(q => shuffleOptions(q));
 }
 
-// ========== INISIALISASI ==========
 function initQuiz() {
     shuffleAllQuestions();
-    
     currentQuestion = 0;
     userAnswers = Array(questions.length).fill(null);
-    
     loadQuestion();
     updateSoalGrid();
     startTimer();
@@ -756,22 +753,17 @@ function initQuiz() {
 
 function restartQuiz() {
     if(timerInterval) clearInterval(timerInterval);
-    
     shuffleAllQuestions();
-    
     currentQuestion = 0;
     userAnswers = Array(questions.length).fill(null);
-    
     document.getElementById("result").style.display = "none";
     document.getElementById("quiz").style.display = "block";
     document.getElementById("sidebarToggle").style.display = "block";
-    
     loadQuestion();
     updateSoalGrid();
     startTimer();
 }
 
-// ========== FUNGSI SIDEBAR ==========
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
@@ -789,7 +781,6 @@ function updateSoalGrid() {
         if(userAnswers[i] !== null) statusClass = 'answered';
         if(i === currentQuestion) statusClass = 'active';
         
-        // Tambahkan class kategori untuk border color
         const category = getCategory(i+1);
         
         html += `<div class="grid-soal ${statusClass} ${category.class}" onclick="goToSoal(${i})">${i + 1}</div>`;
@@ -809,8 +800,6 @@ function loadQuestion() {
     
     document.getElementById("progress").innerText = `Soal ${soalNumber}/${questions.length}`;
     document.getElementById("question").innerText = questions[currentQuestion].question;
-    
-    // Update kategori yang sedang aktif
     updateCurrentCategory(soalNumber);
 
     let html = "";
@@ -890,13 +879,14 @@ function finishQuiz() {
 
 function startTimer() {
     if(timerInterval) clearInterval(timerInterval);
-    time = 600;
+    time = 305;
     timerInterval = setInterval(() => {
         let minutes = Math.floor(time/60);
         let seconds = time%60;
         
         document.getElementById("timer").innerText = `${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
         
+        // Update warna timer
         updateTimerColor(time);
         
         if(time <= 0) {
@@ -907,7 +897,6 @@ function startTimer() {
     }, 1000);
 }
 
-// Jalankan quiz saat halaman dimuat
 initQuiz();
 
 </script>
