@@ -141,36 +141,56 @@ body{
     transform:scale(1.05);
 }
 
+/* Warna untuk soal yang SUDAH DIJAWAB */
 .grid-soal.answered{
-    background:#198754;
-    color:white;
-    border-color:#198754;
+    background: #198754;
+    color: white;
+    border-color: #198754;
 }
 
+/* Warna untuk soal yang BELUM DIJAWAB */
 .grid-soal.unanswered{
-    background:#dc3545;
-    color:white;
-    border-color:#dc3545;
+    background: #dc3545;
+    color: white;
+    border-color: #dc3545;
 }
 
+/* Warna untuk soal yang SEDANG AKTIF */
 .grid-soal.active{
-    background:#0d6efd;
-    color:white;
-    border-color:#0d6efd;
-    box-shadow:0 0 0 3px rgba(13,110,253,0.3);
+    background: #0d6efd;
+    color: white;
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 3px rgba(13,110,253,0.5);
+    transform: scale(1.02);
 }
 
-/* Styling untuk border kategori di sidebar */
+/* Styling untuk border kategori di sidebar (hanya border kiri) */
 .grid-soal.twk{
-    border-left: 4px solid #0d6efd;
+    border-left: 5px solid #0d6efd;
 }
 
 .grid-soal.tiu{
-    border-left: 4px solid #fd7e14;
+    border-left: 5px solid #fd7e14;
 }
 
 .grid-soal.tkp{
-    border-left: 4px solid #198754;
+    border-left: 5px solid #198754;
+}
+
+/* Untuk soal aktif, border kiri tetap sesuai kategori tapi lebih tebal */
+.grid-soal.active.twk{
+    border-left: 5px solid #fff;
+    border-left-color: #fff;
+}
+
+.grid-soal.active.tiu{
+    border-left: 5px solid #fff;
+    border-left-color: #fff;
+}
+
+.grid-soal.active.tkp{
+    border-left: 5px solid #fff;
+    border-left-color: #fff;
 }
 
 .sidebar-info{
@@ -475,7 +495,7 @@ button:hover{
 </div>
 
 <div id="quiz">
-    <!-- Info Section dengan label kategori (tanpa badge) -->
+    <!-- Info Section dengan label kategori -->
     <div class="info-section">
         <div class="category-info">
             📚 <span class="twk-text">TWK</span> (Soal 1-2) | 
@@ -539,15 +559,15 @@ button:hover{
             <div class="legend">
                 <div class="legend-item">
                     <div class="legend-color" style="background:#0d6efd;"></div>
-                    <span>Soal Aktif</span>
+                    <span>🔵 Soal Aktif</span>
                 </div>
                 <div class="legend-item">
                     <div class="legend-color" style="background:#198754;"></div>
-                    <span>Sudah Dijawab</span>
+                    <span>🟢 Sudah Dijawab</span>
                 </div>
                 <div class="legend-item">
                     <div class="legend-color" style="background:#dc3545;"></div>
-                    <span>Belum Dijawab</span>
+                    <span>🔴 Belum Dijawab</span>
                 </div>
             </div>
             <div class="legend" style="margin-top:5px;">
