@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>Latihan 1</title>
+<title>Latihan 1 - Pengetahuan Umum</title>
 
 <style>
 *{
@@ -353,14 +353,9 @@ button:hover{
     }
 }
 
+/* CSS untuk acak-info disembunyikan */
 .acak-info{
-    background:#e9ecef;
-    padding:8px 12px;
-    border-radius:8px;
-    font-size:12px;
-    color:#495057;
-    text-align:center;
-    margin-bottom:15px;
+    display:none;
 }
 </style>
 </head>
@@ -377,6 +372,11 @@ button:hover{
         <span id="progress">Soal 1/10</span>
         <span id="timer">10:00</span>
     </div>
+
+    <!-- Hapus atau comment div acakInfo -->
+    <!-- <div class="acak-info" id="acakInfo">
+        🔄 Pilihan jawaban telah diacak!
+    </div> -->
 
     <div class="question" id="question"></div>
     <div id="options"></div>
@@ -562,18 +562,8 @@ function shuffleAllQuestions() {
 
 // ========== INISIALISASI ==========
 function initQuiz() {
-    // Cek apakah ada parameter seed (berarti dari menu utama)
-    const seed = getParameter('seed');
-    
-    if(seed) {
-        // Ada parameter seed, berarti buka dari menu utama → acak pilihan
-        shuffleAllQuestions();
-        document.getElementById("acakInfo").style.display = "block";
-    } else {
-        // Tidak ada parameter, tetap acak juga (agar konsisten)
-        shuffleAllQuestions();
-        document.getElementById("acakInfo").style.display = "block";
-    }
+    // Acak pilihan (tanpa menampilkan notifikasi)
+    shuffleAllQuestions();
     
     currentQuestion = 0;
     userAnswers = Array(questions.length).fill(null);
