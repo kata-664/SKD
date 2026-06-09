@@ -160,7 +160,7 @@ body{
     box-shadow:0 0 0 3px rgba(13,110,253,0.3);
 }
 
-/* Styling untuk grid TWK, TIU, TKP */
+/* Styling untuk border kategori di sidebar */
 .grid-soal.twk{
     border-left: 4px solid #0d6efd;
 }
@@ -232,7 +232,7 @@ body{
     color:#0d6efd;
 }
 
-/* Info Section dengan Label TWK, TIU, TKP */
+/* Info Section dengan Label Kategori */
 .info-section{
     background:#f8f9fa;
     padding:12px 15px;
@@ -245,39 +245,25 @@ body{
     gap:10px;
 }
 
-.progress-label{
+.category-info{
+    font-size:14px;
+    color:#495057;
+}
+
+.category-info span{
     font-weight:bold;
+}
+
+.category-info .twk-text{
     color:#0d6efd;
-    background:#e9ecef;
-    padding:5px 12px;
-    border-radius:20px;
 }
 
-.category-labels{
-    display:flex;
-    gap:15px;
+.category-info .tiu-text{
+    color:#fd7e14;
 }
 
-.category-badge{
-    padding:5px 12px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:bold;
-}
-
-.category-badge.twk{
-    background:#0d6efd;
-    color:white;
-}
-
-.category-badge.tiu{
-    background:#fd7e14;
-    color:white;
-}
-
-.category-badge.tkp{
-    background:#198754;
-    color:white;
+.category-info .tkp-text{
+    color:#198754;
 }
 
 .info{
@@ -453,7 +439,7 @@ button:hover{
     display:none;
 }
 
-/* Current category indicator */
+/* Kategori aktif saat ini */
 .current-category{
     font-weight:bold;
     padding:5px 12px;
@@ -489,13 +475,12 @@ button:hover{
 </div>
 
 <div id="quiz">
-    <!-- Info Section dengan label TWK, TIU, TKP -->
+    <!-- Info Section dengan label kategori (tanpa badge) -->
     <div class="info-section">
-        <div class="progress-label" id="progressLabel">Soal 1/10</div>
-        <div class="category-labels">
-            <span class="category-badge twk">TWK (Soal 1-2)</span>
-            <span class="category-badge tiu">TIU (Soal 3-5)</span>
-            <span class="category-badge tkp">TKP (Soal 6-10)</span>
+        <div class="category-info">
+            📚 <span class="twk-text">TWK</span> (Soal 1-2) | 
+            <span class="tiu-text">TIU</span> (Soal 3-5) | 
+            <span class="tkp-text">TKP</span> (Soal 6-10)
         </div>
         <div id="currentCategory" class="current-category twk">📍 TWK</div>
     </div>
@@ -803,7 +788,6 @@ function loadQuestion() {
     const soalNumber = currentQuestion + 1;
     
     document.getElementById("progress").innerText = `Soal ${soalNumber}/${questions.length}`;
-    document.getElementById("progressLabel").innerText = `Soal ${soalNumber}/10`;
     document.getElementById("question").innerText = questions[currentQuestion].question;
     
     // Update kategori yang sedang aktif
