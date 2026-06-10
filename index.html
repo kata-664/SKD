@@ -95,6 +95,11 @@ body{
 
 h2{
     margin-bottom:15px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
 }
 
 p{
@@ -134,6 +139,71 @@ p{
     color:#495057;
     text-align:center;
     margin-top:15px;
+}
+
+/* Toggle Switch */
+.toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .3s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .3s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #0d6efd;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.timer-status {
+    font-weight: bold;
+}
+
+.timer-status.on {
+    color: #198754;
+}
+
+.timer-status.off {
+    color: #dc3545;
 }
 
 .screenshot-overlay {
@@ -196,7 +266,16 @@ p{
     <!-- PILIH KUIS -->
     <div id="quizlist" class="screen">
 
-        <h2>📚 Pilih Soal SKD</h2>
+        <h2>
+            📚 Pilih Soal SKD
+            <div class="toggle-container">
+                <span class="timer-status" id="timerStatusLabel">⏱️ Timer ON</span>
+                <label class="switch">
+                    <input type="checkbox" id="timerToggle" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </h2>
 
         <button class="quiz-item" onclick="bukaKuis('latihan1.html')">
             📖 Latihan SKD 1
@@ -230,7 +309,7 @@ p{
         <p>3. Pilih jawaban yang paling benar.</p>
         <p>4. Gunakan tombol Next dan Previous untuk berpindah soal.</p>
         <p>5. Tekan tombol Selesai untuk melihat hasil nilai.</p>
-        <p>6. Setiap soal memiliki timer 100 menit.</p>
+        <p>6. Setiap soal memiliki timer 100 menit (bisa dimatikan).</p>
         <p>7. Gunakan tombol 📋 Daftar Soal untuk navigasi cepat.</p>
 
         <button class="back-btn" onclick="showScreen('home')">
@@ -253,7 +332,7 @@ p{
         <p>
             Fitur unggulan:
             • Pengacakan pilihan jawaban setiap soal dibuka
-            • Timer 100 menit
+            • Timer 100 menit (dapat dimatikan)
             • Sidebar grid soal untuk navigasi
             • Hasil nilai/skor otomatis
         </p>
@@ -379,6 +458,63 @@ document.querySelectorAll('button, .menu-btn, .quiz-item, .back-btn').forEach(el
     });
 });
 
+// ========== FUNGSI TIMER TOGGLE ==========
+// Mendapatkan status timer dari localStorage
+function getTimerStatus() {
+    const savedStatus = localStorage.getItem('timerEnabled');
+    // Jika belum ada setting, default true (ON)
+    if(savedStatus === null) {
+        return true;
+    }
+    return savedStatus === 'true';
+}
+
+// Menyimpan status timer ke localStorage
+function setTimerStatus(enabled) {
+    localStorage.setItem('timerEnabled', enabled);
+}
+
+// Update tampilan toggle berdasarkan status yang tersimpan
+function updateToggleUI() {
+    const toggle = document.getElementById('timerToggle');
+    const statusLabel = document.getElementById('timerStatusLabel');
+    const isEnabled = getTimerStatus();
+    
+    if(toggle) {
+        toggle.checked = isEnabled;
+    }
+    
+    if(statusLabel) {
+        if(isEnabled) {
+            statusLabel.innerHTML = '⏱️ Timer ON';
+            statusLabel.className = 'timer-status on';
+        } else {
+            statusLabel.innerHTML = '⏸️ Timer OFF';
+            statusLabel.className = 'timer-status off';
+        }
+    }
+}
+
+// Event listener untuk toggle timer
+function initTimerToggle() {
+    const toggle = document.getElementById('timerToggle');
+    if(toggle) {
+        // Set nilai awal dari localStorage
+        toggle.checked = getTimerStatus();
+        updateToggleUI();
+        
+        // Event ketika toggle diubah
+        toggle.addEventListener('change', function() {
+            const isEnabled = this.checked;
+            setTimerStatus(isEnabled);
+            updateToggleUI();
+            
+            // Tampilkan notifikasi di console
+            console.log(`Timer ${isEnabled ? 'DIAKTIFKAN' : 'DINONAKTIFKAN'} untuk latihan selanjutnya`);
+        });
+    }
+}
+
 // ========== FUNGSI UTAMA ==========
 function showScreen(id){
     let screens = document.querySelectorAll(".screen");
@@ -388,15 +524,22 @@ function showScreen(id){
     document.getElementById(id).classList.add("active");
 }
 
-// Fungsi untuk membuka kuis dengan parameter acak
+// Fungsi untuk membuka kuis dengan parameter acak dan status timer
 function bukaKuis(halaman) {
     const timestamp = new Date().getTime();
-    window.location.href = `${halaman}?seed=${timestamp}`;
+    const timerEnabled = getTimerStatus();
+    
+    // Kirim parameter seed dan timer status
+    window.location.href = `${halaman}?seed=${timestamp}&timer=${timerEnabled ? 'on' : 'off'}`;
 }
 
 // Peringatan di console (tidak mengganggu user)
 console.log("%c🚫 PERINGATAN! 🚫", "color: red; font-size: 16px; font-weight: bold;");
 console.log("%cKonten ini dilindungi. Copy dan inspect element tidak diizinkan.", "color: orange; font-size: 12px;");
+console.log("%c💡 Fitur Timer dapat diatur ON/OFF di halaman Pilih Soal SKD.", "color: #0d6efd; font-size: 12px;");
+
+// Inisialisasi toggle timer saat halaman dimuat
+initTimerToggle();
 
 </script>
 
