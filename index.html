@@ -155,6 +155,42 @@ p{
     font-size: 14px;
     display: none;
 }
+
+/* ========== ANTI-SCREENSHOT ========== */
+/* Overlay tersembunyi yang akan muncul saat screenshot (coba) */
+.screenshot-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(0,0,0,0.9) 0px,
+        rgba(0,0,0,0.9) 2px,
+        rgba(255,0,0,0.8) 2px,
+        rgba(255,0,0,0.8) 4px
+    );
+    z-index: 99999;
+    display: none;
+    pointer-events: none;
+}
+
+/* Efek blur saat halaman tidak fokus (saat screenshot via shortcut) */
+body:blur {
+    filter: blur(10px);
+}
+
+/* Watermark transparan */
+.watermark {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    font-size: 10px;
+    color: rgba(0,0,0,0.2);
+    z-index: 100;
+    pointer-events: none;
+}
 </style>
 </head>
 <body>
@@ -268,6 +304,10 @@ p{
 
 </div>
 
+<!-- Overlay untuk anti-screenshot -->
+<div id="screenshotOverlay" class="screenshot-overlay"></div>
+<div class="watermark">© Quiz App - Hak Cipta Dilindungi</div>
+
 <script>
 // ========== PERLINDUNGAN ==========
 
@@ -282,46 +322,63 @@ document.addEventListener('keydown', function(e) {
     // F12
     if(e.key === 'F12') {
         e.preventDefault();
+        showScreenshotWarning();
         return false;
     }
     // Ctrl+Shift+I (Windows/Linux)
     if(e.ctrlKey && e.shiftKey && e.key === 'I') {
         e.preventDefault();
+        showScreenshotWarning();
         return false;
     }
     // Ctrl+Shift+J (Windows/Linux)
     if(e.ctrlKey && e.shiftKey && e.key === 'J') {
         e.preventDefault();
+        showScreenshotWarning();
         return false;
     }
     // Ctrl+Shift+C (Windows/Linux)
     if(e.ctrlKey && e.shiftKey && e.key === 'C') {
         e.preventDefault();
+        showScreenshotWarning();
         return false;
     }
     // Ctrl+U (View Source)
     if(e.ctrlKey && e.key === 'u') {
         e.preventDefault();
+        showScreenshotWarning();
         return false;
     }
     // Ctrl+S (Save)
     if(e.ctrlKey && e.key === 's') {
         e.preventDefault();
+        showScreenshotWarning();
         return false;
     }
     // Ctrl+P (Print)
     if(e.ctrlKey && e.key === 'p') {
         e.preventDefault();
+        showScreenshotWarning();
         return false;
     }
-    // Ctrl+C (Copy) - bisa diizinkan untuk user biasa, tapi kita batasi
-    // Jika ingin mencegah copy, uncomment baris di bawah
-    /*
-    if(e.ctrlKey && e.key === 'c') {
+    // Print Screen key
+    if(e.key === 'PrintScreen') {
         e.preventDefault();
+        showScreenshotWarning();
         return false;
     }
-    */
+    // Windows + Shift + S (Snipping Tool)
+    if(e.metaKey && e.shiftKey && e.key === 'S') {
+        e.preventDefault();
+        showScreenshotWarning();
+        return false;
+    }
+    // Windows + PrtSc
+    if(e.metaKey && e.key === 'PrintScreen') {
+        e.preventDefault();
+        showScreenshotWarning();
+        return false;
+    }
 });
 
 // 3. Mencegah drag and drop pada gambar/teks
@@ -330,40 +387,99 @@ document.addEventListener('dragstart', function(e) {
     return false;
 });
 
-// 4. Mencegah seleksi teks tambahan dengan CSS sudah di body
-// 5. Overlay peringatan jika devtools terbuka (deteksi)
-(function() {
-    const devtools = function() {};
-    devtools.toString = function() {
-        this.opened = true;
-    };
-    console.log('%c', devtools);
-    
-    // Deteksi pembukaan devtools
-    setInterval(function() {
-        const before = new Date().getTime();
-        debugger;
-        const after = new Date().getTime();
-        if (after - before > 100) {
-            // Devtools terbuka, bisa lakukan sesuatu
-            // Contoh: redirect atau tampilkan peringatan
-            // window.location.href = 'about:blank';
-            console.log('DevTools terdeteksi!');
-        }
-    }, 1000);
-})();
+// 4. Mencegah copy
+document.addEventListener('copy', function(e) {
+    e.preventDefault();
+    showScreenshotWarning();
+    return false;
+});
 
-// 6. Enkripsi sederhana untuk konten penting (opsional)
-function decodeContent(encoded) {
-    return atob(encoded); // base64 decode
+// 5. Mencegah cut
+document.addEventListener('cut', function(e) {
+    e.preventDefault();
+    showScreenshotWarning();
+    return false;
+});
+
+// 6. Fungsi untuk menampilkan peringatan screenshot
+function showScreenshotWarning() {
+    const overlay = document.getElementById('screenshotOverlay');
+    overlay.style.display = 'block';
+    
+    // Tampilkan peringatan alert
+    alert('🚫 SORRY! Screenshot tidak diizinkan. Konten ini dilindungi! 🚫');
+    
+    // Sembunyikan overlay setelah 2 detik
+    setTimeout(() => {
+        overlay.style.display = 'none';
+    }, 2000);
 }
 
-// 7. Mencegah inspect element melalui tombol kanan pada elemen tertentu
+// 7. Mencegah seleksi teks tambahan dengan CSS sudah di body
+
+// 8. Deteksi screenshot via keyboard shortcut (visibility change)
+document.addEventListener('visibilitychange', function() {
+    if(document.hidden) {
+        // Halaman tidak terlihat (mungkin sedang screenshot atau switch tab)
+        console.log('Halaman tidak terlihat');
+    }
+});
+
+// 9. Mencegah inspect element melalui tombol kanan pada elemen tertentu
 document.querySelectorAll('button, .menu-btn, .quiz-item, .back-btn').forEach(el => {
     el.addEventListener('contextmenu', function(e) {
         e.preventDefault();
         return false;
     });
+});
+
+// 10. Deteksi devtools
+(function() {
+    let devtoolsOpen = false;
+    
+    // Metode deteksi devtools
+    function detectDevTools() {
+        const before = new Date().getTime();
+        debugger;
+        const after = new Date().getTime();
+        
+        if (after - before > 100) {
+            if (!devtoolsOpen) {
+                devtoolsOpen = true;
+                showScreenshotWarning();
+            }
+        } else {
+            devtoolsOpen = false;
+        }
+    }
+    
+    setInterval(detectDevTools, 1000);
+})();
+
+// 11. Prevent print screen via canvas (alternatif)
+function clearScreenForScreenshot() {
+    const overlay = document.getElementById('screenshotOverlay');
+    overlay.style.display = 'block';
+    setTimeout(() => {
+        overlay.style.display = 'none';
+    }, 500);
+}
+
+// Event listener untuk mendeteksi perubahan style yang mungkin disebabkan oleh screenshot tools
+const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+        if(mutation.type === 'attributes') {
+            showScreenshotWarning();
+        }
+    });
+});
+observer.observe(document.body, { attributes: true });
+
+// 12. Menonaktifkan PrintScreen via event listener lain
+window.addEventListener('keyup', function(e) {
+    if(e.key === 'PrintScreen') {
+        showScreenshotWarning();
+    }
 });
 
 // ========== FUNGSI UTAMA ==========
@@ -381,36 +497,18 @@ function bukaKuis(halaman) {
     window.location.href = `${halaman}?seed=${timestamp}`;
 }
 
-// 8. Memata-matai perubahan ukuran (deteksi devtools)
-let element = new Image();
-Object.defineProperty(element, 'id', {
-    get: function() {
-        // Devtools mencoba mengakses properti
-        console.warn('Akses mencurigakan terdeteksi');
-        return '';
-    }
-});
-console.log(element);
-
-// 9. Menonaktifkan cut, copy, paste pada seluruh halaman (opsional)
-/*
-document.addEventListener('cut', function(e) {
-    e.preventDefault();
-    return false;
-});
-document.addEventListener('copy', function(e) {
-    e.preventDefault();
-    return false;
-});
-document.addEventListener('paste', function(e) {
-    e.preventDefault();
-    return false;
-});
-*/
-
-// 10. Peringatan jika console dibuka (hanya peringatan)
+// Peringatan di console
 console.log("%c🚫 PERINGATAN! 🚫", "color: red; font-size: 16px; font-weight: bold;");
-console.log("%cKonten ini dilindungi dan tidak boleh dicopy atau direproduksi tanpa izin.", "color: orange; font-size: 12px;");
+console.log("%cKonten ini dilindungi. Screenshot, copy, dan inspect element tidak diizinkan.", "color: orange; font-size: 12px;");
+
+// Deteksi screen capture software (basic)
+setInterval(function() {
+    // Cek apakah ada elemen yang mencurigakan
+    const suspiciousElements = document.querySelectorAll('[style*="screenshot"], [class*="screenshot"]');
+    if(suspiciousElements.length > 0) {
+        showScreenshotWarning();
+    }
+}, 2000);
 
 </script>
 
