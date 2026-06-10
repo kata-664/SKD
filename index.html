@@ -605,9 +605,9 @@ function loadBestScores() {
     }
     if(bestScores.length > 0) {
         const maxScore = Math.max(...bestScores);
-        document.getElementById('skorTerbaik').innerText = maxScore;
+        document.getElementById('skorTerbaik').innerHTML = `${maxScore} / 550`;  // ← INI YANG DIUBAH
     } else {
-        document.getElementById('skorTerbaik').innerText = '-';
+        document.getElementById('skorTerbaik').innerHTML = '- / 550';  // ← INI JUGA DIUBAH
     }
 }
 
