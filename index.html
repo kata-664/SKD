@@ -787,7 +787,7 @@ function showEvaluasi(){
     const icon=statusCls==='benar'?'✅':statusCls==='salah'?'❌':'⏳';
     html+=`<div class="evaluasi-item ${statusCls}">
       <div class="soal-teks">${icon} Soal ${n} [${cat.name}]</div>
-      <div class="soal-teks" style="font-weight:normal;font-size:13px;margin-top:4px;">${questions[i].question}</div>
+      <div class="soal-teks" style="font-weight:normal;font-size:13px;margin-top:4px;text-align:justify;">${questions[i].question}</div>
       <div class="jawaban-user">📌 Jawaban Anda: ${jawUser}</div>
       ${jawBenar?`<div class="jawaban-benar">✅ ${jawBenar}</div>`:''}
       <div class="pembahasan">💡 ${pembahasan}</div>
