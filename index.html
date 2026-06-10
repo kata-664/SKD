@@ -604,6 +604,8 @@ refreshHomeStats();
 
 // ==================== START QUIZ ====================
 function startQuiz(setId){
+  // ✅ Hentikan timer lama jika ada
+  if(timerInterval){ clearInterval(timerInterval); timerInterval=null; }
   activeSet=setId;
   const orig=buildOriginals();
   questions=orig.map(q=>shuffleOpts(q));
