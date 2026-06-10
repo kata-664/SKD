@@ -925,26 +925,13 @@ console.log("%c🚫 PERINGATAN! 🚫", "color: red; font-size: 16px; font-weight
 console.log("%cKonten ini dilindungi. Copy dan inspect element tidak diizinkan.", "color: orange; font-size: 12px");
 // TAMBAHKAN INI DI PALING BAWAH SEBELUM
 
-// ========== PERBAIKAN TOMBAK BACK ==========
-// Hapus semua history sebelumnya
-history.replaceState(null, '', window.location.pathname);
-
-// Tangkap event tombol back
-window.addEventListener('popstate', function(e) {
-    // Cek apakah sedang di halaman utama (home)
-    const aktif = document.querySelector('.screen.active');
-    
-    if (aktif && aktif.id === 'home') {
-        // Langsung keluar tanpa konfirmasi (atau pakai confirm jika mau)
-        window.location.href = 'about:blank';
-        // Alternatif: window.close();
-    } else {
-        // Jika tidak di home, kembali ke home
-        showScreen('home');
-    }
+// ========== PERBAIKAN TOMBAK BACK SEDERHANA ==========
+// Saat tombol back ditekan, langsung keluar
+window.addEventListener('popstate', function() {
+    window.location.href = 'about:blank';
 });
 
-// Push state baru
+// Push state awal
 history.pushState(null, '', window.location.pathname);
 </script>
 </body>
