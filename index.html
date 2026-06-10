@@ -10,11 +10,7 @@ body{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh
 .page{display:none;width:100%;max-width:620px;}
 .page.active{display:block;animation:fadeIn 0.3s ease;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-
-/* ===== CARD WRAPPER ===== */
 .card{background:rgba(255,255,255,0.98);border-radius:28px;box-shadow:0 20px 60px rgba(0,0,0,.3);padding:22px;margin-bottom:20px;}
-
-/* ===== HOME ===== */
 .logo{text-align:center;margin-bottom:20px;}
 .logo .icon{font-size:52px;margin-bottom:8px;}
 .logo h1{background:linear-gradient(135deg,#667eea,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-size:26px;margin-bottom:6px;}
@@ -26,8 +22,6 @@ body{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh
 .menu-btn:hover{transform:scale(1.02);box-shadow:0 5px 20px rgba(102,126,234,.4);}
 .info-acak{background:linear-gradient(135deg,#f093fb,#f5576c);padding:12px;border-radius:14px;font-size:11px;color:white;text-align:center;margin-top:12px;font-weight:bold;}
 .version{text-align:center;margin-top:16px;color:#aaa;font-size:11px;}
-
-/* ===== QUIZ LIST ===== */
 .page-title{margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;color:#333;font-size:17px;padding-bottom:10px;border-bottom:2px solid #e9ecef;}
 .toggle-container{display:flex;align-items:center;gap:8px;font-size:11px;background:#e9ecef;padding:4px 12px;border-radius:30px;}
 .switch{position:relative;display:inline-block;width:42px;height:20px;}
@@ -39,7 +33,6 @@ input:checked+.slider:before{transform:translateX(22px);}
 .timer-status{font-weight:bold;font-size:10px;}
 .timer-status.on{color:#198754;}
 .timer-status.off{color:#dc3545;}
-
 .quiz-item{width:100%;background:white;border-radius:18px;margin-bottom:10px;cursor:pointer;transition:.2s;box-shadow:0 2px 8px rgba(0,0,0,.06);border:1px solid #e9ecef;overflow:hidden;}
 .quiz-item:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.1);}
 .quiz-header{display:flex;align-items:center;justify-content:space-between;padding:14px;background:linear-gradient(135deg,#11998e,#38ef7d);color:white;}
@@ -63,12 +56,8 @@ input:checked+.slider:before{transform:translateX(22px);}
 .reset-btn:hover{background:#c82333;}
 .back-btn{width:100%;padding:12px;border:none;border-radius:16px;background:#6c757d;color:white;cursor:pointer;margin-top:10px;font-weight:bold;transition:.2s;}
 .back-btn:hover{background:#5a6268;}
-
-/* ===== PETUNJUK / TENTANG ===== */
 .info-block{border-radius:16px;padding:14px;margin-bottom:14px;}
 .info-block p{line-height:1.7;margin-bottom:8px;color:#555;font-size:14px;}
-
-/* ===== QUIZ SCREEN ===== */
 #quizPage{max-width:900px;}
 .quiz-card{background:white;border-radius:16px;box-shadow:0 5px 15px rgba(0,0,0,.1);padding:22px;}
 .quiz-top{text-align:center;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid #0d6efd;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
@@ -86,19 +75,21 @@ input:checked+.slider:before{transform:translateX(22px);}
 .timer-danger{color:#dc3545!important;}
 .timer-blink{color:#dc3545!important;animation:blinkFast .5s ease infinite;font-weight:bold;}
 @keyframes blinkFast{0%,100%{opacity:1}50%{opacity:.3}}
-.question-txt{font-size:17px;margin-bottom:18px;font-weight:bold;line-height:1.6;}
+/* ===== PENTING: question-txt pakai innerHTML bukan textContent ===== */
+.question-txt{font-size:16px;margin-bottom:18px;font-weight:bold;line-height:1.6;}
+.question-txt img{max-width:100%;border-radius:8px;display:block;margin:8px 0;}
 .option{display:flex;align-items:center;gap:12px;margin-bottom:10px;padding:13px;border:1px solid #ddd;border-radius:10px;cursor:pointer;transition:.2s;}
 .option:hover{background:#f2f2f2;}
 .option input{display:none;}
 .choice-letter{width:38px;height:38px;min-width:38px;border-radius:50%;background:#0d6efd;color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:17px;}
 .option input:checked+.choice-letter{background:#198754;}
 .choice-text{flex:1;font-size:15px;}
+/* choice-text boleh mengandung HTML (img) */
+.choice-text img{max-height:60px;vertical-align:middle;border-radius:6px;}
 .quiz-btns{display:flex;justify-content:space-between;margin-top:18px;}
 .btn-prev{padding:10px 20px;border:none;border-radius:8px;background:#6c757d;color:white;cursor:pointer;font-size:15px;transition:.2s;}
 .btn-next{padding:10px 20px;border:none;border-radius:8px;background:#0d6efd;color:white;cursor:pointer;font-size:15px;transition:.2s;}
 .btn-finish{padding:10px 20px;border:none;border-radius:8px;background:#198754;color:white;cursor:pointer;font-size:15px;transition:.2s;}
-
-/* ===== SIDEBAR ===== */
 .sidebar-toggle{position:fixed;bottom:28px;right:20px;z-index:1000;}
 .btn-sidebar{background:#0d6efd;color:white;border:none;border-radius:50px;padding:11px 20px;font-size:15px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.2);display:flex;align-items:center;gap:8px;}
 .sidebar{position:fixed;top:0;right:-360px;width:340px;height:100vh;background:white;box-shadow:-2px 0 10px rgba(0,0,0,.1);z-index:1001;transition:right .3s ease;display:flex;flex-direction:column;overflow-y:auto;}
@@ -119,8 +110,6 @@ input:checked+.slider:before{transform:translateX(22px);}
 .grid-soal.active.twk,.grid-soal.active.tiu,.grid-soal.active.tkp{border-left:4px solid #fff;}
 .overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:1000;display:none;}
 .overlay.show{display:block;}
-
-/* ===== RESULT ===== */
 .result-card{background:white;border-radius:16px;box-shadow:0 5px 15px rgba(0,0,0,.1);padding:22px;text-align:center;}
 .result-card h1{margin-bottom:14px;color:#0d6efd;font-size:22px;}
 .score-detail{text-align:left;max-width:440px;margin:16px auto;padding:14px;background:#f8f9fa;border-radius:10px;}
@@ -143,9 +132,10 @@ input:checked+.slider:before{transform:translateX(22px);}
 .evaluasi-item .jawaban-user{font-size:13px;margin-bottom:4px;}
 .evaluasi-item .jawaban-benar{font-size:13px;margin-bottom:4px;color:#198754;}
 .evaluasi-item .pembahasan{font-size:12px;margin-top:6px;padding-top:6px;border-top:1px dashed #ddd;color:#495057;}
+/* evaluasi soal bergambar */
+.evaluasi-item .soal-teks img{max-width:100%;max-height:100px;border-radius:6px;display:block;margin-top:4px;}
+.evaluasi-item .jawaban-user img,.evaluasi-item .jawaban-benar img{max-height:40px;vertical-align:middle;border-radius:6px;}
 .btn-close-eval{padding:10px 18px;border:none;border-radius:10px;background:#6c757d;color:white;cursor:pointer;margin-top:10px;}
-
-/* ===== MODAL ===== */
 .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:20000;justify-content:center;align-items:center;}
 .modal.show{display:flex;}
 .modal-content{background:white;padding:24px;border-radius:22px;max-width:300px;text-align:center;animation:fadeIn .3s ease;}
@@ -155,21 +145,17 @@ input:checked+.slider:before{transform:translateX(22px);}
 .modal-btns button{padding:9px 18px;border:none;border-radius:10px;cursor:pointer;font-weight:bold;}
 .btn-confirm{background:#dc3545;color:white;}
 .btn-cancel{background:#6c757d;color:white;}
-
-/* ===== SCREENSHOT OVERLAY ===== */
 .screenshot-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.9);z-index:99999;display:none;pointer-events:none;}
 .watermark{position:fixed;bottom:6px;left:8px;font-size:8px;color:rgba(255,255,255,.2);z-index:100;pointer-events:none;}
-
 @media(max-width:600px){
   .sidebar{width:100%;right:-100%;}
   .quiz-top{flex-direction:column;text-align:center;}
-  .question-txt{font-size:15px;}
+  .question-txt{font-size:14px;}
 }
 </style>
 </head>
 <body>
 
-<!-- ============================= HOME ============================= -->
 <div id="homePage" class="page active">
   <div class="card">
     <div class="logo">
@@ -190,7 +176,6 @@ input:checked+.slider:before{transform:translateX(22px);}
   </div>
 </div>
 
-<!-- ============================= QUIZ LIST ============================= -->
 <div id="quizlistPage" class="page">
   <div class="card">
     <div class="page-title">
@@ -206,7 +191,6 @@ input:checked+.slider:before{transform:translateX(22px);}
   </div>
 </div>
 
-<!-- ============================= PETUNJUK ============================= -->
 <div id="petunjukPage" class="page">
   <div class="card">
     <div class="page-title">📖 Petunjuk</div>
@@ -230,7 +214,6 @@ input:checked+.slider:before{transform:translateX(22px);}
   </div>
 </div>
 
-<!-- ============================= TENTANG ============================= -->
 <div id="tentangPage" class="page">
   <div class="card">
     <div class="page-title">ℹ️ Tentang</div>
@@ -255,7 +238,6 @@ input:checked+.slider:before{transform:translateX(22px);}
   </div>
 </div>
 
-<!-- ============================= QUIZ ============================= -->
 <div id="quizPage" class="page">
   <div class="quiz-card">
     <div class="quiz-top">
@@ -280,7 +262,6 @@ input:checked+.slider:before{transform:translateX(22px);}
   </div>
 </div>
 
-<!-- ============================= RESULT ============================= -->
 <div id="resultPage" class="page">
   <div class="result-card">
     <h1>📊 Skor Latihan</h1>
@@ -297,7 +278,6 @@ input:checked+.slider:before{transform:translateX(22px);}
   </div>
 </div>
 
-<!-- ============================= SIDEBAR ============================= -->
 <div class="sidebar-toggle" id="sidebarToggle" style="display:none;">
   <button class="btn-sidebar" onclick="toggleSidebar()">📋 Daftar Soal</button>
 </div>
@@ -322,7 +302,6 @@ input:checked+.slider:before{transform:translateX(22px);}
 </div>
 <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
-<!-- ============================= MODALS ============================= -->
 <div id="resetModal" class="modal">
   <div class="modal-content">
     <h3>⚠️ Reset Progress</h3>
@@ -343,8 +322,7 @@ document.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('keydown',e=>{
   const k=e.key,c=e.ctrlKey,s=e.shiftKey;
   if(k==='F12'||(c&&s&&'ICJ'.includes(k))||(c&&'usp'.includes(k))||k==='PrintScreen'){
-    e.preventDefault();
-    flashOverlay();
+    e.preventDefault();flashOverlay();
   }
 });
 document.addEventListener('dragstart',e=>e.preventDefault());
@@ -356,23 +334,18 @@ function flashOverlay(){const o=document.getElementById('screenshotOverlay');o.s
 // ==================== PAGE NAVIGATION ====================
 const PAGES=['homePage','quizlistPage','petunjukPage','tentangPage','quizPage','resultPage'];
 let currentPage='homePage';
-
 function goTo(pageId){
   if(currentPage===pageId)return;
   PAGES.forEach(p=>document.getElementById(p).classList.remove('active'));
   document.getElementById(pageId).classList.add('active');
   currentPage=pageId;
-  // scroll to top
   window.scrollTo(0,0);
   if(pageId==='quizlistPage')refreshQuizList();
   if(pageId==='homePage')refreshHomeStats();
 }
 
 // ==================== TIMER ====================
-function getTimerEnabled(){
-  const v=localStorage.getItem('timerEnabled');
-  return v===null?true:v==='true';
-}
+function getTimerEnabled(){const v=localStorage.getItem('timerEnabled');return v===null?true:v==='true';}
 function setTimerEnabled(v){localStorage.setItem('timerEnabled',v);}
 function syncTimerToggle(){
   const en=getTimerEnabled();
@@ -381,48 +354,38 @@ function syncTimerToggle(){
   if(toggle)toggle.checked=en;
   if(label){label.textContent=en?'⏱️ ON':'⏸️ OFF';label.className='timer-status '+(en?'on':'off');}
 }
-document.getElementById('timerToggle').addEventListener('change',function(){
-  setTimerEnabled(this.checked);syncTimerToggle();
-});
+document.getElementById('timerToggle').addEventListener('change',function(){setTimerEnabled(this.checked);syncTimerToggle();});
 syncTimerToggle();
 
-// ==================== QUIZ DATA 1====================
-const twkBank1=[
-  {q:"Pancasila sebagai dasar negara Indonesia terdiri dari berapa sila?",opt:["3","4","5","6","7"],a:2},
-  {q:"Siapa presiden pertama Indonesia?",opt:["Soeharto","Soekarno","Habibie","Gus Dur","Megawati"],a:1},
-  {q:"Bendera Indonesia berwarna?",opt:["Merah Putih","Merah Biru","Kuning Merah","Hijau Putih","Hitam Putih"],a:0},
-  {q:"Lagu kebangsaan Indonesia adalah?",opt:["Indonesia Pusaka","Indonesia Raya","Rayuan Pulau Kelapa","Tanah Airku","Garuda Pancasila"],a:1},
-  {q:"Semboyan negara Indonesia adalah?",opt:["Bersatu Kita Teguh","Bhinneka Tunggal Ika","Merdeka","Jayalah Indonesiaku","Indonesia Jaya"],a:1},
-  {q:"Hari Kemerdekaan RI diperingati tanggal?",opt:["17 Agustus","1 Juni","28 Oktober","10 November","20 Mei"],a:0},
-  {q:"Lambang negara Indonesia adalah?",opt:["Garuda","Banteng","Komodo","Elang","Merak"],a:0},
-  {q:"Bahasa resmi Indonesia adalah?",opt:["Jawa","Sunda","Indonesia","Melayu","Inggris"],a:2},
-  {q:"Ibukota Indonesia adalah?",opt:["Bandung","Jakarta","Surabaya","Medan","Makassar"],a:1},
-  {q:"BPUPKI dibentuk pada tanggal?",opt:["1 Maret 1945","29 April 1945","1 Juni 1945","17 Agustus 1945","18 Agustus 1945"],a:0},
-  {q:"Proklamasi Kemerdekaan dibacakan oleh?",opt:["Soekarno","Moh Hatta","Soeharto","Ki Hajar Dewantara","Jendral Sudirman"],a:0},
-  {q:"Sumpah Pemuda diperingati tanggal?",opt:["17 Agustus","28 Oktober","10 November","20 Mei","1 Juni"],a:1},
-  {q:"Konstitusi Indonesia adalah?",opt:["UUD 1945","UUD 1950","UUD Sementara","Proklamasi","Dekrit Presiden"],a:0},
-  {q:"Pahlawan wanita dari Aceh adalah?",opt:["RA Kartini","Cut Nyak Dien","Dewi Sartika","Martha Tiahahu","Christina Tiahahu"],a:1},
-  {q:"Gunung tertinggi di Indonesia?",opt:["Kerinci","Rinjani","Bromo","Jayawijaya","Merbabu"],a:3},
-  {q:"Danau terbesar di Indonesia?",opt:["Toba","Maninjau","Singkarak","Poso","Towuti"],a:0},
-  {q:"Pulau terpadat di Indonesia?",opt:["Jawa","Sumatra","Kalimantan","Sulawesi","Papua"],a:0},
-  {q:"Selat yang memisahkan Jawa dan Sumatra?",opt:["Selat Sunda","Selat Bali","Selat Lombok","Selat Malaka","Selat Makassar"],a:0},
-  {q:"Tarian dari Bali?",opt:["Jaipong","Kecak","Tor-tor","Saman","Piring"],a:1},
-  {q:"Alat musik tradisional dari Jawa Barat?",opt:["Angklung","Gamelan","Sasando","Tifa","Kolintang"],a:0},
-  {q:"Rumah adat Minangkabau?",opt:["Gadang","Joglo","Tongkonan","Honai","Lamin"],a:0},
-  {q:"Makanan khas dari Padang?",opt:["Rendang","Gudeg","Pempek","Sate Lilit","Ayam Betutu"],a:0},
-  {q:"Candi Borobudur terletak di?",opt:["Jawa Tengah","Jawa Timur","Yogyakarta","Bali","Lampung"],a:0},
-  {q:"Agama resmi yang diakui di Indonesia ada?",opt:["4","5","6","7","8"],a:1},
-  {q:"Bahasa pengantar di sekolah adalah?",opt:["Inggris","Indonesia","Daerah","Arab","Mandarin"],a:1},
-  {q:"Lembaga yang berwenang mengubah UUD?",opt:["DPR","MPR","MA","MK","Presiden"],a:1},
-  {q:"Hak angket DPR adalah hak untuk?",opt:["Menyelidiki","Mengajukan","Mengubah","Menghapus","Menolak"],a:0},
-  {q:"TNI singkatan dari?",opt:["Tentara Nasional Indonesia","Tentara Negara Indonesia","Tugas Nasional Indonesia","Tim Nasional Indonesia","Tentara Nusantara Indonesia"],a:0},
-  {q:"Polri singkatan dari?",opt:["Polisi Republik Indonesia","Polisi Negara Indonesia","Polisi Nasional Indonesia","Pasukan Republik Indonesia","Pengawal Republik Indonesia"],a:0},
-  {q:"Warna pada lambang Garuda Pancasila melambangkan?",opt:["Kemakmuran","Kesuburan","Keadilan","Persatuan","Kekuatan"],a:0}
-];
+// ==================== QUIZ DATA ====================
 
+// ---- tiuBank1: soal 1 & 2 diganti bergambar (base64 SVG - works online & offline) ----
 const tiuBank1=[
-  {q:"2 + 2 = ?",opt:["2","3","4","5","6"],a:2},
-  {q:"5 x 5 = ?",opt:["20","25","30","35","40"],a:1},
+  // SOAL 1: Deret Pola Gambar
+  {
+    q:`<span style="display:block;margin-bottom:6px;font-weight:bold;color:#0d6efd;">🖼️ Perhatikan deret pola berikut, gambar ke-4 adalah...?</span><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzODAiIGhlaWdodD0iMTEwIj4KICA8cmVjdCB3aWR0aD0iMzgwIiBoZWlnaHQ9IjExMCIgZmlsbD0iI2VlZjJmZiIgcng9IjEwIi8+CiAgPHRleHQgeD0iMTQiIHk9IjE4IiBmb250LXNpemU9IjExIiBmaWxsPSIjNTU1IiBmb250LWZhbWlseT0iQXJpYWwiPlBvbGEgZGVyZXQgZ2FtYmFyIGtlLTQgYWRhbGFoIC4uLj88L3RleHQ+CiAgPHJlY3QgeD0iMTAiIHk9IjI0IiB3aWR0aD0iNjgiIGhlaWdodD0iNjgiIGZpbGw9IndoaXRlIiBzdHJva2U9IiMwZDZlZmQiIHN0cm9rZS13aWR0aD0iMiIgcng9IjciLz4KICA8Y2lyY2xlIGN4PSI0NCIgY3k9IjU4IiByPSIxNCIgZmlsbD0iIzBkNmVmZCIvPgogIDx0ZXh0IHg9IjM2IiB5PSIxMDIiIGZvbnQtc2l6ZT0iMTAiIGZpbGw9IiM1NTUiIGZvbnQtZmFtaWx5PSJBcmlhbCI+S2UtMTwvdGV4dD4KICA8cmVjdCB4PSI5MiIgeT0iMjQiIHdpZHRoPSI2OCIgaGVpZ2h0PSI2OCIgZmlsbD0id2hpdGUiIHN0cm9rZT0iIzBkNmVmZCIgc3Ryb2tlLXdpZHRoPSIyIiByeD0iNyIvPgogIDxjaXJjbGUgY3g9IjExNiIgY3k9IjQ2IiByPSIxMiIgZmlsbD0iIzBkNmVmZCIvPgogIDxjaXJjbGUgY3g9IjE0MiIgY3k9IjcwIiByPSIxMiIgZmlsbD0iIzBkNmVmZCIvPgogIDx0ZXh0IHg9IjExOCIgeT0iMTAyIiBmb250LXNpemU9IjEwIiBmaWxsPSIjNTU1IiBmb250LWZhbWlseT0iQXJpYWwiPktlLTI8L3RleHQ+CiAgPHJlY3QgeD0iMTc0IiB5PSIyNCIgd2lkdGg9IjY4IiBoZWlnaHQ9IjY4IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjMGQ2ZWZkIiBzdHJva2Utd2lkdGg9IjIiIHJ4PSI3Ii8+CiAgPGNpcmNsZSBjeD0iMTkzIiBjeT0iNDIiIHI9IjEwIiBmaWxsPSIjMGQ2ZWZkIi8+CiAgPGNpcmNsZSBjeD0iMjA4IiBjeT0iNjIiIHI9IjEwIiBmaWxsPSIjMGQ2ZWZkIi8+CiAgPGNpcmNsZSBjeD0iMjI1IiBjeT0iNDIiIHI9IjEwIiBmaWxsPSIjMGQ2ZWZkIi8+CiAgPHRleHQgeD0iMjAwIiB5PSIxMDIiIGZvbnQtc2l6ZT0iMTAiIGZpbGw9IiM1NTUiIGZvbnQtZmFtaWx5PSJBcmlhbCI+S2UtMzwvdGV4dD4KICA8cmVjdCB4PSIyNTYiIHk9IjI0IiB3aWR0aD0iNjgiIGhlaWdodD0iNjgiIGZpbGw9IiNmZmYwZjAiIHN0cm9rZT0iI2RjMzU0NSIgc3Ryb2tlLXdpZHRoPSIyLjUiIHJ4PSI3IiBzdHJva2UtZGFzaGFycmF5PSI2LDMiLz4KICA8dGV4dCB4PSIyODEiIHk9IjY4IiBmb250LXNpemU9IjMwIiBmaWxsPSIjZGMzNTQ1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtd2VpZ2h0PSJib2xkIj4/PC90ZXh0PgogIDx0ZXh0IHg9IjI4MiIgeT0iMTAyIiBmb250LXNpemU9IjEwIiBmaWxsPSIjZGMzNTQ1IiBmb250LWZhbWlseT0iQXJpYWwiPktlLTQ8L3RleHQ+CiAgPHRleHQgeD0iODMiIHk9IjYyIiBmb250LXNpemU9IjE4IiBmaWxsPSIjYWFhIj7ihpI8L3RleHQ+CiAgPHRleHQgeD0iMTY1IiB5PSI2MiIgZm9udC1zaXplPSIxOCIgZmlsbD0iI2FhYSI+4oaSPC90ZXh0PgogIDx0ZXh0IHg9IjI0NyIgeT0iNjIiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiNhYWEiPuKGkjwvdGV4dD4KPC9zdmc+" alt="Deret pola lingkaran ke-1 ke-2 ke-3 tanda tanya" style="max-width:100%;border-radius:8px;margin:6px 0;display:block;">`,
+    opt:[
+      `<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MiIgaGVpZ2h0PSI1MiI+PHJlY3Qgd2lkdGg9IjUyIiBoZWlnaHQ9IjUyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjMTk4NzU0IiBzdHJva2Utd2lkdGg9IjIiIHJ4PSI2Ii8+PGNpcmNsZSBjeD0iMTQiIGN5PSIxNiIgcj0iOSIgZmlsbD0iIzE5ODc1NCIvPjxjaXJjbGUgY3g9IjM0IiBjeT0iMTYiIHI9IjkiIGZpbGw9IiMxOTg3NTQiLz48Y2lyY2xlIGN4PSIxNCIgY3k9IjM2IiByPSI5IiBmaWxsPSIjMTk4NzU0Ii8+PGNpcmNsZSBjeD0iMzQiIGN5PSIzNiIgcj0iOSIgZmlsbD0iIzE5ODc1NCIvPjwvc3ZnPg==" alt="4 lingkaran" style="height:50px;border-radius:6px;vertical-align:middle;margin-right:6px">4 lingkaran`,
+      `<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MiIgaGVpZ2h0PSI1MiI+PHJlY3Qgd2lkdGg9IjUyIiBoZWlnaHQ9IjUyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjMGQ2ZWZkIiBzdHJva2Utd2lkdGg9IjIiIHJ4PSI2Ii8+PGNpcmNsZSBjeD0iMTYiIGN5PSIxOCIgcj0iOSIgZmlsbD0iIzBkNmVmZCIvPjxjaXJjbGUgY3g9IjM2IiBjeT0iMTgiIHI9IjkiIGZpbGw9IiMwZDZlZmQiLz48Y2lyY2xlIGN4PSIyNiIgY3k9IjM2IiByPSI5IiBmaWxsPSIjMGQ2ZWZkIi8+PC9zdmc+" alt="3 lingkaran" style="height:50px;border-radius:6px;vertical-align:middle;margin-right:6px">3 lingkaran`,
+      `<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MiIgaGVpZ2h0PSI1MiI+PHJlY3Qgd2lkdGg9IjUyIiBoZWlnaHQ9IjUyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjMGQ2ZWZkIiBzdHJva2Utd2lkdGg9IjIiIHJ4PSI2Ii8+PGNpcmNsZSBjeD0iMTQiIGN5PSIxNiIgcj0iOSIgZmlsbD0iIzBkNmVmZCIvPjxjaXJjbGUgY3g9IjM0IiBjeT0iMTYiIHI9IjkiIGZpbGw9IiMwZDZlZmQiLz48Y2lyY2xlIGN4PSIxNCIgY3k9IjM2IiByPSI5IiBmaWxsPSIjMGQ2ZWZkIi8+PGNpcmNsZSBjeD0iMzQiIGN5PSIzNiIgcj0iOSIgZmlsbD0iIzBkNmVmZCIvPjxjaXJjbGUgY3g9IjI0IiBjeT0iMjYiIHI9IjkiIGZpbGw9IiMwZDZlZmQiLz48L3N2Zz4=" alt="5 lingkaran" style="height:50px;border-radius:6px;vertical-align:middle;margin-right:6px">5 lingkaran`,
+      `<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MiIgaGVpZ2h0PSI1MiI+PHJlY3Qgd2lkdGg9IjUyIiBoZWlnaHQ9IjUyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjMGQ2ZWZkIiBzdHJva2Utd2lkdGg9IjIiIHJ4PSI2Ii8+PGNpcmNsZSBjeD0iMTgiIGN5PSIyMiIgcj0iOSIgZmlsbD0iIzBkNmVmZCIvPjxjaXJjbGUgY3g9IjM4IiBjeT0iMzQiIHI9IjkiIGZpbGw9IiMwZDZlZmQiLz48L3N2Zz4=" alt="2 lingkaran" style="height:50px;border-radius:6px;vertical-align:middle;margin-right:6px">2 lingkaran`,
+      `<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MiIgaGVpZ2h0PSI1MiI+PHJlY3Qgd2lkdGg9IjUyIiBoZWlnaHQ9IjUyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjMGQ2ZWZkIiBzdHJva2Utd2lkdGg9IjIiIHJ4PSI2Ii8+PGNpcmNsZSBjeD0iMjgiIGN5PSIyOCIgcj0iOSIgZmlsbD0iIzBkNmVmZCIvPjwvc3ZnPg==" alt="1 lingkaran" style="height:50px;border-radius:6px;vertical-align:middle;margin-right:6px">1 lingkaran`
+    ],
+    a:0
+  },
+  // SOAL 2: Luas Segitiga dari Gambar
+  {
+    q:`<span style="display:block;margin-bottom:6px;font-weight:bold;color:#16a34a;">🖼️ Berapa luas segitiga pada gambar berikut?</span><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iMTcwIj4KICA8cmVjdCB3aWR0aD0iMjgwIiBoZWlnaHQ9IjE3MCIgZmlsbD0iI2YwZmRmNCIgcng9IjEwIi8+CiAgPHRleHQgeD0iMTIiIHk9IjIwIiBmb250LXNpemU9IjEyIiBmaWxsPSIjMzMzIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtd2VpZ2h0PSJib2xkIj5IaXR1bmcgbHVhcyBzZWdpdGlnYSBiZXJpa3V0OjwvdGV4dD4KICA8cG9seWdvbiBwb2ludHM9IjE0MCwzMCAzMCwxNDUgMjUwLDE0NSIgZmlsbD0iI2JiZjdkMCIgc3Ryb2tlPSIjMTZhMzRhIiBzdHJva2Utd2lkdGg9IjIuNSIvPgogIDxsaW5lIHgxPSIxNDAiIHkxPSIzMCIgeDI9IjE0MCIgeTI9IjE0NSIgc3Ryb2tlPSIjZGMyNjI2IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWRhc2hhcnJheT0iNSwzIi8+CiAgPHJlY3QgeD0iMTQwIiB5PSIxMzYiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2RjMjYyNiIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8dGV4dCB4PSIxMTgiIHk9IjE2MiIgZm9udC1zaXplPSIxMyIgZmlsbD0iIzE2NjUzNCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXdlaWdodD0iYm9sZCI+YSA9IDEyIGNtPC90ZXh0PgogIDx0ZXh0IHg9IjE0NSIgeT0iOTIiIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiNkYzI2MjYiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC13ZWlnaHQ9ImJvbGQiPnQgPSA4IGNtPC90ZXh0Pgo8L3N2Zz4=" alt="Segitiga dengan alas 12 cm dan tinggi 8 cm" style="max-width:100%;border-radius:8px;margin:6px 0;display:block;">`,
+    opt:[
+      `<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSIzNiI+PHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjM2IiBmaWxsPSIjZGNmY2U3IiBzdHJva2U9IiMxNmEzNGEiIHN0cm9rZS13aWR0aD0iMiIgcng9IjgiLz48dGV4dCB4PSI0MCIgeT0iMjQiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMxNjY1MzQiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC13ZWlnaHQ9ImJvbGQiIHRleHQtYW5jaG9yPSJtaWRkbGUiPjQ4IGNtwrI8L3RleHQ+PC9zdmc+" alt="48 cm persegi" style="height:34px;border-radius:8px;vertical-align:middle">`,
+      `<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSIzNiI+PHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjM2IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjNmM3NTdkIiBzdHJva2Utd2lkdGg9IjIiIHJ4PSI4Ii8+PHRleHQgeD0iNDAiIHk9IjI0IiBmb250LXNpemU9IjE0IiBmaWxsPSIjMzc0MTUxIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtd2VpZ2h0PSJib2xkIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj45NiBjbcKyPC90ZXh0Pjwvc3ZnPg==" alt="96 cm persegi" style="height:34px;border-radius:8px;vertical-align:middle">`,
+      `<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSIzNiI+PHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjM2IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjNmM3NTdkIiBzdHJva2Utd2lkdGg9IjIiIHJ4PSI4Ii8+PHRleHQgeD0iNDAiIHk9IjI0IiBmb250LXNpemU9IjE0IiBmaWxsPSIjMzc0MTUxIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtd2VpZ2h0PSJib2xkIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj4yNCBjbcKyPC90ZXh0Pjwvc3ZnPg==" alt="24 cm persegi" style="height:34px;border-radius:8px;vertical-align:middle">`,
+      `<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSIzNiI+PHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjM2IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjNmM3NTdkIiBzdHJva2Utd2lkdGg9IjIiIHJ4PSI4Ii8+PHRleHQgeD0iNDAiIHk9IjI0IiBmb250LXNpemU9IjE0IiBmaWxsPSIjMzc0MTUxIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtd2VpZ2h0PSJib2xkIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj4yMCBjbcKyPC90ZXh0Pjwvc3ZnPg==" alt="20 cm persegi" style="height:34px;border-radius:8px;vertical-align:middle">`,
+      `<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSIzNiI+PHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjM2IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjNmM3NTdkIiBzdHJva2Utd2lkdGg9IjIiIHJ4PSI4Ii8+PHRleHQgeD0iNDAiIHk9IjI0IiBmb250LXNpemU9IjE0IiBmaWxsPSIjMzc0MTUxIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtd2VpZ2h0PSJib2xkIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj40MCBjbcKyPC90ZXh0Pjwvc3ZnPg==" alt="40 cm persegi" style="height:34px;border-radius:8px;vertical-align:middle">`
+    ],
+    a:0
+  },
+  // SOAL 3-35: tetap teks biasa
   {q:"10 - 3 = ?",opt:["5","6","7","8","9"],a:2},
   {q:"100 : 4 = ?",opt:["20","25","30","35","40"],a:1},
   {q:"Akar dari 81 adalah?",opt:["7","8","9","10","11"],a:2},
@@ -456,6 +419,39 @@ const tiuBank1=[
   {q:"Jika 3x + 2 = 11, maka x = ?",opt:["2","3","4","5","6"],a:1},
   {q:"Jika x + 5 = 10, maka x = ?",opt:["2","3","4","5","6"],a:3},
   {q:"Jika 2x - 3 = 7, maka x = ?",opt:["3","4","5","6","7"],a:2}
+];
+
+const twkBank1=[
+  {q:"Pancasila sebagai dasar negara Indonesia terdiri dari berapa sila?",opt:["3","4","5","6","7"],a:2},
+  {q:"Siapa presiden pertama Indonesia?",opt:["Soeharto","Soekarno","Habibie","Gus Dur","Megawati"],a:1},
+  {q:"Bendera Indonesia berwarna?",opt:["Merah Putih","Merah Biru","Kuning Merah","Hijau Putih","Hitam Putih"],a:0},
+  {q:"Lagu kebangsaan Indonesia adalah?",opt:["Indonesia Pusaka","Indonesia Raya","Rayuan Pulau Kelapa","Tanah Airku","Garuda Pancasila"],a:1},
+  {q:"Semboyan negara Indonesia adalah?",opt:["Bersatu Kita Teguh","Bhinneka Tunggal Ika","Merdeka","Jayalah Indonesiaku","Indonesia Jaya"],a:1},
+  {q:"Hari Kemerdekaan RI diperingati tanggal?",opt:["17 Agustus","1 Juni","28 Oktober","10 November","20 Mei"],a:0},
+  {q:"Lambang negara Indonesia adalah?",opt:["Garuda","Banteng","Komodo","Elang","Merak"],a:0},
+  {q:"Bahasa resmi Indonesia adalah?",opt:["Jawa","Sunda","Indonesia","Melayu","Inggris"],a:2},
+  {q:"Ibukota Indonesia adalah?",opt:["Bandung","Jakarta","Surabaya","Medan","Makassar"],a:1},
+  {q:"BPUPKI dibentuk pada tanggal?",opt:["1 Maret 1945","29 April 1945","1 Juni 1945","17 Agustus 1945","18 Agustus 1945"],a:0},
+  {q:"Proklamasi Kemerdekaan dibacakan oleh?",opt:["Soekarno","Moh Hatta","Soeharto","Ki Hajar Dewantara","Jendral Sudirman"],a:0},
+  {q:"Sumpah Pemuda diperingati tanggal?",opt:["17 Agustus","28 Oktober","10 November","20 Mei","1 Juni"],a:1},
+  {q:"Konstitusi Indonesia adalah?",opt:["UUD 1945","UUD 1950","UUD Sementara","Proklamasi","Dekrit Presiden"],a:0},
+  {q:"Pahlawan wanita dari Aceh adalah?",opt:["RA Kartini","Cut Nyak Dien","Dewi Sartika","Martha Tiahahu","Christina Tiahahu"],a:1},
+  {q:"Gunung tertinggi di Indonesia?",opt:["Kerinci","Rinjani","Bromo","Jayawijaya","Merbabu"],a:3},
+  {q:"Danau terbesar di Indonesia?",opt:["Toba","Maninjau","Singkarak","Poso","Towuti"],a:0},
+  {q:"Pulau terpadat di Indonesia?",opt:["Jawa","Sumatra","Kalimantan","Sulawesi","Papua"],a:0},
+  {q:"Selat yang memisahkan Jawa dan Sumatra?",opt:["Selat Sunda","Selat Bali","Selat Lombok","Selat Malaka","Selat Makassar"],a:0},
+  {q:"Tarian dari Bali?",opt:["Jaipong","Kecak","Tor-tor","Saman","Piring"],a:1},
+  {q:"Alat musik tradisional dari Jawa Barat?",opt:["Angklung","Gamelan","Sasando","Tifa","Kolintang"],a:0},
+  {q:"Rumah adat Minangkabau?",opt:["Gadang","Joglo","Tongkonan","Honai","Lamin"],a:0},
+  {q:"Makanan khas dari Padang?",opt:["Rendang","Gudeg","Pempek","Sate Lilit","Ayam Betutu"],a:0},
+  {q:"Candi Borobudur terletak di?",opt:["Jawa Tengah","Jawa Timur","Yogyakarta","Bali","Lampung"],a:0},
+  {q:"Agama resmi yang diakui di Indonesia ada?",opt:["4","5","6","7","8"],a:1},
+  {q:"Bahasa pengantar di sekolah adalah?",opt:["Inggris","Indonesia","Daerah","Arab","Mandarin"],a:1},
+  {q:"Lembaga yang berwenang mengubah UUD?",opt:["DPR","MPR","MA","MK","Presiden"],a:1},
+  {q:"Hak angket DPR adalah hak untuk?",opt:["Menyelidiki","Mengajukan","Mengubah","Menghapus","Menolak"],a:0},
+  {q:"TNI singkatan dari?",opt:["Tentara Nasional Indonesia","Tentara Negara Indonesia","Tugas Nasional Indonesia","Tim Nasional Indonesia","Tentara Nusantara Indonesia"],a:0},
+  {q:"Polri singkatan dari?",opt:["Polisi Republik Indonesia","Polisi Negara Indonesia","Polisi Nasional Indonesia","Pasukan Republik Indonesia","Pengawal Republik Indonesia"],a:0},
+  {q:"Warna pada lambang Garuda Pancasila melambangkan?",opt:["Kemakmuran","Kesuburan","Keadilan","Persatuan","Kekuatan"],a:0}
 ];
 
 const tkpBank1=[
@@ -505,34 +501,11 @@ const tkpBank1=[
   {q:"Integritas adalah?",opts:["Ketidakjujuran","Kejujuran dan konsistensi","Kebohongan","Kemunafikan","Kecurangan"],scores:[1,5,2,3,4]},
   {q:"Sikap terhadap rekan kerja yang berbeda pendapat?",opts:["Memusuhi","Menghargai","Mengabaikan","Mengolok","Mengancam"],scores:[1,5,2,3,4]}
 ];
-// ==================== QUIZ DATA 2====================
-const twkBank2=[
-];
-const tiuBank2=[
-];
-const tkpBank2=[
-];
-// ==================== QUIZ DATA 3====================
-const twkBank3=[
-];
-const tiuBank3=[
-];
-const tkpBank3=[
-];
-// ==================== QUIZ DATA 4====================
-const twkBank4=[
-];
-const tiuBank4=[
-];
-const tkpBank4=[
-];
-// ==================== QUIZ DATA 5====================
-const twkBank5=[
-];
-const tiuBank5=[
-];
-const tkpBank5=[
-];
+
+const twkBank2=[],tiuBank2=[],tkpBank2=[];
+const twkBank3=[],tiuBank3=[],tkpBank3=[];
+const twkBank4=[],tiuBank4=[],tkpBank4=[];
+const twkBank5=[],tiuBank5=[],tkpBank5=[];
 
 // ==================== QUIZ STATE ====================
 let activeSet=1;
@@ -544,7 +517,6 @@ let timerInterval=null;
 let timeLeft=6000;
 const PREFIXES=["A","B","C","D","E"];
 const PASSING={TWK:65,TIU:80,TKP:166};
-const ICONS=["📘","📗","📙","📕","📔"];
 
 // ==================== HELPERS ====================
 function getCat(n){
@@ -566,26 +538,23 @@ function shuffleOpts(q){
   }
 }
 
-// Menambah soal
-const soalPerLatihan = {
-  1: { twk: twkBank1, tiu: tiuBank1, tkp: tkpBank1 },
-  2: { twk: twkBank2, tiu: tiuBank2, tkp: tkpBank2 },
-  3: { twk: twkBank3, tiu: tiuBank3, tkp: tkpBank3 },
-  4: { twk: twkBank4, tiu: tiuBank4, tkp: tkpBank4 },
-  5: { twk: twkBank5, tiu: tiuBank5, tkp: tkpBank5 },
-  // dst...
+const soalPerLatihan={
+  1:{twk:twkBank1,tiu:tiuBank1,tkp:tkpBank1},
+  2:{twk:twkBank2,tiu:tiuBank2,tkp:tkpBank2},
+  3:{twk:twkBank3,tiu:tiuBank3,tkp:tkpBank3},
+  4:{twk:twkBank4,tiu:tiuBank4,tkp:tkpBank4},
+  5:{twk:twkBank5,tiu:tiuBank5,tkp:tkpBank5},
 };
 
 function buildOriginals(){
-  const bank = soalPerLatihan[activeSet];
+  const bank=soalPerLatihan[activeSet];
   const orig=[];
   bank.twk.forEach(d=>orig.push({question:d.q,options:[...d.opt],answer:d.a,isTKP:false,optionScores:null}));
   bank.tiu.forEach(d=>orig.push({question:d.q,options:[...d.opt],answer:d.a,isTKP:false,optionScores:null}));
   bank.tkp.forEach(d=>orig.push({question:d.q,options:[...d.opts],answer:null,isTKP:true,optionScores:[...d.scores]}));
   return orig;
 }
-// Menambah soal...
-  
+
 function hitungSkor(){
   let twk=0,tiu=0,tkp=0;
   for(let i=0;i<questions.length;i++){
@@ -607,8 +576,7 @@ const quizMeta=[
 ];
 
 function refreshQuizList(){
-  const c=document.getElementById('quizListContainer');
-  c.innerHTML='';
+  const c=document.getElementById('quizListContainer');c.innerHTML='';
   quizMeta.forEach(m=>{
     const twk=localStorage.getItem(`skorTWK_latihan${m.id}`);
     const tiu=localStorage.getItem(`skorTIU_latihan${m.id}`);
@@ -618,20 +586,12 @@ function refreshQuizList(){
     const badgesHtml=done?
       `<span class="skor-badge twk">TWK:${twk}/150</span><span class="skor-badge tiu">TIU:${tiu}/175</span><span class="skor-badge tkp">TKP:${tkp}/225</span>`
       :`<span class="skor-badge belum">-</span><span class="skor-badge belum">-</span><span class="skor-badge belum">-</span>`;
-    c.innerHTML+=`
-    <div class="quiz-item" onclick="startQuiz(${m.id})">
-      <div class="quiz-header">
-        <div class="quiz-left"><span class="quiz-icon">${m.icon}</span><span>${m.name}</span></div>
-        <div class="quiz-right">${badgesHtml}</div>
-      </div>
-      <div class="quiz-detail">
-        <div class="total-skor-container">
-          <span class="total-skor-label">Total Skor:</span>
-          <span class="total-skor-value ${done?'completed':''}">${total} / 550</span>
-        </div>
-        <span class="status-badge ${done?'selesai':'belum'}">${done?'✅ Selesai':'⏳ Belum'}</span>
-      </div>
-    </div>`;
+    c.innerHTML+=`<div class="quiz-item" onclick="startQuiz(${m.id})">
+      <div class="quiz-header"><div class="quiz-left"><span class="quiz-icon">${m.icon}</span><span>${m.name}</span></div>
+      <div class="quiz-right">${badgesHtml}</div></div>
+      <div class="quiz-detail"><div class="total-skor-container"><span class="total-skor-label">Total Skor:</span>
+      <span class="total-skor-value ${done?'completed':''}">${total} / 550</span></div>
+      <span class="status-badge ${done?'selesai':'belum'}">${done?'✅ Selesai':'⏳ Belum'}</span></div></div>`;
   });
 }
 
@@ -651,7 +611,6 @@ function startQuiz(setId){
   userAnswers=Array(questions.length).fill(null);
   userScores=Array(questions.length).fill(null);
   timeLeft=6000;
-  // reset evaluasi
   document.getElementById('evaluasiPanel').style.display='none';
   document.getElementById('btnCloseEval').style.display='none';
   document.getElementById('quizTitle').textContent=`📖 Latihan SKD ${setId}`;
@@ -660,14 +619,20 @@ function startQuiz(setId){
   loadQuestion();
   updateGrid();
   if(getTimerEnabled()){startTimer();}
-  else{document.getElementById('timerDisplay').style.opacity='.5';document.getElementById('timerBadge').textContent='⏸️ Timer OFF';document.getElementById('timerBadge').className='timer-badge off';}
+  else{
+    document.getElementById('timerDisplay').style.opacity='.5';
+    document.getElementById('timerBadge').textContent='⏸️ Timer OFF';
+    document.getElementById('timerBadge').className='timer-badge off';
+  }
 }
 
 // ==================== LOAD QUESTION ====================
+// PERUBAHAN UTAMA: gunakan innerHTML bukan textContent agar soal/opsi bergambar tampil
 function loadQuestion(){
   const n=curQ+1;
   document.getElementById('quizProgress').textContent=`Soal ${n}/${questions.length}`;
-  document.getElementById('quizQuestion').textContent=questions[curQ].question;
+  // innerHTML agar tag <img> dan <span> di dalam soal bisa dirender
+  document.getElementById('quizQuestion').innerHTML=questions[curQ].question;
   const cat=getCat(n);
   const hc=document.getElementById('quizHeaderCat');
   hc.textContent=`📍 ${cat.name}`;hc.className=`header-cat ${cat.cls}`;
@@ -676,10 +641,10 @@ function loadQuestion(){
     let checked=false;
     if(questions[curQ].isTKP)checked=(userScores[curQ]===questions[curQ].optionScores[idx]);
     else checked=(userAnswers[curQ]===idx);
+    // innerHTML di choice-text agar gambar pada opsi juga tampil
     html+=`<label class="option"><input type="radio" name="ans" value="${idx}" ${checked?'checked':''}><span class="choice-letter">${PREFIXES[idx]}</span><span class="choice-text">${opt}</span></label>`;
   });
   document.getElementById('quizOptions').innerHTML=html;
-  // Next/Finish button
   const btn=document.getElementById('btnNextFinish');
   if(curQ===questions.length-1){btn.textContent='✅ Selesai';btn.className='btn-finish';btn.onclick=finishQuiz;}
   else{btn.textContent='Next ▶';btn.className='btn-next';btn.onclick=nextQuestion;}
@@ -717,8 +682,7 @@ function startTimer(){
 
 // ==================== GRID ====================
 function updateGrid(){
-  const grid=document.getElementById('soalGrid');
-  if(!grid)return;
+  const grid=document.getElementById('soalGrid');if(!grid)return;
   let html='';
   for(let i=0;i<questions.length;i++){
     let st='unanswered';
@@ -739,30 +703,25 @@ function toggleSidebar(){
 
 // ==================== FINISH ====================
 function finishQuiz(){
-  if(timerInterval)clearInterval(timerInterval);
-  timerInterval=null;
+  if(timerInterval)clearInterval(timerInterval);timerInterval=null;
   saveAnswer();
   document.getElementById('sidebarToggle').style.display='none';
   const s=hitungSkor();
-  // Save scores
   localStorage.setItem(`skorTWK_latihan${activeSet}`,s.twk);
   localStorage.setItem(`skorTIU_latihan${activeSet}`,s.tiu);
   localStorage.setItem(`skorTKP_latihan${activeSet}`,s.tkp);
   const key=`bestScore_latihan${activeSet}`;
   const prev=localStorage.getItem(key);
   if(prev===null||s.total>parseInt(prev))localStorage.setItem(key,s.total);
-  // Show result
   const pass={twk:s.twk>=PASSING.TWK,tiu:s.tiu>=PASSING.TIU,tkp:s.tkp>=PASSING.TKP};
   pass.all=pass.twk&&pass.tiu&&pass.tkp;
   document.getElementById('scoreDetail').innerHTML=`
-    <h3>📊 Detail Skor</h3>
-    <table>
+    <h3>📊 Detail Skor</h3><table>
       <tr><td>📚 TWK (30 soal)</td><td><strong>${s.twk}</strong> / 150</td></tr>
       <tr><td>🔢 TIU (35 soal)</td><td><strong>${s.tiu}</strong> / 175</td></tr>
       <tr><td>⭐ TKP (45 soal)</td><td><strong>${s.tkp}</strong> / 225</td></tr>
       <tr style="border-top:2px solid #ddd;"><td><strong>✅ TOTAL SKOR</strong></td><td><strong>${s.total}</strong> / 550</td></tr>
-    </table>
-    <div class="total-score">🎯 Nilai Akhir: ${s.persen}%</div>`;
+    </table><div class="total-score">🎯 Nilai Akhir: ${s.persen}%</div>`;
   document.getElementById('passStatus').innerHTML=`
     <div style="margin-bottom:10px;font-weight:bold;">📋 STATUS PASSING GRADE:</div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;">
@@ -776,17 +735,11 @@ function finishQuiz(){
   goTo('resultPage');
 }
 
-// ==================== RESTART & HOME ====================
-function restartQuiz(){
-  startQuiz(activeSet);
-}
-
+function restartQuiz(){startQuiz(activeSet);}
 function backToHome(){
-  if(timerInterval)clearInterval(timerInterval);
-  timerInterval=null;
+  if(timerInterval)clearInterval(timerInterval);timerInterval=null;
   document.getElementById('sidebarToggle').style.display='none';
-  goTo('homePage');
-  refreshHomeStats();
+  goTo('homePage');refreshHomeStats();
 }
 
 // ==================== EVALUASI ====================
@@ -794,20 +747,16 @@ function showEvaluasi(){
   const panel=document.getElementById('evaluasiPanel');
   let html='<h3 style="color:#0d6efd;margin-bottom:14px;">📝 Evaluasi Jawaban</h3>';
   for(let i=0;i<questions.length;i++){
-    const n=i+1;
-    const cat=getCat(n);
+    const n=i+1;const cat=getCat(n);
     const isJ=(questions[i].isTKP?userScores[i]!==null:userAnswers[i]!==null);
     let jawUser='Tidak dijawab',jawBenar='',pembahasan='',statusCls='';
     if(questions[i].isTKP){
       if(isJ){
-        const uScore=userScores[i];
-        const idx=questions[i].optionScores.findIndex(s=>s===uScore);
+        const uScore=userScores[i];const idx=questions[i].optionScores.findIndex(s=>s===uScore);
         jawUser=`${PREFIXES[idx]}. ${questions[i].options[idx]}`;
-        const maxS=Math.max(...questions[i].optionScores);
-        const bIdx=questions[i].optionScores.findIndex(s=>s===maxS);
+        const maxS=Math.max(...questions[i].optionScores);const bIdx=questions[i].optionScores.findIndex(s=>s===maxS);
         jawBenar=`Jawaban terbaik: ${PREFIXES[bIdx]}. ${questions[i].options[bIdx]} (Skor ${maxS})`;
-        const isB=uScore===maxS;
-        statusCls=isB?'benar':'salah';
+        const isB=uScore===maxS;statusCls=isB?'benar':'salah';
         pembahasan=`Jawaban Anda mendapat skor ${uScore} dari maksimal ${maxS}. ${isB?'Jawaban Anda sudah tepat.':'Coba evaluasi kembali pilihan Anda.'}`;
       }else{pembahasan='Soal ini belum Anda jawab.';}
     }else{
@@ -815,26 +764,23 @@ function showEvaluasi(){
         const ua=userAnswers[i];
         jawUser=`${PREFIXES[ua]}. ${questions[i].options[ua]}`;
         jawBenar=`Jawaban benar: ${PREFIXES[questions[i].answer]}. ${questions[i].options[questions[i].answer]}`;
-        const isB=ua===questions[i].answer;
-        statusCls=isB?'benar':'salah';
+        const isB=ua===questions[i].answer;statusCls=isB?'benar':'salah';
         pembahasan=`${isB?'✅ Jawaban Anda benar!':'❌ Jawaban Anda kurang tepat.'} ${jawBenar}.`;
       }else{pembahasan='Soal ini belum Anda jawab.';}
     }
     const icon=statusCls==='benar'?'✅':statusCls==='salah'?'❌':'⏳';
     html+=`<div class="evaluasi-item ${statusCls}">
       <div class="soal-teks">${icon} Soal ${n} [${cat.name}]</div>
-      <div class="soal-teks" style="font-weight:normal;font-size:14px;margin-top:4px;">${questions[i].question}</div>
+      <div class="soal-teks" style="font-weight:normal;font-size:13px;margin-top:4px;">${questions[i].question}</div>
       <div class="jawaban-user">📌 Jawaban Anda: ${jawUser}</div>
       ${jawBenar?`<div class="jawaban-benar">✅ ${jawBenar}</div>`:''}
       <div class="pembahasan">💡 ${pembahasan}</div>
     </div>`;
   }
-  panel.innerHTML=html;
-  panel.style.display='block';
+  panel.innerHTML=html;panel.style.display='block';
   document.getElementById('btnCloseEval').style.display='block';
   panel.scrollIntoView({behavior:'smooth',block:'start'});
 }
-
 function closeEvaluasi(){
   document.getElementById('evaluasiPanel').style.display='none';
   document.getElementById('btnCloseEval').style.display='none';
@@ -850,28 +796,20 @@ function resetAllProgress(){
     localStorage.removeItem(`skorTIU_latihan${i}`);
     localStorage.removeItem(`skorTKP_latihan${i}`);
   }
-  refreshQuizList();
-  refreshHomeStats();
-  closeResetModal();
+  refreshQuizList();refreshHomeStats();closeResetModal();
   alert('✅ Semua progress latihan telah direset!');
 }
 
-// ==================== ANDROID BACK BUTTON ====================
-// Intercept hardware back via popstate — prevent going back to quiz mid-session
+// ==================== ANDROID BACK ====================
 history.pushState({app:'skd'},'','');
 window.addEventListener('popstate',function(){
-  history.pushState({app:'skd'},'',''); // always push back
-  // navigate logically
+  history.pushState({app:'skd'},'','');
   if(currentPage==='quizPage'||currentPage==='resultPage'){
-    if(currentPage==='quizPage'){
-      if(timerInterval)clearInterval(timerInterval);timerInterval=null;
-      document.getElementById('sidebarToggle').style.display='none';
-    }
+    if(currentPage==='quizPage'){if(timerInterval)clearInterval(timerInterval);timerInterval=null;document.getElementById('sidebarToggle').style.display='none';}
     goTo('quizlistPage');
-  } else if(currentPage==='quizlistPage'||currentPage==='petunjukPage'||currentPage==='tentangPage'){
+  }else if(currentPage==='quizlistPage'||currentPage==='petunjukPage'||currentPage==='tentangPage'){
     goTo('homePage');
   }
-  // on homePage, do nothing (let WebView handle app exit)
 });
 </script>
 </body>
