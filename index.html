@@ -37,9 +37,7 @@ body{
     border:1px solid rgba(255,255,255,.3);
 }
 
-.screen{
-    display:none;
-}
+.screen{ display:none; }
 
 .active{
     display:block;
@@ -51,16 +49,8 @@ body{
     to { opacity: 1; transform: translateY(0); }
 }
 
-.logo{
-    text-align:center;
-    margin-bottom:25px;
-}
-
-.logo .icon{
-    font-size: 50px;
-    margin-bottom: 10px;
-}
-
+.logo{ text-align:center; margin-bottom:25px; }
+.logo .icon{ font-size: 50px; margin-bottom: 10px; }
 .logo h1{
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     -webkit-background-clip: text;
@@ -69,11 +59,7 @@ body{
     font-size: 26px;
     margin-bottom:8px;
 }
-
-.logo p{
-    color:#888;
-    font-size:13px;
-}
+.logo p{ color:#888; font-size:13px; }
 
 .menu-btn{
     width:100%;
@@ -92,11 +78,7 @@ body{
     gap:10px;
     font-weight:bold;
 }
-
-.menu-btn:hover{
-    transform:scale(1.02);
-    box-shadow:0 5px 20px rgba(102,126,234,0.4);
-}
+.menu-btn:hover{ transform:scale(1.02); box-shadow:0 5px 20px rgba(102,126,234,0.4); }
 
 .back-btn{
     width:100%;
@@ -110,11 +92,7 @@ body{
     transition:0.2s;
     font-weight:bold;
 }
-
-.back-btn:hover{
-    background:#5a6268;
-    transform:scale(1.02);
-}
+.back-btn:hover{ background:#5a6268; transform:scale(1.02); }
 
 .reset-btn{
     width:100%;
@@ -132,11 +110,7 @@ body{
     justify-content:center;
     gap:8px;
 }
-
-.reset-btn:hover{
-    background:#c82333;
-    transform:scale(1.02);
-}
+.reset-btn:hover{ background:#c82333; transform:scale(1.02); }
 
 h2{
     margin-bottom:15px;
@@ -151,14 +125,9 @@ h2{
     border-bottom:2px solid #e9ecef;
 }
 
-p{
-    line-height:1.7;
-    margin-bottom:10px;
-    color:#555;
-}
+p{ line-height:1.7; margin-bottom:10px; color:#555; }
 
-/* Quiz Item dengan skor */
-.quiz-item {
+.quiz-item{
     width:100%;
     background: white;
     border-radius:20px;
@@ -169,13 +138,9 @@ p{
     border:1px solid #e9ecef;
     overflow:hidden;
 }
+.quiz-item:hover{ transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,0.1); }
 
-.quiz-item:hover{
-    transform:translateY(-2px);
-    box-shadow:0 8px 20px rgba(0,0,0,0.1);
-}
-
-.quiz-header {
+.quiz-header{
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -183,54 +148,17 @@ p{
     background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
     color:white;
 }
+.quiz-left{ display:flex; align-items:center; gap:10px; font-weight:bold; font-size:16px; }
+.quiz-icon{ font-size:24px; }
+.quiz-right{ display:flex; gap:5px; }
 
-.quiz-left {
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-weight:bold;
-    font-size:16px;
-}
+.skor-badge{ padding:4px 10px; border-radius:30px; text-align:center; font-size:11px; font-weight:bold; }
+.skor-badge.twk{ background: rgba(111,66,193,0.9); color: white; }
+.skor-badge.tiu{ background: rgba(139,69,19,0.9); color: white; }
+.skor-badge.tkp{ background: rgba(32,201,151,0.9); color: white; }
+.skor-badge.belum{ background: rgba(108,117,125,0.8); color: white; }
 
-.quiz-icon {
-    font-size:24px;
-}
-
-.quiz-right {
-    display:flex;
-    gap:5px;
-}
-
-.skor-badge {
-    padding:4px 10px;
-    border-radius:30px;
-    text-align:center;
-    font-size:11px;
-    font-weight:bold;
-}
-
-.skor-badge.twk {
-    background: rgba(111,66,193,0.9);
-    color: white;
-}
-
-.skor-badge.tiu {
-    background: rgba(139,69,19,0.9);
-    color: white;
-}
-
-.skor-badge.tkp {
-    background: rgba(32,201,151,0.9);
-    color: white;
-}
-
-.skor-badge.belum {
-    background: rgba(108,117,125,0.8);
-    color: white;
-}
-
-/* Detail skor di dalam card - lebih sederhana */
-.quiz-detail {
+.quiz-detail{
     padding:12px 15px;
     background: #f8f9fa;
     display:flex;
@@ -238,55 +166,15 @@ p{
     align-items:center;
     border-top:1px solid #e9ecef;
 }
+.total-skor-container{ display:flex; align-items:center; gap:8px; }
+.total-skor-label{ font-size:12px; color:#666; }
+.total-skor-value{ font-size:14px; font-weight:bold; background:#e9ecef; padding:4px 12px; border-radius:20px; color:#0d6efd; }
+.total-skor-value.completed{ background: #d4edda; color: #155724; }
+.status-badge{ font-size:11px; padding:4px 12px; border-radius:20px; font-weight:bold; }
+.status-badge.selesai{ background: #d4edda; color: #155724; }
+.status-badge.belum{ background: #f8d7da; color: #721c24; }
 
-.total-skor-container {
-    display:flex;
-    align-items:center;
-    gap:8px;
-}
-
-.total-skor-label {
-    font-size:12px;
-    color:#666;
-}
-
-.total-skor-value {
-    font-size:14px;
-    font-weight:bold;
-    background:#e9ecef;
-    padding:4px 12px;
-    border-radius:20px;
-    color:#0d6efd;
-}
-
-.total-skor-value.completed {
-    background: #d4edda;
-    color: #155724;
-}
-
-.status-badge {
-    font-size:11px;
-    padding:4px 12px;
-    border-radius:20px;
-    font-weight:bold;
-}
-
-.status-badge.selesai {
-    background: #d4edda;
-    color: #155724;
-}
-
-.status-badge.belum {
-    background: #f8d7da;
-    color: #721c24;
-}
-
-.version{
-    text-align:center;
-    margin-top:20px;
-    color:#aaa;
-    font-size:11px;
-}
+.version{ text-align:center; margin-top:20px; color:#aaa; font-size:11px; }
 
 .info-acak{
     background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
@@ -299,184 +187,58 @@ p{
     font-weight:bold;
 }
 
-/* Toggle Switch */
-.toggle-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 11px;
-    background: #e9ecef;
-    padding: 4px 12px;
-    border-radius: 30px;
-}
+.toggle-container{ display:flex; align-items:center; gap:10px; font-size:11px; background:#e9ecef; padding:4px 12px; border-radius:30px; }
+.switch{ position:relative; display:inline-block; width:45px; height:22px; }
+.switch input{ opacity:0; width:0; height:0; }
+.slider{ position:absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background-color:#ccc; transition:.3s; border-radius:22px; }
+.slider:before{ position:absolute; content:""; height:16px; width:16px; left:3px; bottom:3px; background-color:white; transition:.3s; border-radius:50%; }
+input:checked + .slider{ background-color:#0d6efd; }
+input:checked + .slider:before{ transform:translateX(23px); }
+.timer-status{ font-weight:bold; font-size:10px; }
+.timer-status.on{ color:#198754; }
+.timer-status.off{ color:#dc3545; }
 
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 45px;
-    height: 22px;
+.screenshot-overlay{
+    position:fixed; top:0; left:0; width:100%; height:100%;
+    background:rgba(0,0,0,0.9); z-index:99999; display:none; pointer-events:none;
 }
+.watermark{ position:fixed; bottom:10px; left:10px; font-size:8px; color:rgba(255,255,255,0.3); z-index:100; pointer-events:none; }
 
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: .3s;
-    border-radius: 22px;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 16px;
-    width: 16px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    transition: .3s;
-    border-radius: 50%;
-}
-
-input:checked + .slider {
-    background-color: #0d6efd;
-}
-
-input:checked + .slider:before {
-    transform: translateX(23px);
-}
-
-.timer-status {
-    font-weight: bold;
-    font-size: 10px;
-}
-
-.timer-status.on {
-    color: #198754;
-}
-
-.timer-status.off {
-    color: #dc3545;
-}
-
-.screenshot-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.9);
-    z-index: 99999;
-    display: none;
-    pointer-events: none;
-}
-
-.watermark {
-    position: fixed;
-    bottom: 10px;
-    left: 10px;
-    font-size: 8px;
-    color: rgba(255,255,255,0.3);
-    z-index: 100;
-    pointer-events: none;
-}
-
-/* Statistik Card */
-.stats-card {
+.stats-card{
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    border-radius: 20px;
-    padding: 15px;
-    margin: 20px 0;
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
+    border-radius:20px; padding:15px; margin:20px 0;
+    display:flex; justify-content:space-around; text-align:center;
 }
+.stat-item{ flex:1; }
+.stat-number{ font-size:22px; font-weight:bold; color:#0d6efd; }
+.stat-label{ font-size:10px; color:#666; margin-top:5px; }
 
-.stat-item {
-    flex: 1;
+.modal{
+    display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+    background:rgba(0,0,0,0.7); z-index:20000; justify-content:center; align-items:center;
 }
+.modal-content{ background:white; padding:25px; border-radius:25px; max-width:300px; text-align:center; animation:fadeIn 0.3s ease; }
+.modal-content h3{ margin-bottom:15px; color:#333; }
+.modal-content p{ margin-bottom:20px; color:#666; }
+.modal-buttons{ display:flex; gap:10px; justify-content:center; }
+.modal-buttons button{ padding:10px 20px; border:none; border-radius:12px; cursor:pointer; font-weight:bold; }
+.modal-buttons .confirm{ background:#dc3545; color:white; }
+.modal-buttons .cancel{ background:#6c757d; color:white; }
 
-.stat-number {
-    font-size: 22px;
-    font-weight: bold;
-    color: #0d6efd;
-}
-
-.stat-label {
-    font-size: 10px;
-    color: #666;
-    margin-top: 5px;
-}
-
-/* Modal Konfirmasi */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.7);
-    z-index: 20000;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background: white;
-    padding: 25px;
-    border-radius: 25px;
-    max-width: 300px;
-    text-align: center;
-    animation: fadeIn 0.3s ease;
-}
-
-.modal-content h3 {
-    margin-bottom: 15px;
-    color: #333;
-}
-
-.modal-content p {
-    margin-bottom: 20px;
-    color: #666;
-}
-
-.modal-buttons {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-}
-
-.modal-buttons button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.modal-buttons .confirm {
-    background: #dc3545;
-    color: white;
-}
-
-.modal-buttons .cancel {
-    background: #6c757d;
-    color: white;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+/* Toast */
+#toast{
+    position:fixed;
+    bottom:80px;
+    left:50%;
+    transform:translateX(-50%);
+    background:rgba(0,0,0,0.8);
+    color:white;
+    padding:10px 24px;
+    border-radius:30px;
+    font-size:14px;
+    z-index:99999;
+    display:none;
+    white-space:nowrap;
 }
 </style>
 </head>
@@ -486,14 +248,11 @@ input:checked + .slider:before {
 
     <!-- HOME -->
     <div id="home" class="screen active">
-
         <div class="logo">
             <div class="icon">📚</div>
             <h1>Latihan SKD CPNS</h1>
             <p>Latihan Soal TWK, TIU dan TKP</p>
         </div>
-
-        <!-- Statistik -->
         <div class="stats-card">
             <div class="stat-item">
                 <div class="stat-number" id="totalLatihan">5</div>
@@ -508,32 +267,15 @@ input:checked + .slider:before {
                 <div class="stat-label">Skor Terbaik</div>
             </div>
         </div>
-
-        <button class="menu-btn" onclick="showScreen('quizlist')">
-            📚 Pilih Soal
-        </button>
-
-        <button class="menu-btn" onclick="showScreen('petunjuk')">
-            📖 Petunjuk
-        </button>
-
-        <button class="menu-btn" onclick="showScreen('tentang')">
-            ℹ️ Tentang
-        </button>
-
-        <div class="info-acak">
-            🔄 Setiap membuka soal, pilihan jawaban akan diacak!
-        </div>
-
-        <div class="version">
-            Version 2.0 | © 2025 Latihan SKD
-        </div>
-
+        <button class="menu-btn" onclick="showScreen('quizlist')">📚 Pilih Soal</button>
+        <button class="menu-btn" onclick="showScreen('petunjuk')">📖 Petunjuk</button>
+        <button class="menu-btn" onclick="showScreen('tentang')">ℹ️ Tentang</button>
+        <div class="info-acak">🔄 Setiap membuka soal, pilihan jawaban akan diacak!</div>
+        <div class="version">Version 2.0 | © 2025 Latihan SKD</div>
     </div>
 
     <!-- PILIH KUIS -->
     <div id="quizlist" class="screen">
-
         <h2>
             📚 Pilih Soal SKD
             <div class="toggle-container">
@@ -545,17 +287,11 @@ input:checked + .slider:before {
             </div>
         </h2>
 
-        <!-- Latihan SKD 1 -->
         <div class="quiz-item" onclick="bukaKuis('latihan1.html')">
             <div class="quiz-header">
-                <div class="quiz-left">
-                    <span class="quiz-icon">📘</span>
-                    <span>Latihan SKD 1</span>
-                </div>
+                <div class="quiz-left"><span class="quiz-icon">📘</span><span>Latihan SKD 1</span></div>
                 <div class="quiz-right" id="skorLatihan1">
-                    <span class="skor-badge belum">-</span>
-                    <span class="skor-badge belum">-</span>
-                    <span class="skor-badge belum">-</span>
+                    <span class="skor-badge belum">-</span><span class="skor-badge belum">-</span><span class="skor-badge belum">-</span>
                 </div>
             </div>
             <div class="quiz-detail">
@@ -567,17 +303,11 @@ input:checked + .slider:before {
             </div>
         </div>
 
-        <!-- Latihan SKD 2 -->
         <div class="quiz-item" onclick="bukaKuis('latihan2.html')">
             <div class="quiz-header">
-                <div class="quiz-left">
-                    <span class="quiz-icon">📗</span>
-                    <span>Latihan SKD 2</span>
-                </div>
+                <div class="quiz-left"><span class="quiz-icon">📗</span><span>Latihan SKD 2</span></div>
                 <div class="quiz-right" id="skorLatihan2">
-                    <span class="skor-badge belum">-</span>
-                    <span class="skor-badge belum">-</span>
-                    <span class="skor-badge belum">-</span>
+                    <span class="skor-badge belum">-</span><span class="skor-badge belum">-</span><span class="skor-badge belum">-</span>
                 </div>
             </div>
             <div class="quiz-detail">
@@ -589,17 +319,11 @@ input:checked + .slider:before {
             </div>
         </div>
 
-        <!-- Latihan SKD 3 -->
         <div class="quiz-item" onclick="bukaKuis('latihan3.html')">
             <div class="quiz-header">
-                <div class="quiz-left">
-                    <span class="quiz-icon">📙</span>
-                    <span>Latihan SKD 3</span>
-                </div>
+                <div class="quiz-left"><span class="quiz-icon">📙</span><span>Latihan SKD 3</span></div>
                 <div class="quiz-right" id="skorLatihan3">
-                    <span class="skor-badge belum">-</span>
-                    <span class="skor-badge belum">-</span>
-                    <span class="skor-badge belum">-</span>
+                    <span class="skor-badge belum">-</span><span class="skor-badge belum">-</span><span class="skor-badge belum">-</span>
                 </div>
             </div>
             <div class="quiz-detail">
@@ -611,17 +335,11 @@ input:checked + .slider:before {
             </div>
         </div>
 
-        <!-- Latihan SKD 4 -->
         <div class="quiz-item" onclick="bukaKuis('latihan4.html')">
             <div class="quiz-header">
-                <div class="quiz-left">
-                    <span class="quiz-icon">📕</span>
-                    <span>Latihan SKD 4</span>
-                </div>
+                <div class="quiz-left"><span class="quiz-icon">📕</span><span>Latihan SKD 4</span></div>
                 <div class="quiz-right" id="skorLatihan4">
-                    <span class="skor-badge belum">-</span>
-                    <span class="skor-badge belum">-</span>
-                    <span class="skor-badge belum">-</span>
+                    <span class="skor-badge belum">-</span><span class="skor-badge belum">-</span><span class="skor-badge belum">-</span>
                 </div>
             </div>
             <div class="quiz-detail">
@@ -633,17 +351,11 @@ input:checked + .slider:before {
             </div>
         </div>
 
-        <!-- Latihan SKD 5 -->
         <div class="quiz-item" onclick="bukaKuis('latihan5.html')">
             <div class="quiz-header">
-                <div class="quiz-left">
-                    <span class="quiz-icon">📔</span>
-                    <span>Latihan SKD 5</span>
-                </div>
+                <div class="quiz-left"><span class="quiz-icon">📔</span><span>Latihan SKD 5</span></div>
                 <div class="quiz-right" id="skorLatihan5">
-                    <span class="skor-badge belum">-</span>
-                    <span class="skor-badge belum">-</span>
-                    <span class="skor-badge belum">-</span>
+                    <span class="skor-badge belum">-</span><span class="skor-badge belum">-</span><span class="skor-badge belum">-</span>
                 </div>
             </div>
             <div class="quiz-detail">
@@ -655,21 +367,13 @@ input:checked + .slider:before {
             </div>
         </div>
 
-        <button class="reset-btn" onclick="showResetModal()">
-            🗑️ Reset Semua Progress
-        </button>
-
-        <button class="back-btn" onclick="showScreen('home')">
-            ← Kembali
-        </button>
-
+        <button class="reset-btn" onclick="showResetModal()">🗑️ Reset Semua Progress</button>
+        <button class="back-btn" onclick="showScreen('home')">← Kembali</button>
     </div>
 
     <!-- PETUNJUK -->
     <div id="petunjuk" class="screen">
-
         <h2>📖 Petunjuk</h2>
-
         <div style="background:#e9ecef; border-radius:16px; padding:15px; margin-bottom:15px;">
             <p><strong>📌 Cara Menggunakan:</strong></p>
             <p>1. Pilih salah satu soal latihan yang tersedia.</p>
@@ -680,34 +384,22 @@ input:checked + .slider:before {
             <p>6. Setiap soal memiliki timer 100 menit (bisa dimatikan).</p>
             <p>7. Gunakan tombol 📋 Daftar Soal untuk navigasi cepat.</p>
         </div>
-
         <div style="background:#fff3cd; border-radius:16px; padding:15px;">
             <p><strong>💡 Tips:</strong></p>
             <p>• Kerjakan soal dengan tenang dan fokus</p>
             <p>• Manfaatkan fitur timer untuk mengatur waktu</p>
             <p>• Gunakan fitur evaluasi untuk mengetahui pembahasan</p>
         </div>
-
-        <button class="back-btn" onclick="showScreen('home')">
-            ← Kembali
-        </button>
-
+        <button class="back-btn" onclick="showScreen('home')">← Kembali</button>
     </div>
 
     <!-- TENTANG -->
     <div id="tentang" class="screen">
-
         <h2>ℹ️ Tentang</h2>
-
         <div style="background:#e9ecef; border-radius:16px; padding:15px; margin-bottom:15px;">
             <p><strong>📱 Aplikasi Latihan SKD</strong></p>
-            <p>
-                Latihan SKD adalah aplikasi latihan soal berbasis HTML,
-                CSS dan JavaScript yang dapat dijalankan secara offline
-                maupun online.
-            </p>
+            <p>Latihan SKD adalah aplikasi latihan soal berbasis HTML, CSS dan JavaScript yang dapat dijalankan secara offline maupun online.</p>
         </div>
-
         <div style="background:#d1ecf1; border-radius:16px; padding:15px; margin-bottom:15px;">
             <p><strong>⭐ Fitur Unggulan:</strong></p>
             <p>• Pengacakan pilihan jawaban setiap soal dibuka</p>
@@ -718,22 +410,14 @@ input:checked + .slider:before {
             <p>• Perlindungan konten (anti copy, anti screenshot)</p>
             <p>• Reset progress untuk memulai dari awal</p>
         </div>
-
         <div style="background:#f8f9fa; border-radius:16px; padding:15px;">
             <p><strong>📊 Passing Grade:</strong></p>
             <p>• TWK: 65</p>
             <p>• TIU: 80</p>
             <p>• TKP: 166</p>
         </div>
-
-        <div class="version" style="margin-top:15px;">
-            Versi : 2.0
-        </div>
-
-        <button class="back-btn" onclick="showScreen('home')">
-            ← Kembali
-        </button>
-
+        <div class="version" style="margin-top:15px;">Versi : 2.0</div>
+        <button class="back-btn" onclick="showScreen('home')">← Kembali</button>
     </div>
 
 </div>
@@ -750,6 +434,9 @@ input:checked + .slider:before {
     </div>
 </div>
 
+<!-- Toast -->
+<div id="toast"></div>
+
 <div id="screenshotOverlay" class="screenshot-overlay"></div>
 <div class="watermark">© Latihan SKD - Hak Cipta Dilindungi</div>
 
@@ -762,13 +449,13 @@ document.addEventListener('keydown', e => {
        (e.ctrlKey && e.key === 'u') || (e.ctrlKey && e.key === 's') ||
        (e.ctrlKey && e.key === 'p') || e.key === 'PrintScreen') {
         e.preventDefault();
-        const ov=document.getElementById('screenshotOverlay');
-        if(ov){ov.style.display='block';setTimeout(()=>ov.style.display='none',500);}
+        const ov = document.getElementById('screenshotOverlay');
+        if(ov){ ov.style.display='block'; setTimeout(()=>ov.style.display='none', 500); }
     }
 });
-document.addEventListener('dragstart', e=>e.preventDefault());
-document.addEventListener('copy', e=>e.preventDefault());
-document.addEventListener('cut', e=>e.preventDefault());
+document.addEventListener('dragstart', e => e.preventDefault());
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('cut', e => e.preventDefault());
 
 let lastWarningTime = 0;
 function showScreenshotWarning() {
@@ -778,28 +465,24 @@ function showScreenshotWarning() {
         const overlay = document.getElementById('screenshotOverlay');
         overlay.style.display = 'block';
         setTimeout(() => overlay.style.display = 'none', 500);
-        console.warn('⚠️ Screenshot terdeteksi! Konten dilindungi.');
     }
 }
 window.addEventListener('keyup', e => { if(e.key === 'PrintScreen') showScreenshotWarning(); });
-document.querySelectorAll('button, .menu-btn, .quiz-item, .back-btn, .reset-btn').forEach(el => {
-    el.addEventListener('contextmenu', e => e.preventDefault());
-});
 
-// ========== FUNGSI TIMER TOGGLE ==========
+// ========== TIMER TOGGLE ==========
 function getTimerStatus() {
-    const savedStatus = localStorage.getItem('timerEnabled');
-    return savedStatus === null ? true : savedStatus === 'true';
+    const s = localStorage.getItem('timerEnabled');
+    return s === null ? true : s === 'true';
 }
 function setTimerStatus(enabled) { localStorage.setItem('timerEnabled', enabled); }
 function updateToggleUI() {
     const toggle = document.getElementById('timerToggle');
-    const statusLabel = document.getElementById('timerStatusLabel');
-    const isEnabled = getTimerStatus();
-    if(toggle) toggle.checked = isEnabled;
-    if(statusLabel) {
-        statusLabel.innerHTML = isEnabled ? '⏱️ ON' : '⏸️ OFF';
-        statusLabel.className = `timer-status ${isEnabled ? 'on' : 'off'}`;
+    const label  = document.getElementById('timerStatusLabel');
+    const isOn   = getTimerStatus();
+    if(toggle) toggle.checked = isOn;
+    if(label) {
+        label.innerHTML  = isOn ? '⏱️ ON' : '⏸️ OFF';
+        label.className  = `timer-status ${isOn ? 'on' : 'off'}`;
     }
 }
 function initTimerToggle() {
@@ -814,11 +497,9 @@ function initTimerToggle() {
     }
 }
 
-// ========== FUNGSI MODAL RESET ==========
+// ========== MODAL RESET ==========
 function showResetModal() { document.getElementById('resetModal').style.display = 'flex'; }
 function closeResetModal() { document.getElementById('resetModal').style.display = 'none'; }
-
-// ========== RESET SEMUA PROGRESS ==========
 function resetAllProgress() {
     for(let i = 1; i <= 5; i++) {
         localStorage.removeItem(`bestScore_latihan${i}`);
@@ -833,128 +514,129 @@ function resetAllProgress() {
     alert('✅ Semua progress latihan telah direset!');
 }
 
+// ========== TOAST ==========
+function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.style.display = 'block';
+    setTimeout(() => { toast.style.display = 'none'; }, 2000);
+}
+
 // ========== NAVIGASI ==========
-// ========== NAVIGASI ==========
-let currentScreen = 'home';
+let currentScreen  = 'home';
 let backPressCount = 0;
+let backPressTimer = null;
 
 function showScreen(id) {
-  document.querySelectorAll(".screen").forEach(screen => screen.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-  currentScreen = id;
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    currentScreen = id;
 }
 
 function bukaKuis(halaman) {
-  window.location.replace(`${halaman}?seed=${Date.now()}&timer=${getTimerStatus() ? 'on' : 'off'}`);
+    window.location.replace(`${halaman}?seed=${Date.now()}&timer=${getTimerStatus() ? 'on' : 'off'}`);
 }
 
-// BACK BUTTON HANDLER
+// ========== BACK BUTTON HANDLER ==========
 window.addEventListener('popstate', function(e) {
-  if (currentScreen !== 'home') {
-    // Dari screen lain → kembali ke home
-    showScreen('home');
-    history.pushState({ screen: 'home' }, '', window.location.pathname);
-    backPressCount = 0;
-  } else {
-    // Di home → double back to exit
-    backPressCount++;
-    if (backPressCount >= 2) {
-      // Keluar app - cara WebView
-      window.location.href = 'javascript:window.close()';
+    if (currentScreen !== 'home') {
+        // Di screen selain home → kembali ke home
+        showScreen('home');
+        // Push state baru agar back berikutnya masih bisa ditangkap
+        history.pushState({ screen: 'home' }, '', window.location.pathname);
+        backPressCount = 0;
+        if(backPressTimer) clearTimeout(backPressTimer);
     } else {
-      showToast('Tekan sekali lagi untuk keluar');
-      history.pushState({ screen: 'home' }, '', window.location.pathname);
-      setTimeout(() => { backPressCount = 0; }, 2000);
+        // Sudah di home → double back to exit
+        backPressCount++;
+        if(backPressTimer) clearTimeout(backPressTimer);
+
+        if(backPressCount >= 2) {
+            backPressCount = 0;
+            // ---- Cara keluar untuk WebView / ApkBuilder ----
+            // Coba AndroidInterface jika tersedia
+            try { window.AndroidInterface.exitApp(); return; } catch(e1) {}
+            // Coba skema URL khusus
+            try { window.location.href = 'app://exit'; } catch(e2) {}
+            try { window.location.href = 'android://exit'; } catch(e3) {}
+            // Fallback: mundur sejauh mungkin di history
+            setTimeout(() => history.go(-history.length), 100);
+        } else {
+            showToast('Tekan sekali lagi untuk keluar');
+            // Push state agar handler bisa menangkap back berikutnya
+            history.pushState({ screen: 'home' }, '', window.location.pathname);
+            // Reset counter setelah 2 detik
+            backPressTimer = setTimeout(() => { backPressCount = 0; }, 2000);
+        }
     }
-  }
 });
 
-// Toast notifikasi
-function showToast(msg) {
-  let toast = document.getElementById('toast');
-  if (!toast) {
-    toast = document.createElement('div');
-    toast.id = 'toast';
-    toast.style.cssText = `
-      position:fixed; bottom:80px; left:50%; transform:translateX(-50%);
-      background:rgba(0,0,0,0.8); color:white; padding:10px 24px;
-      border-radius:30px; font-size:14px; z-index:99999;
-      animation: fadeIn 0.3s ease;
-    `;
-    document.body.appendChild(toast);
-  }
-  toast.textContent = msg;
-  toast.style.display = 'block';
-  setTimeout(() => { toast.style.display = 'none'; }, 2000);
+// ========== INISIALISASI HISTORY ==========
+// Jika kembali dari halaman latihan (goToHomePage pakai #reset), bersihkan hash
+if (window.location.hash === '#reset') {
+    history.replaceState(null, '', window.location.pathname);
 }
-
-// Inisialisasi
+// Dua entry: entry pertama jadi "buffer" agar back pertama masuk popstate
+// dan tidak langsung menutup aplikasi
 history.replaceState({ screen: 'home' }, '', window.location.pathname);
 history.pushState({ screen: 'home' }, '', window.location.pathname);
-// ========== HITUNG TOTAL SKOR ==========
+
+// ========== SKOR ==========
 function hitungTotal(twk, tiu, tkp) {
-    const t = (parseInt(twk) || 0) + (parseInt(tiu) || 0) + (parseInt(tkp) || 0);
-    return `${t} / 550`;
+    return `${(parseInt(twk)||0) + (parseInt(tiu)||0) + (parseInt(tkp)||0)} / 550`;
 }
 
-// ========== AMBIL SKOR DARI LOCALSTORAGE ==========
 function loadAllScores() {
-    const maxScores = { twk: 150, tiu: 175, tkp: 225 };
+    const maxScores = { twk:150, tiu:175, tkp:225 };
     for(let i = 1; i <= 5; i++) {
         const twk = localStorage.getItem(`skorTWK_latihan${i}`);
         const tiu = localStorage.getItem(`skorTIU_latihan${i}`);
         const tkp = localStorage.getItem(`skorTKP_latihan${i}`);
-        
+
         const container = document.getElementById(`skorLatihan${i}`);
         if(container) {
-            if(twk && tiu && tkp) {
-                container.innerHTML = `
-                    <span class="skor-badge twk">TWK: ${twk}/${maxScores.twk}</span>
-                    <span class="skor-badge tiu">TIU: ${tiu}/${maxScores.tiu}</span>
-                    <span class="skor-badge tkp">TKP: ${tkp}/${maxScores.tkp}</span>
-                `;
-            } else {
-                container.innerHTML = `<span class="skor-badge belum">-</span><span class="skor-badge belum">-</span><span class="skor-badge belum">-</span>`;
-            }
+            container.innerHTML = (twk && tiu && tkp)
+                ? `<span class="skor-badge twk">TWK: ${twk}/${maxScores.twk}</span>
+                   <span class="skor-badge tiu">TIU: ${tiu}/${maxScores.tiu}</span>
+                   <span class="skor-badge tkp">TKP: ${tkp}/${maxScores.tkp}</span>`
+                : `<span class="skor-badge belum">-</span><span class="skor-badge belum">-</span><span class="skor-badge belum">-</span>`;
         }
-        
+
         const totalEl = document.getElementById(`total${i}`);
         if(totalEl) {
-            const totalText = hitungTotal(twk, tiu, tkp);
-            totalEl.innerText = totalText;
-            if(twk && tiu && tkp) {
-                totalEl.classList.add('completed');
-            } else {
-                totalEl.classList.remove('completed');
-            }
+            totalEl.innerText = hitungTotal(twk, tiu, tkp);
+            totalEl.classList.toggle('completed', !!(twk && tiu && tkp));
         }
-        
+
         const statusEl = document.getElementById(`status${i}`);
-        if(twk && tiu && tkp) {
-            statusEl.className = 'status-badge selesai';
-            statusEl.innerText = '✅ Selesai';
-        } else {
-            statusEl.className = 'status-badge belum';
-            statusEl.innerText = '⏳ Belum';
+        if(statusEl) {
+            if(twk && tiu && tkp) {
+                statusEl.className = 'status-badge selesai';
+                statusEl.innerText = '✅ Selesai';
+            } else {
+                statusEl.className = 'status-badge belum';
+                statusEl.innerText = '⏳ Belum';
+            }
         }
     }
 }
 
 function loadBestScores() {
-    let bestScores = [];
+    let best = [];
     for(let i = 1; i <= 5; i++) {
-        const saved = localStorage.getItem(`bestScore_latihan${i}`);
-        if(saved) bestScores.push(parseInt(saved));
+        const s = localStorage.getItem(`bestScore_latihan${i}`);
+        if(s) best.push(parseInt(s));
     }
-    document.getElementById('skorTerbaik').innerHTML = bestScores.length > 0 ? `${Math.max(...bestScores)} / 550` : '- / 550';
+    document.getElementById('skorTerbaik').innerHTML =
+        best.length > 0 ? `${Math.max(...best)} / 550` : '- / 550';
 }
 
 loadAllScores();
 loadBestScores();
 initTimerToggle();
 
-console.log("%c🚫 PERINGATAN! 🚫", "color: red; font-size: 16px; font-weight: bold;");
-console.log("%cKonten ini dilindungi. Copy dan inspect element tidak diizinkan.", "color: orange; font-size: 12px");
+console.log("%c🚫 PERINGATAN! 🚫", "color:red;font-size:16px;font-weight:bold;");
+console.log("%cKonten ini dilindungi.", "color:orange;font-size:12px");
 </script>
 </body>
 </html>
