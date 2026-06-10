@@ -834,49 +834,40 @@ function resetAllProgress() {
 }
 
 // ========== NAVIGASI ==========
-let screenHistory = ['home'];
+let currentScreen = 'home';
 
 function showScreen(id) {
-    const currentActive = document.querySelector('.screen.active');
-    const currentId = currentActive ? currentActive.id : null;
-    
-    if (currentId !== id) {
-        screenHistory.push(id);
-        history.pushState({ screen: id }, '', window.location.pathname);
-    }
-    
-    document.querySelectorAll(".screen").forEach(screen => screen.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
+  document.querySelectorAll(".screen").forEach(screen => screen.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  currentScreen = id;
 }
 
 function bukaKuis(halaman) {
-    window.location.replace(`${halaman}?seed=${Date.now()}&timer=${getTimerStatus() ? 'on' : 'off'}`);
+  window.location.replace(`${halaman}?seed=${Date.now()}&timer=${getTimerStatus() ? 'on' : 'off'}`);
 }
 
-// BACK BUTTON HANDLER - SATU SAJA!
+// BACK BUTTON HANDLER
 window.addEventListener('popstate', function(e) {
-    // Hapus screen terakhir dari history
-    screenHistory.pop();
-    const previousScreen = screenHistory[screenHistory.length - 1];
-    
-    if (previousScreen) {
-        // Kembali ke screen sebelumnya
-        document.querySelectorAll(".screen").forEach(screen => screen.classList.remove("active"));
-        document.getElementById(previousScreen).classList.add("active");
+  if (currentScreen !== 'home') {
+    // Kalau di screen selain home, kembali ke home
+    showScreen('home');
+    // Push state lagi supaya back berikutnya masih bisa ditangkap
+    history.pushState({ screen: 'home' }, '', window.location.pathname);
+  } else {
+    // Di home, konfirmasi keluar
+    if (confirm('Keluar dari aplikasi Latihan SKD?')) {
+      window.close(); // Untuk PWA/app
+      // Fallback jika window.close() tidak berhasil:
+      history.back();
     } else {
-        // Tidak ada history lagi, keluar
-        if (confirm('Keluar dari aplikasi Latihan SKD?')) {
-            window.location.href = 'about:blank';
-        } else {
-            // Batal, push ulang home
-            screenHistory.push('home');
-            history.pushState({ screen: 'home' }, '', window.location.pathname);
-        }
+      history.pushState({ screen: 'home' }, '', window.location.pathname);
     }
+  }
 });
 
-// Inisialisasi
+// Inisialisasi — push 2 state: satu untuk "back dari home", satu untuk posisi sekarang
 history.replaceState({ screen: 'home' }, '', window.location.pathname);
+history.pushState({ screen: 'home' }, '', window.location.pathname);
 
 // ========== HITUNG TOTAL SKOR ==========
 function hitungTotal(twk, tiu, tkp) {
