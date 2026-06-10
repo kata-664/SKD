@@ -834,7 +834,9 @@ function resetAllProgress() {
 }
 
 // ========== NAVIGASI ==========
+// ========== NAVIGASI ==========
 let currentScreen = 'home';
+let backPressCount = 0;
 
 function showScreen(id) {
   document.querySelectorAll(".screen").forEach(screen => screen.classList.remove("active"));
@@ -849,26 +851,46 @@ function bukaKuis(halaman) {
 // BACK BUTTON HANDLER
 window.addEventListener('popstate', function(e) {
   if (currentScreen !== 'home') {
-    // Kalau di screen selain home, kembali ke home
+    // Dari screen lain → kembali ke home
     showScreen('home');
-    // Push state lagi supaya back berikutnya masih bisa ditangkap
     history.pushState({ screen: 'home' }, '', window.location.pathname);
+    backPressCount = 0;
   } else {
-    // Di home, konfirmasi keluar
-    if (confirm('Keluar dari aplikasi Latihan SKD?')) {
-      window.close(); // Untuk PWA/app
-      // Fallback jika window.close() tidak berhasil:
-      history.back();
+    // Di home → double back to exit
+    backPressCount++;
+    if (backPressCount >= 2) {
+      // Keluar app - cara WebView
+      window.location.href = 'javascript:window.close()';
     } else {
+      showToast('Tekan sekali lagi untuk keluar');
       history.pushState({ screen: 'home' }, '', window.location.pathname);
+      setTimeout(() => { backPressCount = 0; }, 2000);
     }
   }
 });
 
-// Inisialisasi — push 2 state: satu untuk "back dari home", satu untuk posisi sekarang
+// Toast notifikasi
+function showToast(msg) {
+  let toast = document.getElementById('toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'toast';
+    toast.style.cssText = `
+      position:fixed; bottom:80px; left:50%; transform:translateX(-50%);
+      background:rgba(0,0,0,0.8); color:white; padding:10px 24px;
+      border-radius:30px; font-size:14px; z-index:99999;
+      animation: fadeIn 0.3s ease;
+    `;
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.style.display = 'block';
+  setTimeout(() => { toast.style.display = 'none'; }, 2000);
+}
+
+// Inisialisasi
 history.replaceState({ screen: 'home' }, '', window.location.pathname);
 history.pushState({ screen: 'home' }, '', window.location.pathname);
-
 // ========== HITUNG TOTAL SKOR ==========
 function hitungTotal(twk, tiu, tkp) {
     const t = (parseInt(twk) || 0) + (parseInt(tiu) || 0) + (parseInt(tkp) || 0);
