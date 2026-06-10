@@ -834,25 +834,58 @@ function resetAllProgress() {
 }
 
 // ========== FUNGSI UTAMA ==========
-// GANTI DENGAN INI:
-function showScreen(id){
-    // Gunakan replaceState untuk menghapus histori saat pindah antar screen
-    if (id === 'home') {
-        // Saat ke menu utama, replace state agar back langsung exit
-        history.replaceState({ screen: 'home' }, '', window.location.pathname);
-    } else {
+// ========== NAVIGASI BERTINGKAT ==========
+// Stack untuk menyimpan riwayat screen
+let screenHistory = ['home'];
+
+function showScreen(id) {
+    const currentActive = document.querySelector('.screen.active');
+    const currentId = currentActive ? currentActive.id : null;
+    
+    // Jika pindah ke screen yang berbeda
+    if (currentId !== id) {
+        // Simpan ke history stack
+        screenHistory.push(id);
+        
+        // Update browser history
         history.pushState({ screen: id }, '', window.location.pathname);
     }
     
     document.querySelectorAll(".screen").forEach(screen => screen.classList.remove("active"));
     document.getElementById(id).classList.add("active");
 }
-// GANTI DENGAN INI:
+
 function bukaKuis(halaman) {
-    // Gunakan location.replace agar tidak menyimpan halaman soal di history
+    // Untuk pindah ke halaman latihan, replace agar tidak masuk ke history
     window.location.replace(`${halaman}?seed=${Date.now()}&timer=${getTimerStatus() ? 'on' : 'off'}`);
 }
 
+// Tangani tombol back HP
+window.addEventListener('popstate', function(e) {
+    // Hapus screen terakhir dari history stack
+    screenHistory.pop();
+    
+    // Ambil screen sebelumnya
+    const previousScreen = screenHistory[screenHistory.length - 1];
+    
+    if (previousScreen) {
+        // Kembali ke screen sebelumnya
+        document.querySelectorAll(".screen").forEach(screen => screen.classList.remove("active"));
+        document.getElementById(previousScreen).classList.add("active");
+    } else {
+        // Tidak ada history lagi, keluar aplikasi
+        if (confirm('Keluar dari aplikasi Latihan SKD?')) {
+            window.location.href = 'about:blank';
+        } else {
+            // Jika batal, push ulang state
+            screenHistory.push('home');
+            history.pushState({ screen: 'home' }, '', window.location.pathname);
+        }
+    }
+});
+
+// Inisialisasi state awal
+history.replaceState({ screen: 'home' }, '', window.location.pathname);
 // ========== HITUNG TOTAL SKOR ==========
 function hitungTotal(twk, tiu, tkp) {
     const t = (parseInt(twk) || 0) + (parseInt(tiu) || 0) + (parseInt(tkp) || 0);
