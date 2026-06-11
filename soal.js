@@ -7,7 +7,7 @@
 
 // ==================== PAKET 1 ====================
 
-const twkBank1 = [
+window.twkBank1 = [
   {
     q: "Pembangunan pertahanan dan keamanan terutama ditujukan untuk menegakkan kedaulatan negara, menjaga keutuhan wilayah Negara Kesatuan Republik Indonesia, menjaga keselamatan segenap bangsa dari ancaman militer dan nonmiliter, meningkatkan rasa aman dan nyaman sebagai jaminan kondusifnya iklim investasi, serta tetap tertib dan tegaknya hukum di masyarakat. Pembangunan pertahanan dan keamanan ditujukan untuk kepentingan nasional. Upaya yang dapat dilakukan untuk membangun pertahanan dan keamanan adalah...",
     opt: ["Membantu keamanan di negara yang berkonflik","Membangun infrastruktur di negara yang mengalami bencana","Memberikan pelatihan kepada militer negara asing","Menandatangani kontrak kerja sama dengan negara lain","Mempatroli rutin di wilayah darat, laut, dan udara"],
@@ -190,7 +190,7 @@ const twkBank1 = [
   }
 ];
 
-const tiuBank1 = [
+window.tiuBank1 = [
   {
     q: "KHAYALAN : DONGENG = PERISTIWA : ...",
     opt: ["Rekaan","Dugaan","Palsu","Fakta","Estimasi"],
@@ -403,7 +403,7 @@ const tiuBank1 = [
   }
 ];
 
-const tkpBank1 = [
+window.tkpBank1 = [
   {
     q: "Saya baru saja dimutasi ke unit lain yang sama sekali baru bagi saya. Sikap saya ...",
     opts: ["Berusaha mempelajari dan memahami mekanisme kerja unit melalui rekan sejawat","Jarang masuk karena belum jelas apa yang harus saya kerjakan","Berusaha memahami mekanisme kerja unit melalui arsip dan aturan","Hanya duduk sambil menunggu perintah","Mengamati pekerjaan yang dilakukan rekan kerja lainnya"],
@@ -678,21 +678,21 @@ const tkpBank1 = [
 
 // ==================== PAKET 2 ====================
 // Tambahkan soal paket 2 di sini mengikuti format yang sama
-const twkBank2 = [];
-const tiuBank2 = [];
-const tkpBank2 = [];
+window.twkBank2 = [];
+window.tiuBank2 = [];
+window.tkpBank2 = [];
 
 // ==================== PAKET 3 ====================
-const twkBank3 = [];
-const tiuBank3 = [];
-const tkpBank3 = [];
+window.twkBank3 = [];
+window.tiuBank3 = [];
+window.tkpBank3 = [];
 
 // ==================== PAKET 4 ====================
-const twkBank4 = [];
-const tiuBank4 = [];
-const tkpBank4 = [];
+window.twkBank4 = [];
+window.tiuBank4 = [];
+window.tkpBank4 = [];
 
 // ==================== PAKET 5 ====================
-const twkBank5 = [];
-const tiuBank5 = [];
-const tkpBank5 = [];
+window.twkBank5 = [];
+window.tiuBank5 = [];
+window.tkpBank5 = [];
