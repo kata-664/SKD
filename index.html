@@ -75,7 +75,6 @@ input:checked+.slider:before{transform:translateX(22px);}
 .timer-danger{color:#dc3545!important;}
 .timer-blink{color:#dc3545!important;animation:blinkFast .5s ease infinite;font-weight:bold;}
 @keyframes blinkFast{0%,100%{opacity:1}50%{opacity:.3}}
-/* ===== PENTING: question-txt pakai innerHTML bukan textContent ===== */
 .question-txt{font-size:16px;margin-bottom:18px;font-weight:bold;line-height:1.6;text-align:justify;}
 .question-txt img{max-width:100%;border-radius:8px;display:block;margin:8px 0;}
 .option{display:flex;align-items:center;gap:12px;margin-bottom:10px;padding:13px;border:1px solid #ddd;border-radius:10px;cursor:pointer;transition:.2s;}
@@ -84,7 +83,6 @@ input:checked+.slider:before{transform:translateX(22px);}
 .choice-letter{width:38px;height:38px;min-width:38px;border-radius:50%;background:#0d6efd;color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:17px;}
 .option input:checked+.choice-letter{background:#198754;}
 .choice-text{flex:1;font-size:15px;}
-/* choice-text boleh mengandung HTML (img) */
 .choice-text img{max-height:60px;vertical-align:middle;border-radius:6px;}
 .quiz-btns{display:flex;justify-content:space-between;margin-top:18px;}
 .btn-prev{padding:10px 20px;border:none;border-radius:8px;background:#6c757d;color:white;cursor:pointer;font-size:15px;transition:.2s;}
@@ -124,17 +122,20 @@ input:checked+.slider:before{transform:translateX(22px);}
 .btn-restart{padding:10px 18px;border:none;border-radius:10px;background:#198754;color:white;cursor:pointer;font-size:14px;font-weight:bold;}
 .btn-evaluasi{padding:10px 18px;border:none;border-radius:10px;background:#6f42c1;color:white;cursor:pointer;font-size:14px;font-weight:bold;}
 .btn-home{padding:10px 18px;border:none;border-radius:10px;background:#fd7e14;color:white;cursor:pointer;font-size:14px;font-weight:bold;}
-.evaluasi-panel{display:none;max-height:600px;overflow-y:auto;margin-top:18px;text-align:left;border-top:2px solid #0d6efd;padding-top:18px;}
+.evaluasi-panel{display:none;max-height:700px;overflow-y:auto;margin-top:18px;text-align:left;border-top:2px solid #0d6efd;padding-top:18px;}
 .evaluasi-item{background:#f8f9fa;border-radius:10px;padding:14px;margin-bottom:12px;border-left:5px solid #ddd;}
 .evaluasi-item.benar{border-left-color:#198754;background:#d4edda20;}
 .evaluasi-item.salah{border-left-color:#dc3545;background:#f8d7da20;}
-.evaluasi-item .soal-teks{font-weight:bold;margin-bottom:8px;font-size:14px;}
-.evaluasi-item .jawaban-user{font-size:13px;margin-bottom:4px;}
-.evaluasi-item .jawaban-benar{font-size:13px;margin-bottom:4px;color:#198754;}
-.evaluasi-item .pembahasan{font-size:12px;margin-top:6px;padding-top:6px;border-top:1px dashed #ddd;color:#495057;}
-/* evaluasi soal bergambar */
-.evaluasi-item .soal-teks img{max-width:100%;max-height:100px;border-radius:6px;display:block;margin-top:4px;}
+.evaluasi-item.belum{border-left-color:#ffc107;background:#fff3cd20;}
+.evaluasi-item .soal-teks{font-weight:bold;margin-bottom:6px;font-size:13px;color:#333;}
+.evaluasi-item .soal-isi{font-size:13px;margin-bottom:8px;color:#555;line-height:1.5;text-align:justify;}
+.evaluasi-item .soal-isi img{max-width:100%;max-height:100px;border-radius:6px;display:block;margin-top:4px;}
+.evaluasi-item .jawaban-user{font-size:13px;margin-bottom:4px;padding:6px 10px;border-radius:6px;background:#e9ecef;}
+.evaluasi-item .jawaban-benar{font-size:13px;margin-bottom:4px;padding:6px 10px;border-radius:6px;background:#d4edda;color:#155724;}
 .evaluasi-item .jawaban-user img,.evaluasi-item .jawaban-benar img{max-height:40px;vertical-align:middle;border-radius:6px;}
+/* ===== BOX PEMBAHASAN ===== */
+.evaluasi-item .pembahasan-box{margin-top:10px;padding:10px 12px;border-radius:8px;background:#e8f4fd;border-left:4px solid #0d6efd;font-size:12px;color:#1a3a5c;line-height:1.6;}
+.evaluasi-item .pembahasan-box strong{display:block;margin-bottom:4px;color:#0d6efd;font-size:11px;text-transform:uppercase;letter-spacing:.5px;}
 .btn-close-eval{padding:10px 18px;border:none;border-radius:10px;background:#6c757d;color:white;cursor:pointer;margin-top:10px;}
 .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:20000;justify-content:center;align-items:center;}
 .modal.show{display:flex;}
@@ -147,6 +148,8 @@ input:checked+.slider:before{transform:translateX(22px);}
 .btn-cancel{background:#6c757d;color:white;}
 .screenshot-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.9);z-index:99999;display:none;pointer-events:none;}
 .watermark{position:fixed;bottom:6px;left:8px;font-size:8px;color:rgba(255,255,255,.2);z-index:100;pointer-events:none;}
+/* Notifikasi jika soal.js gagal dimuat */
+.error-notice{background:#f8d7da;border:1px solid #f5c6cb;color:#721c24;padding:14px;border-radius:10px;margin-bottom:14px;font-size:13px;display:none;}
 @media(max-width:600px){
   .sidebar{width:100%;right:-100%;}
   .quiz-top{flex-direction:column;text-align:center;}
@@ -156,15 +159,19 @@ input:checked+.slider:before{transform:translateX(22px);}
 </head>
 <body>
 
+<!-- ==================== HALAMAN HOME ==================== -->
 <div id="homePage" class="page active">
   <div class="card">
     <div class="logo">
-      <div class="icon" ><img style="width: 150px; height: auto;" src="data:image/png;base64,iVBORw0KGgoAAAA" /></div>
+      <div class="icon">📚</div>
       <h1>Latihan SKD CPNS</h1>
       <p>Latihan Soal TWK, TIU dan TKP</p>
     </div>
+    <div id="errorNotice" class="error-notice">
+      ⚠️ File <strong>soal.js</strong> tidak ditemukan atau gagal dimuat! Pastikan file <code>soal.js</code> berada di folder yang sama dengan <code>index.html</code>.
+    </div>
     <div class="stats-card">
-      <div class="stat-item"><div class="stat-number">5</div><div class="stat-label">Total Latihan</div></div>
+      <div class="stat-item"><div class="stat-number" id="totalPaket">5</div><div class="stat-label">Total Latihan</div></div>
       <div class="stat-item"><div class="stat-number">110</div><div class="stat-label">Soal/Latihan</div></div>
       <div class="stat-item"><div class="stat-number" id="homeBestScore">-</div><div class="stat-label">Skor Terbaik</div></div>
     </div>
@@ -176,6 +183,7 @@ input:checked+.slider:before{transform:translateX(22px);}
   </div>
 </div>
 
+<!-- ==================== HALAMAN PILIH SOAL ==================== -->
 <div id="quizlistPage" class="page">
   <div class="card">
     <div class="page-title">
@@ -191,6 +199,7 @@ input:checked+.slider:before{transform:translateX(22px);}
   </div>
 </div>
 
+<!-- ==================== HALAMAN PETUNJUK ==================== -->
 <div id="petunjukPage" class="page">
   <div class="card">
     <div class="page-title">📖 Petunjuk</div>
@@ -203,23 +212,27 @@ input:checked+.slider:before{transform:translateX(22px);}
       <p>5. Tekan tombol Selesai untuk melihat hasil nilai.</p>
       <p>6. Setiap soal memiliki timer 100 menit (bisa dimatikan).</p>
       <p>7. Gunakan tombol 📋 Daftar Soal untuk navigasi cepat.</p>
+      <p>8. Tekan tombol <strong>Evaluasi</strong> di halaman hasil untuk melihat pembahasan jawaban.</p>
     </div>
     <div class="info-block" style="background:#fff3cd;">
       <p><strong>💡 Tips:</strong></p>
       <p>• Kerjakan soal dengan tenang dan fokus</p>
       <p>• Manfaatkan fitur timer untuk mengatur waktu</p>
-      <p>• Gunakan fitur evaluasi untuk mengetahui pembahasan</p>
+      <p>• Gunakan fitur evaluasi untuk mengetahui pembahasan lengkap</p>
+      <p>• Data soal disimpan di file <code>soal.js</code> — edit file tersebut untuk update soal</p>
     </div>
     <button class="back-btn" onclick="goTo('homePage')">← Kembali</button>
   </div>
 </div>
 
+<!-- ==================== HALAMAN TENTANG ==================== -->
 <div id="tentangPage" class="page">
   <div class="card">
     <div class="page-title">ℹ️ Tentang</div>
     <div class="info-block" style="background:#e9ecef;">
       <p><strong>📱 Aplikasi Latihan SKD</strong></p>
       <p>Latihan SKD adalah aplikasi latihan soal berbasis HTML, CSS dan JavaScript yang dapat dijalankan secara offline maupun online.</p>
+      <p>Data soal disimpan di file <strong>soal.js</strong> yang dapat diedit secara terpisah untuk memudahkan pembaruan soal.</p>
     </div>
     <div class="info-block" style="background:#d1ecf1;">
       <p><strong>⭐ Fitur Unggulan:</strong></p>
@@ -227,8 +240,9 @@ input:checked+.slider:before{transform:translateX(22px);}
       <p>• Timer 100 menit (dapat dimatikan/dinyalakan)</p>
       <p>• Sidebar grid soal untuk navigasi cepat</p>
       <p>• Hasil nilai/skor otomatis dengan passing grade</p>
-      <p>• Evaluasi jawaban lengkap dengan pembahasan</p>
+      <p>• Evaluasi jawaban lengkap dengan <strong>pembahasan detail</strong></p>
       <p>• Reset progress untuk memulai dari awal</p>
+      <p>• Data soal terpisah di file soal.js (mudah diupdate)</p>
     </div>
     <div class="info-block" style="background:#f8f9fa;">
       <p><strong>📊 Passing Grade:</strong></p>
@@ -238,6 +252,7 @@ input:checked+.slider:before{transform:translateX(22px);}
   </div>
 </div>
 
+<!-- ==================== HALAMAN KUIS ==================== -->
 <div id="quizPage" class="page">
   <div class="quiz-card">
     <div class="quiz-top">
@@ -262,6 +277,7 @@ input:checked+.slider:before{transform:translateX(22px);}
   </div>
 </div>
 
+<!-- ==================== HALAMAN HASIL ==================== -->
 <div id="resultPage" class="page">
   <div class="result-card">
     <h1>📊 Skor Latihan</h1>
@@ -270,7 +286,7 @@ input:checked+.slider:before{transform:translateX(22px);}
     <div id="passStatus" class="pass-status"></div>
     <div class="result-btns">
       <button class="btn-restart" onclick="restartQuiz()">🔄 Ulangi Soal</button>
-      <button class="btn-evaluasi" onclick="showEvaluasi()">📋 Evaluasi</button>
+      <button class="btn-evaluasi" onclick="showEvaluasi()">📋 Evaluasi & Pembahasan</button>
       <button class="btn-home" onclick="backToHome()">🏠 Menu Utama</button>
     </div>
     <div id="evaluasiPanel" class="evaluasi-panel"></div>
@@ -278,6 +294,7 @@ input:checked+.slider:before{transform:translateX(22px);}
   </div>
 </div>
 
+<!-- ==================== SIDEBAR ==================== -->
 <div class="sidebar-toggle" id="sidebarToggle" style="display:none;">
   <button class="btn-sidebar" onclick="toggleSidebar()">📋 Daftar Soal</button>
 </div>
@@ -302,6 +319,7 @@ input:checked+.slider:before{transform:translateX(22px);}
 </div>
 <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
+<!-- ==================== MODAL RESET ==================== -->
 <div id="resetModal" class="modal">
   <div class="modal-content">
     <h3>⚠️ Reset Progress</h3>
@@ -316,7 +334,20 @@ input:checked+.slider:before{transform:translateX(22px);}
 <div id="screenshotOverlay" class="screenshot-overlay"></div>
 <div class="watermark">© Latihan SKD - Hak Cipta Dilindungi</div>
 
+<!-- ==================== MUAT soal.js TERLEBIH DAHULU ==================== -->
+<script src="soal.js"></script>
+
 <script>
+// ==================== CEK soal.js BERHASIL DIMUAT ====================
+(function(){
+  const vars = ['twkBank1','tiuBank1','tkpBank1'];
+  const ok = vars.every(v => typeof window[v] !== 'undefined');
+  if(!ok){
+    document.getElementById('errorNotice').style.display = 'block';
+    console.error('soal.js gagal dimuat atau variabel bank soal tidak ditemukan.');
+  }
+})();
+
 // ==================== PROTECTION ====================
 document.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('keydown',e=>{
@@ -357,145 +388,17 @@ function syncTimerToggle(){
 document.getElementById('timerToggle').addEventListener('change',function(){setTimerEnabled(this.checked);syncTimerToggle();});
 syncTimerToggle();
 
-// ==================== QUIZ DATA ====================
-
-// ---- tiuBank1: soal 1 & 2 diganti bergambar (base64 SVG - works online & offline) ----
-const tiuBank1=[
-  // SOAL 1-33: tetap teks biasa
-  {q:"KHAYALAN : DONGENG = PERISTIWA : ...",opt:["Rekaan","Dugaan","Palsu","Fakta","Estimasi"],a:3},
-  {q:"Presiden : Negara = ... : ...",opt:["RT : RW","Tangan : Kanan","Gubernur : Bupati","Ayah : Keluarga","Hitam : Putih"],a:3},
-  {q:"Ikan : Air : Aquarium = ... : ... : ...",opt:["Burung : Udara : Sangkar","Kucing : Tikus : Rumah","Buaya : Amfibi : Buas","Kupu kupu : Kepompong : Ulat","Hiu : Laut : Samudera"],a:0},
-  {q:"Pelukis : Kuas : Cat = ... : ... : ...",opt:["Tukang : Gergaji : Mandor","Montir : Tang : Obeng","Guru : Meja : Mulia","Dokter : Pasien : Virus","Musisi : Menyanyi : Panggung"],a:1},
-  {q:"Semua perilaku buruk tidak patut dicontoh. Sebagian perilaku pegawai adalah buruk. Kesimpulannya adalah...",opt:["Sebagian perilaku pegawai tidak patut dicontoh","Semua peilaku pegawai tidak patut dicontoh","Sebagian perilaku pegawai patut dicontoh","Sebagian perlaku pegawai wajib dicontoh","Semua perilaku pegawai adalah buruk"],a:0},
-  
-  {q:"Semua penderita penyakit lambung tidak boleh memakan makanan yang pedas. Tono mengidap penyakit lambung. Kesimpulannya adalah...",opt:["Tono boleh memakan makanan yang pedas","Tono tidak mengidap penyakit lambung","Tono suka memakan makan yang tidak pedas","Tono tidak boleh memakan makanan yang manis","Tono tidak boleh memakan makanan yang pedas"],a:4},
-  {q:"Semua manusia membutuhkan air. Semua manusia membutuhkan oksigen. Kesimpulannya adalah...",opt:["Sebagian manusia membutuhkan air dan okigen","Semua manusia membutuhkan air dan oksigen","Semua manusia membutuhkan air","Sebagian manusia tidak membutuhkan air dan oksigen","Semua manusia hanya membutuhkan air dan oksigen"],a:1},
-  {q:"Sebagian toko buku buka pada pukul 08.00. Toko buku tidak buka pada pukul 08.00. Kesimpulannya adalah...",opt:["Toko buku buka pada malam hari","Toko buku buka pada siang hari","Toko buku buka pada pukul 07.00","Tidak bisa disimpulkan","Toko buku buka pada pukul 09.00"],a:3},
-  {q:"Pak Dani membeli 2 keranjang alpukat dan dijual kembali dengan harga Rp 532.000. Jika mendapat untung 40%, berapa rupiah kah harga pembelian sekeranjang alpukat tersebut?",opt:["Rp 180.000","Rp 190.000","Rp 212.000","Rp 380.000","Rp 385.000"],a:1},
-  {q:"Seorang pedagang telur membeli 2 kuintal telur ayam seharga Rp 1.360.000. Dengan banyaknya telur impor yang beredar di pasaran, harga jual telur adalah Rp 5.600 per kg. Berapakah kerugian pedagang tersebut jika hanya terjual 3/4 nya saja dari seluruh telur yang telah dibelinya?",opt:["Rp 180.000,00","Rp 480.000,00","Rp 520.000,00","Rp 640.000,00","Rp 840.000,00"],a:2},
-  {q:"Sebuah proyek selesai dikerjakan 6 orang selama 12 hari, setelah 6 hari proyek terhenti selama 2 hari. Agar proyek selesai tepat waktu, maka tambahan pekerja yang diperlukan adalah ... Orang",opt:["3","6","8","9","11"],a:0},
-  {q:"Seekor kuda dapat menghabiskan rumput di ladang selama 3 hari, sedangkan seekor keledai dapat menghabiskan rumput di ladang selama 6 hari. Jika seekor kuda dan seekor keledai menghabiskan rumput di ladang secara bersama - sama, maka waktu yang diperlukan adalah...",opt:["1 hari","2 hari","2.5 hari","3 hari","3.5 hari"],a:1},
-  {q:"Diketahui lamanya belajar mandiri siswa sebanding dengan nilai ujian. Jika siswa dengan nilai ujian 90 melakukan belajar mandiri 12 jam/hari, maka lamanya belajar mandiri siswa dengan nilai 60 adalah...",opt:["28 jam/hari","24 jam/hari","18 jam/hari","8 jam/hari","6 jam/hari"],a:3},
-  {q:"Ryan membeli 2 lusin barang A dengan harga Rp 264.000. Harga barang B sama dengan setengah harga barang A. Jika Desi ingin membeli 1 kodi barang A dan 1/2 kodi barang B, berapakah uang yang harus dibayarkan?",opt:["Rp 255.000","Rp 275.000","Rp 295.000","Rp 300.000","Rp 355.000"],a:1},
-  {q:"Upah rata - rata 7 orang pekerja Rp. 25.000 per hari. Jika ada tambahan 1 orang pekerja, rata - rata upahnya menjadi Rp. 23.750 per hari, maka upah pekerja baru tersebut adalah...",opt:["Rp 15.000","Rp 20.000","Rp 22.500","Rp 27.500","Rp 30.000"],a:0},
-  {q:"Pada suatu ujian, masing-masing siswa diberikan skor 2, 4, atau 6. Banyaknya siswa untuk masing-masing skor adalah sebagai berikut : \nSkor 2 = 8 siswa, \nSkor 4 = 12 siswa, dan \nSkor 6 = Y siswa. \nJika median skornya 4, maka jumlah terbesar yang mungkin untuk Y adalah...",opt:["7","9","19","20","23"],a:2},
-  {q:"Dalam suatu perlombaan, seorang pembalap mampu melajukan sepeda motornya hingga dapat menempuh jarak 1,5 kilometer dalam waktu 30 detik. Berapakah kecepatannya dalam hitungan kilometer per jam (km/jam)?",opt:["50","100","130","180","200"],a:3},
-  {q:"Seekor kucing mula-mula berada di ketinggian tertentu pada sebuah tangga. Kemudian ia turun 3 tingkat, naik 2 tingkat, turun 5 tingkat, naik 1 tingkat, naik 9 tingkat, dan turun 2 tingkat. Pada ketinggian berapakah kucing itu berada?",opt:["Sama seperti posisi semula","2 tingkat di atas posisi semula","1 tingkat di bawah posisi semula","1 tingkat di atas posisi semula","2 tingkat di bawah posisi semula"],a:1},
-  {q:"√10 x √490 = ...",opt:["89","67","70","80","88"],a:2},
-  {q:"55 + (-110) + 0,25 - (-95) - 0,3 = ...",opt:["143,95","267,9","-49,45","67,89","39,95"],a:4},
-  {q:"1,5 abad + 2 lustrum+ 1 semester = ...",opt:["266 tahun","296 tahun","1290 bulan","1926 bulan","2190 bulan"],a:3},
-  {q:"G, H, I, I, J, K, L, L, M, N, O, ..., ...",opt:["P dan Q","O dan O","P dan P","O dan Q","O dan P"],a:4},
-  {q:"2040, 2040, 1020, 340, 85, ...",opt:["67","51","42","21","17"],a:4},
-  {q:"0, 3, 8, 15, 24, ...",opt:["35","37","29","41","34"],a:0},
-  {q:"13, 26, ..., ..., 52, 60, 104, 77, 208, 94",opt:["26, 43","39, 52","26, 39","36, 44","39, 46"],a:0},
-  {q:"MUMUK >< ...",opt:["Padat","Lubak","Keropos","Hanur","Kuat"],a:0},
-  {q:"MUMUK >< ...",opt:["Padat","Lubak","Keropos","Hanur","Kuat"],a:0},
-  {q:"MUMUK >< ...",opt:["Padat","Lubak","Keropos","Hanur","Kuat"],a:0},
-  {q:"MUMUK >< ...",opt:["Padat","Lubak","Keropos","Hanur","Kuat"],a:0},
-  {q:"MUMUK >< ...",opt:["Padat","Lubak","Keropos","Hanur","Kuat"],a:0},
-  {q:"MUMUK >< ...",opt:["Padat","Lubak","Keropos","Hanur","Kuat"],a:0},
-  {q:"MUMUK >< ...",opt:["Padat","Lubak","Keropos","Hanur","Kuat"],a:0},
-  {q:"STANZA = ....",opt:["Halte","Romantis","Gelap","Puisi","Bait"],a:4},
-  {q:"EKSPLOITASI >< ...",opt:["Konservasi","Interpretasi","Perlindungan","Konservatori","Kuno"],a:0},
-  {q:"MUMUK >< ...",opt:["Padat","Lubak","Keropos","Hanur","Kuat"],a:0}
-];
-
-const twkBank1=[
-  {q:"Pembangunan pertahanan dan keamanan terutama ditujukan untuk menegakkan kedaulatan negara, menjaga keutuhan wilayah Negara Kesatuan Republik Indonesia, menjaga keselamatan segenap bangsa dari ancaman militer dan nonmiliter, meningkatkan rasa aman dan nyaman sebagai jaminan kondusifnya iklim investasi, serta tetap tertib dan tegaknya hukum di masyarakat. Pembangunan pertahanan dan keamanan ditujukan untuk kepentingan nasional. Upaya yang dapat dilakukan untuk membangun pertahanan dan keamanan adalah...",opt:["Membantu keamanan di negara yang berkonflik","Membangun infrastruktur di negara yang mengalami bencana","Memberikan pelatihan kepada militer negara asing","Menandatangani kontrak kerja sama dengan negara lain","Mempatroli rutin di wilayah darat, laut, dan udara"],a:4},
-  {q:"Negara Indonesia dikenal dengan negara yang sangat kaya sekali akan keanekaragaman dan sumber daya alamnya. Keanekaragaman ini menjadi salah satu faktor penyebab adanya kemajemukan masyarakat di Indonesia. Kemajemukan masyarakat Indonesia secara sosiohistoris terdiri atas berbagai suku bangsa yang dilatarbelakangi oleh...",opt:["Kontak sosial dan jumlah penduduk","Isolasi georafis dan kepulauan","Keterbukaan budaya luar dan migrasi penduduk","Keragaman budaya dan potensi alam","Perdagangan dan kekayaan alam"],a:2},
-  {q:"Orang yang memiliki gangguan mental tidak sepantasnya dijauhi maupun dianggap aneh. Karena tidak selamanya orang yang mengalami gangguan mental adalah pecandu narkoba, berkepribadian sombong, atau seorang psikopat. Orang yang memiliki gangguan mental juga tidak dapat dikatakan \"orang gila\". Orang yang memiliki gangguan mental hanyalah orang yang memiliki pengalaman atau luka masa lalu yang belum sembuh. Ide pokok paragraf tersebut adalah ...",opt:["Orang dengan gangguan mental tidak dapat disebut \"orang gila\"","Tidak selamanya orang yang mengalami gangguan mental adalah pecandu narkoba, berkepribadian sombong, atau seorang psikopat","Orang yang memiliki gangguan mental tidak sepantasnya dijauhi maupun dianggap aneh","Orang yang memiliki gangguan mental hanyalah orang yang memiliki pengalaman atau luka masa lalu yang belum sembuh","Kita perlu memahami orang dengan gangguan mental"],a:2},
-  {q:"Berikut merupakan fungsi Bela negara yang benar, kecuali...",opt:["Menjaga keutuhan wilayah Negara","Menjaga identitas dan integritas bangsa","Merupakan panggilan sejarah","Merupakan kewajiban setiap warga Negara","Mempertahankan Negara dari berbagai ancaman"],a:1},
-  {q:"Undang-undang yang membahas mengenai Pertahanan Negara ialah...",opt:["Undang-Undang No. 56 tahun 1999","Undang-Undang No.3 tahun 2002","Undang-Undang no. 20 tahun 1982","Undang-Undang no. 29 tahun 1954","Undang-Undang no. 54 tahun 1999"],a:1},
-  {q:"Bhinneka Tunggal Ika ditulis oleh Mpu Tantular dalam Kitab...",opt:["Negarakertagama","Asmarandana","Sutasoma","Ramayana","Mahabarata"],a:2},
-  {q:"Bacalah Teks berikut: Pemerintah kembali menurunkan bahan bakar minyak (BBM) terutama jenis premium. Bersamaan dengan penurunan harga premium untuk kedua kalinya, harga bahan bakar jenis solar pun diturunkan. Harga minyak dunia yang terus merosot mendorong munculnya kebijakan penurunan BBM. Kalangan industri mestinya sudah bisa menghitung kembali biaya produksi yang berujung pada penurunan harga. Apalagi, harga bahan bakar industri pun mengalami hal yang sama. Dengan turunnya harga premium dan solar, diharapkan harga kebutuhan pokok ikut turun. Dengan demikian, daya beli publik terangkat, diikuti peningkatan konsumsi yang mendorong peningkatan produksi. Hal itu mampu memperkecil peluang terjadinya pemutusan hubungan kerja (PHK). Gagasan utama tajuk tersebut adalah...",opt:["Penurunan harga BBM hendaknya diikuti harga kebutuhan pokok","Penurunan harga premium diikuti solar dan pertamax","Kebutuhan pokok tergantung jenis BBM yang digunakan","Turunnya BBM meningkatkan produksi dalam negeri","Penurunan harga BBM tergantung jenis BBM"],a:0},
-  {q:"Prinsip-prinsip nasionalisme Indonesia (persatuan Indonesia) tersusun dalam kesatuan majemuk tunggal, kecuali...",opt:["Kesatuan Sejarah","Kesatuan Tradisi","Kesatuan Nasib","Kesatuan Kebudayaan","Kesatuan asas kerohanian"],a:1},
-  {q:"Aspek satu nusa dalam Sumpah Pemuda menjelaskan tentang...",opt:["Aspek Kedaulatan","Aspek identitas menggantikan Hindia Belanda","Aspek Otonomi Daerah","Aspek wilayah","Aspek komunikasi"],a:1},
-  {q:"Hubungan Bhinneka Tunggal Ika dalam UUD 1945 yang menjelaskan bahwa Lambang Negara ialah Garuda Pancasila dengan semboyan Bhinneka Tunggal Ika terdapat dalam...",opt:["Pasal 18","Pasal 18 A","Pasal 36","Pasal 36 A","Pasal 32"],a:0},
-  {q:"Salah satu kemajemukan Bangsa Indonesia adalah Perbedaan Horizontal. Berikut ini yang termasuk ke dalam Perbedaan Horizontal adalah...",opt:["Ekonomi","Politik","Pendidikan","Agama","Pekerjaan"],a:3},
-  {q:"(1) Kepedulian untuk menghemat air bersih sangat diperlukan demi kelangsungan kehidupan kita dan generasi penerus kita. (2) Aktivitas sehari-hari kita banyak memerlukan air bersih. (3) Kita menggunakannya untuk mandi, minum, mencuci dan memasak. (4) Saat mencuci pakaian kita perlu membilasnya sampai tiga kali agar betul-betul bersih (5) Hal itu perlu dilakukan namun kita harus waspada, karena Tahun 2025 Indonesia akan terancam mengalami krisi air bersih. Kalimat yang berisi fakta terdapat pada kalimat nomor...",opt:[" (1) dan (2)","(2) dan (3)","(3) dan (4)","(2) dan (4)","(4) dan (5)"],a:1},
-  {q:"Setelah berlangsungnya Pemilu, terpilih Pak Anto sebagai salah satu wakil rakyat. Semua masyarakat di Desa Artasari mempercayai penuh dan menyerahkan terhadap Pak Anto untuk menjalankan tugasnya. Sikap masyarakat Artasari merupakan pengamalan sila ke-...",opt:["1","2","3","4","5"],a:3},
-  {q:"Salah satu ciri pada masa Demokrasi terpimpin adalah...",opt:["Lemahnya pengaruh komunis","Bebasnya keberadaan Pers","Lemahnya politik presiden","Dominan politik presiden","Bebasnya pergerakan partai politik"],a:3},
-  {q:" Jenis demokrasi dimana kekuasaan legislatif dipegang oleh kongres, kekuasaan eksekutif dipegang oleh presiden, dan kekuasaan yudikatif dipegang oleh Mahkamah Agung adalah...",opt:["Demokrasi Pancasila","Demokrasi parlementer","Demokrasi melalui referendum","Demokrasi langsung","Demokrasi dengan sistem pemisahan kekuasaan"],a:4},
-  {q:"Berikut adalah prinsip-prinsip demokrasi yang dirincikan oleh Sukarna, kecuali...",opt:["Prinsip Persetujuan","Prinsip Kesepahaman","Pemerintah dengan diskusi","Pemerintah dengan mayoritas","Pengakuan atas hak-hak minoritas"],a:1},
-  {q:"Undang-undang Nomor 8 Tahun 2012 mengatur tentang...",opt:["Demokrasi Pancasila","Pemilihan Umum Anggota Dewan Perwakilan Rakyat","Hak Asasi Manusia","APBN ditetapkan dengan UU","Sifat Pemilu"],a:1},  
-  {q:" Dokumen penting yang merupakan kontrak atau perjanjian antara beberapa bangsawan dan raja yang dianggap sebagai tonggak perjuangan hak asasi manusia...",opt:["Pembukaan UUD 1945","Isi perjanjian Renville","Bill of rights","Magna Carta","Habeas Corpus Act"],a:3},
-  {q:"Demokrasi di Indonesia merupakan salah satu jenis demokrasi...",opt:["Demokrasi tidak langsung","Demokrasi langsung","Demokrasi liberal","Demokrasi parlementer","Demokrasi gabungan"],a:0},
-  {q:"Kerajaan Islam pertama di Indonesia adalah...",opt:["Majapahit","Kutai","Demak","Samudra Pasai","Aceh"],a:3},
-  {q:"Pada umumnya, sakit tenggorokan disebabkan oleh virus. Biasanya, terkait dengan tanda-tanda penyakit saluran napas lainnya. Seperti, hidung tersumbat atau batuk. Kebanyakan sakit tenggorokan dapat sembuh dengan sendirinya. Namun, untuk membantu agar lebih nyaman ketika sakit, dapat dilakukan dengan minum air hangat yang diberi air perasan jeruk lemon dan madu. Simpulan paragraf tersebut yang tepat adalah...",opt:["Penyakit tenggorokan disebabkan kebanyakan oleh virus","Sakit tenggorokan tidak bisa dikurangi dengan minum air jeruk lemon","Tanda-tanda penyakit tenggorokan adalah hidung tersumbat","Usaha meringankan rasa sakit ketika menderita sakit tenggorokan","Sakit tenggorokan dapat dikurangi dengan minum air perasan jeruk lemon"],a:4},
-  {q:"Salah satu kekuasaan presiden ialah memberikan pengampunan atau penghapusan hukuman kepada seseorang atau sekelompok orang yang telah melakukan tindak pidana tertentu disebut...",opt:["Grasi","Abolisi","Amnesti","Rehabilitasi","Konservasi"],a:2},
-  {q:"Sebelum reformasi, lembaga yang memiliki kedudukan tertinggi negara adalah...",opt:["MPR","DPR","DPRD","DPD","Presiden"],a:0},
-  {q:"Memberikan persetujuan terhadap pemindahtanganan aset negara maupun terhadap perjanjian yang berdampak luas bagi kehidupan rakyat yang terkait dengan beban keuangan negara merupakan tugas DPR dalam fungsi...",opt:["Fungsi Anggaran","Fungsi Legislasi","Fungsi Pengawasan","Fungsi Angket","Fungsi Interpelasi"],a:0},
-  {q:"Lembaga yang berwenang untuk mengadili tingkat kasasi, menguji peraturan perundang-undangan di bawah Undang-undang dan wewenang lain yang diberikan undang-undang adalah...",opt:["Mahkamah Agung","Mahkamah Konstitusi","Komisi Yudisial","Presiden","Badan Pemeriksa Keuangan"],a:0},
-  {q:"Asas dekonsentrasi pada penyelenggaraan otonomi daerah adalah...",opt:["Penyerahan wewenang pemerintahan oleh pemerintah kepada daerah otonom dalam kerangka NKRI","Pelimpahan wewenang dari pemerintah kepada gubernur sebagai wakil pemerintah dan atau perangkat pusat daerah","Penugasan dari pemerintah kepada kepala daerah dan desa, dan dari daerah ke desa untuk melaksanakan tugas tertentu yang disertai pembiayaan, sarana dan prasarana","Penentuan keadilan yang berlandaskan kode etik dan ketentuan peraturan perundang-undangan yang berlaku","Penjaminan terselenggaranya kepada masyarakat dengan menggunakan sumber daya tersedia secara optimal"],a:1},
-  {q:"Adanya peraturan mengenai tingkah laku manusia, peraturan bersifat memaksa, dan sanksi terhadap pelanggaran peraturan adalah tegas, merupakan isi dari...",opt:["Prinsip hukum","Tujuan Hukum","Sifat Hukum","Unsur-unsur hukum","Ciri-ciri hukum"],a:3},
-  {q:"Lengkapilah paragraf deskripsi berikut: Jeje adalah anak yang lebih senang menghabiskan waktu dirumah. Dirumahnya ia memiliki sebuah ruangan favorit. Ruangan tersebut sangatlah nyaman ditempati. Dindingnya dicat dengan warna putih dan sedikit corak hitam pada Sisi bawah. Tiga buah sofa scandinavian berwarna abu-abu dan satu buah meja minimalis ditempatkan di tengah ruangan. Di pojok ruangan terdapat sebuah rak buku berukuran besar dan kokoh. (....) Kalimat yang tepat untuk melengkapi paragraf deksripsi tersebut adalah...",opt:["Di luar ruangan terdapat sebuah taman bunga mungil yang berukuran 3 m x 4 m","Terdapat pot yang menjadi tempat tumbuh pohon palem kecil yang bersandar ke rak buku bercat hijau tersebut","Rak ini sebagian besar memuat buku pelajaran, majalah, dan koran yang disusun rapi dan urut","Terdapat seekor kucing yang sangat menggemaskan","Terdapat meja yang bertumpukan buku-buku"],a:2},
-  {q:"Pengertian Otonomi daerah dan mengenai pemerintahan daerah diatur dalam...",opt:["UUD 1945 Pasal 18A ayat 1","Ketetapan MPR RI Nomor XV/MPR/1998","UU No. 32 Tahun 2004","UU No. 33 Tahun 2004","Ketetapan MPR RI Nomor IV/MPR/2000"],a:2},
-  {q:"Berikut ini bidang yang termasuk ke dalam prinsip otonomi daerah adalah...",opt:["Agama","Sosial","Pertahanan","Keamanan","Semua jawaban salah"],a:1}
-];
-
-const tkpBank1=[
-  {q:"Saya baru saja dimutasi ke unit lain yang sama sekali baru bagi saya. Sikap saya ...",opts:["Berusaha mempelajari dan memahami mekanisme kerja unit melalui rekan sejawat","Jarang masuk karena belum jelas apa yang harus saya kerjakan","Berusaha memahami mekanisme kerja unit melalui arsip dan aturan ","Hanya duduk sambil menunggu perintah","Mengamati pekerjaan yang dilakukan rekan kerja lainnya"],scores:[4,1,5,2,3]},
-  {q:"Kerja keras dan cermat merupakan wujud upaya untuk menjadi pribadi yang bermanfaat bagi organisasi. Berkaitan dengan hal tersebut, saya senang ...",opts:["Bekerja dengan standar hasil yang tinggi","Pekerjaan yang rutin","Pekerjaan yang menantang","Pekerjaan yang menumbuhkan kreativitas baru","Bekerja tanpa mengenal lelah dan pamrih"],scores:[3,1,2,5,4]},
-  {q:"Sikap saya terhadap perubahan, ide baru, dan cara–cara baru dalam melaksanakan suatu pekerjaan adalah ...",opts:["Perubahan adalah sesuatu yang pasti","Perubahan bukan jaminan keberhasilan pekerjaan","Dengan adanya perubahan, kondisi kerja pasti lebih baik","Stabilitas dalam bekerja lebih penting","Keberhasilan pekerjaan tergantung jenis perubaha, ide dan cara baru tersebut"],scores:[3,2,5,1,4]},
-  {q:"Di suatu pasar, Anda melihat ketidakadilan pada pembeli yang berkebutuhan khusus yang di lakukan oleh karyawan pasar, maka yang sebaiknya Anda lakukan adalah ...",opts:["Melaporkan karyawan tersebut pada atasan pasar","Membiarkannya","Menegur dan mengingatkan karyawan tersebut agar tidak berlaku seperti itu","Cuek, karena bukan urusan Anda","Memberitahu pada pembeli kalau dia telah di bohongi oleh karyawan tersebut"],scores:[3,2,5,1,4]},
-  {q:"Pada satu perusahaan ketika Anda melamar, dan mendapatkan informasi dari pihak terkait bahwa Anda dapat diterima sebagai karyawan namun Anda harus memberikan sejumlah uang agar proses tersebut berjalan lancar, maka sikap Anda adalah ...",opts:["Melaporkan kejadian tersebut kepada pimpinan perusahaan","Menerimah tawaran tersebut karena tidak ada yang mengetahuinya","Memberikan uang tersebut agar dapat di terimah bekerja","Mempertimbangkannya","Menolak dan menegaskan bahwa Anda melamar dengan kemampuan yang Anda miliki"],scores:[4,2,1,3,5]},
-  {q:"Pada situasi rapat ketika pendapat atau saran Anda tidak didengar oleh pimpinan, maka sikap Anda adalah ...",opts:["Kecewa dan meminta penjelasan saran pimpinan yang lebih baik","Menerima dengan tenang","Kecewa dan memilih diam","Tidak terimah atas sikap pimpinan tersebut","Menerima dan meminta penjelasan atas ide yang lebih baik"],scores:[3,4,2,1,5]},
-  {q:"Pada satu kesempatan Anda berada pada posisi sebagai karyawan yang harus mengerjakan tugas rekan kerja Anda, yang dikarenakan rekan kerja Anda tidak dapat masuk kerja karena sakit, maka Anda akan bersikap ...",opts:["Tidak mengerjakan tugas tersebut karena bukan tugas Anda ","Berusaha mengerjakan tugas tersebut","Belajar terlebih dahulu","Memprotes keputusan tersebut","Mengerjakan dengan terpaksa"],scores:[1,4,5,3,2]},
-  {q:"Hampir sebagian rekan kerja Anda sering pulang tidak tepat waktu, lebih tepatnya 15 dari waktu yang telah di tentukan, maka sikap Anda ...",opts:["Melaporkan pada atasan","Tetap pulang sesuai jadwal yang di tentukan","Ikut pulang","Membiarkan mereka pulang karena pekerjaan Anda belum selesai","Segera menyelesaikan perkerjaan dan menyusul pulang"],scores:[4,5,1,3,2]},
-  {q:"Apakah Anda merasa sulit untuk meminta bantuan pada rekan atau teman kerja?",opts:["Saya jarang meminta tolong karena saya merasa itu tugas saya dan saya berusaha menyelesaikannya sendiri","Saya merasa sulit karena saya tidak ingin memberaktkan orang lain atas tugas saya","Saya tidak pernah merasa sulit karena menurut saya meminta tolong adalah hal yang sopan dan baik","Tergantung situasi dan urgensi, terkadang saya meminta tolong terkadang tidak jika tidak dibutuhkan","Jika dalam kondisi benar–benar mendesak maka saya akan minta tolong orang lain"],scores:[4,1,3,5,2]},
-  {q:"Apa yang Anda rasakan dan lakukan saat menerima pujian dari atasan Anda?",opts:["Saya merasa biasa saja","Saya merasa bersyukur dan puas atas hasil kerja saya","Saya merasa sulit menerima pujian tersbut karena menurut saya itu berlebihan","Saya merasa senang dan bangga atas pencapaian saya","Saya merasa sedikit tersipu karena hal tersebut"],scores:[2,5,1,4,3]},
-  {q:"Jika kolega Anda membatalkan janjinya secara tiba–tiba untuk suatu keperluanpenting, apa yang akan Anda lakukan?",opts:["Jika saya sangat kecewa, saya tidak dapat menyembunyikannya","Saya akan menunjukan betapa kecewanya saya","Saya selalu dapat menyembuinyakan rasa kecewa dan sedih karena tidak ingin orang lain tahu","Jika hal tersebut dapat di toleransi dan dia dapat mengatakan dengan jelas maka saya akan biasa saja","Jika hal tersebut bukanlah hal yang cukup penting maka saya tidak akan menunjukkan sikap kecewa"],scores:[2,1,3,5,4]},
-  {q:"Apakah Anda akan bersikeras agar orang lain melakukan pembagian secara adil?",opts:["Melihat kondisi, jika kedua pihak puas walaupun bukan pada posisi yang adil, maka tidak masalah","Walaupun tidak adil, jika dalam proporsinya cukup dan dapat berjalan baik tidak masalah","Saya tidak pernah memaksa harus dibagi sacara adil","Jelas, karena keadilan adalah utama dan mutlak","Tergantung apakah hal tersebut dapat ditoleransi atau tidak"],scores:[4,3,1,5,2]},
-  {q:"Apa yang Anda lakukan dalam sebuah diskusi dengan kelompok kecil dari teman–teman Anda?",opts:["Saya lebih banyak mendengar dan berbicara sekedarnya","Saya selalu aktif berpendapat dan mengarahkan teman – teman untuk mendapatkan juga","Saya menjadi pengamat sejenak lalu aktif berpendapat","Saya adalah pendengar dan pengamat yang baik dalam diskusi","Jika perlu bicara maka saya utarakan, jika tidak, maka saya cukup mendengarkan"],scores:[2,4,5,1,3]},
-  {q:"Bagaimana Anda menilai sebuah permasalahan?",opts:["Lakukan saja untuk menyelesaikannya","Meminta pendapat untuk mecari solusi","Melakukan sebisa mungkin sambil berpikir cara terbaik","Mempertimbangkan terlebih dahulu dengan memikirkannya","Menambah informasi, mempertimbangkan, kemudian eksekusi"],scores:[1,2,4,3,5]},
-  {q:"Seberapa sering Anda menyisihkan waktu untuk merencanakan dan berpikir tentang pekerjaan Anda?",opts:["Saat saya membutuhkan berpikir ulang maka saya akan mengatur kembali pekerjaan saya","Saya hampir tidak pernah menyisihkan waktu untuk merencakanan dan berpikir tentang pekerjaan","Saya selalu rutin mengevaluasi diri dan memikirkan kembali seminggu sekali","Terkadang saya memikirkannya saat waktu senggang","Saya selalu menjadwalkan rutin untuk evaluasi dan merencakanan ulang walaupun tidak rutin"],scores:[3,1,5,2,4]},
-  {q:"Apa pendapat Anda tentang waktu?",opts:["Santai dan berusaha sebaik mungkin","Tepat waktu adalah segalanya","Berusaha sebaik mungkin memanfaatkan waktu","Tepat waktu adalah cara menghargai orang lain, maka membuat perencanaan merupakan standar yang harus dilakukan","Harus dapat memanfaatkan waktu semaksimal mungkin secara otomatis"],scores:[1,4,3,5,2]},
-  {q:"Seberapa pentingkah kekompakan tim bagi Anda?",opts:["Sangat penting, walaupun tujuan tercapai lebih lama, tetapi kedekatan individu harus terbangun kuat","Tidak terlalu penting karena yang penting adalah target","Cukup penting karena itu merupakan dorongan mencapai tujuan tim","Biasa saja karena kita di dunia ini professional tidak begitu perlu kedekatan","Penting tapi bukan yang utama"],scores:[3,1,5,2,4]},
-  {q:"Bagaimana menurut Anda tentang pencapaian target tim dan individu?",opts:["Sebisa mungkin kedua target tersebut harus beriringan sebagai tujuan pencapaian","Apabila target individu tercapai maka dengan otomatis target tim juga akan tercapai","Target tim harus harus lah di utamakan yang kemudian diikuti target individu","Target individu terlebih dahulu lalu kemudian tim","Target tim adalah utama walau target individu tidak tercapai"],scores:[5,2,4,1,3]},
-  {q:"Sebagai seorang pemimpin , apakah Anda selalu memberi tahu setiap informasi kepada anggota?",opts:["Hanya menginformasikan secara umum dan tersirat","Saya tidak pernah menginfomasikan itu adalah kewajiban saya sebagai pemimpin","Selalu, karena transparansi itu penting dalam tim","Tidak semua informasi, hanya hal yang bersifat umum dan yang lain berhak untuk mengetahui","Hanya memberitahukan jika ditanya"],scores:[4,1,3,5,2]},
-  {q:"Bagaimana perasaan Anda tentang memecahkan konflik antar pribadi dalam tim?",opts:["Hal tersebut merupakan tanggug jawab kedua pihak","Hal tersebut adalah sebuah masalah besar bagi saya","Ketua tim adalah penanggung jawab masalah tersebut","Hal tersebut merupakan pembelajaran bagi saya","Hal tersebut adalah masalah bagi tim dan harus diselesaikan secara tim"],scores:[5,1,3,4,2]},
-  {q:"Bagaimana cara Anda menyatakan pemikiran Anda?",opts:["Lugas dan tegas","Nyata dan tegas","Secara umum dan nyata","Lugas dan detail","Nyata, detail, dan tegas"],scores:[3,4,1,2,5]},
-  {q:"Apakah menurut Anda seorang pemimpin butuh menjadi pendengar?",opts:["Tidak perlu","Sangat perlu","Perlu","Sangat tidak perlu","Terkadang perlu"],scores:[2,5,4,1,3]},
-  {q:"Jika atasan meminta melakukan suatu pekerjaan namun hasilnya tidak memuaskan, biasanya saya ...",opts:["Tidak kecewa meskipun tidak sesuai dengan harapan","Yang penting melakukannya","Memaksakan melakukan perintah meskipun mengewakan","Memaklumi jika perintahnya tidak dapat dilaksanakan dengan sempurna","Cukup meminta dan tidak ditindaklanjuti"],scores:[3,5,2,4,1]},
-  {q:"Dalam kantor Anda menemukan atasan Anda melakukan manipulasi laporan keuangan kantor, maka bagaimana tanggapan Anda ...",opts:["Mengingatkan dan melaporkan kepada yang berwenang","Menolak akan hal tersebut namun tidak berani melaporkan","Menerima karena sudah menjadi tradisi di Indonesia","Menerima karena hal tersebut sudah sering terjadi di perusahaan manapun","Anda memilih diam agar tidak terlibat dalam hal tersebut"],scores:[5,3,1,2,4]},
-  {q:"Jika dalam sebuah perencanaan rencana terlihat rumit, maka reaksi apa yang Anda tunjukan ...",opts:["Saya minta pendapat orang lain dan yang penting saya mecoba terlebih dahulu","Saya berani mencobanya setelah mempertimbangkannya","Saya tidak mau mencobanya","Yang terpenting adalah keputusan untuk mencoba terlebih dahulu","Saya khawatir jika mencobanya akan mengalami kegagalan"],scores:[4,5,1,3,2]},
-  {q:"Ketika ada suatu permasalahan dalam pekerjaan yang berkaitan dengan kewajiban Anda, maka Anda ...",opts:["Melihat dulu adakah pihak lain yang turut bersalah dalam permasalahan tersebut","Dalam permaslahan tersebut seharusnya ada orang lain yang membantu menyelesaikan permasalahan tersebut","Mencari orang yang harus disalahkan","Akan tetap bertanggung jawab dan mencari solusi bersama","Membiarkan masalah tersebut untuk terus berlangsung"],scores:[3,4,1,5,2]},
-  {q:"Dalam agenda presentasi di kantor Anda telah mempersiapkan diri dengan baik untuk dapat mempresentasikan besok pagi di kantor, maka ...",opts:["Saya pasrah jika ada kendala","Mungkin saja presentasi saya terganggu hal lain","Meski sudah di persiapkan saya akan tetap merasa cemas","Saya akan sangat yakin presentasi tersebut akan berjalan dengan lancar, dengan syarat sudah mempersiapkan dengan maksimal","Tidak akan mungkin apabila presentasi saya tidak lancar"],scores:[4,2,1,5,3]},
-  {q:"Apabila dalam penilaian terhadap diri saya kurang baik, maka saya akan bertindak ...",opts:["Belajar lebih giat lagi","Tidak peduli","Peduli","Mawas diri","Mengikuti pelatihan"],scores:[5,1,4,2,3]},
-  {q:"Pada saat dalam pekerjaan Anda dituntutkan untuk melaksanakan tugas berat dan menuntut kemampuan tinggi, maka saya akan ...",opts:["Berusaha mencari bantuan orang lain","Meninggalkan tugas begitu saja","Berusaha mencari cara penyelesaian yang tidak membutuhkan waktu panjang","Berusaha menyelesaikan tugas tersebut perlahan walau harus memakan waktu yang lama","Berhenti untuk mecari selingan pekerjaan yang lain"],scores:[4,1,5,3,2]},
-  {q:"Pada suatu waktu dalam perjalan Anda dengan teman Anda masing–masing mengendarai kendaraan bermotor lalu kemudian berhadapan dengan lampu merah yang menyala, namun teman Anda memaksa untuk menerobos lampu merah tersebut, maka Anda akan ...",opts:["Berhenti mesikipun teman Anda melaju","Terus jalan karena mengikuti kendaraan lain","Berhenti ketika sudah sampai batas marka jalan","Tanpa pikir panjang mengikuti ajakan teman","Berhenti dan menghiraukan ajakan teman"],scores:[4,2,3,1,5]},
-  {q:"Ketika saya mengalami kesalahapahaman dengan teman, maka saya ...",opts:["Berusaha mencari informasi permasalahan yang sebenarnya","Tetap tenang dan yakin menyelesaikannya","Mengabaikan karena itu hanya masalah kecil","Merasa takut akan kehilangan teman","Bingung yang menyebabkan tidak bisa tidur"],scores:[5,4,3,2,1]},
-  {q:"Ketika proyek pekerjaan yang saya pimpin tidak memberikan hasil optimal yang dikarenakan ada kesalahan yang dilakukan oleh salah satu individu di dalam tim, maka saya ...",opts:["Hal tersebut merupakan kekeliruan dari individu tersebut","Individu tersebut harus bertanggung jawab atas semuanya","Saya tidak dapat dipersalahkan","Itu tidak masuk dalam tanggung jawab saya","Bagaiman pun juga, sebagai pemimpin saya harus ikut bertanggung jawab dengan apapun yang terjadi dalam tim"],scores:[3,4,1,2,5]},
-  {q:"Jika Anda menjadi seorang pemimipin, bagaimana pandangan Anda apakah seorang pemimpin harus mengakui kesalahan itu dibutuhkan?",opts:["Tidak dibutuhkan karena pemimipin harus bertindak benar","Terkadang dibutuhkan","Tidak terlalu dibutuhkan karena kesalahan harus segera diselesaikan","Sangat dibutuhkan","Dibutuhkan jika memang bersalah"],scores:[1,3,2,5,4]},
-  {q:"Dalam mengambil keputusan biasanya saya ...",opts:["Mengikuti yang terbanyak","Memutuskan bersama–sama","Memaksakan kehendak","Cukup mengutarakan ide dan pendapat","Membiarkan apapun keputusannya"],scores:[4,5,1,3,2]},
-  {q:"Ketika membuat sebuah peraturan atau tugas di lingkungan pekerjaan, maka sikap yang harus dilakukan oleh seorang pemimpin adalah ...",opts:["Tidak membuat peraturan tertulis, dan hanya cukup semua orang mengetahui hal tersebut","Meminta saran dan masukan dari seluruh tim ","Cukup mendelegasikannya","Memutuskan sendiri","Tidak perlu ada peraturan yang harus dibuat"],scores:[2,5,3,4,1]},
-  {q:"Anda sedang berada disebuah gedung mall. Tiba-tiba Anda melihat seseorang menggunakan tas hitam yang besar dipunggungnya. Lalu orang tersebut meletakkan tas ditempat umum dan pergi meninggalkannya. Yang akan Anda lakukan dalam situasi ini adalah ...",opts:["Berteriak dengan kencang agar semua orang menghindari tas hitam tersebut dengan cepat","Melaporkan apa yang Anda lihat kepada sekuriti yang berjaga di mall tersebut","Mengamankan tas tersebut dan melemparkannya ke tanah lapang","Menelpon pihak berwajib dan menceritakan kecurigaan Anda mengenai tas yang ditinggalkan","Melaporkan kejadian tersebut kepada pihak mall bagian informasi agar diambil tindakan"],scores:[1,5,2,3,4]},
-  {q:"Hari ini Indah ditugaskan untuk dinas ke suatu daerah menggunakan pesawat terbang. Karena cuaca buruk, penerbangan Indah diundur sekitar 4 jam. Ketika ia sedang asik membaca berita online, ia mendengar pembicaraan beberapa orang di sebelah Indah yang bercanda bahwa salah satu dari mereka membawa bom di dalam ranselnya. Jika Anda adalah Indah, bagaimana Anda menyikapi situasi tersebut ?",opts:["Saya akan mengingatkan mereka bahwa bercanda soal bom dapat diancam hukuman pidana","Segera bereaksi dengan melaporkan kepada petugas keamanan","Mengabaikannya karena Anda tahu itu hanya candaan","Mengatakan pada mereka untuk tidak mencandai perihal bom dan meminta untuk membahas hal lain yang lebih produktif","Mengamankan tas tersebut dan melemparkannya ke tanah lapang"],scores:[5,4,1,3,2]},
-  {q:"Pemerintah melakukan sejumlah penangkapan pasca bom bunuh diri yang terjadi di Kota Makassar terhadap orang-orang yang diduga terlibat tindakan aksi terorisme. Sejumlah orang yang diamankan tersebut ternyata anggota keluarga Budi, dan Budi juga dimintai keterangan mengenai anggota keluarga tersebut. Bila Anda di posisi Budi, yang akan Anda lakukan dalam situasi ini adalah ...",opts:["Berusaha membantu sebisanya dan menjawab semua pertanyaan dari pihak berwajib","Berusaha menjelaskan kepada pihak berwajib bahwa ia tidak terlibat dan tidak pernah berbuat aneh-aneh","Berusaha membantu anggota keluarga untuk keluar dari permasalahan tersebut dengan cepat","Memberikan keterangan sesuai dengan pengetahuan Anda terhadapnya apa adanya", "Berusaha membantu sebisanya dan menjawab semua pertanyaan dari pihak berwajib"],scores:[4,2,1,5,3]},
-  {q:"Team Anda mendapat tugas dari atasan Anda untuk membantunya menyelesaikan dokumen-dokumen penting yang harus dibawahnya dalam rapat petinggi perusahaan. Dokumen yang harus disiapkan cukup banyak. Namun salah seorang rekan Anda sulit untuk diajak bekerjasama dan cendrung menganggap sepele tugas yang diberikan atasan, perilaku dan sikapnya bahkan dapat berbahaya bagi keselarasan di tempat kerja, sikap Anda ...",opts:["Meminta atasan untuk menegurnya agar bisa diajak bekerja sama","Menyuruhnya untuk menyelesaikan tugasnya secepat mungkin","Memintanya untuk tidak menganggap sepele setiap pekerjaan","Memberikan pengertian agar sadar akan tugas dan tanggung jawab","Membiarkan saja, karena bukan urusan Anda untuk menegurnya"],scores:[2,3,4,5,1]},
-  {q:"Hari adalah seorang penyuluh pertanian dan peternakan yang ditugaskan oleh pemerintah kabupaten di suatu desa yang sebagian besar sawahnya mengalami gagal panen karena musim hujan yang terus menerus. Para penduduk berpendapat bahwa musibah itu adalah takdir Tuhan yang tak bisa ditolak dan tak bisa diubah. Tak hanya itu, para petani tersebut juga menolak penyuluhan dan pelatihan yang diadakan di balai desa. Mereka berpegang teguh bahwa gagal panen adalah hal yang lumrah jika belum memberikan sesajen yang mahal pada para danyang. Padahal Hadi tahu, hal yang terjadi di desa tersebut akibat pola tanam, pembibitan, dan pemeliharaan sawah yang salah. Dalam kasus ini sikap Hadi seharusnya ...",opts:["Tidak ambil pusing dengan pandangan para petani karena merasa tidak ikut memiliki sawah.","Tetap memberikan pengarahan tanpa memaksa petani karena petani selalu konservatif","Tetap memberikan arahan dan motivasi sehingga bisa meyakinkan mereka agar bersedia mengubah kebiasaan lama melalui proyek percontohannya","Tidak jadi memberikan pengarahan dan melaporkan kepada atasannya yang memerintah","Tetap memberikan pengarahan pada petani tapi dengan cara yang lebih formal melalui dinas pertanian"],scores:[2,3,5,1,4]},
-  {q:"Pagi ini semua pegawai dikumpulkan oleh kepala kantor guna membicarakan kendala dan masalah yang terjadi di kantor, kemudian saat giliran Anda memberikan tanggapan mengenai permasalahan di kantor, tiba tiba rekan Anda menyanggah penjelasan Anda saat berbicara, apa pendapat Anda ...",opts:["Rekan Anda kurang memahami sopan santun dalam berdiskusi","Wajar saja karena dalam diskusi komunikasi akan berlangsung dengan dua arah","Seharusnya ia mendengarkan dulu tanggapan anda","Seharusnya rekan saya menuggu giliranya berbicara untuk menaggapi","Memaklumi perbedaan pendapat dan gagasan"],scores:[2,3,5,4,1]},
-  {q:"Pada hari itu, saya diberitahukan oleh atasan saya jika akan ada karyawan yang ditempatkan ke ruangan saya dan ternyata saya harus berbagi ruangan dengan seorang karyawan tersebut. Padahal saya merasa lebih nyaman bekerja sendiri di dalam ruangan. Maka yang akan saya lakukan adalah ...",opts:["Berusaha mengenal rekan kerja tersebut","Sering membahas pekerjaan bersama dan sharing dengan rekan kerja","Menerima keputusan atasan dengan lapang dada","Membiasakan diri dan membangun suasana kerja yang menyenangkan","Fokus mengerjakan pekerjaan apapun situasinya"],scores:[3,2,4,5,1]},
-  {q:"Anda diberikan tugas untuk memimpin proyek untuk pertama kali. Beberapa anggota tim kerja Anda memiliki usia diatas anda. Salah satu orang anggota tim Anda tersebut yang dilaporkan tidak menyelesaikan tugas sesuai waktunya. Saat akan mengadakan rapat evaluasi, anggota tim tersebut justru meminta izin untuk pulang lebih dulu tanpa alasan yang jelas, sikap Anda ...",opts:["Meminta pertimbangan anggota lain","Membujuknya agar mengikuti rapat evaluasi terlebih dahulu","Memaksanya untuk tidak buru buru pulang","Menegurnya dan memintanya untuk mengikuti rapat segera","Memintanya untuk mempertimbangkan kepulanganya"],scores:[2,4,3,5,1]},
-  {q:"Atasan menugaskan Anda untuk mempelajari, menganalisis dan membuat rekomendasi dari hasil riset yang telah dilakukan oleh perusahaan. Hasil riset akan digunakan tim Anda untuk membuat project baru. Sayangnya Anda hanya memiliki waktu 1 hari karena hasil analisis Anda akan disampaikan di rapat pimpinan besok. Masalahnya karena hari ini hari minggu, maka analisis harus di lakukan di rumah. Setiap belajar di rumah Anda sulit sekali berkonsentrasi, mulai dari urusan keluarga hingga tetangga. Kebetulan hari ini sudah ada beberapa agenda yang telah dijadwalkan dari jauh hari yakni acara keluarga besar, undangan pernikahan tetangga serta ulang tahun anak. Bagaimana respon anda?",opts:["Membagi waktu agar dapat menyelesaikan tugas mempelajari hasil riset perusahaan sampai selesai di tempat yang tenang baru kemudian mengerjakan kegiatan pribadi","Meminta pasangan untuk mewakilkan semua kegiatan pribadi saya sehingga saya dapat fokus belajar","Menyelesaikan kegiatan pribadi sampai selesai baru kemudian mempelajari hasil riset. Hal ini karena agenda pribadi sudah lama terjadwal","Menolak permintaan atasan, hal ini karena waktu untuk mempelajari hasil riset terlalu singkat, mendadak dan menggangu waktu libur saya","Meminta rekan kerja untuk mempelajari hasil riset kemudian hasilnya dikirimkan ke saya"],scores:[5,4,2,1,3]},
-  {q:"Anda adalah seorang pimpinan pemerintah. Suatu hari salah satu pemuda dari suku asli di daerah X diperas oleh beberapa orang pemuda dari suku pendatang. Oleh karena jumlah mereka sangat banyak, pemuda dari suku asli mengalah Setelah itu pemuda tersebut pulang dan menceritakan kejadian tersebut kepada pemuda lain dari sukunya. Mendengar cerita tersebut para pemuda asli tidak terima. Mereka pun membuat perhitungan dengan para pemuda dari suku pendatang. Konflik tersebut menyebabkan beberapa rumah dari suku pendatang hangus terbakar, bahkan terjadi pertumpahan darah. Jika konflik itu dibiarkan akan menodai persatuan dan kesatuan NKRI. Untuk menyelesaikan konflik tersebut Anda akan ...",opts:["Menumbuhkembangkan toleransi antar suku","Melakukan penyuluhan kepada kedua suku","Memerintahkan aparat di untuk mengamankan","Memberikan vonis terhadap kedua suku sehingga mereka menyadari akan pentingnya hidup dalam kebhinekaan","Mengadakan rekonsiliasi antar suku"],scores:[4,2,3,1,5]}
-];
-
-const twkBank2=[],tiuBank2=[],tkpBank2=[];
-const twkBank3=[],tiuBank3=[],tkpBank3=[];
-const twkBank4=[],tiuBank4=[],tkpBank4=[];
-const twkBank5=[],tiuBank5=[],tkpBank5=[];
-
 // ==================== QUIZ STATE ====================
-let activeSet=1;
-let questions=[];
-let curQ=0;
-let userAnswers=[];
-let userScores=[];
-let timerInterval=null;
-let timeLeft=6000;
-const PREFIXES=["A","B","C","D","E"];
-const PASSING={TWK:65,TIU:80,TKP:166};
+let activeSet = 1;
+let questions = [];
+let originals = [];   // soal asli sebelum diacak, untuk ambil pembahasan
+let curQ = 0;
+let userAnswers = [];
+let userScores = [];
+let timerInterval = null;
+let timeLeft = 6000;
+const PREFIXES = ["A","B","C","D","E"];
+const PASSING = {TWK:65, TIU:80, TKP:166};
 
 // ==================== HELPERS ====================
 function getCat(n){
@@ -508,29 +411,69 @@ function shuffleOpts(q){
   if(q.isTKP){
     let pairs=q.options.map((t,i)=>({text:t,score:q.optionScores[i]}));
     for(let i=pairs.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[pairs[i],pairs[j]]=[pairs[j],pairs[i]];}
-    return{question:q.question,options:pairs.map(p=>p.text),answer:null,isTKP:true,optionScores:pairs.map(p=>p.score)};
+    return{
+      question:q.question,
+      options:pairs.map(p=>p.text),
+      answer:null,
+      isTKP:true,
+      optionScores:pairs.map(p=>p.score),
+      pembahasan:q.pembahasan||''
+    };
   } else {
     let pairs=q.options.map((t,i)=>({text:t,idx:i}));
     for(let i=pairs.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[pairs[i],pairs[j]]=[pairs[j],pairs[i]];}
     let newAns=pairs.findIndex(p=>p.idx===q.answer);
-    return{question:q.question,options:pairs.map(p=>p.text),answer:newAns,isTKP:false,optionScores:null};
+    return{
+      question:q.question,
+      options:pairs.map(p=>p.text),
+      answer:newAns,
+      isTKP:false,
+      optionScores:null,
+      pembahasan:q.pembahasan||''
+    };
   }
 }
 
-const soalPerLatihan={
-  1:{twk:twkBank1,tiu:tiuBank1,tkp:tkpBank1},
-  2:{twk:twkBank2,tiu:tiuBank2,tkp:tkpBank2},
-  3:{twk:twkBank3,tiu:tiuBank3,tkp:tkpBank3},
-  4:{twk:twkBank4,tiu:tiuBank4,tkp:tkpBank4},
-  5:{twk:twkBank5,tiu:tiuBank5,tkp:tkpBank5},
-};
+// ==================== BANGUN SOAL DARI soal.js ====================
+function getSoalBank(setId){
+  // Ambil variabel bank soal dari scope global (dimuat dari soal.js)
+  const get = (name) => {
+    return (typeof window[name] !== 'undefined') ? window[name] : [];
+  };
+  return {
+    twk: get('twkBank'+setId),
+    tiu: get('tiuBank'+setId),
+    tkp: get('tkpBank'+setId)
+  };
+}
 
-function buildOriginals(){
-  const bank=soalPerLatihan[activeSet];
-  const orig=[];
-  bank.twk.forEach(d=>orig.push({question:d.q,options:[...d.opt],answer:d.a,isTKP:false,optionScores:null}));
-  bank.tiu.forEach(d=>orig.push({question:d.q,options:[...d.opt],answer:d.a,isTKP:false,optionScores:null}));
-  bank.tkp.forEach(d=>orig.push({question:d.q,options:[...d.opts],answer:null,isTKP:true,optionScores:[...d.scores]}));
+function buildOriginals(setId){
+  const bank = getSoalBank(setId);
+  const orig = [];
+  bank.twk.forEach(d=>orig.push({
+    question:d.q,
+    options:[...d.opt],
+    answer:d.a,
+    isTKP:false,
+    optionScores:null,
+    pembahasan:d.pembahasan||''
+  }));
+  bank.tiu.forEach(d=>orig.push({
+    question:d.q,
+    options:[...d.opt],
+    answer:d.a,
+    isTKP:false,
+    optionScores:null,
+    pembahasan:d.pembahasan||''
+  }));
+  bank.tkp.forEach(d=>orig.push({
+    question:d.q,
+    options:[...d.opts],
+    answer:null,
+    isTKP:true,
+    optionScores:[...d.scores],
+    pembahasan:d.pembahasan||''
+  }));
   return orig;
 }
 
@@ -555,22 +498,37 @@ const quizMeta=[
 ];
 
 function refreshQuizList(){
-  const c=document.getElementById('quizListContainer');c.innerHTML='';
+  const c=document.getElementById('quizListContainer');
+  c.innerHTML='';
   quizMeta.forEach(m=>{
+    const bank=getSoalBank(m.id);
+    const totalSoal=(bank.twk.length)+(bank.tiu.length)+(bank.tkp.length);
     const twk=localStorage.getItem(`skorTWK_latihan${m.id}`);
     const tiu=localStorage.getItem(`skorTIU_latihan${m.id}`);
     const tkp=localStorage.getItem(`skorTKP_latihan${m.id}`);
     const done=twk&&tiu&&tkp;
     const total=done?((parseInt(twk)||0)+(parseInt(tiu)||0)+(parseInt(tkp)||0)):0;
+    const maxTWK=bank.twk.length*5;
+    const maxTIU=bank.tiu.length*5;
+    const maxTKP=bank.tkp.length>0?bank.tkp.length*5:225;
+    const maxTotal=maxTWK+maxTIU+maxTKP;
     const badgesHtml=done?
-      `<span class="skor-badge twk">TWK:${twk}/150</span><span class="skor-badge tiu">TIU:${tiu}/175</span><span class="skor-badge tkp">TKP:${tkp}/225</span>`
+      `<span class="skor-badge twk">TWK:${twk}/${maxTWK}</span><span class="skor-badge tiu">TIU:${tiu}/${maxTIU}</span><span class="skor-badge tkp">TKP:${tkp}</span>`
       :`<span class="skor-badge belum">-</span><span class="skor-badge belum">-</span><span class="skor-badge belum">-</span>`;
+    // Tampilkan hanya paket yang ada soalnya, atau selalu tampilkan semua
     c.innerHTML+=`<div class="quiz-item" onclick="startQuiz(${m.id})">
-      <div class="quiz-header"><div class="quiz-left"><span class="quiz-icon">${m.icon}</span><span>${m.name}</span></div>
-      <div class="quiz-right">${badgesHtml}</div></div>
-      <div class="quiz-detail"><div class="total-skor-container"><span class="total-skor-label">Total Skor:</span>
-      <span class="total-skor-value ${done?'completed':''}">${total} / 550</span></div>
-      <span class="status-badge ${done?'selesai':'belum'}">${done?'✅ Selesai':'⏳ Belum'}</span></div></div>`;
+      <div class="quiz-header">
+        <div class="quiz-left"><span class="quiz-icon">${m.icon}</span><span>${m.name} (${totalSoal} soal)</span></div>
+        <div class="quiz-right">${badgesHtml}</div>
+      </div>
+      <div class="quiz-detail">
+        <div class="total-skor-container">
+          <span class="total-skor-label">Total Skor:</span>
+          <span class="total-skor-value ${done?'completed':''}">${total} / ${maxTotal}</span>
+        </div>
+        <span class="status-badge ${done?'selesai':'belum'}">${done?'✅ Selesai':'⏳ Belum'}</span>
+      </div>
+    </div>`;
   });
 }
 
@@ -583,66 +541,81 @@ refreshHomeStats();
 
 // ==================== START QUIZ ====================
 function startQuiz(setId){
-  // ✅ Hentikan timer lama jika ada
-  if(timerInterval){ clearInterval(timerInterval); timerInterval=null; }
+  if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
+
+  // Cek apakah ada soal
+  const bank=getSoalBank(setId);
+  const totalSoal=bank.twk.length+bank.tiu.length+bank.tkp.length;
+  if(totalSoal===0){
+    alert(`⚠️ Paket ${setId} belum memiliki soal.\nSilakan tambahkan soal di file soal.js.`);
+    return;
+  }
+
   activeSet=setId;
-  const orig=buildOriginals();
-  questions=orig.map(q=>shuffleOpts(q));
+  originals=buildOriginals(setId);
+  questions=originals.map(q=>shuffleOpts(q));
   curQ=0;
   userAnswers=Array(questions.length).fill(null);
   userScores=Array(questions.length).fill(null);
   timeLeft=6000;
   document.getElementById('evaluasiPanel').style.display='none';
   document.getElementById('btnCloseEval').style.display='none';
-  document.getElementById('quizTitle').textContent=`📖 Latihan SKD ${setId}`;
+  document.getElementById('quizTitle').textContent=`📖 Latihan SKD Paket ${setId}`;
   document.getElementById('sidebarToggle').style.display='block';
   goTo('quizPage');
   loadQuestion();
   updateGrid();
-  
-  // ✅ RESET timer display & badge berdasarkan state terbaru
-  const timerOn = getTimerEnabled();
-  const timerDisplay = document.getElementById('timerDisplay');
-  const timerBadge = document.getElementById('timerBadge');
-  
+
+  const timerOn=getTimerEnabled();
+  const timerDisplay=document.getElementById('timerDisplay');
+  const timerBadge=document.getElementById('timerBadge');
   if(timerOn){
-    timerDisplay.textContent = '100:00';
-    timerDisplay.style.opacity = '1';
+    timerDisplay.textContent='100:00';
+    timerDisplay.style.opacity='1';
     timerDisplay.classList.remove('timer-warning','timer-danger','timer-blink');
-    timerBadge.textContent = '⏱️ Timer ON';
-    timerBadge.className = 'timer-badge on';
+    timerBadge.textContent='⏱️ Timer ON';
+    timerBadge.className='timer-badge on';
     startTimer();
   } else {
-    timerDisplay.textContent = '100:00';
-    timerDisplay.style.opacity = '.5';
+    timerDisplay.textContent='100:00';
+    timerDisplay.style.opacity='.5';
     timerDisplay.classList.remove('timer-warning','timer-danger','timer-blink');
-    timerBadge.textContent = '⏸️ Timer OFF';
-    timerBadge.className = 'timer-badge off';
+    timerBadge.textContent='⏸️ Timer OFF';
+    timerBadge.className='timer-badge off';
   }
 }
 
 // ==================== LOAD QUESTION ====================
-// PERUBAHAN UTAMA: gunakan innerHTML bukan textContent agar soal/opsi bergambar tampil
 function loadQuestion(){
   const n=curQ+1;
   document.getElementById('quizProgress').textContent=`Soal ${n}/${questions.length}`;
-  // innerHTML agar tag <img> dan <span> di dalam soal bisa dirender
   document.getElementById('quizQuestion').innerHTML=questions[curQ].question;
   const cat=getCat(n);
   const hc=document.getElementById('quizHeaderCat');
-  hc.textContent=`📍 ${cat.name}`;hc.className=`header-cat ${cat.cls}`;
+  hc.textContent=`📍 ${cat.name}`;
+  hc.className=`header-cat ${cat.cls}`;
   let html='';
   questions[curQ].options.forEach((opt,idx)=>{
     let checked=false;
     if(questions[curQ].isTKP)checked=(userScores[curQ]===questions[curQ].optionScores[idx]);
     else checked=(userAnswers[curQ]===idx);
-    // innerHTML di choice-text agar gambar pada opsi juga tampil
-    html+=`<label class="option"><input type="radio" name="ans" value="${idx}" ${checked?'checked':''}><span class="choice-letter">${PREFIXES[idx]}</span><span class="choice-text">${opt}</span></label>`;
+    html+=`<label class="option">
+      <input type="radio" name="ans" value="${idx}" ${checked?'checked':''}>
+      <span class="choice-letter">${PREFIXES[idx]}</span>
+      <span class="choice-text">${opt}</span>
+    </label>`;
   });
   document.getElementById('quizOptions').innerHTML=html;
   const btn=document.getElementById('btnNextFinish');
-  if(curQ===questions.length-1){btn.textContent='✅ Selesai';btn.className='btn-finish';btn.onclick=finishQuiz;}
-  else{btn.textContent='Next ▶';btn.className='btn-next';btn.onclick=nextQuestion;}
+  if(curQ===questions.length-1){
+    btn.textContent='✅ Selesai';
+    btn.className='btn-finish';
+    btn.onclick=finishQuiz;
+  } else {
+    btn.textContent='Next ▶';
+    btn.className='btn-next';
+    btn.onclick=nextQuestion;
+  }
   updateGrid();
 }
 
@@ -675,9 +648,10 @@ function startTimer(){
   },1000);
 }
 
-// ==================== GRID ====================
+// ==================== GRID SOAL ====================
 function updateGrid(){
-  const grid=document.getElementById('soalGrid');if(!grid)return;
+  const grid=document.getElementById('soalGrid');
+  if(!grid)return;
   let html='';
   for(let i=0;i<questions.length;i++){
     let st='unanswered';
@@ -696,7 +670,7 @@ function toggleSidebar(){
   document.getElementById('overlay').classList.toggle('show');
 }
 
-// ==================== FINISH ====================
+// ==================== SELESAI ====================
 function finishQuiz(){
   if(timerInterval)clearInterval(timerInterval);timerInterval=null;
   saveAnswer();
@@ -710,12 +684,20 @@ function finishQuiz(){
   if(prev===null||s.total>parseInt(prev))localStorage.setItem(key,s.total);
   const pass={twk:s.twk>=PASSING.TWK,tiu:s.tiu>=PASSING.TIU,tkp:s.tkp>=PASSING.TKP};
   pass.all=pass.twk&&pass.tiu&&pass.tkp;
+
+  // Hitung max skor berdasarkan soal aktual
+  const bank=getSoalBank(activeSet);
+  const maxTWK=bank.twk.length*5;
+  const maxTIU=bank.tiu.length*5;
+  const maxTKP=bank.tkp.length>0?bank.tkp.length*5:225;
+  const maxTotal=maxTWK+maxTIU+maxTKP;
+
   document.getElementById('scoreDetail').innerHTML=`
     <h3>📊 Detail Skor</h3><table>
-      <tr><td>📚 TWK (30 soal)</td><td><strong>${s.twk}</strong> / 150</td></tr>
-      <tr><td>🔢 TIU (35 soal)</td><td><strong>${s.tiu}</strong> / 175</td></tr>
-      <tr><td>⭐ TKP (45 soal)</td><td><strong>${s.tkp}</strong> / 225</td></tr>
-      <tr style="border-top:2px solid #ddd;"><td><strong>✅ TOTAL SKOR</strong></td><td><strong>${s.total}</strong> / 550</td></tr>
+      <tr><td>📚 TWK (${bank.twk.length} soal)</td><td><strong>${s.twk}</strong> / ${maxTWK}</td></tr>
+      <tr><td>🔢 TIU (${bank.tiu.length} soal)</td><td><strong>${s.tiu}</strong> / ${maxTIU}</td></tr>
+      <tr><td>⭐ TKP (${bank.tkp.length} soal)</td><td><strong>${s.tkp}</strong></td></tr>
+      <tr style="border-top:2px solid #ddd;"><td><strong>✅ TOTAL SKOR</strong></td><td><strong>${s.total}</strong> / ${maxTotal}</td></tr>
     </table><div class="total-score">🎯 Nilai Akhir: ${s.persen}%</div>`;
   document.getElementById('passStatus').innerHTML=`
     <div style="margin-bottom:10px;font-weight:bold;">📋 STATUS PASSING GRADE:</div>
@@ -734,54 +716,77 @@ function restartQuiz(){startQuiz(activeSet);}
 function backToHome(){
   if(timerInterval)clearInterval(timerInterval);timerInterval=null;
   document.getElementById('sidebarToggle').style.display='none';
-  goTo('homePage');refreshHomeStats();
+  goTo('homePage');
+  refreshHomeStats();
 }
 
-// ==================== EVALUASI ====================
+// ==================== EVALUASI + PEMBAHASAN ====================
 function showEvaluasi(){
   const panel=document.getElementById('evaluasiPanel');
-  let html='<h3 style="color:#0d6efd;margin-bottom:14px;">📝 Evaluasi Jawaban</h3>';
+  let html='<h3 style="color:#0d6efd;margin-bottom:14px;">📝 Evaluasi Jawaban & Pembahasan</h3>';
+
   for(let i=0;i<questions.length;i++){
-    const n=i+1;const cat=getCat(n);
-    const isJ=(questions[i].isTKP?userScores[i]!==null:userAnswers[i]!==null);
-    let jawUser='Tidak dijawab',jawBenar='',pembahasan='',statusCls='';
-    if(questions[i].isTKP){
-      if(isJ){
-        const uScore=userScores[i];const idx=questions[i].optionScores.findIndex(s=>s===uScore);
-        jawUser=`${PREFIXES[idx]}. ${questions[i].options[idx]}`;
-        const maxS=Math.max(...questions[i].optionScores);const bIdx=questions[i].optionScores.findIndex(s=>s===maxS);
-        jawBenar=`Jawaban terbaik: ${PREFIXES[bIdx]}. ${questions[i].options[bIdx]} (Skor ${maxS})`;
-        const isB=uScore===maxS;statusCls=isB?'benar':'salah';
-        pembahasan=`Jawaban Anda mendapat skor ${uScore} dari maksimal ${maxS}. ${isB?'Jawaban Anda sudah tepat.':'Coba evaluasi kembali pilihan Anda.'}`;
-      }else{pembahasan='Soal ini belum Anda jawab.';}
-    }else{
-      if(isJ){
+    const n=i+1;
+    const cat=getCat(n);
+    const q=questions[i];
+    // Ambil pembahasan dari array questions (sudah di-copy saat shuffle)
+    const pembahasanText = q.pembahasan || '';
+
+    let jawUser='Tidak dijawab';
+    let jawBenar='';
+    let statusCls='belum';
+    let statusIcon='⏳';
+
+    if(q.isTKP){
+      if(userScores[i]!==null){
+        const uScore=userScores[i];
+        const idx=q.optionScores.findIndex(s=>s===uScore);
+        jawUser=idx>=0?`${PREFIXES[idx]}. ${q.options[idx]} <span style="font-weight:bold;color:#6f42c1">(Skor: ${uScore})</span>`:'Tidak dijawab';
+        const maxS=Math.max(...q.optionScores);
+        const bIdx=q.optionScores.findIndex(s=>s===maxS);
+        jawBenar=`Jawaban terbaik: ${PREFIXES[bIdx]}. ${q.options[bIdx]} <strong>(Skor: ${maxS})</strong>`;
+        const isB=uScore===maxS;
+        statusCls=isB?'benar':'salah';
+        statusIcon=isB?'✅':'❌';
+      }
+    } else {
+      if(userAnswers[i]!==null){
         const ua=userAnswers[i];
-        jawUser=`${PREFIXES[ua]}. ${questions[i].options[ua]}`;
-        jawBenar=`Jawaban benar: ${PREFIXES[questions[i].answer]}. ${questions[i].options[questions[i].answer]}`;
-        const isB=ua===questions[i].answer;statusCls=isB?'benar':'salah';
-        pembahasan=`${isB?'✅ Jawaban Anda benar!':'❌ Jawaban Anda kurang tepat.'} ${jawBenar}.`;
-      }else{pembahasan='Soal ini belum Anda jawab.';}
+        jawUser=`${PREFIXES[ua]}. ${q.options[ua]}`;
+        jawBenar=`${PREFIXES[q.answer]}. ${q.options[q.answer]}`;
+        const isB=ua===q.answer;
+        statusCls=isB?'benar':'salah';
+        statusIcon=isB?'✅':'❌';
+      }
     }
-    const icon=statusCls==='benar'?'✅':statusCls==='salah'?'❌':'⏳';
+
+    // Tentukan label status
+    let statusLabel='';
+    if(statusCls==='benar') statusLabel='<span style="color:#198754;font-weight:bold;font-size:12px;">BENAR</span>';
+    else if(statusCls==='salah') statusLabel='<span style="color:#dc3545;font-weight:bold;font-size:12px;">SALAH</span>';
+    else statusLabel='<span style="color:#856404;font-weight:bold;font-size:12px;">BELUM DIJAWAB</span>';
+
     html+=`<div class="evaluasi-item ${statusCls}">
-      <div class="soal-teks">${icon} Soal ${n} [${cat.name}]</div>
-      <div class="soal-teks" style="font-weight:normal;font-size:13px;margin-top:4px;text-align:justify;">${questions[i].question}</div>
-      <div class="jawaban-user">📌 Jawaban Anda: ${jawUser}</div>
-      ${jawBenar?`<div class="jawaban-benar">✅ ${jawBenar}</div>`:''}
-      <div class="pembahasan">💡 ${pembahasan}</div>
+      <div class="soal-teks">${statusIcon} Soal ${n} [${cat.name}] — ${statusLabel}</div>
+      <div class="soal-isi">${q.question}</div>
+      <div class="jawaban-user">📌 <strong>Jawaban Anda:</strong> ${jawUser}</div>
+      ${jawBenar?`<div class="jawaban-benar">✅ <strong>Jawaban Benar:</strong> ${jawBenar}</div>`:''}
+      ${pembahasanText?`<div class="pembahasan-box"><strong>💡 Pembahasan</strong>${pembahasanText}</div>`:''}
     </div>`;
   }
-  panel.innerHTML=html;panel.style.display='block';
+
+  panel.innerHTML=html;
+  panel.style.display='block';
   document.getElementById('btnCloseEval').style.display='block';
   panel.scrollIntoView({behavior:'smooth',block:'start'});
 }
+
 function closeEvaluasi(){
   document.getElementById('evaluasiPanel').style.display='none';
   document.getElementById('btnCloseEval').style.display='none';
 }
 
-// ==================== RESET ====================
+// ==================== RESET PROGRESS ====================
 function showResetModal(){document.getElementById('resetModal').classList.add('show');}
 function closeResetModal(){document.getElementById('resetModal').classList.remove('show');}
 function resetAllProgress(){
@@ -791,18 +796,24 @@ function resetAllProgress(){
     localStorage.removeItem(`skorTIU_latihan${i}`);
     localStorage.removeItem(`skorTKP_latihan${i}`);
   }
-  refreshQuizList();refreshHomeStats();closeResetModal();
+  refreshQuizList();
+  refreshHomeStats();
+  closeResetModal();
   alert('✅ Semua progress latihan telah direset!');
 }
 
-// ==================== ANDROID BACK ====================
+// ==================== ANDROID BACK BUTTON ====================
 history.pushState({app:'skd'},'','');
 window.addEventListener('popstate',function(){
   history.pushState({app:'skd'},'','');
   if(currentPage==='quizPage'||currentPage==='resultPage'){
-    if(currentPage==='quizPage'){if(timerInterval)clearInterval(timerInterval);timerInterval=null;document.getElementById('sidebarToggle').style.display='none';}
+    if(currentPage==='quizPage'){
+      if(timerInterval)clearInterval(timerInterval);
+      timerInterval=null;
+      document.getElementById('sidebarToggle').style.display='none';
+    }
     goTo('quizlistPage');
-  }else if(currentPage==='quizlistPage'||currentPage==='petunjukPage'||currentPage==='tentangPage'){
+  } else if(currentPage==='quizlistPage'||currentPage==='petunjukPage'||currentPage==='tentangPage'){
     goTo('homePage');
   }
 });
