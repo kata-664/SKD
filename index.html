@@ -716,9 +716,12 @@ function getSoalBank(id){
 
 function buildOriginals(id){
   const bank=getSoalBank(id),orig=[];
-  bank.twk.forEach(d=>orig.push({question:d.q,options:[...d.opt],answer:d.a,isTKP:false,optionScores:null,pembahasan:d.pembahasan||''}));
-  bank.tiu.forEach(d=>orig.push({question:d.q,options:[...d.opt],answer:d.a,isTKP:false,optionScores:null,pembahasan:d.pembahasan||''}));
-  bank.tkp.forEach(d=>orig.push({question:d.q,options:[...d.opts],answer:null,isTKP:true,optionScores:[...d.scores],pembahasan:d.pembahasan||''}));
+  bank.twk.forEach(d=>orig.push({question:d.q,options:[...d.opt],answer:d.a,
+    isTKP:false,optionScores:null,pembahasan:d.pembahasan||'',kategori:'TWK'})); // ← tambah kategori
+  bank.tiu.forEach(d=>orig.push({question:d.q,options:[...d.opt],answer:d.a,
+    isTKP:false,optionScores:null,pembahasan:d.pembahasan||'',kategori:'TIU'})); // ← tambah kategori
+  bank.tkp.forEach(d=>orig.push({question:d.q,options:[...d.opts],answer:null,
+    isTKP:true,optionScores:[...d.scores],pembahasan:d.pembahasan||'',kategori:'TKP'})); // ← tambah kategori
   return orig;
 }
 
@@ -1234,8 +1237,11 @@ function finishQuiz(){
     }
     if(!isBenar&&!simulasiMode){
       // ← TAMBAH kategori di sini
-      const cat=getCat(i+1);
-      newWrong.push({question:q.question,options:q.options,answer:q.answer,isTKP:q.isTKP,optionScores:q.optionScores,pembahasan:q.pembahasan||'',kategori:cat.name});
+      // Ambil kategori dari originals (soal asli), bukan dari posisi
+const kat=originals[i]?.kategori || getCat(i+1).name;
+newWrong.push({question:q.question,options:q.options,answer:q.answer,
+  isTKP:q.isTKP,optionScores:q.optionScores,pembahasan:q.pembahasan||'',
+  kategori:kat});
     }
     if(isBenar&&!simulasiMode){
       benarList.push(q);
