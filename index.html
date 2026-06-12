@@ -1259,31 +1259,10 @@ function finishQuiz(){
     });
     mTWK=qTWK*5;mTIU=qTIU*5;mTKP=qTKP*5;
   } else {
-    // Menjadi ini:
-  let cTWK=0,cTIU=0,cTKP=0;
-  for(let i=0;i<questions.length;i++){
-    const n=i+1;
-    if(wasSoalSalah){
-      // soal salah: posisi tidak menentu, cek dari kategori aslinya tidak bisa
-      // hitung dari jumlah saja — semua dianggap campuran
-      if(questions[i].isTKP)cTKP++;
-      else cTWK++; // fallback, akan diperbaiki di bawah
-    }
-  }
-  let mTWK,mTIU,mTKP;
-  if(wasSoalSalah){
-    // hitung ulang: soal non-TKP bisa TWK atau TIU, tapi getCat(n) tidak valid
-    // → gunakan hitungSkor() saja, tampilkan jumlah soal bukan /150 dll
-    let qTWK=0,qTIU=0,qTKP=0;
-    questions.forEach(q=>{if(q.isTKP)qTKP++;else qTWK++;});
-    // tidak bisa bedakan TWK vs TIU di soal salah tanpa metadata kategori
-    mTWK=qTWK*5; mTIU=0; mTKP=qTKP*5;
-  } else {
     const bank=getSoalBank(activeSet);
     mTWK=bank.twk.length>0?bank.twk.length*5:150;
     mTIU=bank.tiu.length>0?bank.tiu.length*5:175;
     mTKP=bank.tkp.length>0?bank.tkp.length*5:225;
-  }
   }
 
   document.getElementById('scoreDetail').innerHTML=`<h3>📊 Detail Skor</h3><table>
