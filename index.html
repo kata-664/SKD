@@ -790,29 +790,28 @@ input:checked+.slider:before{transform:translateX(22px);}
 
 <!-- ==================== HALAMAN KUIS ==================== -->
 <div id="quizPage" class="page">
-  <div class="quiz-card">
-    <div class="quiz-top">
+  <div class="quiz-card" style="display:flex;flex-direction:column;max-height:90vh;padding-bottom:12px;">
+    <div class="quiz-top" style="flex-shrink:0;">
       <h2 id="quizTitle">📖 Latihan SKD CPNS</h2>
       <div id="quizHeaderCat" class="header-cat twk">📍 TWK</div>
     </div>
-    <div id="quizSection">
-      <div class="quiz-info">
-        <span id="quizProgress">Soal 1/110</span>
-        <div>
-          <span id="timerDisplay">100:00</span>
-          <span id="timerBadge" class="timer-badge on">⏱️ Timer ON</span>
-        </div>
+    <div class="quiz-info" style="flex-shrink:0;">
+      <span id="quizProgress">Soal 1/110</span>
+      <div>
+        <span id="timerDisplay">100:00</span>
+        <span id="timerBadge" class="timer-badge on">⏱️ Timer ON</span>
       </div>
+    </div>
+    <div id="quizSection" style="flex:1;overflow-y:auto;min-height:200px;padding-right:6px;margin-bottom:0;">
       <div class="question-txt" id="quizQuestion"></div>
       <div id="quizOptions"></div>
-      <div class="quiz-btns">
-        <button class="btn-prev" onclick="prevQuestion()">◀ Previous</button>
-        <button class="btn-next" id="btnNextFinish" onclick="nextQuestion()">Next ▶</button>
-      </div>
+    </div>
+    <div class="quiz-btns" style="flex-shrink:0;margin-top:8px;padding-top:8px;border-top:1px solid #e9ecef;">
+      <button class="btn-prev" onclick="prevQuestion()">◀ Previous</button>
+      <button class="btn-next" id="btnNextFinish" onclick="nextQuestion()">Next ▶</button>
     </div>
   </div>
 </div>
-
 <!-- ==================== HALAMAN EVALUASI DARI QUIZLIST ==================== -->
 <div id="evaluasiListPage" class="page">
   <div class="result-card" style="display:flex;flex-direction:column;max-height:90vh;padding-bottom:14px;">
@@ -849,17 +848,17 @@ input:checked+.slider:before{transform:translateX(22px);}
     <h3>📋 Daftar Soal</h3>
     <button class="close-sidebar" onclick="toggleSidebar()">×</button>
   </div>
-  <div class="sidebar-content" style="display:flex;flex-direction:column;height:100%;">
-    <div class="soal-grid" id="soalGrid" style="flex-shrink:0;max-height:55vh;overflow-y:auto;"></div>
-    <div style="flex-shrink:0;padding-top:14px;border-top:1px solid #ddd;font-size:12px;color:#666;margin-top:auto;">
-      <p style="margin-bottom:8px;"><strong>Legend:</strong></p>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+  <div class="sidebar-content" style="display:flex;flex-direction:column;height:calc(100% - 60px);padding-bottom:10px;">
+    <div class="soal-grid" id="soalGrid" style="flex:1;overflow-y:auto;margin-bottom:8px;padding-bottom:4px;"></div>
+    <div style="flex-shrink:0;padding-top:8px;border-top:1px solid #ddd;font-size:12px;color:#666;">
+      <p style="margin-bottom:4px;"><strong>Legend:</strong></p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;">
         <span style="background:#0d6efd;color:white;padding:2px 8px;border-radius:10px;font-size:11px;">🔵 Aktif</span>
         <span style="background:#198754;color:white;padding:2px 8px;border-radius:10px;font-size:11px;">🟢 Dijawab</span>
         <span style="background:#dc3545;color:white;padding:2px 8px;border-radius:10px;font-size:11px;">🔴 Belum</span>
       </div>
-      <p style="margin-top:8px;">🟣 TWK (1-30) | 🟤 TIU (31-65) | 🟢 TKP (66-110)</p>
-      <p style="margin-top:4px;">Passing Grade: TWK=65, TIU=80, TKP=166</p>
+      <p style="margin-top:6px;">🟣 TWK (1-30) | 🟤 TIU (31-65) | 🟢 TKP (66-110)</p>
+      <p style="margin-top:2px;">Passing Grade: TWK=65, TIU=80, TKP=166</p>
     </div>
   </div>
 </div>
