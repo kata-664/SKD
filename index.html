@@ -324,10 +324,35 @@ canvas#progressChart{max-width:100%;height:180px;}
 .qc-opt.correct .qc-opt-letter{background:var(--success);color:white;border-color:var(--success);}
 .qc-opt.wrong .qc-opt-letter{background:var(--danger);color:white;border-color:var(--danger);}
 .qc-opt-text{flex:1;font-size:14px;color:#334155;font-weight:500;}
-.qc-feedback{padding:10px 14px;border-radius:10px;font-size:13px;font-weight:700;margin-bottom:8px;display:none;}
+/* ===== TAMBAHAN BARU: FIX LAYOUT QUIZ CEPAT ===== */
+#quizCepatPlayPage > div {
+  display: flex;
+  flex-direction: column;
+  height: 92vh;
+  max-height: 92vh;
+  overflow: hidden;
+}
+.qc-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+  padding-right: 4px;
+  margin-bottom: 10px;
+}
+.qc-question-card {
+  background: white;
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 4px 16px rgba(30,58,138,.08);
+}
+/* Override margin-bottom di dalam scroll area */
+.qc-scroll-area .qc-question-card {
+  margin-bottom: 0;
+}
+.qc-feedback{flex-shrink: 0;padding:10px 14px;border-radius:10px;font-size:13px;font-weight:700;margin-bottom:8px;display:none;}
 .qc-feedback.benar{background:var(--success-light);color:#065f46;display:block;}
 .qc-feedback.salah{background:var(--danger-light);color:#991b1b;display:block;}
-.btn-qc-next{width:100%;padding:13px;border:none;border-radius:12px;background:linear-gradient(135deg,#2563eb,#4f46e5);color:white;font-size:15px;font-weight:700;cursor:pointer;transition:.2s;display:none;}
+.btn-qc-next{flex-shrink: 0;width:100%;padding:13px;border:none;border-radius:12px;background:linear-gradient(135deg,#be123c,#f43f5e);color:white;font-size:15px;font-weight:700;cursor:pointer;transition:.2s;display:none;}
 .btn-qc-next.show{display:block;}
 .btn-qc-next:active{transform:scale(0.98);}
 
@@ -449,13 +474,23 @@ canvas#progressChart{max-width:100%;height:180px;}
         <div style="font-size:10px;color:var(--gray);margin-top:2px;" id="qcCorrectCount">✅ 0 Benar</div>
       </div>
     </div>
-    <div class="qc-progress-bar"><div class="qc-progress-fill" id="qcProgressFill" style="width:100%"></div></div>
-    <div class="qc-question-card">
-      <div class="qc-q-num" id="qcQNum">SOAL 1</div>
-      <div class="qc-q-txt" id="qcQTxt"></div>
-      <div class="qc-options" id="qcOpts"></div>
+    <div class="qc-progress-bar">
+      <div class="qc-progress-fill" id="qcProgressFill" style="width:100%"></div>
     </div>
+    
+    <!-- SCROLL AREA: soal dan opsi -->
+    <div class="qc-scroll-area">
+      <div class="qc-question-card">
+        <div class="qc-q-num" id="qcQNum">SOAL 1</div>
+        <div class="qc-q-txt" id="qcQTxt"></div>
+        <div class="qc-options" id="qcOpts"></div>
+      </div>
+    </div>
+    
+    <!-- FEEDBACK - tetap di bawah -->
     <div class="qc-feedback" id="qcFeedback"></div>
+    
+    <!-- TOMBOL - tetap di bawah -->
     <button class="btn-qc-next" id="btnQcNext" onclick="qcNextQuestion()">Soal Berikutnya →</button>
   </div>
 </div>
