@@ -1,5 +1,5 @@
-// paket2.js - Soal Paket 2
-var paket2 = {
+// paket5.js - Soal Paket 5
+var paket5 = {
   twk: [
   { // No 1
     q: "",
