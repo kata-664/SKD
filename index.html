@@ -465,17 +465,17 @@ input:checked+.slider:before{transform:translateX(22px);}
 
 <!-- ==================== HALAMAN PILIH SOAL ==================== -->
 <div id="quizlistPage" class="page">
-  <div class="card">
-    <div class="page-title">
+  <div class="card" style="display:flex;flex-direction:column;max-height:90vh;padding-bottom:14px;">
+    <div class="page-title" style="flex-shrink:0;">
       📚 Pilih Soal SKD
       <div class="toggle-container">
         <span class="timer-status on" id="timerLabel">⏱️ ON</span>
         <label class="switch"><input type="checkbox" id="timerToggle" checked><span class="slider"></span></label>
       </div>
     </div>
-    <div id="quizListContainer"></div>
-    <button class="reset-btn" onclick="showResetModal()">🗑️ Reset Semua Progress</button>
-    <button class="back-btn" onclick="goTo('homePage')">← Kembali</button>
+    <div id="quizListContainer" style="flex:1;overflow-y:auto;min-height:200px;margin-bottom:0;padding-right:6px;"></div>
+    <button class="reset-btn" style="flex-shrink:0;margin-top:6px;" onclick="showResetModal()">🗑️ Reset Semua Progress</button>
+    <button class="back-btn" style="flex-shrink:0;margin-top:6px;" onclick="goTo('homePage')">← Kembali</button>
   </div>
 </div>
 
