@@ -325,7 +325,6 @@ input:checked+.slider:before{transform:translateX(22px);}
 .option input:checked+.choice-letter{background:#198754;}
 .choice-text{flex:1;font-size:15px;}
 .choice-text img{max-height:60px;vertical-align:middle;border-radius:6px;}
-.quiz-btns{display:flex;justify-content:space-between;margin-top:auto;padding-top:10px;border-top:1px solid #e9ecef;flex-shrink:0;}
 .btn-prev{padding:10px 20px;border:none;border-radius:8px;background:#6c757d;color:white;cursor:pointer;font-size:15px;transition:.2s;}
 .btn-next{padding:10px 20px;border:none;border-radius:8px;background:#0d6efd;color:white;cursor:pointer;font-size:15px;transition:.2s;}
 .btn-finish{padding:10px 20px;border:none;border-radius:8px;background:#198754;color:white;cursor:pointer;font-size:15px;transition:.2s;}
@@ -790,23 +789,30 @@ input:checked+.slider:before{transform:translateX(22px);}
 
 <!-- ==================== HALAMAN KUIS ==================== -->
 <div id="quizPage" class="page">
-  <div class="quiz-card" style="display:flex;flex-direction:column;max-height:90vh;padding-bottom:12px;">
-    <div class="quiz-top" style="flex-shrink:0;">
+  <div class="quiz-card" style="display:flex;flex-direction:column;max-height:92vh;padding:22px 22px 12px 22px;">
+    <!-- HEADER - tetap -->
+    <div class="quiz-top" style="flex-shrink:0;margin-bottom:12px;">
       <h2 id="quizTitle">📖 Latihan SKD CPNS</h2>
       <div id="quizHeaderCat" class="header-cat twk">📍 TWK</div>
     </div>
-    <div class="quiz-info" style="flex-shrink:0;">
+    
+    <!-- INFO - tetap -->
+    <div class="quiz-info" style="flex-shrink:0;margin-bottom:10px;">
       <span id="quizProgress">Soal 1/110</span>
       <div>
         <span id="timerDisplay">100:00</span>
         <span id="timerBadge" class="timer-badge on">⏱️ Timer ON</span>
       </div>
     </div>
-    <div id="quizSection" style="flex:1;overflow-y:auto;min-height:200px;padding-right:6px;margin-bottom:0;display:flex;flex-direction:column;">
+    
+    <!-- KONTEN SCROLL -->
+    <div style="flex:1;overflow-y:auto;min-height:150px;padding-right:4px;margin-bottom:0;">
       <div class="question-txt" id="quizQuestion"></div>
       <div id="quizOptions"></div>
     </div>
-    <div class="quiz-btns" style="flex-shrink:0;margin-top:8px;padding-top:8px;border-top:1px solid #e9ecef;">
+    
+    <!-- TOMBOL - tetap di bawah -->
+    <div style="flex-shrink:0;margin-top:auto;padding-top:10px;border-top:1px solid #e9ecef;display:flex;justify-content:space-between;gap:10px;">
       <button class="btn-prev" onclick="prevQuestion()">◀ Previous</button>
       <button class="btn-next" id="btnNextFinish" onclick="nextQuestion()">Next ▶</button>
     </div>
