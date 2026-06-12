@@ -880,19 +880,26 @@ input:checked+.slider:before{transform:translateX(22px);}
 <div class="watermark">© Latihan SKD - Hak Cipta Dilindungi</div>
 
 <!-- ==================== MUAT FILE EKSTERNAL ==================== -->
-<script src="soal.js"></script>
+<!-- Materi -->
 <script src="twk.js"></script>
 <script src="tiu.js"></script>
 <script src="tkp.js"></script>
 
+<!-- Soal per Paket -->
+<script src="paket1.js"></script>
+<script src="paket2.js"></script>
+<script src="paket3.js"></script>
+<script src="paket4.js"></script>
+<script src="paket5.js"></script>
+
 <script>
 // ==================== CEK FILE BERHASIL DIMUAT ====================
 (function(){
-  const vars = ['twkBank1','tiuBank1','tkpBank1'];
-  const ok = vars.every(v => typeof window[v] !== 'undefined');
+  const vars = ['paket1','paket2','paket3','paket4','paket5'];
+  const ok = vars.some(v => typeof window[v] !== 'undefined');
   if(!ok){
     document.getElementById('errorNotice').style.display = 'block';
-    console.error('soal.js gagal dimuat atau variabel bank soal tidak ditemukan.');
+    console.error('File paket soal tidak ditemukan. Pastikan file paket1.js - paket5.js ada.');
   }
   // Cek materi
   const materiVars = ['materiTWK','materiTIU','materiTKP'];
@@ -1045,14 +1052,11 @@ function shuffleOpts(q){
 
 // ==================== BANGUN SOAL DARI soal.js ====================
 function getSoalBank(setId){
-  const get = (name) => {
-    return (typeof window[name] !== 'undefined') ? window[name] : [];
-  };
-  return {
-    twk: get('twkBank'+setId),
-    tiu: get('tiuBank'+setId),
-    tkp: get('tkpBank'+setId)
-  };
+  const varName = 'paket' + setId;
+  if(typeof window[varName] !== 'undefined'){
+    return window[varName];
+  }
+  return { twk: [], tiu: [], tkp: [] };
 }
 
 function buildOriginals(setId){
