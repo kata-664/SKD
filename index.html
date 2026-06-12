@@ -54,7 +54,7 @@ body{background:linear-gradient(135deg,#1e3a8a 0%,#4f46e5 50%,#7c3aed 100%);min-
 .menu-card.petunjuk{background:linear-gradient(135deg,#0891b2,#22d3ee);}
 .menu-card.tentang{background:linear-gradient(135deg,#2563eb,#60a5fa);}
 .menu-card.pencapaian{background:linear-gradient(135deg,#b45309,#f59e0b);}
-.menu-card.soal-salah{background:linear-gradient(135deg,#be185d,#ec4899);}
+.menu-card.quiz-cepat{background:linear-gradient(135deg,#be123c,#f43f5e);}
 .info-acak{background:linear-gradient(135deg,#7c3aed,#a78bfa);padding:11px;border-radius:12px;font-size:11px;color:white;text-align:center;margin-top:10px;font-weight:700;}
 .version{text-align:center;margin-top:12px;color:#94a3b8;font-size:11px;}
 .page-title{margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;color:var(--dark);font-size:17px;font-weight:700;padding-bottom:10px;border-bottom:2px solid var(--border);}
@@ -216,7 +216,7 @@ input:checked+.slider:before{transform:translateX(22px);}
 .btn-close-eval:active{transform:scale(0.93);background:#334155;box-shadow:0 0 0 4px rgba(71,85,105,.25);}
 .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,23,42,.7);z-index:20000;justify-content:center;align-items:center;}
 .modal.show{display:flex;}
-.modal-content{background:white;padding:24px;border-radius:20px;max-width:300px;text-align:center;animation:fadeIn .3s ease;}
+.modal-content{background:white;padding:24px;border-radius:20px;max-width:320px;width:90%;text-align:center;animation:fadeIn .3s ease;}
 .modal-content h3{margin-bottom:10px;color:var(--dark);font-weight:800;}
 .modal-content p{margin-bottom:16px;color:var(--gray);font-size:14px;}
 .modal-btns{display:flex;gap:10px;justify-content:center;}
@@ -252,10 +252,6 @@ canvas#progressChart{max-width:100%;height:180px;}
 .badge-card .badge-desc{font-size:11px;color:var(--gray);margin-top:3px;line-height:1.4;}
 .badge-card.locked .badge-icon{filter:grayscale(1);opacity:.4;}
 .badge-card.locked .badge-name{color:var(--gray);}
-.soal-salah-info{background:linear-gradient(135deg,#fff5f5,#ffe4e6);border:1px solid #fca5a5;border-radius:12px;padding:12px;margin-bottom:14px;font-size:13px;color:#991b1b;text-align:center;}
-.btn-mulai-soal-salah{width:100%;padding:14px;border:none;border-radius:14px;background:linear-gradient(135deg,#be123c,#f43f5e);color:white;font-size:16px;font-weight:700;cursor:pointer;transition:.2s;margin-bottom:10px;}
-.btn-mulai-soal-salah:active{transform:scale(0.97);box-shadow:0 0 0 4px rgba(190,18,60,.25);}
-.btn-mulai-soal-salah:disabled{background:#cbd5e1;cursor:not-allowed;}
 .simulasi-info{background:var(--warning-light);border-left:4px solid var(--warning);padding:14px;border-radius:0 12px 12px 0;margin-bottom:16px;font-size:13px;line-height:1.6;}
 .simulasi-info strong{color:#92400e;}
 .btn-mulai-simulasi{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#dc2626,#ef4444);color:white;font-size:17px;font-weight:700;cursor:pointer;transition:.2s;}
@@ -264,11 +260,94 @@ canvas#progressChart{max-width:100%;height:180px;}
 .screenshot-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.9);z-index:99999;display:none;pointer-events:none;}
 .watermark{position:fixed;bottom:6px;left:8px;font-size:8px;color:rgba(255,255,255,.15);z-index:100;pointer-events:none;}
 .error-notice{background:var(--danger-light);border:1px solid #fca5a5;color:#991b1b;padding:13px;border-radius:10px;margin-bottom:12px;font-size:13px;display:none;}
-/* Soal Salah skor box */
-.soal-salah-skor-box{background:linear-gradient(135deg,#fff1f2,#ffe4e6);border:1px solid #fca5a5;border-radius:14px;padding:14px;margin:12px 0;text-align:center;}
-.soal-salah-skor-box .skor-title{font-size:13px;color:#9f1239;font-weight:700;margin-bottom:8px;}
-.soal-salah-skor-box .skor-grid{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
-.soal-salah-skor-box .skor-pill{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;}
+
+/* ===== QUIZ CEPAT STYLES ===== */
+.quiz-cepat-grid{display:grid;grid-template-columns:1fr;gap:12px;margin:14px 0;}
+.qc-card{border:none;border-radius:18px;padding:0;color:white;cursor:pointer;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.15);transition:.2s;}
+.qc-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.2);}
+.qc-card:active{transform:scale(0.97);}
+.qc-header{padding:18px 20px 14px;display:flex;align-items:center;gap:14px;}
+.qc-icon{font-size:40px;line-height:1;}
+.qc-info{flex:1;}
+.qc-title{font-size:18px;font-weight:800;margin-bottom:3px;}
+.qc-sub{font-size:12px;opacity:.85;line-height:1.4;}
+.qc-stats-row{padding:10px 20px 14px;background:rgba(0,0,0,.15);display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+.qc-stat{font-size:11px;font-weight:700;opacity:.95;display:flex;align-items:center;gap:4px;}
+.qc-stat.highlight{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:20px;}
+.qc-card.twk .qc-header{background:linear-gradient(135deg,#6d28d9,#7c3aed);}
+.qc-card.twk .qc-stats-row{background:rgba(109,40,217,.35);}
+.qc-card.tiu .qc-header{background:linear-gradient(135deg,#92400e,#b45309);}
+.qc-card.tiu .qc-stats-row{background:rgba(146,64,14,.35);}
+.qc-card.tkp .qc-header{background:linear-gradient(135deg,#065f46,#059669);}
+.qc-card.tkp .qc-stats-row{background:rgba(6,95,70,.35);}
+
+/* Konfirmasi Quiz Cepat */
+.qc-confirm-card{background:white;border-radius:20px;padding:28px 22px;text-align:center;box-shadow:0 20px 60px rgba(30,58,138,.18);}
+.qc-confirm-icon{font-size:60px;margin-bottom:12px;}
+.qc-confirm-title{font-size:22px;font-weight:800;color:var(--dark);margin-bottom:6px;}
+.qc-confirm-sub{font-size:14px;color:var(--gray);margin-bottom:20px;line-height:1.5;}
+.qc-timer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0 20px;}
+.qc-timer-btn{border:2px solid var(--border);border-radius:12px;padding:12px 6px;background:var(--gray-light);cursor:pointer;font-size:13px;font-weight:700;color:#334155;transition:.2s;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.qc-timer-btn .t-num{font-size:20px;font-weight:800;color:var(--primary);}
+.qc-timer-btn:hover{border-color:var(--primary);background:var(--primary-light);}
+.qc-timer-btn.selected{border-color:var(--primary);background:var(--primary-light);color:var(--primary-dark);}
+.qc-timer-btn.selected .t-num{color:var(--primary-dark);}
+.btn-mulai-qc{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#be123c,#f43f5e);color:white;font-size:17px;font-weight:700;cursor:pointer;transition:.2s;margin-bottom:8px;}
+.btn-mulai-qc:active{transform:scale(0.98);box-shadow:0 0 0 4px rgba(190,18,60,.25);}
+.qc-info-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:18px;}
+.qc-info-pill{background:var(--gray-light);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600;color:#334155;}
+
+/* Quiz Cepat Permainan */
+.qc-play-header{background:white;border-radius:18px;padding:14px 18px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 4px 16px rgba(30,58,138,.1);}
+.qc-play-cat{font-weight:800;padding:4px 14px;border-radius:20px;font-size:13px;}
+.qc-play-cat.twk{background:var(--secondary-light);color:var(--secondary);}
+.qc-play-cat.tiu{background:#fef3c7;color:#b45309;}
+.qc-play-cat.tkp{background:var(--success-light);color:var(--success);}
+.qc-play-timer{font-size:26px;font-weight:800;color:var(--dark);font-variant-numeric:tabular-nums;}
+.qc-play-timer.warning{color:var(--warning);}
+.qc-play-timer.danger{color:var(--danger);animation:blinkFast .5s infinite;}
+.qc-play-score{font-size:13px;font-weight:700;color:var(--gray);}
+.qc-progress-bar{width:100%;height:8px;background:var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px;}
+.qc-progress-fill{height:100%;border-radius:10px;background:linear-gradient(90deg,#2563eb,#7c3aed);transition:width .4s ease;}
+.qc-question-card{background:white;border-radius:16px;padding:18px;box-shadow:0 4px 16px rgba(30,58,138,.08);margin-bottom:10px;}
+.qc-q-num{font-size:11px;color:var(--gray);font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;}
+.qc-q-txt{font-size:15px;font-weight:700;line-height:1.65;color:var(--dark);margin-bottom:14px;text-align:justify;}
+.qc-options{display:flex;flex-direction:column;gap:8px;}
+.qc-opt{display:flex;align-items:center;gap:12px;padding:12px 14px;border:2px solid var(--border);border-radius:12px;cursor:pointer;transition:.15s;background:white;}
+.qc-opt:active{transform:scale(0.98);}
+.qc-opt.selected{border-color:var(--primary);background:var(--primary-light);}
+.qc-opt.correct{border-color:var(--success);background:var(--success-light);pointer-events:none;}
+.qc-opt.wrong{border-color:var(--danger);background:var(--danger-light);pointer-events:none;}
+.qc-opt.disabled{pointer-events:none;opacity:.7;}
+.qc-opt-letter{width:34px;height:34px;min-width:34px;border-radius:50%;background:var(--gray-light);color:#334155;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;border:2px solid var(--border);}
+.qc-opt.selected .qc-opt-letter{background:var(--primary);color:white;border-color:var(--primary);}
+.qc-opt.correct .qc-opt-letter{background:var(--success);color:white;border-color:var(--success);}
+.qc-opt.wrong .qc-opt-letter{background:var(--danger);color:white;border-color:var(--danger);}
+.qc-opt-text{flex:1;font-size:14px;color:#334155;font-weight:500;}
+.qc-feedback{padding:10px 14px;border-radius:10px;font-size:13px;font-weight:700;margin-bottom:8px;display:none;}
+.qc-feedback.benar{background:var(--success-light);color:#065f46;display:block;}
+.qc-feedback.salah{background:var(--danger-light);color:#991b1b;display:block;}
+.btn-qc-next{width:100%;padding:13px;border:none;border-radius:12px;background:linear-gradient(135deg,#2563eb,#4f46e5);color:white;font-size:15px;font-weight:700;cursor:pointer;transition:.2s;display:none;}
+.btn-qc-next.show{display:block;}
+.btn-qc-next:active{transform:scale(0.98);}
+
+/* Hasil Quiz Cepat */
+.qc-result-header{background:linear-gradient(135deg,#be123c,#f43f5e);border-radius:18px;padding:22px;text-align:center;color:white;margin-bottom:16px;}
+.qc-result-icon{font-size:50px;margin-bottom:10px;}
+.qc-result-title{font-size:22px;font-weight:800;margin-bottom:4px;}
+.qc-result-cat{font-size:13px;opacity:.85;margin-bottom:14px;}
+.qc-result-skor{font-size:40px;font-weight:900;margin-bottom:4px;}
+.qc-result-sub{font-size:13px;opacity:.9;}
+.qc-result-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px;}
+.qc-rs{background:var(--gray-light);border-radius:14px;padding:14px 8px;text-align:center;border:1px solid var(--border);}
+.qc-rs .rs-val{font-size:22px;font-weight:800;color:var(--primary);}
+.qc-rs .rs-lbl{font-size:10px;color:var(--gray);margin-top:3px;font-weight:600;}
+.qc-result-btns{display:flex;gap:10px;flex-wrap:wrap;}
+.qc-result-btns button{flex:1;min-width:100px;padding:12px;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;transition:.2s;}
+.btn-qc-ulang{background:linear-gradient(135deg,#059669,#10b981);color:white;}
+.btn-qc-lain{background:linear-gradient(135deg,#7c3aed,#a78bfa);color:white;}
+.btn-qc-home{background:linear-gradient(135deg,#d97706,#f59e0b);color:white;}
+.new-best-badge{background:linear-gradient(135deg,#f59e0b,#fbbf24);color:#78350f;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;display:inline-block;margin-bottom:8px;}
 @media(max-width:600px){
   .menu-grid-6{grid-template-columns:1fr 1fr;gap:8px;}
   .stats-overview{grid-template-columns:1fr 1fr 1fr;gap:6px;}
@@ -276,6 +355,7 @@ canvas#progressChart{max-width:100%;height:180px;}
   .quiz-top{flex-direction:column;text-align:center;}
   .question-txt{font-size:14px;}
   .pencapaian-grid{grid-template-columns:1fr 1fr;}
+  .qc-timer-grid{grid-template-columns:repeat(4,1fr);}
 }
 </style>
 </head>
@@ -299,7 +379,7 @@ canvas#progressChart{max-width:100%;height:180px;}
     <div class="menu-grid-6">
       <button class="menu-card soal" onclick="goTo('quizlistPage')"><span class="menu-icon">📚</span><span class="menu-label">Pilih Soal</span></button>
       <button class="menu-card simulasi" onclick="goTo('simulasiPage')"><span class="menu-icon">⏰</span><span class="menu-label">Simulasi</span></button>
-      <button class="menu-card soal-salah" onclick="goTo('soalSalahPage')"><span class="menu-icon">🔁</span><span class="menu-label">Soal Salah</span></button>
+      <button class="menu-card quiz-cepat" onclick="goTo('quizCepatPage')"><span class="menu-icon">⚡</span><span class="menu-label">Quiz Cepat</span></button>
       <button class="menu-card materi" onclick="goTo('materiPage')"><span class="menu-icon">📖</span><span class="menu-label">Materi</span></button>
       <button class="menu-card pencapaian" onclick="goTo('pencapaianPage')"><span class="menu-icon">🏅</span><span class="menu-label">Pencapaian</span></button>
       <button class="menu-card stats" onclick="goTo('statistikPage')"><span class="menu-icon">📊</span><span class="menu-label">Statistik</span></button>
@@ -307,7 +387,7 @@ canvas#progressChart{max-width:100%;height:180px;}
       <button class="menu-card tentang" onclick="goTo('tentangPage')"><span class="menu-icon">ℹ️</span><span class="menu-label">Tentang</span></button>
     </div>
     <div class="info-acak">🔄 Setiap membuka soal, pilihan jawaban akan diacak!</div>
-    <div class="version">Version 4.1 | © 2026 Latihan SKD</div>
+    <div class="version">Version 4.2 | © 2026 Latihan SKD</div>
   </div>
 </div>
 
@@ -324,6 +404,84 @@ canvas#progressChart{max-width:100%;height:180px;}
     <div id="quizListContainer" style="flex:1;overflow-y:auto;min-height:0;padding-right:4px;"></div>
     <button class="reset-btn" style="flex-shrink:0;margin-top:6px;" onclick="showResetModal()">🗑️ Reset Semua Progress</button>
     <button class="back-btn" style="flex-shrink:0;margin-top:6px;" onclick="goTo('homePage')">← Kembali</button>
+  </div>
+</div>
+
+<!-- QUIZ CEPAT - PILIH KATEGORI -->
+<div id="quizCepatPage" class="page">
+  <div class="card">
+    <div class="page-title">⚡ Quiz Cepat</div>
+    <p style="color:var(--gray);font-size:13px;margin-bottom:16px;">Jawab soal sebanyak mungkin dalam waktu terbatas. Pilih kategori:</p>
+    <div class="quiz-cepat-grid" id="quizCepatGrid"></div>
+    <button class="back-btn" onclick="goTo('homePage')">← Kembali</button>
+  </div>
+</div>
+
+<!-- QUIZ CEPAT - KONFIRMASI -->
+<div id="quizCepatConfirmPage" class="page">
+  <div class="qc-confirm-card">
+    <div class="qc-confirm-icon" id="qcConfirmIcon">📚</div>
+    <div class="qc-confirm-title" id="qcConfirmTitle">Quiz Cepat TWK</div>
+    <div class="qc-confirm-sub" id="qcConfirmSub">Jawab soal Tes Wawasan Kebangsaan sebanyak-banyaknya dalam waktu yang dipilih!</div>
+    <div class="qc-info-row" id="qcInfoRow"></div>
+    <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px;">⏱️ Pilih Durasi Waktu:</p>
+    <div class="qc-timer-grid">
+      <button class="qc-timer-btn selected" onclick="selectQCTimer(1,this)"><span class="t-num">1</span><span>menit</span></button>
+      <button class="qc-timer-btn" onclick="selectQCTimer(3,this)"><span class="t-num">3</span><span>menit</span></button>
+      <button class="qc-timer-btn" onclick="selectQCTimer(5,this)"><span class="t-num">5</span><span>menit</span></button>
+      <button class="qc-timer-btn" onclick="selectQCTimer(10,this)"><span class="t-num">10</span><span>menit</span></button>
+    </div>
+    <button class="btn-mulai-qc" onclick="mulaiQuizCepat()">🚀 Mulai Quiz!</button>
+    <button class="back-btn" onclick="goTo('quizCepatPage')">← Kembali</button>
+  </div>
+</div>
+
+<!-- QUIZ CEPAT - PERMAINAN -->
+<div id="quizCepatPlayPage" class="page">
+  <div style="max-width:620px;">
+    <div class="qc-play-header">
+      <div>
+        <div class="qc-play-cat" id="qcPlayCat">TWK</div>
+        <div class="qc-play-score" id="qcPlayScore">Soal ke-1</div>
+      </div>
+      <div style="text-align:right;">
+        <div class="qc-play-timer" id="qcPlayTimer">01:00</div>
+        <div style="font-size:10px;color:var(--gray);margin-top:2px;" id="qcCorrectCount">✅ 0 Benar</div>
+      </div>
+    </div>
+    <div class="qc-progress-bar"><div class="qc-progress-fill" id="qcProgressFill" style="width:100%"></div></div>
+    <div class="qc-question-card">
+      <div class="qc-q-num" id="qcQNum">SOAL 1</div>
+      <div class="qc-q-txt" id="qcQTxt"></div>
+      <div class="qc-options" id="qcOpts"></div>
+    </div>
+    <div class="qc-feedback" id="qcFeedback"></div>
+    <button class="btn-qc-next" id="btnQcNext" onclick="qcNextQuestion()">Soal Berikutnya →</button>
+  </div>
+</div>
+
+<!-- QUIZ CEPAT - HASIL -->
+<div id="quizCepatResultPage" class="page">
+  <div class="result-card">
+    <div class="qc-result-header">
+      <div class="qc-result-icon" id="qcResIcon">🏆</div>
+      <div class="qc-result-title" id="qcResTitle">Quiz Selesai!</div>
+      <div class="qc-result-cat" id="qcResCat">TWK · 3 Menit</div>
+      <div id="qcNewBest" style="display:none;"><span class="new-best-badge">🎉 Rekor Baru!</span></div>
+      <div class="qc-result-skor" id="qcResSkor">0</div>
+      <div class="qc-result-sub" id="qcResSub">soal dijawab dengan benar</div>
+    </div>
+    <div class="qc-result-stats">
+      <div class="qc-rs"><div class="rs-val" id="qcStatBenar">0</div><div class="rs-lbl">✅ Benar</div></div>
+      <div class="qc-rs"><div class="rs-val" id="qcStatSalah">0</div><div class="rs-lbl">❌ Salah</div></div>
+      <div class="qc-rs"><div class="rs-val" id="qcStatTotal">0</div><div class="rs-lbl">📝 Dijawab</div></div>
+    </div>
+    <div style="background:var(--gray-light);border-radius:12px;padding:12px;margin-bottom:14px;font-size:13px;" id="qcBestInfo"></div>
+    <div class="qc-result-btns">
+      <button class="btn-qc-ulang" onclick="ulangQuizCepat()">🔄 Ulangi</button>
+      <button class="btn-qc-lain" onclick="goTo('quizCepatPage')">⚡ Kategori Lain</button>
+      <button class="btn-qc-home" onclick="goTo('homePage')">🏠 Menu</button>
+    </div>
   </div>
 </div>
 
@@ -359,6 +517,7 @@ canvas#progressChart{max-width:100%;height:180px;}
       <div class="chart-canvas-wrap"><canvas id="progressChart"></canvas></div>
     </div>
     <div id="statsHistory" style="margin-top:12px;"></div>
+    <div id="statsQCHistory" style="margin-top:12px;"></div>
     <button class="back-btn" onclick="goTo('homePage')">← Kembali</button>
   </div>
 </div>
@@ -369,16 +528,6 @@ canvas#progressChart{max-width:100%;height:180px;}
     <div class="page-title">🏅 Pencapaian</div>
     <p style="color:var(--gray);font-size:13px;margin-bottom:14px;">Kumpulkan semua pencapaian dengan terus berlatih!</p>
     <div class="pencapaian-grid" id="pencapaianGrid"></div>
-    <button class="back-btn" onclick="goTo('homePage')">← Kembali</button>
-  </div>
-</div>
-
-<!-- SOAL SALAH -->
-<div id="soalSalahPage" class="page">
-  <div class="card">
-    <div class="page-title">🔁 Latihan Soal Salah</div>
-    <div class="soal-salah-info" id="soalSalahInfo">Memuat data soal salah...</div>
-    <button class="btn-mulai-soal-salah" id="btnMulaiSoalSalah" onclick="mulaiSoalSalah()">🔁 Mulai Latihan Soal Salah</button>
     <button class="back-btn" onclick="goTo('homePage')">← Kembali</button>
   </div>
 </div>
@@ -411,7 +560,7 @@ canvas#progressChart{max-width:100%;height:180px;}
       <p>4. Tekan tombol Selesai untuk melihat hasil nilai.</p>
       <p>5. Setiap soal memiliki timer 100 menit (bisa dimatikan).</p>
       <p>6. Gunakan 📋 Daftar Soal untuk navigasi cepat.</p>
-      <p>7. Menu <strong>Soal Salah</strong> untuk mengulang soal yang pernah salah.</p>
+      <p>7. Menu <strong>⚡ Quiz Cepat</strong>: jawab soal TWK/TIU/TKP sebanyak-banyaknya dalam 1–10 menit.</p>
       <p>8. Menu <strong>Pencapaian</strong> untuk melihat badge yang sudah diraih.</p>
     </div>
     <div class="info-block" style="background:var(--warning-light);">
@@ -419,6 +568,7 @@ canvas#progressChart{max-width:100%;height:180px;}
       <p>• Kerjakan soal dengan tenang dan fokus</p>
       <p>• Manfaatkan fitur evaluasi untuk pembahasan lengkap</p>
       <p>• Pelajari materi terlebih dahulu sebelum mengerjakan soal</p>
+      <p>• Gunakan Quiz Cepat untuk melatih kecepatan menjawab</p>
     </div>
     <button class="back-btn" onclick="goTo('homePage')">← Kembali</button>
   </div>
@@ -441,7 +591,7 @@ canvas#progressChart{max-width:100%;height:180px;}
       <p>• Materi TWK, TIU, TKP lengkap</p>
       <p>• Grafik progress skor per paket</p>
       <p>• Pencapaian/Badge sebagai motivasi belajar</p>
-      <p>• Latihan soal salah untuk perbaikan</p>
+      <p>• ⚡ Quiz Cepat: jawab soal sebanyak mungkin dalam 1–10 menit</p>
     </div>
     <div class="info-block" style="background:var(--gray-light);">
       <p><strong>📊 Passing Grade:</strong></p>
@@ -454,7 +604,7 @@ canvas#progressChart{max-width:100%;height:180px;}
   </div>
 </div>
 
-<!-- KUIS -->
+<!-- KUIS (Latihan Normal) -->
 <div id="quizPage" class="page">
   <div class="quiz-card" style="display:flex;flex-direction:column;height:92vh;padding:20px 20px 12px 20px;">
     <div class="quiz-top" style="flex-shrink:0;margin-bottom:10px;">
@@ -490,7 +640,7 @@ canvas#progressChart{max-width:100%;height:180px;}
   </div>
 </div>
 
-<!-- HASIL -->
+<!-- HASIL (Latihan Normal/Simulasi) -->
 <div id="resultPage" class="page">
   <div class="result-card">
     <h1>📊 Skor Latihan</h1>
@@ -554,6 +704,9 @@ canvas#progressChart{max-width:100%;height:180px;}
 <script src="paket3.js"></script>
 <script src="paket4.js"></script>
 <script src="paket5.js"></script>
+<script src="quiztwk.js"></script>
+<script src="quiztiu.js"></script>
+<script src="quiztkp.js"></script>
 
 <script>
 // ==================== CEK FILE ====================
@@ -579,7 +732,7 @@ window.addEventListener('keyup',e=>{if(e.key==='PrintScreen')flashOverlay();});
 function flashOverlay(){const o=document.getElementById('screenshotOverlay');o.style.display='block';setTimeout(()=>o.style.display='none',500);}
 
 // ==================== NAVIGATION ====================
-const PAGES=['homePage','quizlistPage','materiPage','materiContentPage','statistikPage','simulasiPage','petunjukPage','tentangPage','quizPage','resultPage','evaluasiListPage','pencapaianPage','soalSalahPage'];
+const PAGES=['homePage','quizlistPage','materiPage','materiContentPage','statistikPage','simulasiPage','petunjukPage','tentangPage','quizPage','resultPage','evaluasiListPage','pencapaianPage','quizCepatPage','quizCepatConfirmPage','quizCepatPlayPage','quizCepatResultPage'];
 let currentPage='homePage';
 
 function goTo(pageId){
@@ -592,7 +745,7 @@ function goTo(pageId){
   if(pageId==='homePage'){refreshHomeStats();}
   if(pageId==='statistikPage')refreshStatistik();
   if(pageId==='pencapaianPage')refreshPencapaian();
-  if(pageId==='soalSalahPage')refreshSoalSalahInfo();
+  if(pageId==='quizCepatPage')renderQuizCepatGrid();
 }
 
 // ==================== TIMER TOGGLE ====================
@@ -635,55 +788,35 @@ function showMateri(k){
   cd.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-// ==================== QUIZ STATE ====================
+// ==================== QUIZ STATE (Latihan Normal) ====================
 let activeSet=1;
 let questions=[],originals=[],curQ=0;
 let userAnswers=[],userScores=[];
 let timerInterval=null,timeLeft=6000;
-let simulasiMode=false,soalSalahMode=false;
+let simulasiMode=false;
 const PREFIXES=['A','B','C','D','E'];
 const PASSING={TWK:65,TIU:80,TKP:166};
 
-// getCat hanya dipakai untuk grid sidebar warna & soal normal (berurutan TWK/TIU/TKP)
 function getCat(n){
   if(n<=30)return{name:'TWK',cls:'twk'};
   if(n<=65)return{name:'TIU',cls:'tiu'};
   return{name:'TKP',cls:'tkp'};
 }
 
-// Mendapatkan kategori soal: gunakan field kategori jika ada, fallback ke posisi
 function getKategoriSoal(idx){
-  // Ambil dari questions[idx].kategori (sudah di-copy dari originals saat shuffleOpts)
   return questions[idx]&&questions[idx].kategori ? questions[idx].kategori : getCat(idx+1).name;
 }
 
 function shuffleOpts(q){
-  // Salin kategori ke hasil shuffle agar tidak hilang
   const kat = q.kategori || 'TKP';
   if(q.isTKP){
     let p=q.options.map((t,i)=>({text:t,score:q.optionScores[i]}));
     for(let i=p.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[p[i],p[j]]=[p[j],p[i]];}
-    return{
-      question:q.question,
-      options:p.map(x=>x.text),
-      answer:null,
-      isTKP:true,
-      optionScores:p.map(x=>x.score),
-      pembahasan:q.pembahasan||'',
-      kategori:kat   // ← PENTING: selalu ikut
-    };
+    return{question:q.question,options:p.map(x=>x.text),answer:null,isTKP:true,optionScores:p.map(x=>x.score),pembahasan:q.pembahasan||'',kategori:kat};
   } else {
     let p=q.options.map((t,i)=>({text:t,idx:i}));
     for(let i=p.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[p[i],p[j]]=[p[j],p[i]];}
-    return{
-      question:q.question,
-      options:p.map(x=>x.text),
-      answer:p.findIndex(x=>x.idx===q.answer),
-      isTKP:false,
-      optionScores:null,
-      pembahasan:q.pembahasan||'',
-      kategori:kat   // ← PENTING: selalu ikut
-    };
+    return{question:q.question,options:p.map(x=>x.text),answer:p.findIndex(x=>x.idx===q.answer),isTKP:false,optionScores:null,pembahasan:q.pembahasan||'',kategori:kat};
   }
 }
 
@@ -694,26 +827,13 @@ function getSoalBank(id){
 
 function buildOriginals(id){
   const bank=getSoalBank(id),orig=[];
-  bank.twk.forEach(d=>orig.push({
-    question:d.q,options:[...d.opt],answer:d.a,
-    isTKP:false,optionScores:null,pembahasan:d.pembahasan||'',
-    kategori:'TWK'
-  }));
-  bank.tiu.forEach(d=>orig.push({
-    question:d.q,options:[...d.opt],answer:d.a,
-    isTKP:false,optionScores:null,pembahasan:d.pembahasan||'',
-    kategori:'TIU'
-  }));
-  bank.tkp.forEach(d=>orig.push({
-    question:d.q,options:[...d.opts],answer:null,
-    isTKP:true,optionScores:[...d.scores],pembahasan:d.pembahasan||'',
-    kategori:'TKP'
-  }));
+  bank.twk.forEach(d=>orig.push({question:d.q,options:[...d.opt],answer:d.a,isTKP:false,optionScores:null,pembahasan:d.pembahasan||'',kategori:'TWK'}));
+  bank.tiu.forEach(d=>orig.push({question:d.q,options:[...d.opt],answer:d.a,isTKP:false,optionScores:null,pembahasan:d.pembahasan||'',kategori:'TIU'}));
+  bank.tkp.forEach(d=>orig.push({question:d.q,options:[...d.opts],answer:null,isTKP:true,optionScores:[...d.scores],pembahasan:d.pembahasan||'',kategori:'TKP'}));
   return orig;
 }
 
 // ==================== HITUNG SKOR ====================
-// Untuk latihan normal (urutan tetap TWK 1-30, TIU 31-65, TKP 66-110)
 function hitungSkor(){
   let twk=0,tiu=0,tkp=0;
   for(let i=0;i<questions.length;i++){
@@ -725,125 +845,362 @@ function hitungSkor(){
   return{twk,tiu,tkp,total:twk+tiu+tkp,persen:Math.round((twk+tiu+tkp)/550*100)};
 }
 
-// Untuk soal salah & simulasi: gunakan field kategori di setiap soal
 function hitungSkorByKategori(){
   let twk=0,tiu=0,tkp=0;
   for(let i=0;i<questions.length;i++){
     const q=questions[i];
     const kat=q.kategori||'TKP';
-    if(q.isTKP){
-      // TKP: tambahkan skor yang dipilih user (bukan hanya skor maksimal)
-      if(userScores[i]!==null && userScores[i]!==undefined){
-        tkp+=userScores[i];
-      }
-    } else {
-      if(userAnswers[i]!==null && userAnswers[i]===q.answer){
-        if(kat==='TWK') twk+=5;
-        else if(kat==='TIU') tiu+=5;
-        else tkp+=5; // fallback
-      }
-    }
+    if(q.isTKP){if(userScores[i]!==null&&userScores[i]!==undefined)tkp+=userScores[i];}
+    else{if(userAnswers[i]!==null&&userAnswers[i]===q.answer){
+      if(kat==='TWK')twk+=5;else if(kat==='TIU')tiu+=5;else tkp+=5;
+    }}
   }
   const total=twk+tiu+tkp;
-  // Hitung skor maks dinamis dari soal yang ada
   let mTWK=0,mTIU=0,mTKP=0;
   questions.forEach(q=>{
     const kat=q.kategori||'TKP';
-    if(q.isTKP){
-      // Skor maks TKP per soal = nilai tertinggi dari optionScores
-      const mx=q.optionScores?Math.max(...q.optionScores):5;
-      mTKP+=mx;
-    } else {
-      if(kat==='TWK') mTWK+=5;
-      else if(kat==='TIU') mTIU+=5;
-    }
+    if(q.isTKP){const mx=q.optionScores?Math.max(...q.optionScores):5;mTKP+=mx;}
+    else{if(kat==='TWK')mTWK+=5;else if(kat==='TIU')mTIU+=5;}
   });
   const mTot=mTWK+mTIU+mTKP;
-  const persen=mTot>0?Math.round(total/mTot*100):0;
-  return{twk,tiu,tkp,total,persen,mTWK,mTIU,mTKP,mTot};
+  return{twk,tiu,tkp,total,persen:mTot>0?Math.round(total/mTot*100):0,mTWK,mTIU,mTKP,mTot};
 }
 
-// ==================== SOAL SALAH ====================
-function getSoalSalahList(){
-  let list=[];
-  try{const d=localStorage.getItem('soalSalahData');if(d)list=JSON.parse(d);}catch(e){}
-  return list;
+// ==================== QUIZ CEPAT ====================
+const QC_CATS = {
+  twk: { name:'TWK', fullName:'Tes Wawasan Kebangsaan', icon:'📚', cls:'twk', jsVar:'quizTWK', color:'#7c3aed' },
+  tiu: { name:'TIU', fullName:'Tes Intelegensi Umum', icon:'🔢', cls:'tiu', jsVar:'quizTIU', color:'#b45309' },
+  tkp: { name:'TKP', fullName:'Tes Karakteristik Pribadi', icon:'⭐', cls:'tkp', jsVar:'quizTKP', color:'#059669' }
+};
+
+let qcState = {
+  cat: 'twk',
+  timerMenit: 1,
+  soal: [],
+  curIdx: 0,
+  benar: 0,
+  salah: 0,
+  totalDijawab: 0,
+  timeLeft: 60,
+  interval: null,
+  totalWaktu: 60
+};
+
+function getQCSoal(cat){
+  const varName = QC_CATS[cat].jsVar;
+  if(typeof window[varName] !== 'undefined') return window[varName];
+  // Fallback: ambil dari paket yang tersedia berdasarkan kategori
+  let all=[];
+  for(let i=1;i<=5;i++){
+    const b=getSoalBank(i);
+    if(cat==='twk')b.twk.forEach(d=>all.push({q:d.q,opt:[...d.opt],a:d.a,isTKP:false,pembahasan:d.pembahasan||''}));
+    else if(cat==='tiu')b.tiu.forEach(d=>all.push({q:d.q,opt:[...d.opt],a:d.a,isTKP:false,pembahasan:d.pembahasan||''}));
+    else if(cat==='tkp')b.tkp.forEach(d=>all.push({q:d.q,opt:[...d.opts],scores:[...d.scores],isTKP:true,pembahasan:d.pembahasan||''}));
+  }
+  return all;
 }
 
-function saveSoalSalah(newWrong){
-  let list=getSoalSalahList();
-  newWrong.forEach(q=>{
-    const exists=list.some(x=>x.question===q.question);
-    if(!exists)list.push(q);
+function getQCBestScore(cat, menit){
+  const key=`qcBest_${cat}_${menit}m`;
+  return parseInt(localStorage.getItem(key)||'0');
+}
+function setQCBestScore(cat, menit, val){
+  const key=`qcBest_${cat}_${menit}m`;
+  const prev=getQCBestScore(cat,menit);
+  if(val>prev)localStorage.setItem(key,val);
+  return val>prev;
+}
+function getQCTotalSesi(cat){
+  return parseInt(localStorage.getItem(`qcTotalSesi_${cat}`)||'0');
+}
+function incQCTotalSesi(cat){
+  localStorage.setItem(`qcTotalSesi_${cat}`, getQCTotalSesi(cat)+1);
+}
+
+function renderQuizCepatGrid(){
+  const grid = document.getElementById('quizCepatGrid');
+  let html='';
+  ['twk','tiu','tkp'].forEach(cat=>{
+    const c=QC_CATS[cat];
+    const soalArr=getQCSoal(cat);
+    const totalSoal=soalArr.length;
+    const totalSesi=getQCTotalSesi(cat);
+    // Best per durasi
+    const bests=[1,3,5,10].map(m=>{
+      const b=getQCBestScore(cat,m);
+      return b>0?`<span class="qc-stat highlight">⏱️${m}m: ${b}</span>`:'';
+    }).filter(x=>x).join('');
+    html+=`<div class="qc-card ${cat}" onclick="pilihanQC('${cat}')">
+      <div class="qc-header">
+        <div class="qc-icon">${c.icon}</div>
+        <div class="qc-info">
+          <div class="qc-title">${c.name} — ${c.fullName}</div>
+          <div class="qc-sub">${totalSoal} soal tersedia · ${totalSesi} sesi dimainkan</div>
+        </div>
+      </div>
+      <div class="qc-stats-row">
+        ${bests || '<span class="qc-stat" style="opacity:.7;">Belum ada rekor</span>'}
+      </div>
+    </div>`;
   });
-  localStorage.setItem('soalSalahData',JSON.stringify(list));
+  grid.innerHTML=html;
 }
 
-function hapusDariSoalSalah(benarList){
-  let list=getSoalSalahList();
-  benarList.forEach(q=>{
-    list=list.filter(x=>x.question!==q.question);
+function pilihanQC(cat){
+  qcState.cat=cat;
+  qcState.timerMenit=1;
+  const c=QC_CATS[cat];
+  const soalArr=getQCSoal(cat);
+  document.getElementById('qcConfirmIcon').textContent=c.icon;
+  document.getElementById('qcConfirmTitle').textContent=`Quiz Cepat ${c.name}`;
+  document.getElementById('qcConfirmSub').textContent=`Jawab soal ${c.fullName} sebanyak-banyaknya dalam waktu yang dipilih!`;
+  // Info row: total soal & best score
+  const infoRow = document.getElementById('qcInfoRow');
+  let infoHtml=`<span class="qc-info-pill">📝 ${soalArr.length} soal tersedia</span>`;
+  [1,3,5,10].forEach(m=>{
+    const b=getQCBestScore(cat,m);
+    if(b>0) infoHtml+=`<span class="qc-info-pill" style="background:${c.color}20;color:${c.color}">🏆 ${m}m: ${b} benar</span>`;
   });
-  localStorage.setItem('soalSalahData',JSON.stringify(list));
+  infoRow.innerHTML=infoHtml;
+  // Reset timer selection
+  document.querySelectorAll('.qc-timer-btn').forEach(b=>b.classList.remove('selected'));
+  document.querySelectorAll('.qc-timer-btn')[0].classList.add('selected');
+  goTo('quizCepatConfirmPage');
 }
 
-function refreshSoalSalahInfo(){
-  const list=getSoalSalahList();
-  const info=document.getElementById('soalSalahInfo');
-  const btn=document.getElementById('btnMulaiSoalSalah');
-  if(list.length===0){
-    info.textContent='Belum ada soal yang salah. Kerjakan latihan terlebih dahulu!';
-    btn.disabled=true;
+function selectQCTimer(menit, btn){
+  qcState.timerMenit=menit;
+  document.querySelectorAll('.qc-timer-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function shuffleQCSoal(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+
+function shuffleQCOpts(d){
+  // For TWK/TIU: shuffle opts, track correct answer index
+  if(d.isTKP){
+    // For TKP: shuffle opts+scores together
+    let p=d.opt.map((t,i)=>({text:t,score:d.scores[i]}));
+    for(let i=p.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[p[i],p[j]]=[p[j],p[i]];}
+    return{...d,opt:p.map(x=>x.text),scores:p.map(x=>x.score)};
   } else {
-    // Hitung berapa TWK/TIU/TKP
-    let cTWK=0,cTIU=0,cTKP=0;
-    list.forEach(q=>{
-      const k=q.kategori||'TKP';
-      if(k==='TWK')cTWK++;
-      else if(k==='TIU')cTIU++;
-      else cTKP++;
-    });
-    info.innerHTML=`Terdapat <strong>${list.length} soal</strong> yang pernah dijawab salah.<br>
-      <span style="font-size:11px;color:#7c3aed;">📚 TWK: ${cTWK}</span> &nbsp;
-      <span style="font-size:11px;color:#b45309;">🔢 TIU: ${cTIU}</span> &nbsp;
-      <span style="font-size:11px;color:#059669;">⭐ TKP: ${cTKP}</span>`;
-    btn.disabled=false;
+    let p=d.opt.map((t,i)=>({text:t,idx:i}));
+    for(let i=p.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[p[i],p[j]]=[p[j],p[i]];}
+    return{...d,opt:p.map(x=>x.text),a:p.findIndex(x=>x.idx===d.a)};
   }
 }
 
-function mulaiSoalSalah(){
-  const list=getSoalSalahList();
-  if(list.length===0){alert('Belum ada soal salah!');return;}
-  if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
-  // Pastikan semua soal punya kategori
-  originals=list.map(q=>({
-    ...q,
-    kategori: q.kategori || 'TKP' // fallback jika data lama tidak punya kategori
-  }));
-  questions=originals.map(q=>shuffleOpts(q));
-  curQ=0;
-  userAnswers=Array(questions.length).fill(null);
-  userScores=Array(questions.length).fill(null);
-  timeLeft=6000;
-  simulasiMode=false;
-  soalSalahMode=true;
-  activeSet=0;
-  document.getElementById('evaluasiPanel').style.display='none';
-  document.getElementById('btnCloseEval').style.display='none';
-  document.getElementById('quizTitle').textContent='🔁 Latihan Soal Salah';
-  document.getElementById('sidebarToggle').style.display='block';
-  goTo('quizPage');
-  loadQuestion();
-  updateGrid();
-  const td=document.getElementById('timerDisplay');
-  const tb=document.getElementById('timerBadge');
-  td.textContent='--:--';td.style.opacity='0';
-  tb.textContent='';tb.className='timer-badge off';
-  tb.style.display='none';
+function mulaiQuizCepat(){
+  if(qcState.interval){clearInterval(qcState.interval);qcState.interval=null;}
+  const cat=qcState.cat;
+  const menit=qcState.timerMenit;
+  const rawSoal=getQCSoal(cat);
+  if(!rawSoal||rawSoal.length===0){alert('Soal tidak tersedia! Pastikan file quiz'+cat.toUpperCase()+'.js sudah ada.');return;}
+
+  const soalShuffled = shuffleQCSoal(rawSoal).map(d=>{
+    // Normalize format
+    const isTKP = d.isTKP || (d.scores && !d.a && d.a!==0) || false;
+    if(isTKP){
+      return {q:d.q, opt:[...(d.opt||d.opts||[])], scores:[...(d.scores||[])], isTKP:true, pembahasan:d.pembahasan||''};
+    } else {
+      return {q:d.q, opt:[...(d.opt||[])], a:d.a!==undefined?d.a:0, isTKP:false, pembahasan:d.pembahasan||''};
+    }
+  }).map(d=>shuffleQCOpts(d));
+
+  qcState.soal=soalShuffled;
+  qcState.curIdx=0;
+  qcState.benar=0;
+  qcState.salah=0;
+  qcState.totalDijawab=0;
+  qcState.timeLeft=menit*60;
+  qcState.totalWaktu=menit*60;
+
+  goTo('quizCepatPlayPage');
+  renderQCQuestion();
+  startQCTimer();
+}
+
+function renderQCQuestion(){
+  const soal=qcState.soal;
+  const idx=qcState.curIdx;
+  if(idx>=soal.length){
+    // Habis semua soal sebelum waktu
+    finishQuizCepat();
+    return;
+  }
+  const d=soal[idx];
+  const c=QC_CATS[qcState.cat];
+
+  document.getElementById('qcPlayCat').textContent=`${c.icon} ${c.name}`;
+  document.getElementById('qcPlayCat').className=`qc-play-cat ${qcState.cat}`;
+  document.getElementById('qcPlayScore').textContent=`Soal ke-${idx+1}`;
+  document.getElementById('qcCorrectCount').textContent=`✅ ${qcState.benar} Benar`;
+  document.getElementById('qcQNum').textContent=`SOAL ${idx+1}`;
+  document.getElementById('qcQTxt').innerHTML=d.q;
+
+  let optsHtml='';
+  if(d.isTKP){
+    d.opt.forEach((o,i)=>{
+      optsHtml+=`<div class="qc-opt" onclick="pilihQCJawaban(${i})">
+        <div class="qc-opt-letter">${PREFIXES[i]}</div>
+        <div class="qc-opt-text">${o} <span style="font-size:11px;color:var(--secondary);font-weight:700;">(${d.scores[i]})</span></div>
+      </div>`;
+    });
+  } else {
+    d.opt.forEach((o,i)=>{
+      optsHtml+=`<div class="qc-opt" onclick="pilihQCJawaban(${i})">
+        <div class="qc-opt-letter">${PREFIXES[i]}</div>
+        <div class="qc-opt-text">${o}</div>
+      </div>`;
+    });
+  }
+  document.getElementById('qcOpts').innerHTML=optsHtml;
+
+  const fb=document.getElementById('qcFeedback');
+  fb.className='qc-feedback';
+  fb.textContent='';
+  const btnNext=document.getElementById('btnQcNext');
+  btnNext.className='btn-qc-next';
+  btnNext.textContent='Soal Berikutnya →';
+}
+
+function pilihQCJawaban(idx){
+  const soal=qcState.soal[qcState.curIdx];
+  const opts=document.querySelectorAll('.qc-opt');
+  // Disable semua
+  opts.forEach(o=>o.classList.add('disabled'));
+  opts.forEach(o=>o.onclick=null);
+
+  const fb=document.getElementById('qcFeedback');
+  let isBenar=false;
+
+  if(soal.isTKP){
+    const maxScore=Math.max(...soal.scores);
+    const chosen=soal.scores[idx];
+    opts[idx].classList.add(chosen===maxScore?'correct':'wrong');
+    // Tunjukkan yang terbaik jika salah
+    if(chosen!==maxScore){
+      const bestIdx=soal.scores.findIndex(s=>s===maxScore);
+      if(bestIdx>=0)opts[bestIdx].classList.add('correct');
+    }
+    isBenar=(chosen===maxScore);
+    fb.textContent=isBenar?`✅ Tepat! Skor tertinggi: ${maxScore}`:`❌ Skor kamu: ${chosen} | Terbaik: ${maxScore}`;
+    fb.className='qc-feedback '+(isBenar?'benar':'salah');
+  } else {
+    opts[idx].classList.add(idx===soal.a?'correct':'wrong');
+    if(idx!==soal.a) opts[soal.a].classList.add('correct');
+    isBenar=(idx===soal.a);
+    fb.textContent=isBenar?'✅ Benar!':'❌ Salah! Jawaban benar: '+PREFIXES[soal.a]+'. '+soal.opt[soal.a];
+    fb.className='qc-feedback '+(isBenar?'benar':'salah');
+  }
+
+  if(isBenar) qcState.benar++;
+  else qcState.salah++;
+  qcState.totalDijawab++;
+  document.getElementById('qcCorrectCount').textContent=`✅ ${qcState.benar} Benar`;
+
+  const btnNext=document.getElementById('btnQcNext');
+  btnNext.className='btn-qc-next show';
+  // Jika soal terakhir
+  if(qcState.curIdx>=qcState.soal.length-1){
+    btnNext.textContent='🏁 Lihat Hasil';
+    btnNext.onclick=finishQuizCepat;
+  }
+}
+
+function qcNextQuestion(){
+  qcState.curIdx++;
+  if(qcState.curIdx>=qcState.soal.length){
+    finishQuizCepat();
+  } else {
+    renderQCQuestion();
+  }
+}
+
+function startQCTimer(){
+  if(qcState.interval)clearInterval(qcState.interval);
+  updateQCTimerDisplay();
+  qcState.interval=setInterval(()=>{
+    qcState.timeLeft--;
+    updateQCTimerDisplay();
+    if(qcState.timeLeft<=0){
+      clearInterval(qcState.interval);
+      qcState.interval=null;
+      finishQuizCepat();
+    }
+  },1000);
+}
+
+function updateQCTimerDisplay(){
+  const el=document.getElementById('qcPlayTimer');
+  const prog=document.getElementById('qcProgressFill');
+  const m=Math.floor(qcState.timeLeft/60),s=qcState.timeLeft%60;
+  el.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  el.className='qc-play-timer';
+  if(qcState.timeLeft<=10) el.classList.add('danger');
+  else if(qcState.timeLeft<=30) el.classList.add('warning');
+  const pct=Math.max(0,(qcState.timeLeft/qcState.totalWaktu)*100);
+  prog.style.width=pct+'%';
+  prog.style.background=qcState.timeLeft<=10?'linear-gradient(90deg,#dc2626,#ef4444)':
+    qcState.timeLeft<=30?'linear-gradient(90deg,#d97706,#f59e0b)':
+    'linear-gradient(90deg,#2563eb,#7c3aed)';
+}
+
+function finishQuizCepat(){
+  if(qcState.interval){clearInterval(qcState.interval);qcState.interval=null;}
+  const cat=qcState.cat;
+  const menit=qcState.timerMenit;
+  const benar=qcState.benar;
+  const salah=qcState.salah;
+  const total=qcState.totalDijawab;
+  const c=QC_CATS[cat];
+
+  incQCTotalSesi(cat);
+  const isNewBest=setQCBestScore(cat,menit,benar);
+
+  // Tampilkan hasil
+  const pct=total>0?Math.round(benar/total*100):0;
+  let icon='😅',title='Terus Semangat!';
+  if(pct>=90){icon='🏆';title='Luar Biasa!';}
+  else if(pct>=70){icon='🎯';title='Bagus Sekali!';}
+  else if(pct>=50){icon='💪';title='Cukup Baik!';}
+
+  document.getElementById('qcResIcon').textContent=icon;
+  document.getElementById('qcResTitle').textContent=title;
+  document.getElementById('qcResCat').textContent=`${c.name} · ${menit} Menit`;
+  document.getElementById('qcResSkor').textContent=benar;
+  document.getElementById('qcResSub').textContent=`soal dijawab dengan benar dari ${total} soal`;
+  document.getElementById('qcStatBenar').textContent=benar;
+  document.getElementById('qcStatSalah').textContent=salah;
+  document.getElementById('qcStatTotal').textContent=total;
+
+  const newBestEl=document.getElementById('qcNewBest');
+  newBestEl.style.display=isNewBest&&benar>0?'block':'none';
+
+  const bestOverall=getQCBestScore(cat,menit);
+  const prevBest=isNewBest?benar:bestOverall;
+  document.getElementById('qcBestInfo').innerHTML=`
+    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center;">
+      <span style="font-size:13px;color:var(--gray);">🏆 Rekor ${menit} menit:</span>
+      <span style="font-size:16px;font-weight:800;color:${c.color};">${prevBest} benar</span>
+      ${total>0?`<span style="font-size:12px;color:var(--gray);">· Akurasi: ${pct}%</span>`:''}
+    </div>`;
+
+  goTo('quizCepatResultPage');
+  checkAndUnlockBadgesQC();
+}
+
+function ulangQuizCepat(){
+  mulaiQuizCepat();
 }
 
 // ==================== PENCAPAIAN ====================
 const BADGES=[
+  // Latihan biasa
   {id:'first_done',icon:'🎯',name:'Langkah Pertama',desc:'Selesaikan 1 paket soal',check:(s)=>s.totalDone>=1},
   {id:'all_done',icon:'🏆',name:'Penguasa SKD',desc:'Selesaikan semua 5 paket',check:(s)=>s.totalDone>=5},
   {id:'first_pass',icon:'✅',name:'Lulus Perdana',desc:'Lulus passing grade pertama kali',check:(s)=>s.totalLulus>=1},
@@ -852,8 +1209,16 @@ const BADGES=[
   {id:'score_500',icon:'🔥',name:'Elite SKD',desc:'Raih total skor 500+',check:(s)=>s.bestScore>=500},
   {id:'twk_perfect',icon:'📚',name:'Ahli Kebangsaan',desc:'Raih skor TWK maksimal (150)',check:(s)=>s.bestTWK>=150},
   {id:'tiu_perfect',icon:'🔢',name:'Jenius Logika',desc:'Raih skor TIU maksimal (175)',check:(s)=>s.bestTIU>=175},
-  {id:'soal_salah_0',icon:'🎖️',name:'Tanpa Cela',desc:'Kosongkan daftar soal salah',check:(s)=>s.soalSalahCount===0&&s.totalDone>0},
   {id:'simulasi',icon:'⏰',name:'Petarung Ujian',desc:'Selesaikan 1 simulasi ujian',check:(s)=>s.simulasiDone>=1},
+  // Quiz Cepat
+  {id:'qc_first',icon:'⚡',name:'Pemula Cepat',desc:'Main Quiz Cepat pertama kali (kategori apapun)',check:(s)=>s.qcTotalSesi>=1},
+  {id:'qc_10twk',icon:'📖',name:'Pakar TWK',desc:'Jawab 10 soal TWK dengan benar dalam Quiz Cepat',check:(s)=>s.qcBestTWK>=10},
+  {id:'qc_10tiu',icon:'🧮',name:'Pakar TIU',desc:'Jawab 10 soal TIU dengan benar dalam Quiz Cepat',check:(s)=>s.qcBestTIU>=10},
+  {id:'qc_10tkp',icon:'🌈',name:'Pakar TKP',desc:'Jawab 10 soal TKP dengan benar dalam Quiz Cepat',check:(s)=>s.qcBestTKP>=10},
+  {id:'qc_speed',icon:'🚀',name:'Kilat 1 Menit',desc:'Jawab 5+ soal benar dalam Quiz Cepat 1 menit',check:(s)=>s.qcBest1m>=5},
+  {id:'qc_10m_champ',icon:'👑',name:'Raja 10 Menit',desc:'Jawab 30+ soal benar dalam Quiz Cepat 10 menit',check:(s)=>s.qcBest10m>=30},
+  {id:'qc_all_cat',icon:'🎓',name:'Serba Bisa',desc:'Main Quiz Cepat semua kategori (TWK, TIU, TKP)',check:(s)=>s.qcSesiTWK>=1&&s.qcSesiTIU>=1&&s.qcSesiTKP>=1},
+  {id:'qc_marathon',icon:'🏃',name:'Maraton Quiz',desc:'Main Quiz Cepat 10 sesi (total semua kategori)',check:(s)=>s.qcTotalSesi>=10},
 ];
 
 function getBadgeStats(){
@@ -872,7 +1237,24 @@ function getBadgeStats(){
     }
   }
   try{const s=localStorage.getItem('simulasi_last');if(s)simulasiDone=1;}catch(e){}
-  return{totalDone,totalLulus,bestScore,bestTWK,simulasiDone,soalSalahCount:getSoalSalahList().length};
+  // Quiz cepat stats
+  const qcSesiTWK=getQCTotalSesi('twk');
+  const qcSesiTIU=getQCTotalSesi('tiu');
+  const qcSesiTKP=getQCTotalSesi('tkp');
+  const qcTotalSesi=qcSesiTWK+qcSesiTIU+qcSesiTKP;
+  // Best per kategori (max across durasi)
+  const qcBestTWK=Math.max(...[1,3,5,10].map(m=>getQCBestScore('twk',m)));
+  const qcBestTIU=Math.max(...[1,3,5,10].map(m=>getQCBestScore('tiu',m)));
+  const qcBestTKP=Math.max(...[1,3,5,10].map(m=>getQCBestScore('tkp',m)));
+  const qcBest1m=Math.max(getQCBestScore('twk',1),getQCBestScore('tiu',1),getQCBestScore('tkp',1));
+  const qcBest10m=Math.max(getQCBestScore('twk',10),getQCBestScore('tiu',10),getQCBestScore('tkp',10));
+  return{totalDone,totalLulus,bestScore,bestTWK,bestTIU,simulasiDone,
+    qcTotalSesi,qcSesiTWK,qcSesiTIU,qcSesiTKP,
+    qcBestTWK,qcBestTIU,qcBestTKP,qcBest1m,qcBest10m};
+}
+
+function checkAndUnlockBadgesQC(){
+  // No-op: badge checking is done live in refreshPencapaian
 }
 
 function refreshPencapaian(){
@@ -1086,7 +1468,7 @@ function refreshStatistik(){
   } else {
     cc.style.display='none';
   }
-  let hHtml='<h4 style="margin-bottom:8px;color:var(--dark);font-size:13px;font-weight:700;">📋 Riwayat Latihan</h4>';
+  let hHtml='<h4 style="margin-bottom:8px;color:var(--dark);font-size:13px;font-weight:700;">📋 Riwayat Latihan Paket</h4>';
   if(rows.length>0){
     hHtml+=`<table class="stats-history-table"><tr><th>Paket</th><th>TWK</th><th>TIU</th><th>TKP</th><th>Total</th><th>Status</th></tr>`;
     rows.forEach(r=>{
@@ -1094,9 +1476,24 @@ function refreshStatistik(){
     });
     hHtml+='</table>';
   } else {
-    hHtml+='<p style="color:#94a3b8;text-align:center;padding:20px;">Belum ada riwayat latihan.</p>';
+    hHtml+='<p style="color:#94a3b8;text-align:center;padding:20px;">Belum ada riwayat latihan paket.</p>';
   }
   document.getElementById('statsHistory').innerHTML=hHtml;
+
+  // Quiz Cepat stats
+  let qcHtml='<h4 style="margin:14px 0 8px;color:var(--dark);font-size:13px;font-weight:700;">⚡ Rekor Quiz Cepat</h4>';
+  qcHtml+=`<table class="stats-history-table"><tr><th>Kategori</th><th>1 Menit</th><th>3 Menit</th><th>5 Menit</th><th>10 Menit</th><th>Sesi</th></tr>`;
+  ['twk','tiu','tkp'].forEach(cat=>{
+    const c=QC_CATS[cat];
+    const sesi=getQCTotalSesi(cat);
+    const b1=getQCBestScore(cat,1)||'-';
+    const b3=getQCBestScore(cat,3)||'-';
+    const b5=getQCBestScore(cat,5)||'-';
+    const b10=getQCBestScore(cat,10)||'-';
+    qcHtml+=`<tr><td style="font-weight:700;">${c.icon} ${c.name}</td><td>${b1}</td><td>${b3}</td><td>${b5}</td><td>${b10}</td><td>${sesi}</td></tr>`;
+  });
+  qcHtml+='</table>';
+  document.getElementById('statsQCHistory').innerHTML=qcHtml;
 }
 
 // ==================== SIMULASI ====================
@@ -1113,7 +1510,7 @@ function mulaiSimulasi(){
   sTKP.forEach(d=>originals.push({question:d.q,options:[...d.opts],answer:null,isTKP:true,optionScores:[...d.scores],pembahasan:d.pembahasan||'',kategori:'TKP'}));
   questions=originals.map(q=>shuffleOpts(q));
   curQ=0;userAnswers=Array(questions.length).fill(null);userScores=Array(questions.length).fill(null);
-  timeLeft=6000;simulasiMode=true;soalSalahMode=false;activeSet=0;
+  timeLeft=6000;simulasiMode=true;activeSet=0;
   document.getElementById('evaluasiPanel').style.display='none';
   document.getElementById('btnCloseEval').style.display='none';
   document.getElementById('quizTitle').textContent='⏰ Simulasi Ujian SKD';
@@ -1130,10 +1527,8 @@ function mulaiSimulasi(){
 function startQuiz(setId){
   if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
   const bank=getSoalBank(setId);
-  if(bank.twk.length+bank.tiu.length+bank.tkp.length===0){
-    alert(`⚠️ Paket ${setId} belum tersedia.`);return;
-  }
-  activeSet=setId;simulasiMode=false;soalSalahMode=false;
+  if(bank.twk.length+bank.tiu.length+bank.tkp.length===0){alert(`⚠️ Paket ${setId} belum tersedia.`);return;}
+  activeSet=setId;simulasiMode=false;
   originals=buildOriginals(setId);
   questions=originals.map(q=>shuffleOpts(q));
   curQ=0;userAnswers=Array(questions.length).fill(null);userScores=Array(questions.length).fill(null);
@@ -1161,14 +1556,11 @@ function loadQuestion(){
   const n=curQ+1;
   document.getElementById('quizProgress').textContent=`Soal ${n}/${questions.length}`;
   document.getElementById('quizQuestion').innerHTML=questions[curQ].question;
-
-  // Tampilkan kategori soal berdasarkan field kategori, bukan posisi
   const kat=questions[curQ].kategori||getCat(n).name;
   const katCls=kat.toLowerCase();
   const hc=document.getElementById('quizHeaderCat');
   hc.textContent=`📍 ${kat}`;
   hc.className=`header-cat ${katCls}`;
-
   let html='';
   questions[curQ].options.forEach((opt,idx)=>{
     let checked=questions[curQ].isTKP?(userScores[curQ]===questions[curQ].optionScores[idx]):(userAnswers[curQ]===idx);
@@ -1185,11 +1577,8 @@ function saveAnswer(){
   const sel=document.querySelector('input[name="ans"]:checked');
   if(sel){
     const idx=parseInt(sel.value);
-    if(questions[curQ].isTKP){
-      userScores[curQ]=questions[curQ].optionScores[idx];
-    } else {
-      userAnswers[curQ]=idx;
-    }
+    if(questions[curQ].isTKP){userScores[curQ]=questions[curQ].optionScores[idx];}
+    else{userAnswers[curQ]=idx;}
     updateGrid();
   }
 }
@@ -1222,7 +1611,6 @@ function updateGrid(){
     if(questions[i].isTKP){if(userScores[i]!==null&&userScores[i]!==undefined)st='answered';}
     else{if(userAnswers[i]!==null)st='answered';}
     if(i===curQ)st='active';
-    // Warna grid berdasarkan kategori soal, bukan posisi
     const kat=(questions[i].kategori||getCat(i+1).name).toLowerCase();
     html+=`<div class="grid-soal ${st} ${kat}" onclick="goToSoal(${i})">${i+1}</div>`;
   }
@@ -1237,19 +1625,14 @@ function toggleSidebar(){
   else{ov.style.width='';ov.classList.remove('show');}
 }
 
-// ==================== FINISH ====================
+// ==================== FINISH (Latihan Normal) ====================
 function finishQuiz(){
   if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
   saveAnswer();
   document.getElementById('sidebarToggle').style.display='none';
-
-  const wasSoalSalah=soalSalahMode;
   const wasSimulasi=simulasiMode;
-
-  // Hitung skor sesuai mode
   let s;
-  if(!wasSoalSalah && !wasSimulasi){
-    // Latihan normal: posisi menentukan kategori (TWK 1-30, TIU 31-65, TKP 66-110)
+  if(!wasSimulasi){
     s=hitungSkor();
     const bank=getSoalBank(activeSet);
     s.mTWK=bank.twk.length*5||150;
@@ -1257,115 +1640,43 @@ function finishQuiz(){
     s.mTKP=bank.tkp.length*5||225;
     s.mTot=s.mTWK+s.mTIU+s.mTKP;
   } else {
-    // Soal salah atau simulasi: kategori dari field soal
     s=hitungSkorByKategori();
   }
-
-  // Kumpulkan soal salah & benar untuk update bank soal salah
-  const newWrong=[];
-  const benarList=[];
-  for(let i=0;i<questions.length;i++){
-    const q=questions[i];
-    let isBenar=false;
-    if(q.isTKP){
-      if(userScores[i]!==null&&userScores[i]!==undefined){
-        const maxS=Math.max(...q.optionScores);
-        isBenar=userScores[i]===maxS;
-      }
-    } else {
-      isBenar=userAnswers[i]!==null&&userAnswers[i]===q.answer;
-    }
-    if(!wasSimulasi){
-      if(!isBenar){
-        const kat=q.kategori||(originals[i]&&originals[i].kategori)||getCat(i+1).name;
-        newWrong.push({
-          question:q.question,
-          options:q.options,
-          answer:q.answer,
-          isTKP:q.isTKP,
-          optionScores:q.optionScores,
-          pembahasan:q.pembahasan||'',
-          kategori:kat
-        });
-      } else {
-        benarList.push(q);
-      }
-    }
-  }
-
-  if(!wasSimulasi&&!wasSoalSalah){
-    saveSoalSalah(newWrong);
-    hapusDariSoalSalah(benarList);
-  }
-  if(wasSoalSalah){
-    // Hapus yang sudah benar, tambahkan yang masih salah ke bank
-    hapusDariSoalSalah(benarList);
-    // Update soal yang masih salah (bisa saja optionScores teracak ulang, simpan aslinya)
-    // Tidak perlu re-save newWrong karena sudah ada di bank, hanya hapus yang benar
-  }
-
   if(wasSimulasi){
-    localStorage.setItem('simulasi_last',JSON.stringify({
-      twk:s.twk,tiu:s.tiu,tkp:s.tkp,total:s.total,
-      persen:s.persen,tanggal:new Date().toLocaleDateString('id-ID')
-    }));
+    localStorage.setItem('simulasi_last',JSON.stringify({twk:s.twk,tiu:s.tiu,tkp:s.tkp,total:s.total,persen:s.persen,tanggal:new Date().toLocaleDateString('id-ID')}));
     simulasiMode=false;
-  } else if(!wasSoalSalah){
+  } else {
     localStorage.setItem(`skorTWK_latihan${activeSet}`,s.twk);
     localStorage.setItem(`skorTIU_latihan${activeSet}`,s.tiu);
     localStorage.setItem(`skorTKP_latihan${activeSet}`,s.tkp);
-    const ed={
-      answers:userAnswers,
-      scores:userScores,
-      questions:questions.map(q=>({
-        question:q.question,options:q.options,answer:q.answer,
-        isTKP:q.isTKP,optionScores:q.optionScores,
-        pembahasan:q.pembahasan||'',kategori:q.kategori||''
-      }))
-    };
+    const ed={answers:userAnswers,scores:userScores,questions:questions.map(q=>({question:q.question,options:q.options,answer:q.answer,isTKP:q.isTKP,optionScores:q.optionScores,pembahasan:q.pembahasan||'',kategori:q.kategori||''}))};
     localStorage.setItem(`evalData_latihan${activeSet}`,JSON.stringify(ed));
     const key=`bestScore_latihan${activeSet}`;
     const prev=localStorage.getItem(key);
     if(prev===null||s.total>parseInt(prev))localStorage.setItem(key,s.total);
   }
-  soalSalahMode=false;
-
-  // ==================== TAMPILKAN HASIL ====================
   const mTWK=s.mTWK||150,mTIU=s.mTIU||175,mTKP=s.mTKP||225;
   const mTot=s.mTot||(mTWK+mTIU+mTKP);
-
-  if(wasSoalSalah){
-    document.getElementById('resultSubtitle').textContent='🔁 Hasil Latihan Soal Salah';
-    document.getElementById('scoreDetail').innerHTML=`<h3>📊 Detail Skor</h3><table>
-      <tr><td>📚 TWK</td><td><strong>${s.twk}</strong> / ${mTWK}</td></tr>
-      <tr><td>🔢 TIU</td><td><strong>${s.tiu}</strong> / ${mTIU}</td></tr>
-      <tr><td>⭐ TKP</td><td><strong>${s.tkp}</strong> / ${mTKP}</td></tr>
-      <tr style="border-top:2px solid var(--border);"><td><strong>✅ TOTAL</strong></td><td><strong>${s.total}</strong> / ${mTot}</td></tr>
-    </table><div class="total-score">🎯 Nilai: ${s.persen}%</div>`;
-    document.getElementById('passStatus').style.display='none';
-  } else {
-    document.getElementById('resultSubtitle').textContent=wasSimulasi?'⏰ Hasil Simulasi SKD':`📝 Latihan SKD Paket ${activeSet}`;
-    document.getElementById('scoreDetail').innerHTML=`<h3>📊 Detail Skor</h3><table>
-      <tr><td>📚 TWK</td><td><strong>${s.twk}</strong> / ${mTWK}</td></tr>
-      <tr><td>🔢 TIU</td><td><strong>${s.tiu}</strong> / ${mTIU}</td></tr>
-      <tr><td>⭐ TKP</td><td><strong>${s.tkp}</strong> / ${mTKP}</td></tr>
-      <tr style="border-top:2px solid var(--border);"><td><strong>✅ TOTAL</strong></td><td><strong>${s.total}</strong> / ${mTot}</td></tr>
-    </table><div class="total-score">🎯 Nilai Akhir: ${s.persen}%</div>`;
-    const pass={twk:s.twk>=PASSING.TWK,tiu:s.tiu>=PASSING.TIU,tkp:s.tkp>=PASSING.TKP};
-    pass.all=pass.twk&&pass.tiu&&pass.tkp;
-    document.getElementById('passStatus').style.display='';
-    document.getElementById('passStatus').innerHTML=`
-      <div style="margin-bottom:10px;font-weight:700;color:var(--dark);">📋 STATUS PASSING GRADE:</div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        <div style="flex:1;text-align:center;padding:9px;border-radius:10px;background:${pass.twk?'#d1fae5':'#fee2e2'};font-size:13px;">📚 TWK: ${s.twk}/65<br><strong>${pass.twk?'✅ LULUS':'❌ GAGAL'}</strong></div>
-        <div style="flex:1;text-align:center;padding:9px;border-radius:10px;background:${pass.tiu?'#d1fae5':'#fee2e2'};font-size:13px;">🔢 TIU: ${s.tiu}/80<br><strong>${pass.tiu?'✅ LULUS':'❌ GAGAL'}</strong></div>
-        <div style="flex:1;text-align:center;padding:9px;border-radius:10px;background:${pass.tkp?'#d1fae5':'#fee2e2'};font-size:13px;">⭐ TKP: ${s.tkp}/166<br><strong>${pass.tkp?'✅ LULUS':'❌ GAGAL'}</strong></div>
-      </div>
-      <div style="margin-top:12px;padding:12px;border-radius:10px;background:${pass.all?'#d1fae5':'#fee2e2'};font-weight:700;font-size:14px;">
-        ${pass.all?'🎉 SELAMAT! Anda LULUS Passing Grade SKD!':'⚠️ Belum lulus passing grade. Terus semangat berlatih!'}
-      </div>`;
-  }
-
+  document.getElementById('resultSubtitle').textContent=wasSimulasi?'⏰ Hasil Simulasi SKD':`📝 Latihan SKD Paket ${activeSet}`;
+  document.getElementById('scoreDetail').innerHTML=`<h3>📊 Detail Skor</h3><table>
+    <tr><td>📚 TWK</td><td><strong>${s.twk}</strong> / ${mTWK}</td></tr>
+    <tr><td>🔢 TIU</td><td><strong>${s.tiu}</strong> / ${mTIU}</td></tr>
+    <tr><td>⭐ TKP</td><td><strong>${s.tkp}</strong> / ${mTKP}</td></tr>
+    <tr style="border-top:2px solid var(--border);"><td><strong>✅ TOTAL</strong></td><td><strong>${s.total}</strong> / ${mTot}</td></tr>
+  </table><div class="total-score">🎯 Nilai Akhir: ${s.persen}%</div>`;
+  const pass={twk:s.twk>=PASSING.TWK,tiu:s.tiu>=PASSING.TIU,tkp:s.tkp>=PASSING.TKP};
+  pass.all=pass.twk&&pass.tiu&&pass.tkp;
+  document.getElementById('passStatus').style.display='';
+  document.getElementById('passStatus').innerHTML=`
+    <div style="margin-bottom:10px;font-weight:700;color:var(--dark);">📋 STATUS PASSING GRADE:</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <div style="flex:1;text-align:center;padding:9px;border-radius:10px;background:${pass.twk?'#d1fae5':'#fee2e2'};font-size:13px;">📚 TWK: ${s.twk}/65<br><strong>${pass.twk?'✅ LULUS':'❌ GAGAL'}</strong></div>
+      <div style="flex:1;text-align:center;padding:9px;border-radius:10px;background:${pass.tiu?'#d1fae5':'#fee2e2'};font-size:13px;">🔢 TIU: ${s.tiu}/80<br><strong>${pass.tiu?'✅ LULUS':'❌ GAGAL'}</strong></div>
+      <div style="flex:1;text-align:center;padding:9px;border-radius:10px;background:${pass.tkp?'#d1fae5':'#fee2e2'};font-size:13px;">⭐ TKP: ${s.tkp}/166<br><strong>${pass.tkp?'✅ LULUS':'❌ GAGAL'}</strong></div>
+    </div>
+    <div style="margin-top:12px;padding:12px;border-radius:10px;background:${pass.all?'#d1fae5':'#fee2e2'};font-weight:700;font-size:14px;">
+      ${pass.all?'🎉 SELAMAT! Anda LULUS Passing Grade SKD!':'⚠️ Belum lulus passing grade. Terus semangat berlatih!'}
+    </div>`;
   goTo('resultPage');
 }
 
@@ -1375,8 +1686,9 @@ function restartQuiz(){
 }
 function backToHome(){
   if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
+  if(qcState.interval){clearInterval(qcState.interval);qcState.interval=null;}
   document.getElementById('sidebarToggle').style.display='none';
-  simulasiMode=false;soalSalahMode=false;
+  simulasiMode=false;
   goTo('homePage');refreshHomeStats();
 }
 
@@ -1386,7 +1698,6 @@ function showEvaluasi(){
   let html='<h3 style="color:var(--primary);margin-bottom:12px;">📝 Evaluasi Jawaban</h3>';
   for(let i=0;i<questions.length;i++){
     const n=i+1;
-    // Gunakan kategori dari soal, bukan posisi
     const katName=questions[i].kategori||getCat(n).name;
     const q=questions[i],pb=q.pembahasan||'';
     let jawUser='Tidak dijawab',jawBenar='',stCls='belum',stIcon='⏳';
@@ -1434,8 +1745,12 @@ function resetAllProgress(){
     ['bestScore','skorTWK','skorTIU','skorTKP'].forEach(k=>localStorage.removeItem(`${k}_latihan${i}`));
     localStorage.removeItem(`evalData_latihan${i}`);
   }
-  localStorage.removeItem('soalSalahData');
   localStorage.removeItem('simulasi_last');
+  // Reset QC data
+  ['twk','tiu','tkp'].forEach(cat=>{
+    [1,3,5,10].forEach(m=>localStorage.removeItem(`qcBest_${cat}_${m}m`));
+    localStorage.removeItem(`qcTotalSesi_${cat}`);
+  });
   refreshQuizList();refreshHomeStats();closeResetModal();
   alert('✅ Semua progress telah direset!');
 }
@@ -1447,9 +1762,14 @@ window.addEventListener('popstate',function(){
   if(currentPage==='quizPage'||currentPage==='resultPage'){
     if(currentPage==='quizPage'){if(timerInterval)clearInterval(timerInterval);timerInterval=null;document.getElementById('sidebarToggle').style.display='none';}
     goTo('quizlistPage');
-  } else if(['evaluasiListPage'].includes(currentPage)){goTo('quizlistPage');}
+  } else if(currentPage==='evaluasiListPage'){goTo('quizlistPage');}
   else if(currentPage==='materiContentPage'){goTo('materiPage');}
-  else if(['quizlistPage','materiPage','statistikPage','simulasiPage','petunjukPage','tentangPage','pencapaianPage','soalSalahPage'].includes(currentPage)){goTo('homePage');}
+  else if(currentPage==='quizCepatPlayPage'){
+    if(qcState.interval){clearInterval(qcState.interval);qcState.interval=null;}
+    goTo('quizCepatConfirmPage');
+  } else if(currentPage==='quizCepatConfirmPage'){goTo('quizCepatPage');}
+  else if(currentPage==='quizCepatResultPage'){goTo('quizCepatPage');}
+  else if(['quizlistPage','materiPage','statistikPage','simulasiPage','petunjukPage','tentangPage','pencapaianPage','quizCepatPage'].includes(currentPage)){goTo('homePage');}
 });
 </script>
 </body>
