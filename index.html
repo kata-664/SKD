@@ -962,7 +962,7 @@ function showEvaluasiFromList(setId){
     let statusCls = 'belum';
     let statusIcon = '⏳';
 
-    if(q.isTKP){
+        if(q.isTKP){
       const userScore = (savedScores[i] !== undefined && savedScores[i] !== null) ? savedScores[i] : null;
       if(userScore !== null){
         const idx = q.optionScores.findIndex(s=>s===userScore);
@@ -973,11 +973,8 @@ function showEvaluasiFromList(setId){
         const isB = userScore===maxS;
         statusCls = isB?'benar':'salah';
         statusIcon = isB?'✅':'❌';
-      } else {
-        const maxS = Math.max(...q.optionScores);
-        const bIdx = q.optionScores.findIndex(s=>s===maxS);
-        jawBenar = `Jawaban terbaik: ${PREFIXES[bIdx]}. ${q.options[bIdx]} <strong>(Skor: ${maxS})</strong>`;
       }
+      // ✅ Jika tidak dijawab, jawBenar tetap kosong (tidak ditampilkan)
     } else {
       const userAns = (savedAnswers[i] !== undefined && savedAnswers[i] !== null) ? savedAnswers[i] : null;
       if(userAns !== null){
@@ -986,9 +983,8 @@ function showEvaluasiFromList(setId){
         const isB = userAns===q.answer;
         statusCls = isB?'benar':'salah';
         statusIcon = isB?'✅':'❌';
-      } else {
-        jawBenar = `${PREFIXES[q.answer]}. ${q.options[q.answer]}`;
       }
+      // ✅ Jika tidak dijawab, jawBenar tetap kosong (tidak ditampilkan)
     }
 
     let statusLabel = '';
