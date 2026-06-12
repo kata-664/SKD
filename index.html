@@ -463,8 +463,6 @@ input:checked+.slider:before{transform:translateX(22px);}
       <p>• Manfaatkan fitur timer untuk mengatur waktu</p>
       <p>• Gunakan fitur evaluasi untuk mengetahui pembahasan lengkap</p>
       <p>• Pelajari materi terlebih dahulu sebelum mengerjakan soal</p>
-      <p>• Data soal disimpan di file <code>soal.js</code> — edit file tersebut untuk update soal</p>
-      <p>• Materi disimpan di <code>twk.js</code>, <code>tiu.js</code>, <code>tkp.js</code></p>
     </div>
     <button class="back-btn" onclick="goTo('homePage')">← Kembali</button>
   </div>
@@ -477,8 +475,6 @@ input:checked+.slider:before{transform:translateX(22px);}
     <div class="info-block" style="background:#e9ecef;">
       <p><strong>📱 Aplikasi Latihan SKD</strong></p>
       <p>Latihan SKD adalah aplikasi latihan soal berbasis HTML, CSS dan JavaScript yang dapat dijalankan secara offline maupun online.</p>
-      <p>Data soal disimpan di file <strong>soal.js</strong> yang dapat diedit secara terpisah untuk memudahkan pembaruan soal.</p>
-      <p>Materi pembelajaran disimpan di file <strong>twk.js</strong>, <strong>tiu.js</strong>, dan <strong>tkp.js</strong>.</p>
     </div>
     <div class="info-block" style="background:#d1ecf1;">
       <p><strong>⭐ Fitur Unggulan:</strong></p>
@@ -489,7 +485,6 @@ input:checked+.slider:before{transform:translateX(22px);}
       <p>• Evaluasi jawaban lengkap dengan <strong>pembahasan detail</strong></p>
       <p>• <strong>Materi TWK, TIU, TKP</strong> yang dapat dipelajari</p>
       <p>• Reset progress untuk memulai dari awal</p>
-      <p>• Data soal terpisah di file soal.js (mudah diupdate)</p>
     </div>
     <div class="info-block" style="background:#f8f9fa;">
       <p><strong>📊 Passing Grade:</strong></p>
@@ -851,13 +846,14 @@ function refreshHomeStats(){
 refreshHomeStats();
 
 // ==================== START QUIZ ====================
+//⚠️ Paket ${setId} belum memiliki soal.\nSilakan tambahkan soal di file soal.js.
 function startQuiz(setId){
   if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
 
   const bank=getSoalBank(setId);
   const totalSoal=bank.twk.length+bank.tiu.length+bank.tkp.length;
   if(totalSoal===0){
-    alert(`⚠️ Paket ${setId} belum memiliki soal.\nSilakan tambahkan soal di file soal.js.`);
+    alert(`⚠️ Paket ${setId} belum tersedia.\nSilakan kerjakan paket soal yang sudah tersedia.`);
     return;
   }
 
