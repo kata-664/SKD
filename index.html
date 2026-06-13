@@ -35,9 +35,9 @@ body{background:linear-gradient(135deg,#1e3a8a 0%,#4f46e5 50%,#7c3aed 100%);min-
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .card{background:var(--white);border-radius:var(--radius);box-shadow:0 20px 60px rgba(30,58,138,.18);padding:22px;margin-bottom:20px;}
 
-/* ==================== LOGIN STYLES ==================== */
-#loginPage{display:flex;justify-content:center;align-items:center;min-height:calc(100vh - 32px);}
-#loginPage.active{display:flex;}
+/* LOGIN */
+#loginPage{display:none;justify-content:center;align-items:center;min-height:calc(100vh - 32px);}
+#loginPage.active{display:flex !important;}
 .login-card{background:var(--white);border-radius:var(--radius);box-shadow:0 20px 60px rgba(30,58,138,.25);padding:32px 28px;width:100%;max-width:400px;}
 .login-logo{text-align:center;margin-bottom:28px;}
 .login-logo .login-icon{font-size:56px;margin-bottom:10px;}
@@ -59,18 +59,17 @@ body{background:linear-gradient(135deg,#1e3a8a 0%,#4f46e5 50%,#7c3aed 100%);min-
 .btn-eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--gray);font-size:20px;padding:0;display:flex;align-items:center;}
 .btn-eye:active{color:var(--primary);}
 
-/* ==================== AKUN CARD (Home Only) ==================== */
+/* AKUN CARD */
 .akun-card{background:linear-gradient(135deg,#1e3a8a,#4f46e5);border-radius:16px;padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
 .akun-info{display:flex;align-items:center;gap:10px;}
 .akun-avatar{width:40px;height:40px;min-width:40px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:20px;border:2px solid rgba(255,255,255,.4);}
-.akun-detail{}
 .akun-label{font-size:10px;color:rgba(255,255,255,.7);font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
 .akun-username{font-size:15px;font-weight:800;color:white;}
 .btn-logout-home{background:rgba(220,38,38,.85);color:white;border:none;border-radius:10px;padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:6px;white-space:nowrap;}
 .btn-logout-home:hover{background:#b91c1c;}
 .btn-logout-home:active{transform:scale(0.96);}
 
-/* Logout confirm modal */
+/* LOGOUT MODAL */
 .logout-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,23,42,.7);z-index:20001;justify-content:center;align-items:center;}
 .logout-modal.show{display:flex;}
 .logout-modal-content{background:white;padding:24px;border-radius:20px;max-width:300px;width:90%;text-align:center;animation:fadeIn .3s ease;}
@@ -81,7 +80,7 @@ body{background:linear-gradient(135deg,#1e3a8a 0%,#4f46e5 50%,#7c3aed 100%);min-
 .btn-logout-confirm{background:linear-gradient(135deg,#dc2626,#ef4444);color:white;}
 .btn-logout-cancel{background:linear-gradient(135deg,#475569,#64748b);color:white;}
 
-/* ==================== ORIGINAL STYLES ==================== */
+/* GENERAL */
 .logo{text-align:center;margin-bottom:14px;}
 .logo .icon{margin-bottom:8px;}
 .logo h1{background:linear-gradient(135deg,#2563eb,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-size:24px;font-weight:800;margin-bottom:4px;}
@@ -466,7 +465,7 @@ canvas#progressChart{max-width:100%;height:180px;min-width:300px;}
 </head>
 <body>
 
-<!-- ==================== LOGIN PAGE ==================== -->
+<!-- LOGIN PAGE -->
 <div id="loginPage" class="page">
   <div class="login-card">
     <div class="login-logo">
@@ -491,7 +490,7 @@ canvas#progressChart{max-width:100%;height:180px;min-width:300px;}
   </div>
 </div>
 
-<!-- LOGOUT CONFIRM MODAL -->
+<!-- LOGOUT MODAL -->
 <div id="logoutModal" class="logout-modal">
   <div class="logout-modal-content">
     <div style="font-size:44px;margin-bottom:10px;">👋</div>
@@ -508,12 +507,10 @@ canvas#progressChart{max-width:100%;height:180px;min-width:300px;}
 <div id="homePage" class="page">
   <div class="card">
     <div class="logo">
-      <div class="icon"><img style="width: 150px; height: auto;" src="http://google.com" /></div>
+      <div class="icon"><img style="width:150px;height:auto;" src="http://google.com" /></div>
       <h1>Latihan SKD CPNS</h1>
       <p>Soal TWK, TIU dan TKP</p>
     </div>
-
-    <!-- AKUN CARD — hanya tampil di halaman utama -->
     <div class="akun-card">
       <div class="akun-info">
         <div class="akun-avatar">👤</div>
@@ -524,7 +521,6 @@ canvas#progressChart{max-width:100%;height:180px;min-width:300px;}
       </div>
       <button class="btn-logout-home" onclick="showLogoutModal()">🚪 Logout</button>
     </div>
-
     <div id="errorNotice" class="error-notice">⚠️ File <strong>soal.js</strong> tidak ditemukan!</div>
     <div id="errorMateriNotice" class="error-notice" style="display:none;">⚠️ File materi tidak ditemukan!</div>
     <div class="stats-card">
@@ -764,7 +760,7 @@ canvas#progressChart{max-width:100%;height:180px;min-width:300px;}
   </div>
 </div>
 
-<!-- KUIS (Latihan Normal) -->
+<!-- KUIS -->
 <div id="quizPage" class="page">
   <div class="quiz-card" style="display:flex;flex-direction:column;height:92vh;padding:20px 20px 12px 20px;">
     <div class="quiz-top" style="flex-shrink:0;margin-bottom:10px;">
@@ -800,7 +796,7 @@ canvas#progressChart{max-width:100%;height:180px;min-width:300px;}
   </div>
 </div>
 
-<!-- HASIL (Latihan Normal/Simulasi) -->
+<!-- HASIL -->
 <div id="resultPage" class="page">
   <div class="result-card">
     <h1>📊 Skor Latihan</h1>
@@ -892,132 +888,107 @@ document.addEventListener('cut',e=>e.preventDefault());
 window.addEventListener('keyup',e=>{if(e.key==='PrintScreen')flashOverlay();});
 function flashOverlay(){const o=document.getElementById('screenshotOverlay');o.style.display='block';setTimeout(()=>o.style.display='none',500);}
 
-// ==================== LOGIN SYSTEM ====================
-// Pakai localStorage agar sesi tetap bertahan saat app ditutup & dibuka kembali
-const SESSION_KEY = 'skd_session_user';
+// ==================== SESSION ====================
+const SESSION_KEY='skd_session_user';
+function getLoggedInUser(){return localStorage.getItem(SESSION_KEY)||null;}
+function setLoggedInUser(u){localStorage.setItem(SESSION_KEY,u);}
+function clearLoggedInUser(){localStorage.removeItem(SESSION_KEY);}
 
-function getLoggedInUser(){
-  return localStorage.getItem(SESSION_KEY) || null;
+// ==================== HELPERS: TAMPIL/SEMBUNYIKAN PAGE ====================
+// Fungsi terpusat untuk show/hide agar tidak ada inkonsistensi display
+function hidePage(id){
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.classList.remove('active');
+  el.style.display='none';
+}
+function showPage(id,displayValue){
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.classList.add('active');
+  el.style.display=displayValue||'block';
 }
 
-function setLoggedInUser(username){
-  localStorage.setItem(SESSION_KEY, username);
-}
-
-function clearLoggedInUser(){
-  localStorage.removeItem(SESSION_KEY);
-}
-
+// ==================== LOGIN ====================
 function togglePasswordVisibility(){
-  const inp = document.getElementById('inputPassword');
-  const btn = document.getElementById('btnEye');
-  if(inp.type === 'password'){inp.type='text';btn.textContent='🙈';}
+  const inp=document.getElementById('inputPassword');
+  const btn=document.getElementById('btnEye');
+  if(inp.type==='password'){inp.type='text';btn.textContent='🙈';}
   else{inp.type='password';btn.textContent='👁️';}
 }
 
 function doLogin(){
-  const u = document.getElementById('inputUsername').value.trim().toLowerCase();
-  const p = document.getElementById('inputPassword').value;
-  const errEl = document.getElementById('loginError');
-
-  if(!u || !p){
-    errEl.textContent = '⚠️ Username dan password tidak boleh kosong!';
-    errEl.classList.add('show');
-    return;
-  }
-
-  const pengguna = typeof daftarPengguna !== 'undefined' ? daftarPengguna : [];
-  const match = pengguna.find(x => x.username.toLowerCase() === u && x.password === p);
-
+  const u=document.getElementById('inputUsername').value.trim().toLowerCase();
+  const p=document.getElementById('inputPassword').value;
+  const errEl=document.getElementById('loginError');
+  if(!u||!p){errEl.textContent='⚠️ Username dan password tidak boleh kosong!';errEl.classList.add('show');return;}
+  const pengguna=typeof daftarPengguna!=='undefined'?daftarPengguna:[];
+  const match=pengguna.find(x=>x.username.toLowerCase()===u&&x.password===p);
   if(match){
     errEl.classList.remove('show');
     setLoggedInUser(match.username);
+    document.getElementById('inputUsername').value='';
+    document.getElementById('inputPassword').value='';
+    document.getElementById('btnEye').textContent='👁️';
+    document.getElementById('inputPassword').type='password';
     showApp(match.username);
-    document.getElementById('inputUsername').value = '';
-    document.getElementById('inputPassword').value = '';
-    document.getElementById('btnEye').textContent = '👁️';
-    document.getElementById('inputPassword').type = 'password';
   } else {
-    errEl.textContent = '⚠️ Username atau password salah!';
+    errEl.textContent='⚠️ Username atau password salah!';
     errEl.classList.add('show');
-    document.getElementById('inputPassword').value = '';
+    document.getElementById('inputPassword').value='';
     document.getElementById('inputPassword').focus();
   }
 }
 
 function showApp(username){
-  // Sembunyikan login
-  const lp = document.getElementById('loginPage');
-  lp.classList.remove('active');
-  lp.style.display = 'none';
-  // Sembunyikan semua page dulu
-  PAGES.forEach(p=>{
-    const el=document.getElementById(p);
-    if(el){el.classList.remove('active');el.style.display='';}
-  });
-  // Update nama
-  document.getElementById('akunUsername').textContent = username;
-  // Tampilkan home langsung tanpa goTo
-  const home = document.getElementById('homePage');
-  home.classList.add('active');
-  home.style.display = 'block';
-  currentPage = 'homePage';
+  // Sembunyikan semua page termasuk login
+  PAGES.forEach(id=>hidePage(id));
+  hidePage('loginPage');
+  // Update nama user
+  document.getElementById('akunUsername').textContent=username;
+  // Tampilkan home
+  showPage('homePage','block');
+  currentPage='homePage';
   window.scrollTo(0,0);
   refreshHomeStats();
 }
 
-function showLogoutModal(){
-  document.getElementById('logoutModal').classList.add('show');
-}
-function closeLogoutModal(){
-  document.getElementById('logoutModal').classList.remove('show');
-}
+function showLogoutModal(){document.getElementById('logoutModal').classList.add('show');}
+function closeLogoutModal(){document.getElementById('logoutModal').classList.remove('show');}
 
 function doLogout(){
   closeLogoutModal();
   clearLoggedInUser();
-  // Stop semua timer
   if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
   if(qcState&&qcState.interval){clearInterval(qcState.interval);qcState.interval=null;}
-  // Tutup sidebar jika terbuka
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('overlay').classList.remove('show');
   document.getElementById('sidebarToggle').style.display='none';
-  // Sembunyikan semua page, tampilkan login
-  PAGES.forEach(p=>{
-    const el=document.getElementById(p);
-    if(el){el.classList.remove('active');el.style.display='';}
-  });
-  currentPage = 'homePage';
-  const lp = document.getElementById('loginPage');
-  lp.style.display = '';
-  lp.classList.add('active');
-  currentPage = 'loginPage';
+  // Sembunyikan semua page
+  PAGES.forEach(id=>hidePage(id));
+  // Tampilkan login
+  showPage('loginPage','flex');
+  currentPage='loginPage';
   window.scrollTo(0,0);
 }
 
-// Cek sesi saat halaman dimuat
+// Cek sesi saat load
 (function initAuth(){
-  const user = getLoggedInUser();
+  // Sembunyikan semua page dulu
+  PAGES.forEach(id=>hidePage(id));
+  const user=getLoggedInUser();
   if(user){
     showApp(user);
   } else {
-    const lp = document.getElementById('loginPage');
-    lp.classList.add('active');
-    lp.style.display = 'flex';
+    showPage('loginPage','flex');
+    currentPage='loginPage';
   }
 })();
 
-// ==================== TRACKING MATERI & MENU ====================
-function markMateriOpened(kat){
-  const d=JSON.parse(localStorage.getItem('materiOpened')||'{}');
-  d[kat]=true;localStorage.setItem('materiOpened',JSON.stringify(d));
-}
+// ==================== TRACKING ====================
+function markMateriOpened(kat){const d=JSON.parse(localStorage.getItem('materiOpened')||'{}');d[kat]=true;localStorage.setItem('materiOpened',JSON.stringify(d));}
 function getMateriOpened(){return JSON.parse(localStorage.getItem('materiOpened')||'{}');}
-function markMenuVisited(menu){
-  const d=JSON.parse(localStorage.getItem('menuVisited')||'{}');
-  d[menu]=true;localStorage.setItem('menuVisited',JSON.stringify(d));
-}
+function markMenuVisited(menu){const d=JSON.parse(localStorage.getItem('menuVisited')||'{}');d[menu]=true;localStorage.setItem('menuVisited',JSON.stringify(d));}
 function getMenuVisited(){return JSON.parse(localStorage.getItem('menuVisited')||'{}');}
 
 // ==================== NAVIGATION ====================
@@ -1026,13 +997,11 @@ let currentPage='loginPage';
 
 function goTo(pageId){
   if(currentPage===pageId)return;
-  if(pageId !== 'loginPage' && !getLoggedInUser()) return;
-  PAGES.forEach(p=>{
-    const el=document.getElementById(p);
-    if(el){el.classList.remove('active');el.style.display='';}
-  });
-  const target=document.getElementById(pageId);
-  if(target){target.classList.add('active');target.style.display = 'block';}
+  if(pageId!=='loginPage'&&!getLoggedInUser())return;
+  // Sembunyikan semua
+  PAGES.forEach(id=>hidePage(id));
+  // Tampilkan target
+  showPage(pageId,'block');
   currentPage=pageId;
   window.scrollTo(0,0);
   const menuMap={quizlistPage:'latihan',materiPage:'materi',statistikPage:'statistik',simulasiPage:'simulasi',petunjukPage:'petunjuk',tentangPage:'tentang',pencapaianPage:'pencapaian',quizCepatPage:'quizcepat'};
@@ -1061,14 +1030,9 @@ syncTimerToggle();
 function getMateri(k){
   const v='materi'+k.toUpperCase();
   if(typeof window[v]!=='undefined')return window[v];
-  const fb={
-    twk:{judul:'TWK - Tes Wawasan Kebangsaan',konten:'<p>File twk.js belum tersedia.</p>'},
-    tiu:{judul:'TIU - Tes Intelegensi Umum',konten:'<p>File tiu.js belum tersedia.</p>'},
-    tkp:{judul:'TKP - Tes Karakteristik Pribadi',konten:'<p>File tkp.js belum tersedia.</p>'}
-  };
+  const fb={twk:{judul:'TWK - Tes Wawasan Kebangsaan',konten:'<p>File twk.js belum tersedia.</p>'},tiu:{judul:'TIU - Tes Intelegensi Umum',konten:'<p>File tiu.js belum tersedia.</p>'},tkp:{judul:'TKP - Tes Karakteristik Pribadi',konten:'<p>File tkp.js belum tersedia.</p>'}};
   return fb[k]||fb.twk;
 }
-
 function showMateri(k){
   markMateriOpened(k);
   const m=getMateri(k);
@@ -1092,205 +1056,76 @@ let userAnswers=[],userScores=[];
 let timerInterval=null,timeLeft=6000;
 let simulasiMode=false;
 let qcCurrentStreak=0,qcMaxStreak=0;
-function incPaketUlangi(setId){
-  const key=`paketUlangi_${setId}`;
-  const v=parseInt(localStorage.getItem(key)||'0')+1;
-  localStorage.setItem(key,v);
-}
-function getPaketUlangiMax(){
-  let mx=0;for(let i=1;i<=5;i++){const v=parseInt(localStorage.getItem(`paketUlangi_${i}`)||'0');if(v>mx)mx=v;}return mx;
-}
-function checkSkorNaik(){
-  const scores=[];for(let i=1;i<=5;i++){const b=localStorage.getItem(`bestScore_latihan${i}`);if(b)scores.push({id:i,s:parseInt(b)});}
-  if(scores.length<2)return false;
-  for(let i=1;i<scores.length;i++){if(scores[i].s<=scores[i-1].s)return false;}
-  return true;
-}
+function incPaketUlangi(setId){const key=`paketUlangi_${setId}`;const v=parseInt(localStorage.getItem(key)||'0')+1;localStorage.setItem(key,v);}
+function getPaketUlangiMax(){let mx=0;for(let i=1;i<=5;i++){const v=parseInt(localStorage.getItem(`paketUlangi_${i}`)||'0');if(v>mx)mx=v;}return mx;}
+function checkSkorNaik(){const scores=[];for(let i=1;i<=5;i++){const b=localStorage.getItem(`bestScore_latihan${i}`);if(b)scores.push({id:i,s:parseInt(b)});}if(scores.length<2)return false;for(let i=1;i<scores.length;i++){if(scores[i].s<=scores[i-1].s)return false;}return true;}
 
 const PREFIXES=['A','B','C','D','E'];
 const PASSING={TWK:65,TIU:80,TKP:166};
-
-function getCat(n){
-  if(n<=30)return{name:'TWK',cls:'twk'};
-  if(n<=65)return{name:'TIU',cls:'tiu'};
-  return{name:'TKP',cls:'tkp'};
-}
+function getCat(n){if(n<=30)return{name:'TWK',cls:'twk'};if(n<=65)return{name:'TIU',cls:'tiu'};return{name:'TKP',cls:'tkp'};}
 
 function shuffleOpts(q){
   const kat=q.kategori||'TKP';
-  if(q.isTKP){
-    let p=q.options.map((t,i)=>({text:t,score:q.optionScores[i]}));
-    for(let i=p.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[p[i],p[j]]=[p[j],p[i]];}
-    return{question:q.question,options:p.map(x=>x.text),answer:null,isTKP:true,optionScores:p.map(x=>x.score),pembahasan:q.pembahasan||'',kategori:kat};
-  } else {
-    let p=q.options.map((t,i)=>({text:t,idx:i}));
-    for(let i=p.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[p[i],p[j]]=[p[j],p[i]];}
-    return{question:q.question,options:p.map(x=>x.text),answer:p.findIndex(x=>x.idx===q.answer),isTKP:false,optionScores:null,pembahasan:q.pembahasan||'',kategori:kat};
-  }
+  if(q.isTKP){let p=q.options.map((t,i)=>({text:t,score:q.optionScores[i]}));for(let i=p.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[p[i],p[j]]=[p[j],p[i]];}return{question:q.question,options:p.map(x=>x.text),answer:null,isTKP:true,optionScores:p.map(x=>x.score),pembahasan:q.pembahasan||'',kategori:kat};}
+  else{let p=q.options.map((t,i)=>({text:t,idx:i}));for(let i=p.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[p[i],p[j]]=[p[j],p[i]];}return{question:q.question,options:p.map(x=>x.text),answer:p.findIndex(x=>x.idx===q.answer),isTKP:false,optionScores:null,pembahasan:q.pembahasan||'',kategori:kat};}
 }
-
-function getSoalBank(id){
-  const v='paket'+id;
-  return typeof window[v]!=='undefined'?window[v]:{twk:[],tiu:[],tkp:[]};
-}
-
-function buildOriginals(id){
-  const bank=getSoalBank(id),orig=[];
-  bank.twk.forEach(d=>orig.push({question:d.q,options:[...d.opt],answer:d.a,isTKP:false,optionScores:null,pembahasan:d.pembahasan||'',kategori:'TWK'}));
-  bank.tiu.forEach(d=>orig.push({question:d.q,options:[...d.opt],answer:d.a,isTKP:false,optionScores:null,pembahasan:d.pembahasan||'',kategori:'TIU'}));
-  bank.tkp.forEach(d=>orig.push({question:d.q,options:[...d.opts],answer:null,isTKP:true,optionScores:[...d.scores],pembahasan:d.pembahasan||'',kategori:'TKP'}));
-  return orig;
-}
-
-function hitungSkor(){
-  let twk=0,tiu=0,tkp=0;
-  for(let i=0;i<questions.length;i++){
-    const n=i+1;
-    if(n<=30){if(userAnswers[i]!==null&&userAnswers[i]===questions[i].answer)twk+=5;}
-    else if(n<=65){if(userAnswers[i]!==null&&userAnswers[i]===questions[i].answer)tiu+=5;}
-    else{if(userScores[i]!==null)tkp+=userScores[i];}
-  }
-  return{twk,tiu,tkp,total:twk+tiu+tkp,persen:Math.round((twk+tiu+tkp)/550*100)};
-}
-
-function hitungSkorByKategori(){
-  let twk=0,tiu=0,tkp=0;
-  for(let i=0;i<questions.length;i++){
-    const q=questions[i];const kat=q.kategori||'TKP';
-    if(q.isTKP){if(userScores[i]!==null&&userScores[i]!==undefined)tkp+=userScores[i];}
-    else{if(userAnswers[i]!==null&&userAnswers[i]===q.answer){
-      if(kat==='TWK')twk+=5;else if(kat==='TIU')tiu+=5;else tkp+=5;
-    }}
-  }
-  const total=twk+tiu+tkp;
-  let mTWK=0,mTIU=0,mTKP=0;
-  questions.forEach(q=>{
-    const kat=q.kategori||'TKP';
-    if(q.isTKP){const mx=q.optionScores?Math.max(...q.optionScores):5;mTKP+=mx;}
-    else{if(kat==='TWK')mTWK+=5;else if(kat==='TIU')mTIU+=5;}
-  });
-  const mTot=mTWK+mTIU+mTKP;
-  return{twk,tiu,tkp,total,persen:mTot>0?Math.round(total/mTot*100):0,mTWK,mTIU,mTKP,mTot};
-}
+function getSoalBank(id){const v='paket'+id;return typeof window[v]!=='undefined'?window[v]:{twk:[],tiu:[],tkp:[]};}
+function buildOriginals(id){const bank=getSoalBank(id),orig=[];bank.twk.forEach(d=>orig.push({question:d.q,options:[...d.opt],answer:d.a,isTKP:false,optionScores:null,pembahasan:d.pembahasan||'',kategori:'TWK'}));bank.tiu.forEach(d=>orig.push({question:d.q,options:[...d.opt],answer:d.a,isTKP:false,optionScores:null,pembahasan:d.pembahasan||'',kategori:'TIU'}));bank.tkp.forEach(d=>orig.push({question:d.q,options:[...d.opts],answer:null,isTKP:true,optionScores:[...d.scores],pembahasan:d.pembahasan||'',kategori:'TKP'}));return orig;}
+function hitungSkor(){let twk=0,tiu=0,tkp=0;for(let i=0;i<questions.length;i++){const n=i+1;if(n<=30){if(userAnswers[i]!==null&&userAnswers[i]===questions[i].answer)twk+=5;}else if(n<=65){if(userAnswers[i]!==null&&userAnswers[i]===questions[i].answer)tiu+=5;}else{if(userScores[i]!==null)tkp+=userScores[i];}}return{twk,tiu,tkp,total:twk+tiu+tkp,persen:Math.round((twk+tiu+tkp)/550*100)};}
+function hitungSkorByKategori(){let twk=0,tiu=0,tkp=0;for(let i=0;i<questions.length;i++){const q=questions[i];const kat=q.kategori||'TKP';if(q.isTKP){if(userScores[i]!==null&&userScores[i]!==undefined)tkp+=userScores[i];}else{if(userAnswers[i]!==null&&userAnswers[i]===q.answer){if(kat==='TWK')twk+=5;else if(kat==='TIU')tiu+=5;else tkp+=5;}}}const total=twk+tiu+tkp;let mTWK=0,mTIU=0,mTKP=0;questions.forEach(q=>{const kat=q.kategori||'TKP';if(q.isTKP){const mx=q.optionScores?Math.max(...q.optionScores):5;mTKP+=mx;}else{if(kat==='TWK')mTWK+=5;else if(kat==='TIU')mTIU+=5;}});const mTot=mTWK+mTIU+mTKP;return{twk,tiu,tkp,total,persen:mTot>0?Math.round(total/mTot*100):0,mTWK,mTIU,mTKP,mTot};}
 
 // ==================== QUIZ CEPAT ====================
-const QC_CATS={
-  twk:{name:'TWK',fullName:'Tes Wawasan Kebangsaan',icon:'📚',cls:'twk',jsVar:'quizTWK',color:'#7c3aed'},
-  tiu:{name:'TIU',fullName:'Tes Intelegensi Umum',icon:'🔢',cls:'tiu',jsVar:'quizTIU',color:'#b45309'},
-  tkp:{name:'TKP',fullName:'Tes Karakteristik Pribadi',icon:'⭐',cls:'tkp',jsVar:'quizTKP',color:'#059669'}
-};
-
+const QC_CATS={twk:{name:'TWK',fullName:'Tes Wawasan Kebangsaan',icon:'📚',cls:'twk',jsVar:'quizTWK',color:'#7c3aed'},tiu:{name:'TIU',fullName:'Tes Intelegensi Umum',icon:'🔢',cls:'tiu',jsVar:'quizTIU',color:'#b45309'},tkp:{name:'TKP',fullName:'Tes Karakteristik Pribadi',icon:'⭐',cls:'tkp',jsVar:'quizTKP',color:'#059669'}};
 let qcState={cat:'twk',timerMenit:1,soal:[],curIdx:0,benar:0,salah:0,totalDijawab:0,timeLeft:60,interval:null,totalWaktu:60,streakCur:0,streakMax:0,noWrong:true};
-
-function getQCSoal(cat){
-  const varName=QC_CATS[cat].jsVar;
-  if(typeof window[varName]!=='undefined')return window[varName];
-  let all=[];
-  for(let i=1;i<=5;i++){
-    const b=getSoalBank(i);
-    if(cat==='twk')b.twk.forEach(d=>all.push({q:d.q,opt:[...d.opt],a:d.a,isTKP:false,pembahasan:d.pembahasan||''}));
-    else if(cat==='tiu')b.tiu.forEach(d=>all.push({q:d.q,opt:[...d.opt],a:d.a,isTKP:false,pembahasan:d.pembahasan||''}));
-    else if(cat==='tkp')b.tkp.forEach(d=>all.push({q:d.q,opt:[...d.opts],scores:[...d.scores],isTKP:true,pembahasan:d.pembahasan||''}));
-  }
-  return all;
-}
-
+function getQCSoal(cat){const varName=QC_CATS[cat].jsVar;if(typeof window[varName]!=='undefined')return window[varName];let all=[];for(let i=1;i<=5;i++){const b=getSoalBank(i);if(cat==='twk')b.twk.forEach(d=>all.push({q:d.q,opt:[...d.opt],a:d.a,isTKP:false,pembahasan:d.pembahasan||''}));else if(cat==='tiu')b.tiu.forEach(d=>all.push({q:d.q,opt:[...d.opt],a:d.a,isTKP:false,pembahasan:d.pembahasan||''}));else if(cat==='tkp')b.tkp.forEach(d=>all.push({q:d.q,opt:[...d.opts],scores:[...d.scores],isTKP:true,pembahasan:d.pembahasan||''}));}return all;}
 function getQCBestScore(cat,menit){return parseInt(localStorage.getItem(`qcBest_${cat}_${menit}m`)||'0');}
-function setQCBestScore(cat,menit,val){
-  const prev=getQCBestScore(cat,menit);
-  if(val>prev)localStorage.setItem(`qcBest_${cat}_${menit}m`,val);
-  return val>prev;
-}
+function setQCBestScore(cat,menit,val){const prev=getQCBestScore(cat,menit);if(val>prev)localStorage.setItem(`qcBest_${cat}_${menit}m`,val);return val>prev;}
 function getQCTotalSesi(cat){return parseInt(localStorage.getItem(`qcTotalSesi_${cat}`)||'0');}
 function incQCTotalSesi(cat){localStorage.setItem(`qcTotalSesi_${cat}`,getQCTotalSesi(cat)+1);}
 function getQCStreakMax(cat){return parseInt(localStorage.getItem(`qcStreakMax_${cat}`)||'0');}
 function setQCStreakMax(cat,val){const p=getQCStreakMax(cat);if(val>p)localStorage.setItem(`qcStreakMax_${cat}`,val);}
 function getQCNoWrongBest(cat){return parseInt(localStorage.getItem(`qcNoWrong_${cat}`)||'0');}
 function setQCNoWrongBest(cat,val){const p=getQCNoWrongBest(cat);if(val>p)localStorage.setItem(`qcNoWrong_${cat}`,val);}
-function getQCAkurasi90(cat){return parseInt(localStorage.getItem(`qcAkurasi90_${cat}`)||'0');}
 function setQCAkurasi90(cat,achieved){if(achieved)localStorage.setItem(`qcAkurasi90_${cat}`,'1');}
-function getQCAnyAkurasi90(){return ['twk','tiu','tkp'].some(c=>parseInt(localStorage.getItem(`qcAkurasi90_${c}`)||'0')===1);}
 
 function renderQuizCepatGrid(){
-  const grid=document.getElementById('quizCepatGrid');
-  let html='';
+  const grid=document.getElementById('quizCepatGrid');let html='';
   ['twk','tiu','tkp'].forEach(cat=>{
-    const c=QC_CATS[cat];
-    const soalArr=getQCSoal(cat);
-    const totalSesi=getQCTotalSesi(cat);
-    const bests=[1,3,5,10].map(m=>{
-      const b=getQCBestScore(cat,m);
-      return b>0?`<span class="qc-stat highlight">⏱️${m}m: ${b}</span>`:'';
-    }).filter(x=>x).join('');
-    html+=`<div class="qc-card ${cat}" onclick="pilihanQC('${cat}')">
-      <div class="qc-header">
-        <div class="qc-icon">${c.icon}</div>
-        <div class="qc-info">
-          <div class="qc-title">${c.name} — ${c.fullName}</div>
-          <div class="qc-sub">${soalArr.length} soal tersedia · ${totalSesi} sesi dimainkan</div>
-        </div>
-      </div>
-      <div class="qc-stats-row">${bests||'<span class="qc-stat" style="opacity:.7;">Belum ada rekor</span>'}</div>
-    </div>`;
+    const c=QC_CATS[cat];const soalArr=getQCSoal(cat);const totalSesi=getQCTotalSesi(cat);
+    const bests=[1,3,5,10].map(m=>{const b=getQCBestScore(cat,m);return b>0?`<span class="qc-stat highlight">⏱️${m}m: ${b}</span>`:''}).filter(x=>x).join('');
+    html+=`<div class="qc-card ${cat}" onclick="pilihanQC('${cat}')"><div class="qc-header"><div class="qc-icon">${c.icon}</div><div class="qc-info"><div class="qc-title">${c.name} — ${c.fullName}</div><div class="qc-sub">${soalArr.length} soal tersedia · ${totalSesi} sesi dimainkan</div></div></div><div class="qc-stats-row">${bests||'<span class="qc-stat" style="opacity:.7;">Belum ada rekor</span>'}</div></div>`;
   });
   grid.innerHTML=html;
 }
-
 function pilihanQC(cat){
   qcState.cat=cat;qcState.timerMenit=1;
-  const c=QC_CATS[cat];
-  const soalArr=getQCSoal(cat);
+  const c=QC_CATS[cat];const soalArr=getQCSoal(cat);
   document.getElementById('qcConfirmIcon').textContent=c.icon;
   document.getElementById('qcConfirmTitle').textContent=`Quiz Cepat ${c.name}`;
   document.getElementById('qcConfirmSub').textContent=`Jawab soal ${c.fullName} sebanyak-banyaknya dalam waktu yang dipilih!`;
   const infoRow=document.getElementById('qcInfoRow');
   let infoHtml=`<span class="qc-info-pill">📝 ${soalArr.length} soal tersedia</span>`;
-  [1,3,5,10].forEach(m=>{
-    const b=getQCBestScore(cat,m);
-    if(b>0)infoHtml+=`<span class="qc-info-pill" style="background:${c.color}20;color:${c.color}">🏆 ${m}m: ${b} benar</span>`;
-  });
+  [1,3,5,10].forEach(m=>{const b=getQCBestScore(cat,m);if(b>0)infoHtml+=`<span class="qc-info-pill" style="background:${c.color}20;color:${c.color}">🏆 ${m}m: ${b} benar</span>`;});
   infoRow.innerHTML=infoHtml;
   document.querySelectorAll('.qc-timer-btn').forEach(b=>b.classList.remove('selected'));
   document.querySelectorAll('.qc-timer-btn')[0].classList.add('selected');
   goTo('quizCepatConfirmPage');
 }
-
-function selectQCTimer(menit,btn){
-  qcState.timerMenit=menit;
-  document.querySelectorAll('.qc-timer-btn').forEach(b=>b.classList.remove('selected'));
-  btn.classList.add('selected');
-}
-
+function selectQCTimer(menit,btn){qcState.timerMenit=menit;document.querySelectorAll('.qc-timer-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');}
 function shuffleQCSoal(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-
 function shuffleQCOpts(d){
-  if(d.isTKP){
-    let p=d.opt.map((t,i)=>({text:t,score:d.scores[i]}));
-    for(let i=p.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[p[i],p[j]]=[p[j],p[i]];}
-    return{...d,opt:p.map(x=>x.text),scores:p.map(x=>x.score)};
-  } else {
-    let p=d.opt.map((t,i)=>({text:t,idx:i}));
-    for(let i=p.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[p[i],p[j]]=[p[j],p[i]];}
-    return{...d,opt:p.map(x=>x.text),a:p.findIndex(x=>x.idx===d.a)};
-  }
+  if(d.isTKP){let p=d.opt.map((t,i)=>({text:t,score:d.scores[i]}));for(let i=p.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[p[i],p[j]]=[p[j],p[i]];}return{...d,opt:p.map(x=>x.text),scores:p.map(x=>x.score)};}
+  else{let p=d.opt.map((t,i)=>({text:t,idx:i}));for(let i=p.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[p[i],p[j]]=[p[j],p[i]];}return{...d,opt:p.map(x=>x.text),a:p.findIndex(x=>x.idx===d.a)};}
 }
-
 function mulaiQuizCepat(){
   if(qcState.interval){clearInterval(qcState.interval);qcState.interval=null;}
   const cat=qcState.cat;const menit=qcState.timerMenit;
   const rawSoal=getQCSoal(cat);
   if(!rawSoal||rawSoal.length===0){alert('Soal tidak tersedia!');return;}
-  const soalShuffled=shuffleQCSoal(rawSoal).map(d=>{
-    const isTKP=d.isTKP||(d.scores&&!d.a&&d.a!==0)||false;
-    if(isTKP)return{q:d.q,opt:[...(d.opt||d.opts||[])],scores:[...(d.scores||[])],isTKP:true,pembahasan:d.pembahasan||''};
-    else return{q:d.q,opt:[...(d.opt||[])],a:d.a!==undefined?d.a:0,isTKP:false,pembahasan:d.pembahasan||''};
-  }).map(d=>shuffleQCOpts(d));
-  qcState.soal=soalShuffled;qcState.curIdx=0;qcState.benar=0;qcState.salah=0;
-  qcState.totalDijawab=0;qcState.timeLeft=menit*60;qcState.totalWaktu=menit*60;
-  qcState.streakCur=0;qcState.streakMax=0;qcState.noWrong=true;
+  const soalShuffled=shuffleQCSoal(rawSoal).map(d=>{const isTKP=d.isTKP||(d.scores&&!d.a&&d.a!==0)||false;if(isTKP)return{q:d.q,opt:[...(d.opt||d.opts||[])],scores:[...(d.scores||[])],isTKP:true,pembahasan:d.pembahasan||''};else return{q:d.q,opt:[...(d.opt||[])],a:d.a!==undefined?d.a:0,isTKP:false,pembahasan:d.pembahasan||''};}).map(d=>shuffleQCOpts(d));
+  qcState.soal=soalShuffled;qcState.curIdx=0;qcState.benar=0;qcState.salah=0;qcState.totalDijawab=0;qcState.timeLeft=menit*60;qcState.totalWaktu=menit*60;qcState.streakCur=0;qcState.streakMax=0;qcState.noWrong=true;
   goTo('quizCepatPlayPage');renderQCQuestion();startQCTimer();
 }
-
 function renderQCQuestion(){
   const soal=qcState.soal;const idx=qcState.curIdx;
   if(idx>=soal.length){finishQuizCepat();return;}
@@ -1302,38 +1137,21 @@ function renderQCQuestion(){
   document.getElementById('qcQNum').textContent=`SOAL ${idx+1}`;
   document.getElementById('qcQTxt').innerHTML=d.q;
   let optsHtml='';
-  d.opt.forEach((o,i)=>{
-    optsHtml+=`<div class="qc-opt" onclick="pilihQCJawaban(${i})">
-      <div class="qc-opt-letter">${PREFIXES[i]}</div>
-      <div class="qc-opt-text">${o}</div>
-    </div>`;
-  });
+  d.opt.forEach((o,i)=>{optsHtml+=`<div class="qc-opt" onclick="pilihQCJawaban(${i})"><div class="qc-opt-letter">${PREFIXES[i]}</div><div class="qc-opt-text">${o}</div></div>`;});
   document.getElementById('qcOpts').innerHTML=optsHtml;
-  const fb=document.getElementById('qcFeedback');
-  fb.className='qc-feedback';fb.textContent='';
-  const btnNext=document.getElementById('btnQcNext');
-  btnNext.className='btn-qc-next';btnNext.textContent='Soal Berikutnya →';
+  const fb=document.getElementById('qcFeedback');fb.className='qc-feedback';fb.textContent='';
+  const btnNext=document.getElementById('btnQcNext');btnNext.className='btn-qc-next';btnNext.textContent='Soal Berikutnya →';
 }
-
 function pilihQCJawaban(idx){
   const soal=qcState.soal[qcState.curIdx];
   const opts=document.querySelectorAll('.qc-opt');
   opts.forEach(o=>{o.classList.add('disabled');o.onclick=null;});
-  const fb=document.getElementById('qcFeedback');
-  let isBenar=false;
+  const fb=document.getElementById('qcFeedback');let isBenar=false;
   if(soal.isTKP){
     const maxScore=Math.max(...soal.scores);const chosen=soal.scores[idx];
     opts[idx].classList.add(chosen===maxScore?'correct':'wrong');
     if(chosen!==maxScore){const bestIdx=soal.scores.findIndex(s=>s===maxScore);if(bestIdx>=0)opts[bestIdx].classList.add('correct');}
-    opts.forEach((optEl,i)=>{
-      const textEl=optEl.querySelector('.qc-opt-text');
-      if(textEl&&!textEl.querySelector('.qc-score-reveal')){
-        const scoreSpan=document.createElement('span');
-        scoreSpan.className='qc-score-reveal';
-        scoreSpan.style.cssText='font-size:11px;margin-left:6px;font-weight:700;';
-        scoreSpan.textContent=`(${soal.scores[i]} poin)`;textEl.appendChild(scoreSpan);
-      }
-    });
+    opts.forEach((optEl,i)=>{const textEl=optEl.querySelector('.qc-opt-text');if(textEl&&!textEl.querySelector('.qc-score-reveal')){const scoreSpan=document.createElement('span');scoreSpan.className='qc-score-reveal';scoreSpan.style.cssText='font-size:11px;margin-left:6px;font-weight:700;';scoreSpan.textContent=`(${soal.scores[i]} poin)`;textEl.appendChild(scoreSpan);}});
     isBenar=(chosen===maxScore);
     fb.textContent=isBenar?`✅ Tepat! Skor maksimal: ${maxScore}`:`❌ Skor kamu: ${chosen} poin | Skor terbaik: ${maxScore} poin`;
     fb.className='qc-feedback '+(isBenar?'benar':'salah');
@@ -1348,75 +1166,45 @@ function pilihQCJawaban(idx){
   else{qcState.salah++;qcState.streakCur=0;qcState.noWrong=false;}
   qcState.totalDijawab++;
   document.getElementById('qcCorrectCount').textContent=`✅ ${qcState.benar} Benar`;
-  const btnNext=document.getElementById('btnQcNext');
-  btnNext.className='btn-qc-next show';btnNext.onclick=qcNextQuestion;
+  const btnNext=document.getElementById('btnQcNext');btnNext.className='btn-qc-next show';btnNext.onclick=qcNextQuestion;
   if(qcState.curIdx>=qcState.soal.length-1){btnNext.textContent='🏁 Lihat Hasil';btnNext.onclick=finishQuizCepat;}
 }
-
 function qcNextQuestion(){qcState.curIdx++;if(qcState.curIdx>=qcState.soal.length)finishQuizCepat();else renderQCQuestion();}
-
 function startQCTimer(){
   if(qcState.interval)clearInterval(qcState.interval);
   updateQCTimerDisplay();
-  qcState.interval=setInterval(()=>{
-    qcState.timeLeft--;updateQCTimerDisplay();
-    if(qcState.timeLeft<=0){clearInterval(qcState.interval);qcState.interval=null;finishQuizCepat();}
-  },1000);
+  qcState.interval=setInterval(()=>{qcState.timeLeft--;updateQCTimerDisplay();if(qcState.timeLeft<=0){clearInterval(qcState.interval);qcState.interval=null;finishQuizCepat();}},1000);
 }
-
 function updateQCTimerDisplay(){
-  const el=document.getElementById('qcPlayTimer');
-  const prog=document.getElementById('qcProgressFill');
+  const el=document.getElementById('qcPlayTimer');const prog=document.getElementById('qcProgressFill');
   const m=Math.floor(qcState.timeLeft/60),s=qcState.timeLeft%60;
   el.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
   el.className='qc-play-timer';
-  if(qcState.timeLeft<=10)el.classList.add('danger');
-  else if(qcState.timeLeft<=30)el.classList.add('warning');
-  const pct=Math.max(0,(qcState.timeLeft/qcState.totalWaktu)*100);
-  prog.style.width=pct+'%';
-  prog.style.background=qcState.timeLeft<=10?'linear-gradient(90deg,#dc2626,#ef4444)':
-    qcState.timeLeft<=30?'linear-gradient(90deg,#d97706,#f59e0b)':
-    'linear-gradient(90deg,#2563eb,#7c3aed)';
+  if(qcState.timeLeft<=10)el.classList.add('danger');else if(qcState.timeLeft<=30)el.classList.add('warning');
+  const pct=Math.max(0,(qcState.timeLeft/qcState.totalWaktu)*100);prog.style.width=pct+'%';
+  prog.style.background=qcState.timeLeft<=10?'linear-gradient(90deg,#dc2626,#ef4444)':qcState.timeLeft<=30?'linear-gradient(90deg,#d97706,#f59e0b)':'linear-gradient(90deg,#2563eb,#7c3aed)';
 }
-
 function finishQuizCepat(){
   if(qcState.interval){clearInterval(qcState.interval);qcState.interval=null;}
-  const cat=qcState.cat;const menit=qcState.timerMenit;
-  const benar=qcState.benar;const salah=qcState.salah;const total=qcState.totalDijawab;
-  const c=QC_CATS[cat];
-  incQCTotalSesi(cat);
-  const isNewBest=setQCBestScore(cat,menit,benar);
-  setQCStreakMax(cat,qcState.streakMax);
+  const cat=qcState.cat;const menit=qcState.timerMenit;const benar=qcState.benar;const salah=qcState.salah;const total=qcState.totalDijawab;const c=QC_CATS[cat];
+  incQCTotalSesi(cat);const isNewBest=setQCBestScore(cat,menit,benar);setQCStreakMax(cat,qcState.streakMax);
   if(qcState.noWrong&&total>0)setQCNoWrongBest(cat,total);
   if(total>0&&Math.round(benar/total*100)>=90)setQCAkurasi90(cat,true);
   const pct=total>0?Math.round(benar/total*100):0;
   let icon='😅',title='Terus Semangat!';
-  if(pct>=90){icon='🏆';title='Luar Biasa!';}
-  else if(pct>=70){icon='🎯';title='Bagus Sekali!';}
-  else if(pct>=50){icon='💪';title='Cukup Baik!';}
-  document.getElementById('qcResIcon').textContent=icon;
-  document.getElementById('qcResTitle').textContent=title;
-  document.getElementById('qcResCat').textContent=`${c.name} · ${menit} Menit`;
-  document.getElementById('qcResSkor').textContent=benar;
+  if(pct>=90){icon='🏆';title='Luar Biasa!';}else if(pct>=70){icon='🎯';title='Bagus Sekali!';}else if(pct>=50){icon='💪';title='Cukup Baik!';}
+  document.getElementById('qcResIcon').textContent=icon;document.getElementById('qcResTitle').textContent=title;
+  document.getElementById('qcResCat').textContent=`${c.name} · ${menit} Menit`;document.getElementById('qcResSkor').textContent=benar;
   document.getElementById('qcResSub').textContent=`soal dijawab dengan benar dari ${total} soal`;
-  document.getElementById('qcStatBenar').textContent=benar;
-  document.getElementById('qcStatSalah').textContent=salah;
-  document.getElementById('qcStatTotal').textContent=total;
-  const newBestEl=document.getElementById('qcNewBest');
-  newBestEl.style.display=isNewBest&&benar>0?'block':'none';
+  document.getElementById('qcStatBenar').textContent=benar;document.getElementById('qcStatSalah').textContent=salah;document.getElementById('qcStatTotal').textContent=total;
+  const newBestEl=document.getElementById('qcNewBest');newBestEl.style.display=isNewBest&&benar>0?'block':'none';
   const bestOverall=getQCBestScore(cat,menit);
-  document.getElementById('qcBestInfo').innerHTML=`
-    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center;">
-      <span style="font-size:13px;color:var(--gray);">🏆 Rekor ${menit} menit:</span>
-      <span style="font-size:16px;font-weight:800;color:${c.color};">${bestOverall} benar</span>
-      ${total>0?`<span style="font-size:12px;color:var(--gray);">· Akurasi: ${pct}%</span>`:''}
-    </div>`;
+  document.getElementById('qcBestInfo').innerHTML=`<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center;"><span style="font-size:13px;color:var(--gray);">🏆 Rekor ${menit} menit:</span><span style="font-size:16px;font-weight:800;color:${c.color};">${bestOverall} benar</span>${total>0?`<span style="font-size:12px;color:var(--gray);">· Akurasi: ${pct}%</span>`:''}</div>`;
   goTo('quizCepatResultPage');
 }
-
 function ulangQuizCepat(){mulaiQuizCepat();}
 
-// ==================== PENCAPAIAN SYSTEM ====================
+// ==================== PENCAPAIAN ====================
 const BADGE_TIERS=[
   {tier:1,label:'🎗️ Tier 1 — Pemula',badges:[
     {id:'first_done',icon:'🎯',name:'Langkah Pertama',desc:'Selesaikan 1 paket soal',check:s=>s.totalDone>=1},
@@ -1472,29 +1260,11 @@ const BADGE_TIERS=[
 
 function getBadgeStats(){
   let totalDone=0,totalLulus=0,bestScore=0,bestTWK=0,bestTIU=0,simulasiDone=0,simulasiLulus=false;
-  for(let i=1;i<=5;i++){
-    const twk=localStorage.getItem(`skorTWK_latihan${i}`);
-    const tiu=localStorage.getItem(`skorTIU_latihan${i}`);
-    const tkp=localStorage.getItem(`skorTKP_latihan${i}`);
-    if(twk&&tiu&&tkp){
-      totalDone++;
-      const t=parseInt(twk)||0,u=parseInt(tiu)||0,k=parseInt(tkp)||0;
-      if(t>=65&&u>=80&&k>=166)totalLulus++;
-      if(t+u+k>bestScore)bestScore=t+u+k;
-      if(t>bestTWK)bestTWK=t;
-      if(u>bestTIU)bestTIU=u;
-    }
-  }
-  try{
-    const s=localStorage.getItem('simulasi_last');
-    if(s){const d=JSON.parse(s);simulasiLulus=d.twk>=65&&d.tiu>=80&&d.tkp>=166;}
-  }catch(e){}
-  const simuCount=parseInt(localStorage.getItem('simulasiCount')||'0');
-  simulasiDone=simuCount;
+  for(let i=1;i<=5;i++){const twk=localStorage.getItem(`skorTWK_latihan${i}`);const tiu=localStorage.getItem(`skorTIU_latihan${i}`);const tkp=localStorage.getItem(`skorTKP_latihan${i}`);if(twk&&tiu&&tkp){totalDone++;const t=parseInt(twk)||0,u=parseInt(tiu)||0,k=parseInt(tkp)||0;if(t>=65&&u>=80&&k>=166)totalLulus++;if(t+u+k>bestScore)bestScore=t+u+k;if(t>bestTWK)bestTWK=t;if(u>bestTIU)bestTIU=u;}}
+  try{const s=localStorage.getItem('simulasi_last');if(s){const d=JSON.parse(s);simulasiLulus=d.twk>=65&&d.tiu>=80&&d.tkp>=166;}}catch(e){}
+  simulasiDone=parseInt(localStorage.getItem('simulasiCount')||'0');
   const simulasiLulusBerturut=parseInt(localStorage.getItem('simulasiLulusBerturut')||'0');
-  const qcSesiTWK=getQCTotalSesi('twk');
-  const qcSesiTIU=getQCTotalSesi('tiu');
-  const qcSesiTKP=getQCTotalSesi('tkp');
+  const qcSesiTWK=getQCTotalSesi('twk'),qcSesiTIU=getQCTotalSesi('tiu'),qcSesiTKP=getQCTotalSesi('tkp');
   const qcTotalSesi=qcSesiTWK+qcSesiTIU+qcSesiTKP;
   const qcBestTWK=Math.max(...[1,3,5,10].map(m=>getQCBestScore('twk',m)));
   const qcBestTIU=Math.max(...[1,3,5,10].map(m=>getQCBestScore('tiu',m)));
@@ -1505,247 +1275,88 @@ function getBadgeStats(){
   const qcStreakMaxAll=Math.max(...['twk','tiu','tkp'].map(c=>getQCStreakMax(c)));
   const qcNoWrongAny=['twk','tiu','tkp'].some(c=>getQCNoWrongBest(c)>0);
   const qcAkurasi90=['twk','tiu','tkp'].some(c=>parseInt(localStorage.getItem(`qcAkurasi90_${c}`)||'0')===1);
-  const materiOpened=getMateriOpened();
-  const materiAll=materiOpened.twk&&materiOpened.tiu&&materiOpened.tkp;
-  const menuVisited=getMenuVisited();
-  const menuAll=['latihan','materi','statistik','simulasi','petunjuk','tentang','pencapaian','quizcepat'].every(m=>menuVisited[m]);
-  const menuVisitedTentang=!!menuVisited['tentang'];
-  const paketUlangiMax=getPaketUlangiMax();
-  let pernahJawab=false;
-  for(let i=1;i<=5;i++){if(localStorage.getItem(`evalData_latihan${i}`))pernahJawab=true;}
+  const materiOpened=getMateriOpened();const materiAll=materiOpened.twk&&materiOpened.tiu&&materiOpened.tkp;
+  const menuVisited=getMenuVisited();const menuAll=['latihan','materi','statistik','simulasi','petunjuk','tentang','pencapaian','quizcepat'].every(m=>menuVisited[m]);
+  const menuVisitedTentang=!!menuVisited['tentang'];const paketUlangiMax=getPaketUlangiMax();
+  let pernahJawab=false;for(let i=1;i<=5;i++){if(localStorage.getItem(`evalData_latihan${i}`))pernahJawab=true;}
   const skorNaik=checkSkorNaik();
   return{totalDone,totalLulus,bestScore,bestTWK,bestTIU,simulasiDone,simulasiLulus,simulasiLulusBerturut,qcTotalSesi,qcSesiTWK,qcSesiTIU,qcSesiTKP,qcBestTWK,qcBestTIU,qcBestTKP,qcBest1m,qcBest5m,qcBest10m,qcStreakMaxAll,qcNoWrongAny,qcAkurasi90,materiAll,menuAll,menuVisitedTentang,paketUlangiMax,skorNaik,pernahJawab};
 }
 
 function refreshPencapaian(){
-  const stats=getBadgeStats();
-  const scroll=document.getElementById('pencapaianScroll');
+  const stats=getBadgeStats();const scroll=document.getElementById('pencapaianScroll');
   let totalBadge=0,unlockedBadge=0;
   BADGE_TIERS.forEach(t=>t.badges.forEach(b=>{totalBadge++;if(b.check(stats))unlockedBadge++;}));
-  let html=`<div style="text-align:center;margin-bottom:10px;">
-    <div style="font-size:13px;color:var(--gray);margin-bottom:6px;">🏅 ${unlockedBadge} / ${totalBadge} Badge Diraih</div>
-    <div class="pencapaian-progress-bar"><div class="pencapaian-progress-fill" style="width:${Math.round(unlockedBadge/totalBadge*100)}%">${Math.round(unlockedBadge/totalBadge*100)}%</div></div>
-  </div>`;
+  let html=`<div style="text-align:center;margin-bottom:10px;"><div style="font-size:13px;color:var(--gray);margin-bottom:6px;">🏅 ${unlockedBadge} / ${totalBadge} Badge Diraih</div><div class="pencapaian-progress-bar"><div class="pencapaian-progress-fill" style="width:${Math.round(unlockedBadge/totalBadge*100)}%">${Math.round(unlockedBadge/totalBadge*100)}%</div></div></div>`;
   BADGE_TIERS.forEach(tier=>{
     const tierNum=tier.tier;
-    html+=`<div class="pencapaian-tier-section tier-${tierNum}">
-      <div class="pencapaian-tier-label">${tier.label}</div>
-      <div class="pencapaian-grid">`;
-    tier.badges.forEach(b=>{
-      const unlocked=b.check(stats);
-      html+=`<div class="badge-card ${unlocked?'unlocked':'locked'}">
-        <span class="badge-tier-tag">${['Pemula','Std','Menengah','Mahir','Ahli','Master','Legendaris'][tierNum-1]}</span>
-        <div class="badge-icon">${b.icon}</div>
-        <div class="badge-name">${b.name}</div>
-        <div class="badge-desc">${b.desc}</div>
-        <div class="badge-unlocked-check">${unlocked?'✅ Diraih!':'🔒 Belum'}</div>
-      </div>`;
-    });
+    html+=`<div class="pencapaian-tier-section tier-${tierNum}"><div class="pencapaian-tier-label">${tier.label}</div><div class="pencapaian-grid">`;
+    tier.badges.forEach(b=>{const unlocked=b.check(stats);html+=`<div class="badge-card ${unlocked?'unlocked':'locked'}"><span class="badge-tier-tag">${['Pemula','Std','Menengah','Mahir','Ahli','Master','Legendaris'][tierNum-1]}</span><div class="badge-icon">${b.icon}</div><div class="badge-name">${b.name}</div><div class="badge-desc">${b.desc}</div><div class="badge-unlocked-check">${unlocked?'✅ Diraih!':'🔒 Belum'}</div></div>`;});
     html+='</div></div>';
   });
   scroll.innerHTML=html;
 }
 
 // ==================== QUIZ LIST ====================
-const quizMeta=[
-  {id:1,name:'Paket 1',icon:'📘'},{id:2,name:'Paket 2',icon:'📗'},
-  {id:3,name:'Paket 3',icon:'📙'},{id:4,name:'Paket 4',icon:'📕'},
-  {id:5,name:'Paket 5',icon:'📔'}
-];
-
+const quizMeta=[{id:1,name:'Paket 1',icon:'📘'},{id:2,name:'Paket 2',icon:'📗'},{id:3,name:'Paket 3',icon:'📙'},{id:4,name:'Paket 4',icon:'📕'},{id:5,name:'Paket 5',icon:'📔'}];
 function refreshQuizList(){
   const c=document.getElementById('quizListContainer');c.innerHTML='';
   quizMeta.forEach(m=>{
-    const bank=getSoalBank(m.id);
-    const total=(bank.twk.length)+(bank.tiu.length)+(bank.tkp.length);
-    const twk=localStorage.getItem(`skorTWK_latihan${m.id}`);
-    const tiu=localStorage.getItem(`skorTIU_latihan${m.id}`);
-    const tkp=localStorage.getItem(`skorTKP_latihan${m.id}`);
-    const done=twk&&tiu&&tkp;
-    const tot=done?((parseInt(twk)||0)+(parseInt(tiu)||0)+(parseInt(tkp)||0)):0;
-    const mTWK=bank.twk.length*5,mTIU=bank.tiu.length*5,mTKP=bank.tkp.length*5;
-    const mTot=mTWK+mTIU+mTKP;
-    const badges=done?
-      `<span class="skor-badge twk">TWK:${twk}/${mTWK}</span><span class="skor-badge tiu">TIU:${tiu}/${mTIU}</span><span class="skor-badge tkp">TKP:${tkp}/${mTKP}</span>`
-      :`<span class="skor-badge belum">-</span><span class="skor-badge belum">-</span><span class="skor-badge belum">-</span>`;
-    c.innerHTML+=`<div class="quiz-item">
-      <div onclick="startQuiz(${m.id})">
-        <div class="quiz-header">
-          <div class="quiz-left"><span class="quiz-icon">${m.icon}</span><span>${m.name} (${total} soal)</span></div>
-          <div class="quiz-right">${badges}</div>
-        </div>
-        <div class="quiz-detail">
-          <div class="total-skor-container">
-            <span class="total-skor-label">Total Skor:</span>
-            <span class="total-skor-value ${done?'completed':''}">${tot} / ${mTot}</span>
-          </div>
-          <span class="status-badge ${done?'selesai':'belum'}">${done?'✅ Selesai':'⏳ Belum'}</span>
-        </div>
-      </div>
-      ${done?`<button class="btn-eval-toggle" onclick="event.stopPropagation();showEvaluasiFromList(${m.id})"><span class="eval-icon">📋</span> Lihat Evaluasi & Pembahasan <span>→</span></button>`:''}
-    </div>`;
+    const bank=getSoalBank(m.id);const total=(bank.twk.length)+(bank.tiu.length)+(bank.tkp.length);
+    const twk=localStorage.getItem(`skorTWK_latihan${m.id}`);const tiu=localStorage.getItem(`skorTIU_latihan${m.id}`);const tkp=localStorage.getItem(`skorTKP_latihan${m.id}`);
+    const done=twk&&tiu&&tkp;const tot=done?((parseInt(twk)||0)+(parseInt(tiu)||0)+(parseInt(tkp)||0)):0;
+    const mTWK=bank.twk.length*5,mTIU=bank.tiu.length*5,mTKP=bank.tkp.length*5,mTot=mTWK+mTIU+mTKP;
+    const badges=done?`<span class="skor-badge twk">TWK:${twk}/${mTWK}</span><span class="skor-badge tiu">TIU:${tiu}/${mTIU}</span><span class="skor-badge tkp">TKP:${tkp}/${mTKP}</span>`:`<span class="skor-badge belum">-</span><span class="skor-badge belum">-</span><span class="skor-badge belum">-</span>`;
+    c.innerHTML+=`<div class="quiz-item"><div onclick="startQuiz(${m.id})"><div class="quiz-header"><div class="quiz-left"><span class="quiz-icon">${m.icon}</span><span>${m.name} (${total} soal)</span></div><div class="quiz-right">${badges}</div></div><div class="quiz-detail"><div class="total-skor-container"><span class="total-skor-label">Total Skor:</span><span class="total-skor-value ${done?'completed':''}">${tot} / ${mTot}</span></div><span class="status-badge ${done?'selesai':'belum'}">${done?'✅ Selesai':'⏳ Belum'}</span></div></div>${done?`<button class="btn-eval-toggle" onclick="event.stopPropagation();showEvaluasiFromList(${m.id})"><span class="eval-icon">📋</span> Lihat Evaluasi & Pembahasan <span>→</span></button>`:''}</div>`;
   });
 }
 
 function showEvaluasiFromList(setId){
-  const bank=getSoalBank(setId);
-  let savedAnswers=[],savedScores=[],savedQuestions=[];
+  const bank=getSoalBank(setId);let savedAnswers=[],savedScores=[],savedQuestions=[];
   try{const d=localStorage.getItem(`evalData_latihan${setId}`);if(d){const p=JSON.parse(d);savedAnswers=p.answers||[];savedScores=p.scores||[];savedQuestions=p.questions||[];}}catch(e){}
   let eq=savedQuestions.length>0?savedQuestions:[];
-  if(eq.length===0){
-    bank.twk.forEach(d=>eq.push({question:d.q,options:[...d.opt],answer:d.a,isTKP:false,optionScores:null,pembahasan:d.pembahasan||'',kategori:'TWK'}));
-    bank.tiu.forEach(d=>eq.push({question:d.q,options:[...d.opt],answer:d.a,isTKP:false,optionScores:null,pembahasan:d.pembahasan||'',kategori:'TIU'}));
-    bank.tkp.forEach(d=>eq.push({question:d.q,options:[...d.opts],answer:null,isTKP:true,optionScores:[...d.scores],pembahasan:d.pembahasan||'',kategori:'TKP'}));
-  }
-  const sTWK=parseInt(localStorage.getItem(`skorTWK_latihan${setId}`))||0;
-  const sTIU=parseInt(localStorage.getItem(`skorTIU_latihan${setId}`))||0;
-  const sTKP=parseInt(localStorage.getItem(`skorTKP_latihan${setId}`))||0;
-  const sTot=sTWK+sTIU+sTKP;
+  if(eq.length===0){bank.twk.forEach(d=>eq.push({question:d.q,options:[...d.opt],answer:d.a,isTKP:false,optionScores:null,pembahasan:d.pembahasan||'',kategori:'TWK'}));bank.tiu.forEach(d=>eq.push({question:d.q,options:[...d.opt],answer:d.a,isTKP:false,optionScores:null,pembahasan:d.pembahasan||'',kategori:'TIU'}));bank.tkp.forEach(d=>eq.push({question:d.q,options:[...d.opts],answer:null,isTKP:true,optionScores:[...d.scores],pembahasan:d.pembahasan||'',kategori:'TKP'}));}
+  const sTWK=parseInt(localStorage.getItem(`skorTWK_latihan${setId}`))||0;const sTIU=parseInt(localStorage.getItem(`skorTIU_latihan${setId}`))||0;const sTKP=parseInt(localStorage.getItem(`skorTKP_latihan${setId}`))||0;const sTot=sTWK+sTIU+sTKP;
   const mTWK=bank.twk.length*5,mTIU=bank.tiu.length*5,mTKP=bank.tkp.length*5,mTot=mTWK+mTIU+mTKP;
   document.getElementById('evalListTitle').textContent=`📖 Latihan SKD Paket ${setId}`;
-  document.getElementById('evalListScoreSummary').innerHTML=`<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
-    <span style="background:#ede9fe;padding:5px 12px;border-radius:20px;font-weight:700;font-size:12px;color:#7c3aed;">📚 TWK: ${sTWK}/${mTWK}</span>
-    <span style="background:#fef3c7;padding:5px 12px;border-radius:20px;font-weight:700;font-size:12px;color:#b45309;">🔢 TIU: ${sTIU}/${mTIU}</span>
-    <span style="background:#d1fae5;padding:5px 12px;border-radius:20px;font-weight:700;font-size:12px;color:#065f46;">⭐ TKP: ${sTKP}/${mTKP}</span>
-    <span style="background:#dbeafe;padding:5px 12px;border-radius:20px;font-weight:700;font-size:12px;color:#1d4ed8;">✅ Total: ${sTot}/${mTot}</span>
-  </div>`;
+  document.getElementById('evalListScoreSummary').innerHTML=`<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;"><span style="background:#ede9fe;padding:5px 12px;border-radius:20px;font-weight:700;font-size:12px;color:#7c3aed;">📚 TWK: ${sTWK}/${mTWK}</span><span style="background:#fef3c7;padding:5px 12px;border-radius:20px;font-weight:700;font-size:12px;color:#b45309;">🔢 TIU: ${sTIU}/${mTIU}</span><span style="background:#d1fae5;padding:5px 12px;border-radius:20px;font-weight:700;font-size:12px;color:#065f46;">⭐ TKP: ${sTKP}/${mTKP}</span><span style="background:#dbeafe;padding:5px 12px;border-radius:20px;font-weight:700;font-size:12px;color:#1d4ed8;">✅ Total: ${sTot}/${mTot}</span></div>`;
   let html='<h3 style="color:var(--primary);margin-bottom:12px;font-size:15px;">📝 Evaluasi Jawaban & Pembahasan</h3>';
   for(let i=0;i<eq.length;i++){
     const n=i+1,cat=getCat(n),q=eq[i],pb=q.pembahasan||'';
     let jawUser='Tidak dijawab',jawBenar='',stCls='belum',stIcon='⏳';
-    if(q.isTKP){
-      const uS=(savedScores[i]!==undefined&&savedScores[i]!==null)?savedScores[i]:null;
-      if(uS!==null){
-        const idx=q.optionScores.findIndex(s=>s===uS);
-        jawUser=idx>=0?`${PREFIXES[idx]}. ${q.options[idx]} <span style="font-weight:700;color:#7c3aed">(Skor: ${uS})</span>`:'Tidak dijawab';
-        const mS=Math.max(...q.optionScores),bIdx=q.optionScores.findIndex(s=>s===mS);
-        jawBenar=`Jawaban terbaik: ${PREFIXES[bIdx]}. ${q.options[bIdx]} <strong>(Skor: ${mS})</strong>`;
-        stCls=uS===mS?'benar':'salah';stIcon=uS===mS?'✅':'❌';
-      }
-    } else {
-      const uA=(savedAnswers[i]!==undefined&&savedAnswers[i]!==null)?savedAnswers[i]:null;
-      if(uA!==null){
-        jawUser=`${PREFIXES[uA]}. ${q.options[uA]}`;
-        jawBenar=`${PREFIXES[q.answer]}. ${q.options[q.answer]}`;
-        stCls=uA===q.answer?'benar':'salah';stIcon=uA===q.answer?'✅':'❌';
-      }
-    }
-    let stLabel=stCls==='benar'?'<span style="color:#059669;font-weight:700;font-size:12px;">✅ BENAR</span>':
-      stCls==='salah'?'<span style="color:#dc2626;font-weight:700;font-size:12px;">❌ SALAH</span>':
-      '<span style="color:#d97706;font-weight:700;font-size:12px;">⏳ BELUM</span>';
-    html+=`<div class="evaluasi-item ${stCls}">
-      <div class="soal-teks">${stIcon} Soal ${n} [${cat.name}] — ${stLabel}</div>
-      <div class="soal-isi">${q.question}</div>
-      <div class="jawaban-user">📌 <strong>Jawaban Anda:</strong> ${jawUser}</div>
-      ${jawBenar?`<div class="jawaban-benar">✅ <strong>Jawaban Benar:</strong> ${jawBenar}</div>`:''}
-      ${pb?`<div class="pembahasan-box"><strong>💡 Pembahasan</strong><br>${pb}</div>`:''}
-    </div>`;
+    if(q.isTKP){const uS=(savedScores[i]!==undefined&&savedScores[i]!==null)?savedScores[i]:null;if(uS!==null){const idx=q.optionScores.findIndex(s=>s===uS);jawUser=idx>=0?`${PREFIXES[idx]}. ${q.options[idx]} <span style="font-weight:700;color:#7c3aed">(Skor: ${uS})</span>`:'Tidak dijawab';const mS=Math.max(...q.optionScores),bIdx=q.optionScores.findIndex(s=>s===mS);jawBenar=`Jawaban terbaik: ${PREFIXES[bIdx]}. ${q.options[bIdx]} <strong>(Skor: ${mS})</strong>`;stCls=uS===mS?'benar':'salah';stIcon=uS===mS?'✅':'❌';}}
+    else{const uA=(savedAnswers[i]!==undefined&&savedAnswers[i]!==null)?savedAnswers[i]:null;if(uA!==null){jawUser=`${PREFIXES[uA]}. ${q.options[uA]}`;jawBenar=`${PREFIXES[q.answer]}. ${q.options[q.answer]}`;stCls=uA===q.answer?'benar':'salah';stIcon=uA===q.answer?'✅':'❌';}}
+    let stLabel=stCls==='benar'?'<span style="color:#059669;font-weight:700;font-size:12px;">✅ BENAR</span>':stCls==='salah'?'<span style="color:#dc2626;font-weight:700;font-size:12px;">❌ SALAH</span>':'<span style="color:#d97706;font-weight:700;font-size:12px;">⏳ BELUM</span>';
+    html+=`<div class="evaluasi-item ${stCls}"><div class="soal-teks">${stIcon} Soal ${n} [${cat.name}] — ${stLabel}</div><div class="soal-isi">${q.question}</div><div class="jawaban-user">📌 <strong>Jawaban Anda:</strong> ${jawUser}</div>${jawBenar?`<div class="jawaban-benar">✅ <strong>Jawaban Benar:</strong> ${jawBenar}</div>`:''}${pb?`<div class="pembahasan-box"><strong>💡 Pembahasan</strong><br>${pb}</div>`:''}</div>`;
   }
   document.getElementById('evalListContent').innerHTML=html;
   goTo('evaluasiListPage');
 }
 
-function refreshHomeStats(){
-  let best=[];
-  for(let i=1;i<=5;i++){const s=localStorage.getItem(`bestScore_latihan${i}`);if(s)best.push(parseInt(s));}
-  document.getElementById('homeBestScore').textContent=best.length>0?Math.max(...best)+'/550':'-';
-}
+function refreshHomeStats(){let best=[];for(let i=1;i<=5;i++){const s=localStorage.getItem(`bestScore_latihan${i}`);if(s)best.push(parseInt(s));}document.getElementById('homeBestScore').textContent=best.length>0?Math.max(...best)+'/550':'-';}
 
 let chartInstance=null;
 function refreshStatistik(){
-  let totalLatihan=0,totalLulus=0,bestOverall=0;
-  const rows=[],chartLabels=[],chartData=[];
-  for(let i=1;i<=5;i++){
-    const twk=localStorage.getItem(`skorTWK_latihan${i}`);
-    const tiu=localStorage.getItem(`skorTIU_latihan${i}`);
-    const tkp=localStorage.getItem(`skorTKP_latihan${i}`);
-    if(twk&&tiu&&tkp){
-      totalLatihan++;
-      const t=parseInt(twk)||0,u=parseInt(tiu)||0,k=parseInt(tkp)||0,tot=t+u+k;
-      const lulus=t>=65&&u>=80&&k>=166;
-      if(lulus)totalLulus++;
-      if(tot>bestOverall)bestOverall=tot;
-      const bank=getSoalBank(i);
-      rows.push({paket:i,twk:t,tiu:u,tkp:k,total:tot,lulus,max:(bank.twk.length*5)+(bank.tiu.length*5)+(bank.tkp.length*5)});
-      chartLabels.push('Paket '+i);chartData.push(tot);
-    }
-  }
-  document.getElementById('statsOverview').innerHTML=`
-    <div class="stats-mini-card"><div class="mini-icon">📝</div><div class="mini-value">${totalLatihan}/5</div><div class="mini-label">Paket Selesai</div></div>
-    <div class="stats-mini-card"><div class="mini-icon">🏆</div><div class="mini-value">${bestOverall||'-'}</div><div class="mini-label">Skor Terbaik</div></div>
-    <div class="stats-mini-card"><div class="mini-icon">🎯</div><div class="mini-value">${totalLulus}/${totalLatihan||1}</div><div class="mini-label">Lulus PG</div></div>`;
-  let mTWK=0,mTIU=0,mTKP=0;
-  rows.forEach(r=>{if(r.twk>mTWK)mTWK=r.twk;if(r.tiu>mTIU)mTIU=r.tiu;if(r.tkp>mTKP)mTKP=r.tkp;});
-  const twkP=mTWK>0?Math.round(mTWK/150*100):0;
-  const tiuP=mTIU>0?Math.round(mTIU/175*100):0;
-  const tkpP=mTKP>0?Math.round(mTKP/225*100):0;
-  document.getElementById('statsBars').innerHTML=`
-    <h4 style="margin-bottom:8px;color:var(--dark);font-size:13px;font-weight:700;">📊 Penguasaan per Kategori</h4>
-    <div class="stats-bar-container"><div class="stats-bar-label"><span>📚 TWK</span><span>${mTWK}/150 (${twkP}%)</span></div><div class="stats-bar"><div class="stats-bar-fill twk" style="width:${twkP}%">${twkP}%</div></div></div>
-    <div class="stats-bar-container"><div class="stats-bar-label"><span>🔢 TIU</span><span>${mTIU}/175 (${tiuP}%)</span></div><div class="stats-bar"><div class="stats-bar-fill tiu" style="width:${tiuP}%">${tiuP}%</div></div></div>
-    <div class="stats-bar-container"><div class="stats-bar-label"><span>⭐ TKP</span><span>${mTKP}/225 (${tkpP}%)</span></div><div class="stats-bar"><div class="stats-bar-fill tkp" style="width:${tkpP}%">${tkpP}%</div></div></div>`;
+  let totalLatihan=0,totalLulus=0,bestOverall=0;const rows=[],chartLabels=[],chartData=[];
+  for(let i=1;i<=5;i++){const twk=localStorage.getItem(`skorTWK_latihan${i}`);const tiu=localStorage.getItem(`skorTIU_latihan${i}`);const tkp=localStorage.getItem(`skorTKP_latihan${i}`);if(twk&&tiu&&tkp){totalLatihan++;const t=parseInt(twk)||0,u=parseInt(tiu)||0,k=parseInt(tkp)||0,tot=t+u+k;const lulus=t>=65&&u>=80&&k>=166;if(lulus)totalLulus++;if(tot>bestOverall)bestOverall=tot;const bank=getSoalBank(i);rows.push({paket:i,twk:t,tiu:u,tkp:k,total:tot,lulus,max:(bank.twk.length*5)+(bank.tiu.length*5)+(bank.tkp.length*5)});chartLabels.push('Paket '+i);chartData.push(tot);}}
+  document.getElementById('statsOverview').innerHTML=`<div class="stats-mini-card"><div class="mini-icon">📝</div><div class="mini-value">${totalLatihan}/5</div><div class="mini-label">Paket Selesai</div></div><div class="stats-mini-card"><div class="mini-icon">🏆</div><div class="mini-value">${bestOverall||'-'}</div><div class="mini-label">Skor Terbaik</div></div><div class="stats-mini-card"><div class="mini-icon">🎯</div><div class="mini-value">${totalLulus}/${totalLatihan||1}</div><div class="mini-label">Lulus PG</div></div>`;
+  let mTWK=0,mTIU=0,mTKP=0;rows.forEach(r=>{if(r.twk>mTWK)mTWK=r.twk;if(r.tiu>mTIU)mTIU=r.tiu;if(r.tkp>mTKP)mTKP=r.tkp;});
+  const twkP=mTWK>0?Math.round(mTWK/150*100):0,tiuP=mTIU>0?Math.round(mTIU/175*100):0,tkpP=mTKP>0?Math.round(mTKP/225*100):0;
+  document.getElementById('statsBars').innerHTML=`<h4 style="margin-bottom:8px;color:var(--dark);font-size:13px;font-weight:700;">📊 Penguasaan per Kategori</h4><div class="stats-bar-container"><div class="stats-bar-label"><span>📚 TWK</span><span>${mTWK}/150 (${twkP}%)</span></div><div class="stats-bar"><div class="stats-bar-fill twk" style="width:${twkP}%">${twkP}%</div></div></div><div class="stats-bar-container"><div class="stats-bar-label"><span>🔢 TIU</span><span>${mTIU}/175 (${tiuP}%)</span></div><div class="stats-bar"><div class="stats-bar-fill tiu" style="width:${tiuP}%">${tiuP}%</div></div></div><div class="stats-bar-container"><div class="stats-bar-label"><span>⭐ TKP</span><span>${mTKP}/225 (${tkpP}%)</span></div><div class="stats-bar"><div class="stats-bar-fill tkp" style="width:${tkpP}%">${tkpP}%</div></div></div>`;
   const cc=document.getElementById('chartContainer');
   if(chartData.length>0){
-    cc.style.display='block';
-    const ctx=document.getElementById('progressChart').getContext('2d');
+    cc.style.display='block';const ctx=document.getElementById('progressChart').getContext('2d');
     if(chartInstance)chartInstance.destroy();
-    chartInstance=new (function(){
-      const W=ctx.canvas.width=ctx.canvas.offsetWidth||300;
-      const H=ctx.canvas.height=180;
-      const pad={top:20,right:20,bottom:30,left:40};
-      const cw=W-pad.left-pad.right,ch=H-pad.top-pad.bottom;
-      const maxV=550;
-      ctx.clearRect(0,0,W,H);
-      ctx.strokeStyle='#e2e8f0';ctx.lineWidth=1;
-      [0,138,275,413,550].forEach(v=>{
-        const y=pad.top+ch-(v/maxV)*ch;
-        ctx.beginPath();ctx.moveTo(pad.left,y);ctx.lineTo(pad.left+cw,y);ctx.stroke();
-        ctx.fillStyle='#94a3b8';ctx.font='10px Arial';ctx.textAlign='right';
-        ctx.fillText(v,pad.left-4,y+3);
-      });
-      const pgY=pad.top+ch-(311/maxV)*ch;
-      ctx.strokeStyle='#fca5a5';ctx.lineWidth=1.5;ctx.setLineDash([4,4]);
-      ctx.beginPath();ctx.moveTo(pad.left,pgY);ctx.lineTo(pad.left+cw,pgY);ctx.stroke();
-      ctx.setLineDash([]);
-      ctx.fillStyle='#dc2626';ctx.font='10px Arial';ctx.textAlign='left';
-      ctx.fillText('PG',pad.left+2,pgY-3);
-      const bw=Math.min(40,(cw/chartData.length)*0.6);
-      const gap=(cw-bw*chartData.length)/(chartData.length+1);
-      chartData.forEach((v,i)=>{
-        const x=pad.left+gap+(bw+gap)*i;
-        const bh=(v/maxV)*ch;const y=pad.top+ch-bh;
-        const grad=ctx.createLinearGradient(0,y,0,y+bh);
-        grad.addColorStop(0,'#3b82f6');grad.addColorStop(1,'#7c3aed');
-        ctx.fillStyle=grad;
-        ctx.beginPath();
-        ctx.roundRect?ctx.roundRect(x,y,bw,bh,4):ctx.rect(x,y,bw,bh);
-        ctx.fill();
-        ctx.fillStyle='#334155';ctx.font='bold 11px Arial';ctx.textAlign='center';
-        ctx.fillText(v,x+bw/2,y-4);
-        ctx.fillStyle='#64748b';ctx.font='10px Arial';
-        ctx.fillText(chartLabels[i],x+bw/2,H-pad.bottom+14);
-      });
-      this.destroy=function(){ctx.clearRect(0,0,W,H);};
-    })();
+    chartInstance=new (function(){const W=ctx.canvas.width=ctx.canvas.offsetWidth||300;const H=ctx.canvas.height=180;const pad={top:20,right:20,bottom:30,left:40};const cw=W-pad.left-pad.right,ch=H-pad.top-pad.bottom;const maxV=550;ctx.clearRect(0,0,W,H);ctx.strokeStyle='#e2e8f0';ctx.lineWidth=1;[0,138,275,413,550].forEach(v=>{const y=pad.top+ch-(v/maxV)*ch;ctx.beginPath();ctx.moveTo(pad.left,y);ctx.lineTo(pad.left+cw,y);ctx.stroke();ctx.fillStyle='#94a3b8';ctx.font='10px Arial';ctx.textAlign='right';ctx.fillText(v,pad.left-4,y+3);});const pgY=pad.top+ch-(311/maxV)*ch;ctx.strokeStyle='#fca5a5';ctx.lineWidth=1.5;ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(pad.left,pgY);ctx.lineTo(pad.left+cw,pgY);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#dc2626';ctx.font='10px Arial';ctx.textAlign='left';ctx.fillText('PG',pad.left+2,pgY-3);const bw=Math.min(40,(cw/chartData.length)*0.6);const gap=(cw-bw*chartData.length)/(chartData.length+1);chartData.forEach((v,i)=>{const x=pad.left+gap+(bw+gap)*i;const bh=(v/maxV)*ch;const y=pad.top+ch-bh;const grad=ctx.createLinearGradient(0,y,0,y+bh);grad.addColorStop(0,'#3b82f6');grad.addColorStop(1,'#7c3aed');ctx.fillStyle=grad;ctx.beginPath();ctx.roundRect?ctx.roundRect(x,y,bw,bh,4):ctx.rect(x,y,bw,bh);ctx.fill();ctx.fillStyle='#334155';ctx.font='bold 11px Arial';ctx.textAlign='center';ctx.fillText(v,x+bw/2,y-4);ctx.fillStyle='#64748b';ctx.font='10px Arial';ctx.fillText(chartLabels[i],x+bw/2,H-pad.bottom+14);});this.destroy=function(){ctx.clearRect(0,0,W,H);};})();
   } else {cc.style.display='none';}
   let hHtml='<h4 style="margin-bottom:8px;color:var(--dark);font-size:13px;font-weight:700;">📋 Riwayat Latihan Paket</h4>';
-  if(rows.length>0){
-    hHtml+=`<table class="stats-history-table"><tr><th>Paket</th><th>TWK</th><th>TIU</th><th>TKP</th><th>Total</th><th>Status</th></tr>`;
-    rows.forEach(r=>{hHtml+=`<tr><td>Paket ${r.paket}</td><td>${r.twk}</td><td>${r.tiu}</td><td>${r.tkp}</td><td>${r.total}/${r.max}</td><td class="${r.lulus?'pass':'fail'}">${r.lulus?'✅ Lulus':'❌ Gagal'}</td></tr>`;});
-    hHtml+='</table>';
-  } else {hHtml+='<p style="color:#94a3b8;text-align:center;padding:20px;">Belum ada riwayat latihan paket.</p>';}
+  if(rows.length>0){hHtml+=`<table class="stats-history-table"><tr><th>Paket</th><th>TWK</th><th>TIU</th><th>TKP</th><th>Total</th><th>Status</th></tr>`;rows.forEach(r=>{hHtml+=`<tr><td>Paket ${r.paket}</td><td>${r.twk}</td><td>${r.tiu}</td><td>${r.tkp}</td><td>${r.total}/${r.max}</td><td class="${r.lulus?'pass':'fail'}">${r.lulus?'✅ Lulus':'❌ Gagal'}</td></tr>`;});hHtml+='</table>';}
+  else{hHtml+='<p style="color:#94a3b8;text-align:center;padding:20px;">Belum ada riwayat latihan paket.</p>';}
   document.getElementById('statsHistory').innerHTML=hHtml;
   let qcHtml='<h4 style="margin:14px 0 8px;color:var(--dark);font-size:13px;font-weight:700;">⚡ Rekor Quiz Cepat</h4>';
   qcHtml+=`<table class="stats-history-table"><tr><th>Kategori</th><th>1 Menit</th><th>3 Menit</th><th>5 Menit</th><th>10 Menit</th><th>Sesi</th></tr>`;
-  ['twk','tiu','tkp'].forEach(cat=>{
-    const c=QC_CATS[cat];
-    const sesi=getQCTotalSesi(cat);
-    const b1=getQCBestScore(cat,1)||'-';const b3=getQCBestScore(cat,3)||'-';
-    const b5=getQCBestScore(cat,5)||'-';const b10=getQCBestScore(cat,10)||'-';
-    qcHtml+=`<tr><td style="font-weight:700;">${c.icon} ${c.name}</td><td>${b1}</td><td>${b3}</td><td>${b5}</td><td>${b10}</td><td>${sesi}</td></tr>`;
-  });
-  qcHtml+='</table>';
-  document.getElementById('statsQCHistory').innerHTML=qcHtml;
+  ['twk','tiu','tkp'].forEach(cat=>{const c=QC_CATS[cat];const sesi=getQCTotalSesi(cat);const b1=getQCBestScore(cat,1)||'-';const b3=getQCBestScore(cat,3)||'-';const b5=getQCBestScore(cat,5)||'-';const b10=getQCBestScore(cat,10)||'-';qcHtml+=`<tr><td style="font-weight:700;">${c.icon} ${c.name}</td><td>${b1}</td><td>${b3}</td><td>${b5}</td><td>${b10}</td><td>${sesi}</td></tr>`;});
+  qcHtml+='</table>';document.getElementById('statsQCHistory').innerHTML=qcHtml;
 }
 
 function mulaiSimulasi(){
@@ -1762,58 +1373,32 @@ function mulaiSimulasi(){
   questions=originals.map(q=>shuffleOpts(q));
   curQ=0;userAnswers=Array(questions.length).fill(null);userScores=Array(questions.length).fill(null);
   timeLeft=6000;simulasiMode=true;activeSet=0;
-  document.getElementById('evaluasiPanel').style.display='none';
-  document.getElementById('btnCloseEval').style.display='none';
-  document.getElementById('quizTitle').textContent='⏰ Simulasi Ujian SKD';
-  document.getElementById('sidebarToggle').style.display='block';
+  document.getElementById('evaluasiPanel').style.display='none';document.getElementById('btnCloseEval').style.display='none';
+  document.getElementById('quizTitle').textContent='⏰ Simulasi Ujian SKD';document.getElementById('sidebarToggle').style.display='block';
   goTo('quizPage');loadQuestion();updateGrid();
   const td=document.getElementById('timerDisplay'),tb=document.getElementById('timerBadge');
-  td.textContent='100:00';td.style.opacity='1';
-  td.classList.remove('timer-warning','timer-danger','timer-blink');
-  tb.textContent='⏱️ Simulasi';tb.className='timer-badge on';tb.style.display='';
-  startTimer();
+  td.textContent='100:00';td.style.opacity='1';td.classList.remove('timer-warning','timer-danger','timer-blink');
+  tb.textContent='⏱️ Simulasi';tb.className='timer-badge on';tb.style.display='';startTimer();
 }
 
 function startQuiz(setId){
   if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
   const bank=getSoalBank(setId);
   if(bank.twk.length+bank.tiu.length+bank.tkp.length===0){alert(`⚠️ Paket ${setId} belum tersedia.`);return;}
-  activeSet=setId;simulasiMode=false;
-  originals=buildOriginals(setId);
-  questions=originals.map(q=>shuffleOpts(q));
-  curQ=0;userAnswers=Array(questions.length).fill(null);userScores=Array(questions.length).fill(null);
-  timeLeft=6000;
-  document.getElementById('evaluasiPanel').style.display='none';
-  document.getElementById('btnCloseEval').style.display='none';
-  document.getElementById('quizTitle').textContent=`📖 Latihan SKD Paket ${setId}`;
-  document.getElementById('sidebarToggle').style.display='block';
+  activeSet=setId;simulasiMode=false;originals=buildOriginals(setId);questions=originals.map(q=>shuffleOpts(q));
+  curQ=0;userAnswers=Array(questions.length).fill(null);userScores=Array(questions.length).fill(null);timeLeft=6000;
+  document.getElementById('evaluasiPanel').style.display='none';document.getElementById('btnCloseEval').style.display='none';
+  document.getElementById('quizTitle').textContent=`📖 Latihan SKD Paket ${setId}`;document.getElementById('sidebarToggle').style.display='block';
   goTo('quizPage');loadQuestion();updateGrid();
-  const timerOn=getTimerEnabled();
-  const td=document.getElementById('timerDisplay'),tb=document.getElementById('timerBadge');
-  tb.style.display='';
-  if(timerOn){
-    td.textContent='100:00';td.style.opacity='1';
-    td.classList.remove('timer-warning','timer-danger','timer-blink');
-    tb.textContent='⏱️ Timer ON';tb.className='timer-badge on';startTimer();
-  } else {
-    td.textContent='100:00';td.style.opacity='.5';
-    tb.textContent='⏸️ Timer OFF';tb.className='timer-badge off';
-  }
+  const timerOn=getTimerEnabled();const td=document.getElementById('timerDisplay'),tb=document.getElementById('timerBadge');tb.style.display='';
+  if(timerOn){td.textContent='100:00';td.style.opacity='1';td.classList.remove('timer-warning','timer-danger','timer-blink');tb.textContent='⏱️ Timer ON';tb.className='timer-badge on';startTimer();}
+  else{td.textContent='100:00';td.style.opacity='.5';tb.textContent='⏸️ Timer OFF';tb.className='timer-badge off';}
 }
 
 function loadQuestion(){
-  const n=curQ+1;
-  document.getElementById('quizProgress').textContent=`Soal ${n}/${questions.length}`;
-  document.getElementById('quizQuestion').innerHTML=questions[curQ].question;
-  const kat=questions[curQ].kategori||getCat(n).name;
-  const katCls=kat.toLowerCase();
-  const hc=document.getElementById('quizHeaderCat');
-  hc.textContent=`📍 ${kat}`;hc.className=`header-cat ${katCls}`;
-  let html='';
-  questions[curQ].options.forEach((opt,idx)=>{
-    let checked=questions[curQ].isTKP?(userScores[curQ]===questions[curQ].optionScores[idx]):(userAnswers[curQ]===idx);
-    html+=`<label class="option"><input type="radio" name="ans" value="${idx}" ${checked?'checked':''}><span class="choice-letter">${PREFIXES[idx]}</span><span class="choice-text">${opt}</span></label>`;
-  });
+  const n=curQ+1;document.getElementById('quizProgress').textContent=`Soal ${n}/${questions.length}`;document.getElementById('quizQuestion').innerHTML=questions[curQ].question;
+  const kat=questions[curQ].kategori||getCat(n).name;const katCls=kat.toLowerCase();const hc=document.getElementById('quizHeaderCat');hc.textContent=`📍 ${kat}`;hc.className=`header-cat ${katCls}`;
+  let html='';questions[curQ].options.forEach((opt,idx)=>{let checked=questions[curQ].isTKP?(userScores[curQ]===questions[curQ].optionScores[idx]):(userAnswers[curQ]===idx);html+=`<label class="option"><input type="radio" name="ans" value="${idx}" ${checked?'checked':''}><span class="choice-letter">${PREFIXES[idx]}</span><span class="choice-text">${opt}</span></label>`;});
   document.getElementById('quizOptions').innerHTML=html;
   const btn=document.getElementById('btnNextFinish');
   if(curQ===questions.length-1){btn.textContent='✅ Selesai';btn.className='btn-finish';btn.style.flex='1';btn.onclick=finishQuiz;}
@@ -1821,16 +1406,7 @@ function loadQuestion(){
   updateGrid();
 }
 
-function saveAnswer(){
-  const sel=document.querySelector('input[name="ans"]:checked');
-  if(sel){
-    const idx=parseInt(sel.value);
-    if(questions[curQ].isTKP)userScores[curQ]=questions[curQ].optionScores[idx];
-    else userAnswers[curQ]=idx;
-    updateGrid();
-  }
-}
-
+function saveAnswer(){const sel=document.querySelector('input[name="ans"]:checked');if(sel){const idx=parseInt(sel.value);if(questions[curQ].isTKP)userScores[curQ]=questions[curQ].optionScores[idx];else userAnswers[curQ]=idx;updateGrid();}}
 function nextQuestion(){saveAnswer();if(curQ<questions.length-1){curQ++;loadQuestion();}}
 function prevQuestion(){saveAnswer();if(curQ>0){curQ--;loadQuestion();}}
 
@@ -1838,25 +1414,17 @@ function startTimer(){
   if(timerInterval)clearInterval(timerInterval);
   timerInterval=setInterval(()=>{
     if(timeLeft<=0){clearInterval(timerInterval);finishQuiz();return;}
-    timeLeft--;
-    const m=Math.floor(timeLeft/60),s=timeLeft%60;
-    const el=document.getElementById('timerDisplay');
+    timeLeft--;const m=Math.floor(timeLeft/60),s=timeLeft%60;const el=document.getElementById('timerDisplay');
     el.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
     el.classList.remove('timer-warning','timer-danger','timer-blink');
-    if(timeLeft<=20)el.classList.add('timer-blink');
-    else if(timeLeft<=120)el.classList.add('timer-danger');
-    else if(timeLeft<=300)el.classList.add('timer-warning');
+    if(timeLeft<=20)el.classList.add('timer-blink');else if(timeLeft<=120)el.classList.add('timer-danger');else if(timeLeft<=300)el.classList.add('timer-warning');
   },1000);
 }
 
 function updateGrid(){
-  const grid=document.getElementById('soalGrid');if(!grid)return;
-  let html='';
+  const grid=document.getElementById('soalGrid');if(!grid)return;let html='';
   for(let i=0;i<questions.length;i++){
-    let st='unanswered';
-    if(questions[i].isTKP){if(userScores[i]!==null&&userScores[i]!==undefined)st='answered';}
-    else{if(userAnswers[i]!==null)st='answered';}
-    if(i===curQ)st='active';
+    let st='unanswered';if(questions[i].isTKP){if(userScores[i]!==null&&userScores[i]!==undefined)st='answered';}else{if(userAnswers[i]!==null)st='answered';}if(i===curQ)st='active';
     const kat=(questions[i].kategori||getCat(i+1).name).toLowerCase();
     html+=`<div class="grid-soal ${st} ${kat}" onclick="goToSoal(${i})">${i+1}</div>`;
   }
@@ -1864,142 +1432,58 @@ function updateGrid(){
 }
 
 function goToSoal(i){saveAnswer();curQ=i;loadQuestion();toggleSidebar();}
-function toggleSidebar(){
-  const sb=document.getElementById('sidebar'),ov=document.getElementById('overlay');
-  const isOpen=sb.classList.toggle('open');
-  if(isOpen){ov.style.width=`calc(100% - ${sb.offsetWidth}px)`;ov.classList.add('show');}
-  else{ov.style.width='';ov.classList.remove('show');}
-}
+function toggleSidebar(){const sb=document.getElementById('sidebar'),ov=document.getElementById('overlay');const isOpen=sb.classList.toggle('open');if(isOpen){ov.style.width=`calc(100% - ${sb.offsetWidth}px)`;ov.classList.add('show');}else{ov.style.width='';ov.classList.remove('show');}}
 
 function finishQuiz(){
-  if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
-  saveAnswer();
-  document.getElementById('sidebarToggle').style.display='none';
-  const wasSimulasi=simulasiMode;
-  let s;
-  if(!wasSimulasi){
-    s=hitungSkor();
-    const bank=getSoalBank(activeSet);
-    s.mTWK=bank.twk.length*5||150;s.mTIU=bank.tiu.length*5||175;
-    s.mTKP=bank.tkp.length*5||225;s.mTot=s.mTWK+s.mTIU+s.mTKP;
-  } else {s=hitungSkorByKategori();}
+  if(timerInterval){clearInterval(timerInterval);timerInterval=null;}saveAnswer();
+  document.getElementById('sidebarToggle').style.display='none';const wasSimulasi=simulasiMode;let s;
+  if(!wasSimulasi){s=hitungSkor();const bank=getSoalBank(activeSet);s.mTWK=bank.twk.length*5||150;s.mTIU=bank.tiu.length*5||175;s.mTKP=bank.tkp.length*5||225;s.mTot=s.mTWK+s.mTIU+s.mTKP;}
+  else{s=hitungSkorByKategori();}
   if(wasSimulasi){
-    const simuCount=(parseInt(localStorage.getItem('simulasiCount')||'0'))+1;
-    localStorage.setItem('simulasiCount',simuCount);
+    const simuCount=(parseInt(localStorage.getItem('simulasiCount')||'0'))+1;localStorage.setItem('simulasiCount',simuCount);
     const simuLulus=s.twk>=65&&s.tiu>=80&&s.tkp>=166;
     localStorage.setItem('simulasi_last',JSON.stringify({twk:s.twk,tiu:s.tiu,tkp:s.tkp,total:s.total,persen:s.persen,tanggal:new Date().toLocaleDateString('id-ID'),lulus:simuLulus}));
-    if(simuLulus){const berturut=(parseInt(localStorage.getItem('simulasiLulusBerturut')||'0'))+1;localStorage.setItem('simulasiLulusBerturut',berturut);}
-    else{localStorage.setItem('simulasiLulusBerturut','0');}
+    if(simuLulus){const berturut=(parseInt(localStorage.getItem('simulasiLulusBerturut')||'0'))+1;localStorage.setItem('simulasiLulusBerturut',berturut);}else{localStorage.setItem('simulasiLulusBerturut','0');}
     simulasiMode=false;
   } else {
-    incPaketUlangi(activeSet);
-    localStorage.setItem(`skorTWK_latihan${activeSet}`,s.twk);
-    localStorage.setItem(`skorTIU_latihan${activeSet}`,s.tiu);
-    localStorage.setItem(`skorTKP_latihan${activeSet}`,s.tkp);
+    incPaketUlangi(activeSet);localStorage.setItem(`skorTWK_latihan${activeSet}`,s.twk);localStorage.setItem(`skorTIU_latihan${activeSet}`,s.tiu);localStorage.setItem(`skorTKP_latihan${activeSet}`,s.tkp);
     const ed={answers:userAnswers,scores:userScores,questions:questions.map(q=>({question:q.question,options:q.options,answer:q.answer,isTKP:q.isTKP,optionScores:q.optionScores,pembahasan:q.pembahasan||'',kategori:q.kategori||''}))};
     localStorage.setItem(`evalData_latihan${activeSet}`,JSON.stringify(ed));
-    const key=`bestScore_latihan${activeSet}`;
-    const prev=localStorage.getItem(key);
-    if(prev===null||s.total>parseInt(prev))localStorage.setItem(key,s.total);
+    const key=`bestScore_latihan${activeSet}`;const prev=localStorage.getItem(key);if(prev===null||s.total>parseInt(prev))localStorage.setItem(key,s.total);
   }
-  const mTWK=s.mTWK||150,mTIU=s.mTIU||175,mTKP=s.mTKP||225;
-  const mTot=s.mTot||(mTWK+mTIU+mTKP);
+  const mTWK=s.mTWK||150,mTIU=s.mTIU||175,mTKP=s.mTKP||225,mTot=s.mTot||(mTWK+mTIU+mTKP);
   document.getElementById('resultSubtitle').textContent=wasSimulasi?'⏰ Hasil Simulasi SKD':`📝 Latihan SKD Paket ${activeSet}`;
-  document.getElementById('scoreDetail').innerHTML=`<h3>📊 Detail Skor</h3><table>
-    <tr><td>📚 TWK</td><td><strong>${s.twk}</strong> / ${mTWK}</td></tr>
-    <tr><td>🔢 TIU</td><td><strong>${s.tiu}</strong> / ${mTIU}</td></tr>
-    <tr><td>⭐ TKP</td><td><strong>${s.tkp}</strong> / ${mTKP}</td></tr>
-    <tr style="border-top:2px solid var(--border);"><td><strong>✅ TOTAL</strong></td><td><strong>${s.total}</strong> / ${mTot}</td></tr>
-  </table><div class="total-score">🎯 Nilai Akhir: ${s.persen}%</div>`;
-  const pass={twk:s.twk>=PASSING.TWK,tiu:s.tiu>=PASSING.TIU,tkp:s.tkp>=PASSING.TKP};
-  pass.all=pass.twk&&pass.tiu&&pass.tkp;
+  document.getElementById('scoreDetail').innerHTML=`<h3>📊 Detail Skor</h3><table><tr><td>📚 TWK</td><td><strong>${s.twk}</strong> / ${mTWK}</td></tr><tr><td>🔢 TIU</td><td><strong>${s.tiu}</strong> / ${mTIU}</td></tr><tr><td>⭐ TKP</td><td><strong>${s.tkp}</strong> / ${mTKP}</td></tr><tr style="border-top:2px solid var(--border);"><td><strong>✅ TOTAL</strong></td><td><strong>${s.total}</strong> / ${mTot}</td></tr></table><div class="total-score">🎯 Nilai Akhir: ${s.persen}%</div>`;
+  const pass={twk:s.twk>=PASSING.TWK,tiu:s.tiu>=PASSING.TIU,tkp:s.tkp>=PASSING.TKP};pass.all=pass.twk&&pass.tiu&&pass.tkp;
   document.getElementById('passStatus').style.display='';
-  document.getElementById('passStatus').innerHTML=`
-    <div style="margin-bottom:10px;font-weight:700;color:var(--dark);">📋 STATUS PASSING GRADE:</div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;">
-      <div style="flex:1;text-align:center;padding:9px;border-radius:10px;background:${pass.twk?'#d1fae5':'#fee2e2'};font-size:13px;">📚 TWK: ${s.twk}/65<br><strong>${pass.twk?'✅ LULUS':'❌ GAGAL'}</strong></div>
-      <div style="flex:1;text-align:center;padding:9px;border-radius:10px;background:${pass.tiu?'#d1fae5':'#fee2e2'};font-size:13px;">🔢 TIU: ${s.tiu}/80<br><strong>${pass.tiu?'✅ LULUS':'❌ GAGAL'}</strong></div>
-      <div style="flex:1;text-align:center;padding:9px;border-radius:10px;background:${pass.tkp?'#d1fae5':'#fee2e2'};font-size:13px;">⭐ TKP: ${s.tkp}/166<br><strong>${pass.tkp?'✅ LULUS':'❌ GAGAL'}</strong></div>
-    </div>
-    <div style="margin-top:12px;padding:12px;border-radius:10px;background:${pass.all?'#d1fae5':'#fee2e2'};font-weight:700;font-size:14px;">
-      ${pass.all?'🎉 SELAMAT! Anda LULUS Passing Grade SKD!':'⚠️ Belum lulus passing grade. Terus semangat berlatih!'}
-    </div>`;
+  document.getElementById('passStatus').innerHTML=`<div style="margin-bottom:10px;font-weight:700;color:var(--dark);">📋 STATUS PASSING GRADE:</div><div style="display:flex;gap:8px;flex-wrap:wrap;"><div style="flex:1;text-align:center;padding:9px;border-radius:10px;background:${pass.twk?'#d1fae5':'#fee2e2'};font-size:13px;">📚 TWK: ${s.twk}/65<br><strong>${pass.twk?'✅ LULUS':'❌ GAGAL'}</strong></div><div style="flex:1;text-align:center;padding:9px;border-radius:10px;background:${pass.tiu?'#d1fae5':'#fee2e2'};font-size:13px;">🔢 TIU: ${s.tiu}/80<br><strong>${pass.tiu?'✅ LULUS':'❌ GAGAL'}</strong></div><div style="flex:1;text-align:center;padding:9px;border-radius:10px;background:${pass.tkp?'#d1fae5':'#fee2e2'};font-size:13px;">⭐ TKP: ${s.tkp}/166<br><strong>${pass.tkp?'✅ LULUS':'❌ GAGAL'}</strong></div></div><div style="margin-top:12px;padding:12px;border-radius:10px;background:${pass.all?'#d1fae5':'#fee2e2'};font-weight:700;font-size:14px;">${pass.all?'🎉 SELAMAT! Anda LULUS Passing Grade SKD!':'⚠️ Belum lulus passing grade. Terus semangat berlatih!'}</div>`;
   goTo('resultPage');
 }
 
 function restartQuiz(){if(activeSet>0)startQuiz(activeSet);else goTo('homePage');}
-function backToHome(){
-  if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
-  if(qcState.interval){clearInterval(qcState.interval);qcState.interval=null;}
-  document.getElementById('sidebarToggle').style.display='none';
-  simulasiMode=false;goTo('homePage');refreshHomeStats();
-}
+function backToHome(){if(timerInterval){clearInterval(timerInterval);timerInterval=null;}if(qcState.interval){clearInterval(qcState.interval);qcState.interval=null;}document.getElementById('sidebarToggle').style.display='none';simulasiMode=false;goTo('homePage');refreshHomeStats();}
 
 function showEvaluasi(){
-  const panel=document.getElementById('evaluasiPanel');
-  let html='<h3 style="color:var(--primary);margin-bottom:12px;">📝 Evaluasi Jawaban</h3>';
+  const panel=document.getElementById('evaluasiPanel');let html='<h3 style="color:var(--primary);margin-bottom:12px;">📝 Evaluasi Jawaban</h3>';
   for(let i=0;i<questions.length;i++){
-    const n=i+1;const katName=questions[i].kategori||getCat(n).name;
-    const q=questions[i],pb=q.pembahasan||'';
+    const n=i+1;const katName=questions[i].kategori||getCat(n).name;const q=questions[i],pb=q.pembahasan||'';
     let jawUser='Tidak dijawab',jawBenar='',stCls='belum',stIcon='⏳';
-    if(q.isTKP){
-      if(userScores[i]!==null&&userScores[i]!==undefined){
-        const uS=userScores[i],idx=q.optionScores.findIndex(s=>s===uS);
-        jawUser=idx>=0?`${PREFIXES[idx]}. ${q.options[idx]} <span style="font-weight:700;color:#7c3aed">(Skor: ${uS})</span>`:'Tidak dijawab';
-        const mS=Math.max(...q.optionScores),bIdx=q.optionScores.findIndex(s=>s===mS);
-        jawBenar=`Terbaik: ${PREFIXES[bIdx]}. ${q.options[bIdx]} <strong>(${mS})</strong>`;
-        stCls=uS===mS?'benar':'salah';stIcon=uS===mS?'✅':'❌';
-      }
-    } else {
-      if(userAnswers[i]!==null){
-        jawUser=`${PREFIXES[userAnswers[i]]}. ${q.options[userAnswers[i]]}`;
-        jawBenar=`${PREFIXES[q.answer]}. ${q.options[q.answer]}`;
-        stCls=userAnswers[i]===q.answer?'benar':'salah';stIcon=userAnswers[i]===q.answer?'✅':'❌';
-      }
-    }
-    let stLabel=stCls==='benar'?'<span style="color:#059669;font-weight:700;font-size:12px;">BENAR</span>':
-      stCls==='salah'?'<span style="color:#dc2626;font-weight:700;font-size:12px;">SALAH</span>':
-      '<span style="color:#d97706;font-weight:700;font-size:12px;">BELUM</span>';
-    html+=`<div class="evaluasi-item ${stCls}">
-      <div class="soal-teks">${stIcon} Soal ${n} [${katName}] — ${stLabel}</div>
-      <div class="soal-isi">${q.question}</div>
-      <div class="jawaban-user">📌 <strong>Jawaban Anda:</strong> ${jawUser}</div>
-      ${jawBenar?`<div class="jawaban-benar">✅ <strong>Jawaban Benar:</strong> ${jawBenar}</div>`:''}
-      ${pb?`<div class="pembahasan-box"><strong>💡 Pembahasan</strong><br>${pb}</div>`:''}
-    </div>`;
+    if(q.isTKP){if(userScores[i]!==null&&userScores[i]!==undefined){const uS=userScores[i],idx=q.optionScores.findIndex(s=>s===uS);jawUser=idx>=0?`${PREFIXES[idx]}. ${q.options[idx]} <span style="font-weight:700;color:#7c3aed">(Skor: ${uS})</span>`:'Tidak dijawab';const mS=Math.max(...q.optionScores),bIdx=q.optionScores.findIndex(s=>s===mS);jawBenar=`Terbaik: ${PREFIXES[bIdx]}. ${q.options[bIdx]} <strong>(${mS})</strong>`;stCls=uS===mS?'benar':'salah';stIcon=uS===mS?'✅':'❌';}}
+    else{if(userAnswers[i]!==null){jawUser=`${PREFIXES[userAnswers[i]]}. ${q.options[userAnswers[i]]}`;jawBenar=`${PREFIXES[q.answer]}. ${q.options[q.answer]}`;stCls=userAnswers[i]===q.answer?'benar':'salah';stIcon=userAnswers[i]===q.answer?'✅':'❌';}}
+    let stLabel=stCls==='benar'?'<span style="color:#059669;font-weight:700;font-size:12px;">BENAR</span>':stCls==='salah'?'<span style="color:#dc2626;font-weight:700;font-size:12px;">SALAH</span>':'<span style="color:#d97706;font-weight:700;font-size:12px;">BELUM</span>';
+    html+=`<div class="evaluasi-item ${stCls}"><div class="soal-teks">${stIcon} Soal ${n} [${katName}] — ${stLabel}</div><div class="soal-isi">${q.question}</div><div class="jawaban-user">📌 <strong>Jawaban Anda:</strong> ${jawUser}</div>${jawBenar?`<div class="jawaban-benar">✅ <strong>Jawaban Benar:</strong> ${jawBenar}</div>`:''}${pb?`<div class="pembahasan-box"><strong>💡 Pembahasan</strong><br>${pb}</div>`:''}</div>`;
   }
-  panel.innerHTML=html;panel.style.display='block';
-  document.getElementById('btnCloseEval').style.display='block';
-  panel.scrollIntoView({behavior:'smooth',block:'start'});
+  panel.innerHTML=html;panel.style.display='block';document.getElementById('btnCloseEval').style.display='block';panel.scrollIntoView({behavior:'smooth',block:'start'});
 }
-
-function closeEvaluasi(){
-  document.getElementById('evaluasiPanel').style.display='none';
-  document.getElementById('btnCloseEval').style.display='none';
-}
+function closeEvaluasi(){document.getElementById('evaluasiPanel').style.display='none';document.getElementById('btnCloseEval').style.display='none';}
 
 function showResetModal(){document.getElementById('resetModal').classList.add('show');}
 function closeResetModal(){document.getElementById('resetModal').classList.remove('show');}
 function resetAllProgress(){
-  for(let i=1;i<=5;i++){
-    ['bestScore','skorTWK','skorTIU','skorTKP'].forEach(k=>localStorage.removeItem(`${k}_latihan${i}`));
-    localStorage.removeItem(`evalData_latihan${i}`);
-    localStorage.removeItem(`paketUlangi_${i}`);
-  }
-  localStorage.removeItem('simulasi_last');
-  localStorage.removeItem('simulasiCount');
-  localStorage.removeItem('simulasiLulusBerturut');
-  localStorage.removeItem('materiOpened');
-  localStorage.removeItem('menuVisited');
-  ['twk','tiu','tkp'].forEach(cat=>{
-    [1,3,5,10].forEach(m=>localStorage.removeItem(`qcBest_${cat}_${m}m`));
-    localStorage.removeItem(`qcTotalSesi_${cat}`);
-    localStorage.removeItem(`qcStreakMax_${cat}`);
-    localStorage.removeItem(`qcNoWrong_${cat}`);
-    localStorage.removeItem(`qcAkurasi90_${cat}`);
-  });
-  refreshQuizList();refreshHomeStats();closeResetModal();
-  alert('✅ Semua progress telah direset!');
+  for(let i=1;i<=5;i++){['bestScore','skorTWK','skorTIU','skorTKP'].forEach(k=>localStorage.removeItem(`${k}_latihan${i}`));localStorage.removeItem(`evalData_latihan${i}`);localStorage.removeItem(`paketUlangi_${i}`);}
+  localStorage.removeItem('simulasi_last');localStorage.removeItem('simulasiCount');localStorage.removeItem('simulasiLulusBerturut');localStorage.removeItem('materiOpened');localStorage.removeItem('menuVisited');
+  ['twk','tiu','tkp'].forEach(cat=>{[1,3,5,10].forEach(m=>localStorage.removeItem(`qcBest_${cat}_${m}m`));localStorage.removeItem(`qcTotalSesi_${cat}`);localStorage.removeItem(`qcStreakMax_${cat}`);localStorage.removeItem(`qcNoWrong_${cat}`);localStorage.removeItem(`qcAkurasi90_${cat}`);});
+  refreshQuizList();refreshHomeStats();closeResetModal();alert('✅ Semua progress telah direset!');
 }
 
 // ==================== ANDROID BACK ====================
@@ -2007,16 +1491,13 @@ history.pushState({app:'skd'},'','');
 window.addEventListener('popstate',function(){
   history.pushState({app:'skd'},'','');
   if(currentPage==='loginPage')return;
-  if(currentPage==='quizPage'||currentPage==='resultPage'){
-    if(currentPage==='quizPage'){if(timerInterval)clearInterval(timerInterval);timerInterval=null;document.getElementById('sidebarToggle').style.display='none';}
-    goTo('quizlistPage');
-  } else if(currentPage==='evaluasiListPage'){goTo('quizlistPage');}
+  if(currentPage==='quizPage'||currentPage==='resultPage'){if(currentPage==='quizPage'){if(timerInterval)clearInterval(timerInterval);timerInterval=null;document.getElementById('sidebarToggle').style.display='none';}goTo('quizlistPage');}
+  else if(currentPage==='evaluasiListPage'){goTo('quizlistPage');}
   else if(currentPage==='materiContentPage'){goTo('materiPage');}
   else if(currentPage==='quizCepatPlayPage'){if(qcState.interval){clearInterval(qcState.interval);qcState.interval=null;}goTo('quizCepatConfirmPage');}
   else if(currentPage==='quizCepatConfirmPage'){goTo('quizCepatPage');}
   else if(currentPage==='quizCepatResultPage'){goTo('quizCepatPage');}
   else if(['quizlistPage','materiPage','statistikPage','simulasiPage','petunjukPage','tentangPage','pencapaianPage','quizCepatPage'].includes(currentPage)){goTo('homePage');}
-  else if(currentPage==='homePage'){/* Stay */}
 });
 </script>
 </body>
