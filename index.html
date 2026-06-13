@@ -54,20 +54,27 @@ body{background:linear-gradient(135deg,#1e3a8a 0%,#4f46e5 50%,#7c3aed 100%);min-
 .btn-login:hover{opacity:.9;transform:translateY(-1px);}
 .btn-login:active{transform:scale(0.98);box-shadow:0 0 0 4px rgba(37,99,235,.25);}
 .login-footer{text-align:center;margin-top:20px;color:#94a3b8;font-size:11px;}
-/* Password toggle */
 .input-wrap{position:relative;}
 .input-wrap input{padding-right:44px;}
 .btn-eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--gray);font-size:20px;padding:0;display:flex;align-items:center;}
 .btn-eye:active{color:var(--primary);}
 
-/* ==================== LOGOUT BUTTON ==================== */
-.logout-btn{position:fixed;top:14px;right:14px;z-index:5000;background:rgba(220,38,38,.9);color:white;border:none;border-radius:30px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;display:none;align-items:center;gap:6px;box-shadow:0 4px 16px rgba(220,38,38,.3);transition:.2s;backdrop-filter:blur(4px);}
-.logout-btn:hover{background:#b91c1c;transform:translateY(-1px);}
-.logout-btn:active{transform:scale(0.96);}
-.logout-btn.show{display:flex;}
-/* User badge */
-.user-badge{position:fixed;top:14px;left:14px;z-index:5000;background:rgba(37,99,235,.9);color:white;border:none;border-radius:30px;padding:8px 14px;font-size:12px;font-weight:700;display:none;align-items:center;gap:6px;box-shadow:0 4px 16px rgba(37,99,235,.3);backdrop-filter:blur(4px);}
-.user-badge.show{display:flex;}
+/* ==================== AKUN PAGE ==================== */
+#akunPage{display:flex;justify-content:center;align-items:flex-start;padding-top:16px;}
+#akunPage.active{display:flex;}
+.akun-card{background:var(--white);border-radius:var(--radius);box-shadow:0 20px 60px rgba(30,58,138,.18);padding:28px 24px;width:100%;max-width:420px;}
+.akun-avatar{text-align:center;margin-bottom:20px;}
+.akun-avatar-icon{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#2563eb,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 12px;}
+.akun-username{font-size:20px;font-weight:800;color:var(--dark);margin-bottom:4px;}
+.akun-badge{display:inline-block;background:var(--primary-light);color:var(--primary);padding:4px 14px;border-radius:20px;font-size:12px;font-weight:700;}
+.akun-info-row{background:var(--gray-light);border-radius:14px;padding:16px;margin-bottom:16px;}
+.akun-info-item{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);}
+.akun-info-item:last-child{border-bottom:none;padding-bottom:0;}
+.akun-info-label{font-size:13px;color:var(--gray);font-weight:600;display:flex;align-items:center;gap:6px;}
+.akun-info-value{font-size:13px;font-weight:700;color:var(--dark);}
+.btn-logout-akun{width:100%;padding:14px;border:none;border-radius:14px;background:linear-gradient(135deg,#dc2626,#ef4444);color:white;font-size:16px;font-weight:700;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px;}
+.btn-logout-akun:hover{opacity:.9;transform:translateY(-1px);}
+.btn-logout-akun:active{transform:scale(0.98);box-shadow:0 0 0 4px rgba(220,38,38,.25);}
 
 /* Logout confirm modal */
 .logout-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,23,42,.7);z-index:20001;justify-content:center;align-items:center;}
@@ -102,6 +109,7 @@ body{background:linear-gradient(135deg,#1e3a8a 0%,#4f46e5 50%,#7c3aed 100%);min-
 .menu-card.tentang{background:linear-gradient(135deg,#2563eb,#60a5fa);}
 .menu-card.pencapaian{background:linear-gradient(135deg,#b45309,#f59e0b);}
 .menu-card.quiz-cepat{background:linear-gradient(135deg,#be123c,#f43f5e);}
+.menu-card.akun{background:linear-gradient(135deg,#0f766e,#14b8a6);}
 .info-acak{background:linear-gradient(135deg,#7c3aed,#a78bfa);padding:11px;border-radius:12px;font-size:11px;color:white;text-align:center;margin-top:10px;font-weight:700;}
 .version{text-align:center;margin-top:12px;color:#94a3b8;font-size:11px;}
 .page-title{margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;color:var(--dark);font-size:17px;font-weight:700;padding-bottom:10px;border-bottom:2px solid var(--border);}
@@ -503,10 +511,6 @@ canvas#progressChart{max-width:100%;height:180px;min-width:300px;}
   </div>
 </div>
 
-<!-- USER BADGE & LOGOUT BTN (fixed, muncul saat login) -->
-<div class="user-badge" id="userBadge">👤 <span id="userBadgeName"></span></div>
-<button class="logout-btn" id="logoutBtn" onclick="showLogoutModal()">🚪 Logout</button>
-
 <!-- HOME -->
 <div id="homePage" class="page">
   <div class="card">
@@ -522,6 +526,15 @@ canvas#progressChart{max-width:100%;height:180px;min-width:300px;}
       <div class="stat-item"><div class="stat-number">110</div><div class="stat-label">Soal/Latihan</div></div>
       <div class="stat-item"><div class="stat-number" id="homeBestScore">-</div><div class="stat-label">Skor Terbaik</div></div>
     </div>
+    <!-- Akun mini strip -->
+    <div onclick="goTo('akunPage')" style="display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#0f766e,#14b8a6);border-radius:14px;padding:11px 16px;cursor:pointer;margin-bottom:14px;transition:.2s;" onmouseenter="this.style.opacity='.9'" onmouseleave="this.style.opacity='1'" onpointerdown="this.style.transform='scale(0.98)'" onpointerup="this.style.transform=''">
+      <div style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">👤</div>
+      <div style="flex:1;">
+        <div style="font-size:11px;color:rgba(255,255,255,.8);font-weight:600;">Masuk sebagai</div>
+        <div style="font-size:14px;color:white;font-weight:800;" id="homeUsernameStrip">—</div>
+      </div>
+      <div style="color:rgba(255,255,255,.7);font-size:18px;">›</div>
+    </div>
     <div class="menu-grid-6">
       <button class="menu-card soal" onclick="goTo('quizlistPage')"><span class="menu-icon">📚</span><span class="menu-label">Latihan</span></button>
       <button class="menu-card simulasi" onclick="goTo('simulasiPage')"><span class="menu-icon">⏰</span><span class="menu-label">Simulasi</span></button>
@@ -534,6 +547,41 @@ canvas#progressChart{max-width:100%;height:180px;min-width:300px;}
     </div>
     <div class="info-acak">🔄 Setiap membuka soal, pilihan jawaban akan diacak!</div>
     <div class="version">Version 4.3 | © 2026 Latihan SKD</div>
+  </div>
+</div>
+
+<!-- ==================== AKUN PAGE ==================== -->
+<div id="akunPage" class="page">
+  <div class="akun-card">
+    <div class="akun-avatar">
+      <div class="akun-avatar-icon">👤</div>
+      <div class="akun-username" id="akunUsername">—</div>
+      <span class="akun-badge">✅ Aktif</span>
+    </div>
+    <div class="akun-info-row">
+      <div class="akun-info-item">
+        <span class="akun-info-label">👤 Username</span>
+        <span class="akun-info-value" id="akunUsernameInfo">—</span>
+      </div>
+      <div class="akun-info-item">
+        <span class="akun-info-label">🏆 Skor Terbaik</span>
+        <span class="akun-info-value" id="akunBestScore">—</span>
+      </div>
+      <div class="akun-info-item">
+        <span class="akun-info-label">📝 Paket Selesai</span>
+        <span class="akun-info-value" id="akunPaketDone">0 / 5</span>
+      </div>
+      <div class="akun-info-item">
+        <span class="akun-info-label">🎯 Total Lulus PG</span>
+        <span class="akun-info-value" id="akunLulus">0</span>
+      </div>
+      <div class="akun-info-item">
+        <span class="akun-info-label">⚡ Sesi Quiz Cepat</span>
+        <span class="akun-info-value" id="akunQCSesi">0</span>
+      </div>
+    </div>
+    <button class="btn-logout-akun" onclick="showLogoutModal()">🚪 Logout dari Akun Ini</button>
+    <button class="back-btn" onclick="goTo('homePage')">← Kembali ke Menu</button>
   </div>
 </div>
 
@@ -915,7 +963,6 @@ function doLogin(){
     return;
   }
 
-  // Cek dari daftarPengguna (dari daftarpengguna.js)
   const pengguna = typeof daftarPengguna !== 'undefined' ? daftarPengguna : [];
   const match = pengguna.find(x => x.username.toLowerCase() === u && x.password === p);
 
@@ -923,7 +970,6 @@ function doLogin(){
     errEl.classList.remove('show');
     setLoggedInUser(match.username);
     showApp(match.username);
-    // Bersihkan input
     document.getElementById('inputUsername').value = '';
     document.getElementById('inputPassword').value = '';
     document.getElementById('btnEye').textContent = '👁️';
@@ -937,15 +983,9 @@ function doLogin(){
 }
 
 function showApp(username){
-  // Sembunyikan login, tampilkan app
   document.getElementById('loginPage').classList.remove('active');
   document.getElementById('loginPage').style.display = 'none';
-  // Tampilkan user badge & logout
-  document.getElementById('userBadgeName').textContent = username;
-  document.getElementById('userBadge').classList.add('show');
-  document.getElementById('logoutBtn').classList.add('show');
-  // Navigasi ke home
-  currentPage = 'loginPage'; // reset agar goTo bisa jalan
+  currentPage = 'loginPage';
   goTo('homePage');
   refreshHomeStats();
 }
@@ -960,22 +1000,16 @@ function closeLogoutModal(){
 function doLogout(){
   closeLogoutModal();
   clearLoggedInUser();
-  // Stop semua timer
   if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
   if(qcState&&qcState.interval){clearInterval(qcState.interval);qcState.interval=null;}
-  // Sembunyikan badge & logout btn
-  document.getElementById('userBadge').classList.remove('show');
-  document.getElementById('logoutBtn').classList.remove('show');
   document.getElementById('sidebarToggle').style.display='none';
-  // Tutup sidebar jika terbuka
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('overlay').classList.remove('show');
-  // Sembunyikan semua page, tampilkan login
   PAGES.forEach(p=>{
     const el=document.getElementById(p);
     if(el){el.classList.remove('active');el.style.display='';}
   });
-  currentPage = 'homePage'; // reset state
+  currentPage = 'homePage';
   const lp = document.getElementById('loginPage');
   lp.style.display = '';
   lp.classList.add('active');
@@ -983,14 +1017,11 @@ function doLogout(){
   window.scrollTo(0,0);
 }
 
-// Cek session saat load
 (function initAuth(){
   const user = getLoggedInUser();
   if(user){
-    // Sudah login, langsung tampilkan app
     showApp(user);
   }
-  // Jika belum login, loginPage sudah active by default
 })();
 
 // ==================== TRACKING MATERI & MENU ====================
@@ -1006,12 +1037,11 @@ function markMenuVisited(menu){
 function getMenuVisited(){return JSON.parse(localStorage.getItem('menuVisited')||'{}');}
 
 // ==================== NAVIGATION ====================
-const PAGES=['homePage','quizlistPage','materiPage','materiContentPage','statistikPage','simulasiPage','petunjukPage','tentangPage','quizPage','resultPage','evaluasiListPage','pencapaianPage','quizCepatPage','quizCepatConfirmPage','quizCepatPlayPage','quizCepatResultPage'];
+const PAGES=['homePage','quizlistPage','materiPage','materiContentPage','statistikPage','simulasiPage','petunjukPage','tentangPage','quizPage','resultPage','evaluasiListPage','pencapaianPage','quizCepatPage','quizCepatConfirmPage','quizCepatPlayPage','quizCepatResultPage','akunPage'];
 let currentPage='loginPage';
 
 function goTo(pageId){
   if(currentPage===pageId)return;
-  // Cek login (kecuali kalau mau ke loginPage sendiri)
   if(pageId !== 'loginPage' && !getLoggedInUser()) return;
   PAGES.forEach(p=>{
     const el=document.getElementById(p);
@@ -1021,13 +1051,44 @@ function goTo(pageId){
   if(target){target.classList.add('active');}
   currentPage=pageId;
   window.scrollTo(0,0);
-  const menuMap={quizlistPage:'latihan',materiPage:'materi',statistikPage:'statistik',simulasiPage:'simulasi',petunjukPage:'petunjuk',tentangPage:'tentang',pencapaianPage:'pencapaian',quizCepatPage:'quizcepat'};
+  const menuMap={quizlistPage:'latihan',materiPage:'materi',statistikPage:'statistik',simulasiPage:'simulasi',petunjukPage:'petunjuk',tentangPage:'tentang',pencapaianPage:'pencapaian',quizCepatPage:'quizcepat',akunPage:'akun'};
   if(menuMap[pageId])markMenuVisited(menuMap[pageId]);
   if(pageId==='quizlistPage')refreshQuizList();
-  if(pageId==='homePage')refreshHomeStats();
+  if(pageId==='homePage'){refreshHomeStats();refreshHomeUsername();}
   if(pageId==='statistikPage')refreshStatistik();
   if(pageId==='pencapaianPage')refreshPencapaian();
   if(pageId==='quizCepatPage')renderQuizCepatGrid();
+  if(pageId==='akunPage')refreshAkunPage();
+}
+
+function refreshHomeUsername(){
+  const u = getLoggedInUser() || '—';
+  const el = document.getElementById('homeUsernameStrip');
+  if(el) el.textContent = u;
+}
+
+function refreshAkunPage(){
+  const u = getLoggedInUser() || '—';
+  const setEl = (id, val) => { const e=document.getElementById(id); if(e) e.textContent=val; };
+  setEl('akunUsername', u);
+  setEl('akunUsernameInfo', u);
+  let best=[], done=0, lulus=0;
+  for(let i=1;i<=5;i++){
+    const twk=localStorage.getItem(`skorTWK_latihan${i}`);
+    const tiu=localStorage.getItem(`skorTIU_latihan${i}`);
+    const tkp=localStorage.getItem(`skorTKP_latihan${i}`);
+    if(twk&&tiu&&tkp){
+      done++;
+      const t=parseInt(twk)||0,u2=parseInt(tiu)||0,k=parseInt(tkp)||0;
+      best.push(t+u2+k);
+      if(t>=65&&u2>=80&&k>=166)lulus++;
+    }
+  }
+  setEl('akunBestScore', best.length>0?Math.max(...best)+' / 550':'Belum ada');
+  setEl('akunPaketDone', done+' / 5');
+  setEl('akunLulus', lulus+' paket');
+  const qcSesi=['twk','tiu','tkp'].reduce((s,c)=>s+getQCTotalSesi(c),0);
+  setEl('akunQCSesi', qcSesi+' sesi');
 }
 
 // ==================== TIMER TOGGLE ====================
@@ -1635,6 +1696,7 @@ function refreshHomeStats(){
   let best=[];
   for(let i=1;i<=5;i++){const s=localStorage.getItem(`bestScore_latihan${i}`);if(s)best.push(parseInt(s));}
   document.getElementById('homeBestScore').textContent=best.length>0?Math.max(...best)+'/550':'-';
+  refreshHomeUsername();
 }
 
 let chartInstance=null;
@@ -2001,6 +2063,7 @@ window.addEventListener('popstate',function(){
   else if(currentPage==='quizCepatPlayPage'){if(qcState.interval){clearInterval(qcState.interval);qcState.interval=null;}goTo('quizCepatConfirmPage');}
   else if(currentPage==='quizCepatConfirmPage'){goTo('quizCepatPage');}
   else if(currentPage==='quizCepatResultPage'){goTo('quizCepatPage');}
+  else if(currentPage==='akunPage'){goTo('homePage');}
   else if(['quizlistPage','materiPage','statistikPage','simulasiPage','petunjukPage','tentangPage','pencapaianPage','quizCepatPage'].includes(currentPage)){goTo('homePage');}
   else if(currentPage==='homePage'){/* Stay */}
 });
