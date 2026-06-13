@@ -1695,7 +1695,7 @@ function goTo(pageId){
   const menuMap={quizlistPage:'latihan',materiPage:'materi',statistikPage:'statistik',
     simulasiPage:'simulasi',petunjukPage:'petunjuk',tentangPage:'tentang',
     pencapaianPage:'pencapaian',quizCepatPage:'quizcepat',akunPage:'akun'};
-  if(menuMap[pageId])markMenuVisited(menuMap[pageId]);
+  if(menuMap[pageId]){markMenuVisited(menuMap[pageId]);checkNewAchievements();}
 
   if(pageId==='quizlistPage')refreshQuizList();
   if(pageId==='homePage'){refreshHomeStats();setRandomQuote();}
@@ -1854,6 +1854,7 @@ function showMateri(k){
   nav+='</div>';
   cd.innerHTML=m.konten+nav;
   goTo('materiContentPage');
+  checkNewAchievements();
 }
 
 // ========== QUIZ STATE ==========
@@ -2480,6 +2481,7 @@ function resetAllProgress(){
   for(let i=1;i<=5;i++){['bestScore','skorTWK','skorTIU','skorTKP'].forEach(k=>localStorage.removeItem(`${k}_latihan${i}`));localStorage.removeItem(`evalData_latihan${i}`);localStorage.removeItem(`paketUlangi_${i}`);}
   localStorage.removeItem('simulasi_last');localStorage.removeItem('simulasiCount');localStorage.removeItem('simulasiLulusBerturut');localStorage.removeItem('materiOpened');localStorage.removeItem('menuVisited');
   ['twk','tiu','tkp'].forEach(cat=>{[1,3,5,10].forEach(m=>localStorage.removeItem(`qcBest_${cat}_${m}m`));localStorage.removeItem(`qcTotalSesi_${cat}`);localStorage.removeItem(`qcStreakMax_${cat}`);localStorage.removeItem(`qcNoWrong_${cat}`);localStorage.removeItem(`qcAkurasi90_${cat}`);});
+  localStorage.removeItem('achUnlocked');achUnlocked=[];
   refreshQuizList();refreshHomeStats();closeResetModal();playSound('back');alert('✅ Semua progress telah direset!');
 }
 </script>
