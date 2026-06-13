@@ -969,69 +969,110 @@ input:checked+.slider:before{transform:translateX(22px);}
 <!-- =========== MATERI =========== -->
 <div id="materiPage" class="page">
   <div style="background:var(--bg);min-height:100vh;padding-bottom:80px;">
-    <div class="page-header">
+    
+    <!-- HEADER FIXED -->
+    <div style="position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:50;background:#fff;display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.05);">
       <button class="btn-back" onclick="playSound('back');goTo('homePage')">←</button>
-      <h2>📖 Materi SKD</h2>
+      <h2 style="font-size:17px;font-weight:800;color:var(--dark);flex:1;margin:0;">📖 Materi SKD</h2>
     </div>
+    
+    <!-- SPACER -->
+    <div style="height:70px;"></div>
+    
+    <!-- KONTEN -->
     <div style="padding:0 16px;">
       <p style="color:var(--gray);font-size:13px;margin-bottom:14px;">Pilih kategori materi:</p>
       <button class="materi-cat-card twk" onclick="playSound('menu');showMateri('twk')"><span class="mc-icon">📚</span><span>TWK</span><span class="mc-desc">Tes Wawasan Kebangsaan</span></button>
       <button class="materi-cat-card tiu" onclick="playSound('menu');showMateri('tiu')"><span class="mc-icon">🔢</span><span>TIU</span><span class="mc-desc">Tes Intelegensi Umum</span></button>
       <button class="materi-cat-card tkp" onclick="playSound('menu');showMateri('tkp')"><span class="mc-icon">⭐</span><span>TKP</span><span class="mc-desc">Tes Karakteristik Pribadi</span></button>
     </div>
+    
   </div>
 </div>
 
 <div id="materiContentPage" class="page">
-  <div style="background:var(--bg);height:100vh;display:flex;flex-direction:column;">
-    <div class="page-header" style="border-radius:0;margin-bottom:0;flex-shrink:0;">
+  <div style="background:var(--bg);min-height:100vh;padding-bottom:80px;">
+    
+    <!-- HEADER FIXED -->
+    <div style="position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:50;background:#fff;display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.05);">
       <button class="btn-back" onclick="playSound('back');goTo('materiPage')">←</button>
-      <h2 id="materiContentTitle">📖 Materi</h2>
+      <h2 style="font-size:17px;font-weight:800;color:var(--dark);flex:1;margin:0;" id="materiContentTitle">📖 Materi</h2>
     </div>
-    <div style="flex:1;overflow-y:auto;padding:16px;">
+    
+    <!-- SPACER -->
+    <div style="height:70px;"></div>
+    
+    <!-- KONTEN SCROLL -->
+    <div style="padding:16px;">
       <div id="materiContentFull" class="materi-full"></div>
     </div>
+    
   </div>
 </div>
 
 <!-- =========== STATISTIK =========== -->
 <div id="statistikPage" class="page">
-  <div style="background:var(--bg);height:100vh;display:flex;flex-direction:column;">
-    <div class="page-header" style="border-radius:0;margin-bottom:0;flex-shrink:0;">
+  <div style="background:var(--bg);min-height:100vh;padding-bottom:80px;">
+    
+    <!-- HEADER FIXED -->
+    <div style="position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:50;background:#fff;display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.05);">
       <button class="btn-back" onclick="playSound('back');goTo('homePage')">←</button>
-      <h2>📊 Statistik Belajar</h2>
+      <h2 style="font-size:17px;font-weight:800;color:var(--dark);flex:1;margin:0;">📊 Statistik Belajar</h2>
     </div>
-    <div style="flex:1;overflow-y:auto;padding:16px;">
+    
+    <!-- SPACER -->
+    <div style="height:70px;"></div>
+    
+    <!-- KONTEN SCROLL -->
+    <div style="padding:16px;">
       <div class="stats-overview-grid" id="statsOverview"></div>
       <div id="statsBars"></div>
       <div id="statsHistory" style="margin-top:12px;"></div>
       <div id="statsQCHistory" style="margin-top:12px;"></div>
     </div>
+    
   </div>
 </div>
 
 <!-- =========== PENCAPAIAN =========== -->
 <div id="pencapaianPage" class="page">
-  <div style="background:var(--bg);height:100vh;display:flex;flex-direction:column;">
-    <div class="page-header" style="border-radius:0;margin-bottom:0;flex-shrink:0;">
+  <div style="background:var(--bg);min-height:100vh;padding-bottom:80px;">
+    
+    <!-- HEADER FIXED -->
+    <div style="position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:50;background:#fff;display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.05);">
       <button class="btn-back" onclick="playSound('back');goTo('homePage')">←</button>
-      <h2>🏅 Pencapaian</h2>
+      <h2 style="font-size:17px;font-weight:800;color:var(--dark);flex:1;margin:0;">🏅 Pencapaian</h2>
     </div>
-    <div style="padding:12px 16px 0;flex-shrink:0;">
+    
+    <!-- SPACER -->
+    <div style="height:70px;"></div>
+    
+    <!-- PROGRESS BAR -->
+    <div style="padding:12px 16px 0;">
       <p style="color:var(--gray);font-size:13px;margin-bottom:6px;">Kumpulkan semua badge dengan terus berlatih!</p>
       <div class="pencapaian-progress-bar"><div class="pencapaian-progress-fill" id="pencapaianProgressFill" style="width:0%">0%</div></div>
     </div>
-    <div style="flex:1;overflow-y:auto;padding:0 16px 16px;" id="pencapaianScroll"></div>
+    
+    <!-- KONTEN SCROLL -->
+    <div style="padding:0 16px 16px;" id="pencapaianScroll"></div>
+    
   </div>
 </div>
 
 <!-- =========== SIMULASI =========== -->
 <div id="simulasiPage" class="page">
   <div style="background:var(--bg);min-height:100vh;padding-bottom:80px;">
-    <div class="page-header">
+    
+    <!-- HEADER FIXED -->
+    <div style="position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:50;background:#fff;display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.05);">
       <button class="btn-back" onclick="playSound('back');goTo('homePage')">←</button>
-      <h2>⏰ Simulasi Ujian SKD</h2>
+      <h2 style="font-size:17px;font-weight:800;color:var(--dark);flex:1;margin:0;">⏰ Simulasi Ujian SKD</h2>
     </div>
+    
+    <!-- SPACER -->
+    <div style="height:70px;"></div>
+    
+    <!-- KONTEN -->
     <div style="padding:0 16px;">
       <div class="simulasi-info-card">
         <strong>⚠️ Perhatian!</strong><br>
@@ -1042,16 +1083,24 @@ input:checked+.slider:before{transform:translateX(22px);}
       </div>
       <button class="btn-mulai-simulasi" onclick="playSound('start');mulaiSimulasi()">🚀 MULAI SIMULASI UJIAN</button>
     </div>
+    
   </div>
 </div>
 
 <!-- =========== PETUNJUK =========== -->
 <div id="petunjukPage" class="page">
   <div style="background:var(--bg);min-height:100vh;padding-bottom:80px;">
-    <div class="page-header">
+    
+    <!-- HEADER FIXED -->
+    <div style="position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:50;background:#fff;display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.05);">
       <button class="btn-back" onclick="playSound('back');goTo('homePage')">←</button>
-      <h2>📝 Petunjuk</h2>
+      <h2 style="font-size:17px;font-weight:800;color:var(--dark);flex:1;margin:0;">📝 Petunjuk</h2>
     </div>
+    
+    <!-- SPACER -->
+    <div style="height:70px;"></div>
+    
+    <!-- KONTEN -->
     <div style="padding:0 16px;">
       <div class="info-block blue-bg">
         <p><strong>📌 Cara Menggunakan:</strong></p>
@@ -1072,16 +1121,24 @@ input:checked+.slider:before{transform:translateX(22px);}
         <p>• Gunakan Kuis Cepat untuk melatih kecepatan menjawab</p>
       </div>
     </div>
+    
   </div>
 </div>
 
 <!-- =========== TENTANG =========== -->
 <div id="tentangPage" class="page">
   <div style="background:var(--bg);min-height:100vh;padding-bottom:80px;">
-    <div class="page-header">
+    
+    <!-- HEADER FIXED -->
+    <div style="position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:50;background:#fff;display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.05);">
       <button class="btn-back" onclick="playSound('back');goTo('homePage')">←</button>
-      <h2>ℹ️ Tentang Aplikasi</h2>
+      <h2 style="font-size:17px;font-weight:800;color:var(--dark);flex:1;margin:0;">ℹ️ Tentang Aplikasi</h2>
     </div>
+    
+    <!-- SPACER -->
+    <div style="height:70px;"></div>
+    
+    <!-- KONTEN -->
     <div style="padding:0 16px;">
       <div class="info-block blue-bg">
         <p><strong>📱 Aplikasi Latihan SKD</strong></p>
@@ -1108,49 +1165,69 @@ input:checked+.slider:before{transform:translateX(22px);}
         <p><strong>Version 4.4 | © 2026 Latihan SKD</strong></p>
       </div>
     </div>
+    
   </div>
 </div>
 
 <!-- =========== QUIZ CEPAT =========== -->
 <div id="quizCepatPage" class="page">
   <div style="background:var(--bg);min-height:100vh;padding-bottom:80px;">
-    <div class="page-header">
+    
+    <!-- HEADER FIXED -->
+    <div style="position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:50;background:#fff;display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.05);">
       <button class="btn-back" onclick="playSound('back');goTo('homePage')">←</button>
-      <h2>⚡ Kuis Cepat</h2>
+      <h2 style="font-size:17px;font-weight:800;color:var(--dark);flex:1;margin:0;">⚡ Kuis Cepat</h2>
     </div>
+    
+    <!-- SPACER -->
+    <div style="height:70px;"></div>
+    
+    <!-- KONTEN -->
     <div style="padding:0 16px;">
       <p style="color:var(--gray);font-size:13px;margin-bottom:16px;">Jawab soal sebanyak mungkin dalam waktu terbatas. Pilih kategori:</p>
       <div id="quizCepatGrid"></div>
     </div>
+    
   </div>
 </div>
 
 <div id="quizCepatConfirmPage" class="page">
-  <div style="background:var(--bg);min-height:100vh;padding:16px;padding-bottom:80px;">
-    <div class="page-header" style="margin-bottom:16px;">
+  <div style="background:var(--bg);min-height:100vh;padding-bottom:80px;">
+    
+    <!-- HEADER FIXED -->
+    <div style="position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:50;background:#fff;display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.05);">
       <button class="btn-back" onclick="playSound('back');goTo('quizCepatPage')">←</button>
-      <h2>Konfirmasi</h2>
+      <h2 style="font-size:17px;font-weight:800;color:var(--dark);flex:1;margin:0;">Konfirmasi</h2>
     </div>
-    <div class="qc-confirm-card">
-      <div class="qc-confirm-icon" id="qcConfirmIcon">📚</div>
-      <div class="qc-confirm-title" id="qcConfirmTitle">Kuis Cepat TWK</div>
-      <div class="qc-confirm-sub" id="qcConfirmSub">Jawab soal sebanyak-banyaknya dalam waktu yang dipilih!</div>
-      <div class="qc-info-row" id="qcInfoRow"></div>
-      <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px;">⏱️ Pilih Durasi Waktu:</p>
-      <div class="qc-timer-grid">
-        <button class="qc-timer-btn selected" onclick="selectQCTimer(1,this)"><span class="t-num">1</span><span>menit</span></button>
-        <button class="qc-timer-btn" onclick="selectQCTimer(3,this)"><span class="t-num">3</span><span>menit</span></button>
-        <button class="qc-timer-btn" onclick="selectQCTimer(5,this)"><span class="t-num">5</span><span>menit</span></button>
-        <button class="qc-timer-btn" onclick="selectQCTimer(10,this)"><span class="t-num">10</span><span>menit</span></button>
+    
+    <!-- SPACER -->
+    <div style="height:70px;"></div>
+    
+    <!-- KONTEN -->
+    <div style="padding:16px;">
+      <div class="qc-confirm-card">
+        <div class="qc-confirm-icon" id="qcConfirmIcon">📚</div>
+        <div class="qc-confirm-title" id="qcConfirmTitle">Kuis Cepat TWK</div>
+        <div class="qc-confirm-sub" id="qcConfirmSub">Jawab soal sebanyak-banyaknya dalam waktu yang dipilih!</div>
+        <div class="qc-info-row" id="qcInfoRow"></div>
+        <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px;">⏱️ Pilih Durasi Waktu:</p>
+        <div class="qc-timer-grid">
+          <button class="qc-timer-btn selected" onclick="selectQCTimer(1,this)"><span class="t-num">1</span><span>menit</span></button>
+          <button class="qc-timer-btn" onclick="selectQCTimer(3,this)"><span class="t-num">3</span><span>menit</span></button>
+          <button class="qc-timer-btn" onclick="selectQCTimer(5,this)"><span class="t-num">5</span><span>menit</span></button>
+          <button class="qc-timer-btn" onclick="selectQCTimer(10,this)"><span class="t-num">10</span><span>menit</span></button>
+        </div>
+        <button class="btn-mulai-qc" onclick="playSound('start');mulaiQuizCepat()">🚀 Mulai Kuis!</button>
       </div>
-      <button class="btn-mulai-qc" onclick="playSound('start');mulaiQuizCepat()">🚀 Mulai Kuis!</button>
     </div>
+    
   </div>
 </div>
 
 <div id="quizCepatPlayPage" class="page">
-  <div style="background:var(--bg);height:100vh;display:flex;flex-direction:column;padding:12px;max-width:430px;margin:0 auto;">
-    <div class="qc-play-header" style="flex-shrink:0;">
+  <div style="background:var(--bg);min-height:100vh;padding:12px;padding-bottom:100px;">
+    
+    <div class="qc-play-header">
       <div>
         <div class="qc-play-cat" id="qcPlayCat">TWK</div>
         <div class="qc-play-score" id="qcPlayScore">Soal ke-1</div>
@@ -1160,23 +1237,24 @@ input:checked+.slider:before{transform:translateX(22px);}
         <div style="font-size:10px;color:var(--gray);margin-top:2px;" id="qcCorrectCount">✅ 0 Benar</div>
       </div>
     </div>
-    <div class="qc-progress-bar" style="flex-shrink:0;"><div class="qc-progress-fill" id="qcProgressFill" style="width:100%"></div></div>
-    <div style="flex:1;overflow-y:auto;min-height:0;">
-      <div class="qc-question-card">
-        <div class="qc-q-num" id="qcQNum">SOAL 1</div>
-        <div class="qc-q-txt" id="qcQTxt"></div>
-        <div class="qc-options" id="qcOpts"></div>
-      </div>
+    
+    <div class="qc-progress-bar"><div class="qc-progress-fill" id="qcProgressFill" style="width:100%"></div></div>
+    
+    <div class="qc-question-card">
+      <div class="qc-q-num" id="qcQNum">SOAL 1</div>
+      <div class="qc-q-txt" id="qcQTxt"></div>
+      <div class="qc-options" id="qcOpts"></div>
     </div>
-    <div style="flex-shrink:0;">
-      <div class="qc-feedback" id="qcFeedback"></div>
-      <button class="btn-qc-next" id="btnQcNext" onclick="qcNextQuestion()">Soal Berikutnya →</button>
-    </div>
+    
+    <div class="qc-feedback" id="qcFeedback"></div>
+    <button class="btn-qc-next" id="btnQcNext" onclick="qcNextQuestion()">Soal Berikutnya →</button>
+    
   </div>
 </div>
 
 <div id="quizCepatResultPage" class="page">
   <div style="background:var(--bg);min-height:100vh;padding:16px;padding-bottom:80px;">
+    
     <div class="qc-result-header">
       <div class="qc-result-icon" id="qcResIcon">🏆</div>
       <div class="qc-result-title" id="qcResTitle">Quiz Selesai!</div>
@@ -1185,17 +1263,21 @@ input:checked+.slider:before{transform:translateX(22px);}
       <div class="qc-result-skor" id="qcResSkor">0</div>
       <div class="qc-result-sub" id="qcResSub">soal dijawab dengan benar</div>
     </div>
+    
     <div class="qc-result-stats">
       <div class="qc-rs"><div class="rs-val" id="qcStatBenar">0</div><div class="rs-lbl">✅ Benar</div></div>
       <div class="qc-rs"><div class="rs-val" id="qcStatSalah">0</div><div class="rs-lbl">❌ Salah</div></div>
       <div class="qc-rs"><div class="rs-val" id="qcStatTotal">0</div><div class="rs-lbl">📝 Dijawab</div></div>
     </div>
+    
     <div style="background:#fff;border-radius:12px;padding:12px;margin-bottom:14px;font-size:13px;box-shadow:var(--shadow);" id="qcBestInfo"></div>
+    
     <div class="qc-result-btns">
       <button class="btn-qc-ulang" onclick="playSound('start');ulangQuizCepat()">🔄 Ulangi</button>
       <button class="btn-qc-lain" onclick="playSound('back');goTo('quizCepatPage')">⚡ Lain</button>
       <button class="btn-qc-home" onclick="playSound('back');goTo('homePage')">🏠 Menu</button>
     </div>
+    
   </div>
 </div>
 
