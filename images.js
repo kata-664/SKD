@@ -114,7 +114,10 @@ var IMAGES = {
   shield: '🛡️',
   
   // Gambar (langsung dengan tag img + style)
-  alarm_fill: '<img src="images/alarm-fill.svg" style="width: 64px; height: 64px; object-fit: contain; margin: 0 auto; display: block;">',
+  alarm2: '<img src="images/alarm.svg" style="width: 64px; height: 64px; object-fit: contain; margin: 0 auto; display: block;">',
+  alarm2_fill: '<img src="images/alarm-fill.svg" style="width: 64px; height: 64px; object-fit: contain; margin: 0 auto; display: block;">',
+  eye2: '<img src="images/eye.svg" style="width: 18px; height: 18px; object-fit: contain;">',
+  eye2_slash: '<img src="images/eye-slash.svg" style="width: 18px; height: 18px; object-fit: contain;">',
   logo: '<img src="images/logo.svg" style="width: 100px; height: 100px;">',
 };
 
