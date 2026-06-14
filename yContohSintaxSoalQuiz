@@ -1,272 +1,272 @@
-var quizTKP= [
-  { // No 66
+var quizTKP = [
+  { // No 1
     q: "",
     opts: ["","","","",""],
     scores: [4,1,5,2,3],
     pembahasan: ""
   },
-  { // No 67
+  { // No 2
     q: "",
     opts: ["","","","",""],
     scores: [3,1,2,5,4],
     pembahasan: ""
   },
-  { // No 68
+  { // No 3
     q: "",
     opts: ["","","","",""],
     scores: [3,2,5,1,4],
     pembahasan: ""
   },
-  { // No 69
+  { // No 4
     q: "",
     opts: ["","","","",""],
     scores: [3,2,5,1,4],
     pembahasan: ""
   },
-  { // No 70
+  { // No 5
     q: "",
     opts: ["","","","",""],
     scores: [4,2,1,3,5],
     pembahasan: ""
   },
-  { // No 71
+  { // No 6
     q: "",
     opts: ["","","","",""],
     scores: [3,4,2,1,5],
     pembahasan: ""
   },
-  { // No 72
+  { // No 7
     q: "",
     opts: ["","","","",""],
     scores: [1,4,5,3,2],
     pembahasan: ""
   },
-  { // No 73
+  { // No 8
     q: "",
     opts: ["","","","",""],
     scores: [4,5,1,3,2],
     pembahasan: ""
   },
-  { // No 74
+  { // No 9
     q: "",
     opts: ["","","","",""],
     scores: [4,1,3,5,2],
     pembahasan: ""
   },
-  { // No 75
+  { // No 10
     q: "",
     opts: ["","","","",""],
     scores: [2,5,1,4,3],
     pembahasan: ""
   },
-  { // No 76
+  { // No 11
     q: "",
     opts: ["","","","",""],
     scores: [2,1,3,5,4],
     pembahasan: ""
   },
-  { // No 77
+  { // No 12
     q: "",
     opts: ["","","","",""],
     scores: [4,3,1,5,2],
     pembahasan: ""
   },
-  { // No 78
+  { // No 13
     q: "",
     opts: ["","","","",""],
     scores: [2,4,5,1,3],
     pembahasan: ""
   },
-  { // No 79
+  { // No 14
     q: "",
     opts: ["","","","",""],
     scores: [1,2,4,3,5],
     pembahasan: ""
   },
-  { // No 80
+  { // No 15
     q: "",
     opts: ["","","","",""],
     scores: [3,1,5,2,4],
     pembahasan: ""
   },
-  { // No 81
+  { // No 16
     q: "",
     opts: ["","","","",""],
     scores: [1,4,3,5,2],
     pembahasan: ""
   },
-  { // No 82
+  { // No 17
     q: "",
     opts: ["","","","",""],
     scores: [5,2,4,1,3],
     pembahasan: ""
   },
-  { // No 83
+  { // No 18
     q: "",
     opts: ["","","","",""],
     scores: [4,1,3,5,2],
     pembahasan: ""
   },
-  { // No 84
+  { // No 19
     q: "",
     opts: ["","","","",""],
     scores: [5,1,3,4,2],
     pembahasan: ""
   },
-  { // No 85
+  { // No 20
     q: "",
     opts: ["","","","",""],
     scores: [3,4,1,2,5],
     pembahasan: ""
   },
-  { // No 86
+  { // No 21
     q: "",
     opts: ["","","","",""],
     scores: [2,5,4,1,3],
     pembahasan: ""
   },
-  { // No 87
+  { // No 22
     q: "",
     opts: ["","","","",""],
     scores: [3,5,2,4,1],
     pembahasan: ""
   },
-  { // No 88
+  { // No 23
     q: "",
     opts: ["","","","",""],
     scores: [5,3,1,2,4],
     pembahasan: ""
   },
-  { // No 89
+  { // No 24
     q: "",
     opts: ["","","","",""],
     scores: [4,5,1,3,2],
     pembahasan: ""
   },
-  { // No 90
+  { // No 25
     q: "",
     opts: ["","","","",""],
     scores: [3,4,1,5,2],
     pembahasan: ""
   },
-  { // No 91
+  { // No 26
     q: "",
     opts: ["","","","",""],
     scores: [4,2,1,5,3],
     pembahasan: ""
   },
-  { // No 92
+  { // No 27
     q: "",
     opts: ["","","","",""],
     scores: [5,1,4,2,3],
     pembahasan: ""
   },
-  { // No 93
+  { // No 28
     q: "",
     opts: ["","","","",""],
     scores: [4,1,5,3,2],
     pembahasan: ""
   },
-  { // No 94
+  { // No 29
     q: "",
     opts: ["","","","",""],
     scores: [4,2,3,1,5],
     pembahasan: ""
   },
-  { // No 95
+  { // No 30
     q: "",
     opts: ["","","","",""],
     scores: [5,4,3,2,1],
     pembahasan: ""
   },
-  { // No 96
+  { // No 31
     q: "",
     opts: ["","","","",""],
     scores: [3,4,1,2,5],
     pembahasan: ""
   },
-  { // No 97
+  { // No 32
     q: "",
     opts: ["","","","",""],
     scores: [1,3,2,5,4],
     pembahasan: ""
   },
-  { // No 98
+  { // No 33
     q: "",
     opts: ["","","","",""],
     scores: [4,5,1,3,2],
     pembahasan: ""
   },
-  { // No 99
+  { // No 34
     q: "",
     opts: ["","","","",""],
     scores: [2,5,3,4,1],
     pembahasan: ""
   },
-  { // No 100
+  { // No 35
     q: "",
     opts: ["","","","",""],
     scores: [1,5,2,3,4],
     pembahasan: ""
   },
-  { // No 101
+  { // No 36
     q: "",
     opts: ["","","","",""],
     scores: [5,4,1,3,2],
     pembahasan: ""
   },
-  { // No 102
+  { // No 37
     q: "",
     opts: ["","","","",""],
     scores: [4,2,1,5,3],
     pembahasan: ""
   },
-  { // No 103
+  { // No 38
     q: "",
     opts: ["","","","",""],
     scores: [2,3,5,1,4],
     pembahasan: ""
   },
-  { // No 104
+  { // No 39
     q: "",
     opts: ["","","","",""],
     scores: [2,3,4,5,1],
     pembahasan: ""
   },
-  { // No 105
+  { // No 40
     q: "",
     opts: ["","","","",""],
     scores: [3,2,4,5,1],
     pembahasan: ""
   },
-  { // No 106
+  { // No 41
     q: "",
     opts: ["","","","",""],
     scores: [4,1,5,2,3],
     pembahasan: ""
   },
-  { // No 107
+  { // No 42
     q: "",
     opts: ["","","","",""],
     scores: [3,1,2,5,4],
     pembahasan: ""
   },
-  { // No 108
+  { // No 43
     q: "",
     opts: ["","","","",""],
     scores: [3,2,5,1,4],
     pembahasan: ""
   },
-  { // No 109
+  { // No 44
     q: "",
     opts: ["","","","",""],
     scores: [3,2,5,1,4],
     pembahasan: ""
   },
-  { // No 110
+  { // No 45
     q: "",
     opts: ["","","","",""],
     scores: [4,2,1,3,5],
     pembahasan: ""
   }
-  ];
+];
