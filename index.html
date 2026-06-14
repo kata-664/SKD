@@ -790,7 +790,7 @@ input:checked+.slider:before{transform:translateX(22px);}
       <label>Password</label>
       <div class="field-wrap">
         <input type="password" id="inputPassword" placeholder="Masukkan password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
-        <button class="btn-eye" data-icon="eye2" onclick="togglePasswordVisibility()" id="btnEye" type="button"></button>
+        <button class="btn-eye" data-icon="icon_eyeon" onclick="togglePasswordVisibility()" id="btnEye" type="button"></button>
       </div>
     </div>
     <button class="btn-masuk" onclick="doLogin()">Masuk</button>
@@ -1464,22 +1464,22 @@ input:checked+.slider:before{transform:translateX(22px);}
 <!-- =========== BOTTOM NAV =========== -->
 <div class="bottom-nav" id="bottomNav" style="display:none;">
   <button class="nav-item active" id="navHome" onclick="navTo('homePage','navHome')">
-    <div class="nav-icon">🏠</div>
+    <div class="nav-icon" data-icon="icon_home"></div>
     <div class="nav-label">Home</div>
     <div class="nav-active-dot"></div>
   </button>
   <button class="nav-item" id="navLatihan" onclick="navTo('quizlistPage','navLatihan')">
-    <div class="nav-icon">📚</div>
+    <div class="nav-icon" data-icon="icon_latihan"></div>
     <div class="nav-label">Latihan</div>
     <div class="nav-active-dot" style="background:transparent;"></div>
   </button>
   <button class="nav-item" id="navStat" onclick="navTo('statistikPage','navStat')">
-    <div class="nav-icon">📊</div>
+    <div class="nav-icon" data-icon="icon_statistik"></div>
     <div class="nav-label">Statistik</div>
     <div class="nav-active-dot" style="background:transparent;"></div>
   </button>
   <button class="nav-item" id="navProfil" onclick="navTo('akunPage','navProfil')">
-    <div class="nav-icon">👤</div>
+    <div class="nav-icon" data-icon="icon_profil"></div>
     <div class="nav-label">Profil</div>
     <div class="nav-active-dot" style="background:transparent;"></div>
   </button>
@@ -1810,10 +1810,10 @@ function togglePasswordVisibility(){
   
   if(inp.type === 'password'){
     inp.type = 'text';
-    btn.innerHTML = IMAGES['eye2_slash'];
+    btn.innerHTML = IMAGES['icon_eyeoff'];
   } else {
     inp.type = 'password';
-    btn.innerHTML = IMAGES['eye2'];
+    btn.innerHTML = IMAGES['icon_eyeon'];
   }
 }
 
@@ -1838,7 +1838,7 @@ function doLogin(){
     setLoggedInUser(match.username);
     document.getElementById('inputUsername').value='';
     document.getElementById('inputPassword').value='';
-    document.getElementById('btnEye').innerHTML = IMAGES['eye2'];
+    document.getElementById('btnEye').innerHTML = IMAGES['icon_eyeon'];
     document.getElementById('inputPassword').type='password';
     playSound('login');
     _showPage('homePage');
