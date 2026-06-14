@@ -941,6 +941,15 @@ input:checked+.slider:before{transform:translateX(22px);}
         <div class="akun-row"><span class="akun-row-left">🎯 Total Lulus PG</span><span class="akun-row-val" id="akunLulus">0</span></div>
         <div class="akun-row"><span class="akun-row-left">⚡ Sesi Quiz Cepat</span><span class="akun-row-val" id="akunQCSesi">0</span></div>
       </div>
+      <div class="akun-info-card" style="margin-bottom:12px;">
+  <div class="akun-row">
+    <span class="akun-row-left">🔊 Efek Suara</span>
+    <label class="switch">
+      <input type="checkbox" id="soundToggle" onchange="toggleSound(this.checked)">
+      <span class="slider"></span>
+    </label>
+  </div>
+</div>
       <button class="btn-logout" onclick="playSound('back');showLogoutModal()">🚪 Logout dari Akun Ini</button>
     </div>
     
@@ -1509,6 +1518,7 @@ function playTone(freq,type,duration,gain,delay=0){
   o.start(ctx.currentTime+delay);o.stop(ctx.currentTime+delay+duration);
 }
 function playSound(type){
+  if(!getSoundEnabled())return; // ==== cek pengaturan dahulu ====
   try{
     if(type==='menu'){playTone(440,'sine',.08,.15);playTone(660,'sine',.08,.1,.07);}
     else if(type==='back'){playTone(440,'sine',.06,.12);playTone(330,'sine',.08,.1,.06);}
@@ -1820,9 +1830,23 @@ function refreshAkunPage(){
   setEl('akunBestScore',best.length>0?Math.max(...best)+' / 550':'Belum ada');
   setEl('akunPaketDone',done+' / 5');setEl('akunLulus',lulus+' paket');
   const qcSesi=['twk','tiu','tkp'].reduce((s,c)=>s+getQCTotalSesi(c),0);
-  setEl('akunQCSesi',qcSesi+' sesi');
+  setEl('akunQCSesi',qcSesi+' sesi');syncSoundToggle();
 }
 
+// ========== SOUND SETTINGS ==========
+function toggleSound(val){
+  setSoundEnabled(val);
+  const lbl=document.getElementById('soundToggle');
+  if(lbl)lbl.checked=val;
+  if(val)playSound('menu');
+}
+function syncSoundToggle(){
+  const tog=document.getElementById('soundToggle');
+  if(tog)tog.checked=getSoundEnabled();
+}
+function getSoundEnabled(){const v=localStorage.getItem('soundEnabled');return v===null?true:v==='true';}
+function setSoundEnabled(v){localStorage.setItem('soundEnabled',v);}
+  
 // ========== TIMER TOGGLE ==========
 function getTimerEnabled(){const v=localStorage.getItem('timerEnabled');return v===null?true:v==='true';}
 function setTimerEnabled(v){localStorage.setItem('timerEnabled',v);}
