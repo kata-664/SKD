@@ -1,6 +1,6 @@
 var IMAGES = {
   // Avatar & User
-  graduate: '🎓',
+  /*graduate: '🎓',
   user: '👤',
   profil: '👤',
   avatar: '👤',
@@ -111,13 +111,17 @@ var IMAGES = {
   brain: '🧠',
   muscle: '💪',
   runner: '🏃',
-  shield: '🛡️',
+  shield: '🛡️',*/
   
   // Gambar (langsung dengan tag img + style)
   alarm2: '<img src="images/alarm.svg" style="width: 64px; height: 64px; object-fit: contain; margin: 0 auto; display: block;">',
   alarm2_fill: '<img src="images/alarm-fill.svg" style="width: 64px; height: 64px; object-fit: contain; margin: 0 auto; display: block;">',
-  eye2: '<img src="images/eye.svg" style="width: 18px; height: 18px; object-fit: contain;">',
-  eye2_slash: '<img src="images/eye-slash.svg" style="width: 18px; height: 18px; object-fit: contain;">',
+  icon_eyeon: '<img src="images/eye.svg" style="width: 18px; height: 18px; object-fit: contain;">',
+  icon_eyeoff: '<img src="images/eye-slash.svg" style="width: 18px; height: 18px; object-fit: contain;">',
+  icon_home: '<img src="images/house-door.svg" style="width: 22px; height: 22px; object-fit: contain;">',
+  icon_latihan: '<img src="images/journals.svg" style="width: 22px; height: 22px; object-fit: contain;">',
+  icon_statistik: '<img src="images/graph-up-arrow.svg" style="width: 22px; height: 22px; object-fit: contain;">',
+  icon_profil: '<img src="images/person.svg" style="width: 22px; height: 22px; object-fit: contain;">',
   logo: '<img src="images/logo.svg" style="width: 100px; height: 100px;">',
 };
 
