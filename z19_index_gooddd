@@ -729,8 +729,43 @@ input:checked+.slider:before{transform:translateX(22px);}
   .menu-grid{grid-template-columns:1fr 1fr;}
   .stats-row{gap:8px;}
 }
+
+/* ========== HEADER ANIMASI ========== */
+@keyframes floatUp{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes rotateSun{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes twinkle{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
+@keyframes cloudFloat{0%{transform:translateX(0)}50%{transform:translateX(12px)}100%{transform:translateX(0)}}
+@keyframes pulse-glow{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:.8;transform:scale(1.15)}}
+@keyframes shootingStar{0%{transform:translateX(0) translateY(0);opacity:1}100%{transform:translateX(80px) translateY(80px);opacity:0}}
+.header-anim-wrap{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;}
+.anim-el{position:absolute;font-size:20px;animation:floatUp 3s ease-in-out infinite;}
+  
+/* ========== Notifikasi pencapaian ========== */
+@keyframes slideUpPop{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .page.active{animation:fadeIn .25s ease;}
+
+/* ===== GRID SKY HEADER ===== */
+.sky-header-grid{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:2px;
+  padding:8px 12px 0;
+  position:relative;z-index:2;
+}
+.sky-cell{
+  border-radius:4px;overflow:hidden;cursor:pointer;
+  border:1.5px solid transparent;transition:border-color .2s,transform .15s;
+  position:relative;
+}
+.sky-cell:hover{transform:scale(1.12);z-index:10;}
+.sky-cell.sky-now{border-color:rgba(255,255,255,.75);box-shadow:0 0 6px rgba(255,255,255,.4);}
+.sky-cell canvas{display:block;width:100%;height:36px;}
+.sky-cell-lbl{
+  font-size:7px;font-weight:700;text-align:center;
+  color:rgba(255,255,255,.8);padding:1px 0 2px;
+  background:rgba(0,0,0,.2);
+}
 </style>
 </head>
 <body>
@@ -758,15 +793,16 @@ input:checked+.slider:before{transform:translateX(22px);}
         <button class="btn-eye" onclick="togglePasswordVisibility()" id="btnEye" type="button">👁️</button>
       </div>
     </div>
-    <button class="btn-masuk" onclick="doLogin()">🚀 Masuk</button>
+    <button class="btn-masuk" onclick="doLogin()">Masuk</button>
     <div class="login-foot">Version 4.4 · © 2026 Latihan SKD · Hak Cipta Dilindungi</div>
   </div>
 </div>
 
 <!-- =========== HOME =========== -->
 <div id="homePage" class="page">
-  <div class="top-header">
-    <div class="header-row">
+  <div class="top-header" id="topHeader">
+  <div class="header-anim-wrap" id="headerAnim"></div>
+  <div class="header-row" style="position:relative;z-index:2;">
       <div class="user-info">
         <div class="avatar-wrap">
           <div class="avatar">👤</div>
@@ -940,6 +976,15 @@ input:checked+.slider:before{transform:translateX(22px);}
         <div class="akun-row"><span class="akun-row-left">🎯 Total Lulus PG</span><span class="akun-row-val" id="akunLulus">0</span></div>
         <div class="akun-row"><span class="akun-row-left">⚡ Sesi Quiz Cepat</span><span class="akun-row-val" id="akunQCSesi">0</span></div>
       </div>
+      <div class="akun-info-card" style="margin-bottom:12px;">
+  <div class="akun-row">
+    <span class="akun-row-left">🔊 Efek Suara</span>
+    <label class="switch">
+      <input type="checkbox" id="soundToggle" onchange="toggleSound(this.checked)">
+      <span class="slider"></span>
+    </label>
+  </div>
+</div>
       <button class="btn-logout" onclick="playSound('back');showLogoutModal()">🚪 Logout dari Akun Ini</button>
     </div>
     
@@ -999,10 +1044,8 @@ input:checked+.slider:before{transform:translateX(22px);}
     
     <!-- NAVIGASI FIXED -->
 <div style="flex-shrink:0;background:#fff;padding:10px 16px;border-top:1px solid var(--border);display:flex;gap:10px;">
-  <button class="btn-prev" onclick="prevQuestion()" style="flex:1;padding:12px;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;background:#F1F5F9;color:var(--dark);">◀ Prev</button>
-  <button id="btnNextFinish" class="btn-next" onclick="nextQuestion()" style="flex:1;padding:12px;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;background:linear-gradient(135deg,#0D47A1,#1565C0);color:#fff;">Next ▶</button>
-</div>
-
+  <button class="btn-prev" onclick="prevQuestion()" style="flex:1;padding:12px;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;background:#CBD5E1;color:var(--dark);">◀ Prev</button>
+  <button id="btnNextFinish" class="btn-next" onclick="nextQuestion()">Next ▶</button></div>
 <!-- DAFTAR SOAL FIXED -->
 <div style="flex-shrink:0;background:#fff;padding:0 16px 12px;padding-bottom:calc(12px + env(safe-area-inset-bottom, 0px));">
   <button onclick="toggleSidebar()" style="width:100%;padding:12px;border:none;border-radius:12px;background:#E3F2FD;color:#1565C0;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;border:1.5px solid #BBDEFB;">📋 Daftar Soal</button>
@@ -1046,7 +1089,6 @@ input:checked+.slider:before{transform:translateX(22px);}
       <div class="result-btns">
         <button class="btn-r-ulangi" onclick="playSound('start');restartQuiz()">🔄 Ulangi</button>
         <button class="btn-r-eval" onclick="showEvaluasi()">📋 Evaluasi</button>
-        <button class="btn-r-home" onclick="playSound('back');backToHome()">🏠 Menu</button>
       </div>
       <div id="evaluasiPanel" class="evaluasi-panel"></div>
       <button id="btnCloseEval" class="btn-close-eval" style="display:none;" onclick="closeEvaluasi()">✖ Tutup Evaluasi</button>
@@ -1242,7 +1284,6 @@ input:checked+.slider:before{transform:translateX(22px);}
         <p>• Grafik progress skor per paket</p>
         <p>• Pencapaian/Badge 7 Tier dari Pemula hingga Legendaris</p>
         <p>• ⚡ Kuis Cepat: jawab soal sebanyak mungkin dalam 1–10 menit</p>
-        <p>• 🔊 Efek suara interaktif</p>
       </div>
       <div class="info-block gray-bg">
         <p><strong>📊 Passing Grade:</strong></p>
@@ -1367,7 +1408,6 @@ input:checked+.slider:before{transform:translateX(22px);}
     <div class="qc-result-btns">
       <button class="btn-qc-ulang" onclick="playSound('start');ulangQuizCepat()">🔄 Ulangi</button>
       <button class="btn-qc-lain" onclick="playSound('back');goTo('quizCepatPage')">⚡ Lain</button>
-      <button class="btn-qc-home" onclick="playSound('back');goTo('homePage')">🏠 Menu</button>
     </div>
     
   </div>
@@ -1445,6 +1485,17 @@ input:checked+.slider:before{transform:translateX(22px);}
   </button>
 </div>
 
+<div id="achPopup" style="display:none;position:fixed;bottom:90px;left:50%;transform:translateX(-50%);z-index:9999;background:#fff;border-radius:16px;padding:14px 18px;box-shadow:0 8px 32px rgba(0,0,0,.18);border:1.5px solid #E2E8F0;min-width:280px;max-width:340px;animation:slideUpPop .4s ease;">
+  <div style="display:flex;align-items:center;gap:12px;">
+    <div id="achPopupIcon" style="font-size:36px;flex-shrink:0;">🏅</div>
+    <div>
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#1565C0;margin-bottom:3px;">🎉 Pencapaian Baru!</div>
+      <div id="achPopupName" style="font-size:14px;font-weight:800;color:#1E293B;margin-bottom:2px;">—</div>
+      <div id="achPopupDesc" style="font-size:11px;color:#64748b;">—</div>
+    </div>
+  </div>
+</div>
+  
 <div id="screenshotOverlay" class="screenshot-overlay"></div>
 
 <!-- ========== SCRIPTS ========== -->
@@ -1497,6 +1548,7 @@ function playTone(freq,type,duration,gain,delay=0){
   o.start(ctx.currentTime+delay);o.stop(ctx.currentTime+delay+duration);
 }
 function playSound(type){
+  if(!getSoundEnabled())return; // ==== cek pengaturan dahulu ====
   try{
     if(type==='menu'){playTone(440,'sine',.08,.15);playTone(660,'sine',.08,.1,.07);}
     else if(type==='back'){playTone(440,'sine',.06,.12);playTone(330,'sine',.08,.1,.06);}
@@ -1510,6 +1562,9 @@ function playSound(type){
     else if(type==='timeout'){playTone(880,'square',.1,.2);playTone(440,'square',.1,.2,.15);playTone(880,'square',.1,.2,.30);}
     else if(type==='login'){playTone(440,'sine',.1,.15);playTone(554,'sine',.1,.15,.12);playTone(659,'sine',.12,.18,.24);}
     else if(type==='newbest'){playTone(523,'triangle',.1,.2);playTone(659,'triangle',.1,.2,.1);playTone(784,'triangle',.1,.2,.2);playTone(1047,'triangle',.15,.25,.32);playTone(1319,'triangle',.2,.3,.5);}
+    else if(type==='achPopup'){playTone(784,'triangle',.08,.2,0);playTone(1047,'triangle',.08,.2,.1);playTone(1319,'triangle',.08,.2,.2);playTone(1047,'triangle',.08,.18,.32);playTone(1319,'triangle',.15,.25,.44);}
+    else if(type==='skor_lulus'){playTone(523,'triangle',.1,.2,0);playTone(659,'triangle',.1,.2,.12);playTone(784,'triangle',.1,.2,.25);playTone(1047,'triangle',.2,.25,.4);}
+    else if(type==='skor_gagal'){playTone(330,'sine',.15,.2,0);playTone(262,'sine',.15,.2,.18);playTone(220,'sawtooth',.2,.2,.38);}
   }catch(e){}
 }
 
@@ -1521,6 +1576,207 @@ const QUOTES=[
   {q:"Jangan takut untuk bermimpi besar. Mimpi adalah awal dari semua pencapaian.",a:"Walt Disney"},
   {q:"Sukses bukan kunci kebahagiaan. Kebahagiaanlah kunci sukses.",a:"Albert Schweitzer"},
 ];
+// ========== HEADER ANIMASI ==========
+// ========== HEADER ANIMASI REAL-TIME — 1 TAMPILAN ==========
+let _skyRaf = null;
+let _skyBuilt = false;
+let _skyPrevHour = -1;
+
+const SKY_STARS_CACHE = [];
+for(let i=0;i<22;i++) SKY_STARS_CACHE.push({
+  x:Math.random()*92+1, y:Math.random()*60+2,
+  r:Math.random()*1.6+0.7, phase:Math.random()*Math.PI*2
+});
+
+function updateHeaderAnim(){
+  if(_skyRaf) cancelAnimationFrame(_skyRaf);
+  _buildSkyDOM();
+  _skyRaf = requestAnimationFrame(_skyLoop);
+}
+
+function _buildSkyDOM(){
+  const wrap = document.getElementById('headerAnim');
+  if(!wrap || _skyBuilt) return;
+  _skyBuilt = true;
+
+  if(!document.getElementById('_skyKf')){
+    const s = document.createElement('style');
+    s.id = '_skyKf';
+    s.textContent = `
+      @keyframes _drift{0%,100%{transform:translateX(0)}50%{transform:translateX(18px)}}
+      @keyframes _float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+      @keyframes _shoot{0%{opacity:1;transform:rotate(28deg) translateX(0)}100%{opacity:0;transform:rotate(28deg) translateX(110px)}}
+    `;
+    document.head.appendChild(s);
+  }
+
+  wrap.innerHTML = `
+    <div id="_skyBg" style="position:absolute;inset:0;z-index:0;transition:background 4s ease;"></div>
+    <canvas id="_starCanvas" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;"></canvas>
+    <div id="_skyClouds" style="position:absolute;inset:0;z-index:2;pointer-events:none;transition:opacity 3s ease;opacity:0;"></div>
+    <div id="_skyExtras" style="position:absolute;inset:0;z-index:3;pointer-events:none;"></div>
+    <div id="_skyOrbit" style="position:absolute;width:300px;height:150px;bottom:0;left:50%;transform:translateX(-50%);z-index:4;pointer-events:none;overflow:visible;">
+      <div id="_skyBody" style="position:absolute;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:30px;line-height:1;will-change:transform;"></div>
+    </div>
+  `;
+
+  // Build clouds
+  const cData = [[5,10,26],[22,18,22],[48,13,28],[68,8,24],[84,20,20]];
+  document.getElementById('_skyClouds').innerHTML = cData.map(([x,y,sz],i)=>
+    `<div style="position:absolute;left:${x}%;top:${y}%;font-size:${sz}px;animation:_drift ${10+i*2}s ease-in-out infinite ${i*.8}s;opacity:.6;">☁️</div>`
+  ).join('');
+}
+
+function _skyLoop(ts){
+  const now = new Date();
+  const h = now.getHours();
+  const m = now.getMinutes();
+  const s = now.getSeconds();
+  const totalMin = h*60 + m + s/60;
+
+  // --- Bintang berkelap-kelip via canvas ---
+  const cv = document.getElementById('_starCanvas');
+  const sa = h<5?1:h<6?.4:h<7?.1:h>=20?.7+(h>=21?.3:0):h>=18?.4:0;
+  if(cv){
+    const W = cv.offsetWidth, H = cv.offsetHeight;
+    if(cv.width!==W) cv.width=W;
+    if(cv.height!==H) cv.height=H;
+    const ctx = cv.getContext('2d');
+    ctx.clearRect(0,0,W,H);
+    if(sa>0){
+      SKY_STARS_CACHE.forEach(star=>{
+        const tw = 0.6 + 0.4*Math.sin(ts/1200 + star.phase);
+        ctx.globalAlpha = sa * tw * 0.85;
+        ctx.fillStyle = '#fff';
+        ctx.beginPath();
+        ctx.arc(star.x/100*W, star.y/100*H, star.r, 0, Math.PI*2);
+        ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  // --- Orbit matahari/bulan ---
+  const isSun = h>=6 && h<18;
+  let frac;
+  if(isSun){
+    frac = (totalMin-360)/720;
+  } else {
+    const moonMin = totalMin>=1080 ? totalMin-1080 : totalMin+360;
+    frac = moonMin/720;
+  }
+  frac = Math.max(0,Math.min(1,frac));
+  const angleDeg = 180 - frac*180;
+  const rad = angleDeg * Math.PI/180;
+  const R = 150;
+  const bx = 150 + R*Math.cos(rad);
+  const by = 150 - R*Math.sin(rad)*0.88;
+
+  const body = document.getElementById('_skyBody');
+  if(body){
+    body.style.transform = `translate(${bx-20}px,${by-20}px)`;
+    if(h>=6&&h<7){body.textContent='🌅';body.style.fontSize='26px';body.style.filter='drop-shadow(0 0 8px rgba(255,140,40,.9))';}
+    else if(h>=7&&h<17){body.textContent='☀️';body.style.fontSize=(h>=11&&h<15)?'34px':'30px';body.style.filter=(h>=11&&h<15)?'drop-shadow(0 0 16px rgba(255,235,50,1))':'drop-shadow(0 0 10px rgba(255,210,60,.75))';}
+    else if(h>=17&&h<19){body.textContent='🌇';body.style.fontSize='26px';body.style.filter='drop-shadow(0 0 8px rgba(255,90,20,.85))';}
+    else{body.textContent='🌙';body.style.fontSize='28px';body.style.filter='drop-shadow(0 0 10px rgba(200,220,255,.65))';}
+  }
+
+  // --- Update fase (hanya saat jam berubah) ---
+  if(h !== _skyPrevHour){
+    _skyPrevHour = h;
+    _applySkyPhase(h);
+  }
+
+  _skyRaf = requestAnimationFrame(_skyLoop);
+}
+
+// ===== TABEL WARNA 24 JAM (bebas diubah!) =====
+const SKY_COLORS_24=[
+  ['#000814','#001d3d','#002d5f'], // 00 tengah malam
+  ['#000510','#001133','#001d3d'], // 01
+  ['#000510','#000e2a','#001133'], // 02
+  ['#000814','#001540','#002d5f'], // 03
+  ['#000A1A','#002050','#003d80'], // 04 mulai pre-subuh
+  ['#0D1A4E','#8B3A00','#C85A00'], // 05 subuh kemerahan
+  ['#0D47A1','#E65100','#FFA000'], // 06 fajar oranye
+  ['#0D47A1','#1565C0','#FF8C00'], // 07 pagi awal
+  ['#0D47A1','#1565C0','#42A5F5'], // 08 pagi cerah
+  ['#0D47A1','#1976D2','#29B6F6'], // 09
+  ['#1565C0','#1976D2','#29B6F6'], // 10
+  ['#1565C0','#1E88E5','#4FC3F7'], // 11 menjelang siang
+  ['#1A6CC7','#1E88E5','#29B6F6'], // 12 siang terik
+  ['#1565C0','#1976D2','#29B6F6'], // 13
+  ['#1565C0','#1976D2','#42A5F5'], // 14
+  ['#1260B0','#0D47A1','#FF7043'], // 15 mulai sore
+  ['#0D47A1','#BF360C','#FF7043'], // 16 sore oranye
+  ['#0D3A8C','#BF360C','#E65100'], // 17 sore gelap
+  ['#1A0050','#6A0D8C','#BF360C'], // 18 magrib ungu
+  ['#100030','#0A2070','#6A0050'], // 19 magrib gelap
+  ['#050820','#001133','#0D47A1'], // 20 malam awal
+  ['#000510','#001133','#0D3080'], // 21
+  ['#000510','#001133','#001d3d'], // 22
+  ['#000814','#001d3d','#002d5f'], // 23 hampir tengah malam
+];
+
+function _hexToRgb(hex){
+  return[parseInt(hex.slice(1,3),16),parseInt(hex.slice(3,5),16),parseInt(hex.slice(5,7),16)];
+}
+function _rgbToHex(r,g,b){
+  return'#'+[r,g,b].map(v=>Math.round(Math.max(0,Math.min(255,v))).toString(16).padStart(2,'0')).join('');
+}
+function _lerpColor(c1,c2,t){
+  const a=_hexToRgb(c1),b=_hexToRgb(c2);
+  return _rgbToHex(a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t);
+}
+
+function _applySkyPhase(h){
+  const header=document.getElementById('topHeader');
+  const bg=document.getElementById('_skyBg');
+  const clouds=document.getElementById('_skyClouds');
+  const extras=document.getElementById('_skyExtras');
+  if(!bg)return;
+
+  // Interpolasi warna berdasarkan menit
+  const m=new Date().getMinutes();
+  const t=m/60;
+  const next=(h+1)%24;
+  const c1=SKY_COLORS_24[h], c2=SKY_COLORS_24[next];
+  const top=_lerpColor(c1[0],c2[0],t);
+  const mid=_lerpColor(c1[1],c2[1],t);
+  const bot=_lerpColor(c1[2],c2[2],t);
+
+  if(header) header.style.background=`linear-gradient(135deg,${top},${mid},${bot})`;
+  bg.style.background=`linear-gradient(180deg,${top},${mid},${bot})`;
+
+  // Awan per fase
+  const cloudAlpha=h<5?0:h<6?.4:h<7?.7:h<11?.85:h<15?.7:h<18?.5:h<20?.2:0;
+  if(clouds) clouds.style.opacity=cloudAlpha;
+
+  // Dekorasi per fase
+  const EXTRAS={
+    0:'',1:'',2:'',3:'',4:'',
+    5:`<div style="position:absolute;left:10%;bottom:22%;font-size:18px;opacity:.28;animation:_float 5s ease-in-out infinite;">🌄</div>`,
+    6:`<div style="position:absolute;right:7%;bottom:18%;font-size:20px;opacity:.3;animation:_float 4s ease-in-out infinite;">🌸</div>`,
+    7:`<div style="position:absolute;left:6%;top:22%;font-size:13px;opacity:.48;animation:_float 2.5s ease-in-out infinite;">🌸</div><div style="position:absolute;right:10%;top:17%;font-size:11px;opacity:.38;animation:_float 3s ease-in-out infinite .7s;">🐦</div>`,
+    8:`<div style="position:absolute;right:10%;top:17%;font-size:11px;opacity:.38;animation:_float 3s ease-in-out infinite;">🐦</div>`,
+    9:'',10:'',
+    11:`<div style="position:absolute;left:4%;top:20%;font-size:11px;opacity:.42;animation:_float 2s ease-in-out infinite;">💫</div>`,
+    12:`<div style="position:absolute;left:4%;top:20%;font-size:11px;opacity:.42;animation:_float 2s ease-in-out infinite;">💫</div><div style="position:absolute;right:6%;top:16%;font-size:9px;opacity:.38;animation:_float 1.5s ease-in-out infinite .5s;">✨</div>`,
+    13:'',14:'',
+    15:`<div style="position:absolute;right:5%;bottom:16%;font-size:22px;opacity:.2;animation:_float 4s ease-in-out infinite;">🌅</div>`,
+    16:`<div style="position:absolute;right:5%;bottom:16%;font-size:22px;opacity:.2;animation:_float 4s ease-in-out infinite;">🌅</div>`,
+    17:`<div style="position:absolute;right:5%;bottom:16%;font-size:18px;opacity:.18;animation:_float 4s ease-in-out infinite;">🌇</div>`,
+    18:`<div style="position:absolute;right:8%;bottom:20%;font-size:16px;opacity:.28;animation:_float 5s ease-in-out infinite;">🌆</div><div style="position:absolute;left:10%;top:18%;font-size:9px;opacity:.28;animation:_float 3s ease-in-out infinite .5s;">⭐</div>`,
+    19:`<div style="position:absolute;left:10%;top:18%;font-size:9px;opacity:.28;animation:_float 3s ease-in-out infinite .5s;">⭐</div>`,
+    20:`<div style="position:absolute;right:10%;bottom:22%;font-size:20px;opacity:.15;animation:_float 6s ease-in-out infinite;">🌙</div>`,
+    21:`<div style="position:absolute;right:10%;bottom:22%;font-size:20px;opacity:.15;animation:_float 6s ease-in-out infinite;">🌙</div><div style="position:absolute;left:16%;top:14%;font-size:9px;opacity:.32;animation:_float 4s ease-in-out infinite 1s;">✨</div>`,
+    22:`<div style="position:absolute;left:16%;top:14%;font-size:9px;opacity:.32;animation:_float 4s ease-in-out infinite 1s;">✨</div>`,
+    23:'',
+  };
+  if(extras) extras.innerHTML=EXTRAS[h]||'';
+}
+
+// ========== Quotes ==========
 function setRandomQuote(){
   const q=QUOTES[Math.floor(Math.random()*QUOTES.length)];
   const qEl=document.getElementById('randomQuote'),aEl=document.getElementById('quoteAuthor');
@@ -1580,6 +1836,7 @@ function doLogin(){
     _showPage('homePage');
     refreshHomeStats();
     setRandomQuote();
+    updateHeaderAnim();
   } else {
     playSound('wrong');
     errEl.textContent='⚠️ Username atau password salah!';
@@ -1683,10 +1940,10 @@ function goTo(pageId){
   const menuMap={quizlistPage:'latihan',materiPage:'materi',statistikPage:'statistik',
     simulasiPage:'simulasi',petunjukPage:'petunjuk',tentangPage:'tentang',
     pencapaianPage:'pencapaian',quizCepatPage:'quizcepat',akunPage:'akun'};
-  if(menuMap[pageId])markMenuVisited(menuMap[pageId]);
+  if(menuMap[pageId]){markMenuVisited(menuMap[pageId]);checkNewAchievements();}
 
   if(pageId==='quizlistPage')refreshQuizList();
-  if(pageId==='homePage'){refreshHomeStats();setRandomQuote();}
+  if(pageId==='homePage'){refreshHomeStats();setRandomQuote();updateHeaderAnim();}
   if(pageId==='statistikPage')refreshStatistik();
   if(pageId==='pencapaianPage')refreshPencapaian();
   if(pageId==='quizCepatPage')renderQuizCepatGrid();
@@ -1728,6 +1985,7 @@ const targetPage=restorable.includes(lastPage)?lastPage:'homePage';
     _showPage(targetPage);
     refreshHomeStats();
     setRandomQuote();
+    updateHeaderAnim();
     if(targetPage==='quizlistPage')refreshQuizList();
     if(targetPage==='statistikPage')refreshStatistik();
     if(targetPage==='pencapaianPage')refreshPencapaian();
@@ -1756,7 +2014,7 @@ function refreshHomeStats(){
   const user=getLoggedInUser()||'—';
   const strip=document.getElementById('homeUsernameStrip');if(strip)strip.textContent=user;
   const gDay=document.getElementById('homeGreetingDay');
-  if(gDay){const h=new Date().getHours();gDay.textContent=h<11?'Selamat pagi, ':h<15?'Selamat siang, ':h<18?'Selamat sore, ':'Selamat malam, ';}
+  if(gDay){const h=new Date().getHours();gDay.textContent=h<5?'Selamat subuh, ':h<11?'Selamat pagi, ':h<15?'Selamat siang, ':h<18?'Selamat sore, ':'Selamat malam, ';}
   let best=[],done=0,totalSoalSelesai=0,totalSemuaSoal=0;
   for(let i=1;i<=5;i++){
     const twk=localStorage.getItem(`skorTWK_latihan${i}`);
@@ -1805,9 +2063,23 @@ function refreshAkunPage(){
   setEl('akunBestScore',best.length>0?Math.max(...best)+' / 550':'Belum ada');
   setEl('akunPaketDone',done+' / 5');setEl('akunLulus',lulus+' paket');
   const qcSesi=['twk','tiu','tkp'].reduce((s,c)=>s+getQCTotalSesi(c),0);
-  setEl('akunQCSesi',qcSesi+' sesi');
+  setEl('akunQCSesi',qcSesi+' sesi');syncSoundToggle();
 }
 
+// ========== SOUND SETTINGS ==========
+function toggleSound(val){
+  setSoundEnabled(val);
+  const lbl=document.getElementById('soundToggle');
+  if(lbl)lbl.checked=val;
+  if(val)playSound('menu');
+}
+function syncSoundToggle(){
+  const tog=document.getElementById('soundToggle');
+  if(tog)tog.checked=getSoundEnabled();
+}
+function getSoundEnabled(){const v=localStorage.getItem('soundEnabled');return v===null?true:v==='true';}
+function setSoundEnabled(v){localStorage.setItem('soundEnabled',v);}
+  
 // ========== TIMER TOGGLE ==========
 function getTimerEnabled(){const v=localStorage.getItem('timerEnabled');return v===null?true:v==='true';}
 function setTimerEnabled(v){localStorage.setItem('timerEnabled',v);}
@@ -1842,6 +2114,7 @@ function showMateri(k){
   nav+='</div>';
   cd.innerHTML=m.konten+nav;
   goTo('materiContentPage');
+  checkNewAchievements();
 }
 
 // ========== QUIZ STATE ==========
@@ -2073,6 +2346,7 @@ function finishQuizCepat(){
   const bestOverall=getQCBestScore(cat,menit);
   document.getElementById('qcBestInfo').innerHTML=`<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center;"><span style="font-size:13px;color:var(--gray);">🏆 Rekor ${menit} menit:</span><span style="font-size:16px;font-weight:800;color:${c.color};">${bestOverall} benar</span>${total>0?`<span style="font-size:12px;color:var(--gray);">· Akurasi: ${pct}%</span>`:''}</div>`;
   goTo('quizCepatResultPage');
+  checkNewAchievements();
 }
 function ulangQuizCepat(){mulaiQuizCepat();}
 
@@ -2332,6 +2606,11 @@ function loadQuestion(){
   if(curQ===questions.length-1){btn.textContent='✅ Selesai';btn.className='btn-finish';btn.onclick=finishQuiz;}
   else{btn.textContent='Next ▶';btn.className='btn-next';btn.onclick=nextQuestion;}
   updateGrid();
+  const btnPrev=document.querySelector('.btn-prev');
+  if(btnPrev){
+    if(curQ===0){btnPrev.style.opacity='.4';btnPrev.style.pointerEvents='none';}
+    else{btnPrev.style.opacity='1';btnPrev.style.pointerEvents='auto';}
+  }
 }
 function saveAnswer(){const sel=document.querySelector('input[name="ans"]:checked');if(sel){const idx=parseInt(sel.value);if(questions[curQ].isTKP)userScores[curQ]=questions[curQ].optionScores[idx];else userAnswers[curQ]=idx;updateGrid();}}
 function nextQuestion(){playSound('next');saveAnswer();if(curQ<questions.length-1){curQ++;loadQuestion();}}
@@ -2403,7 +2682,9 @@ function finishQuiz(){
   bannerEl.className=`pass-banner ${pass.all?'pass':'fail'}`;
   bannerEl.textContent=pass.all?'🎉 SELAMAT! Anda LULUS Passing Grade SKD!':'⚠️ Belum lulus passing grade. Terus semangat berlatih!';
   playSound(pass.all?'finish':'wrong');
+  setTimeout(()=>playSound(pass.all?'skor_lulus':'skor_gagal'),600);
   goTo('resultPage');
+  checkNewAchievements();
 }
 function restartQuiz(){if(activeSet>0)startQuiz(activeSet);else goTo('homePage');}
 function backToHome(){if(timerInterval){clearInterval(timerInterval);timerInterval=null;}simulasiMode=false;goTo('homePage');refreshHomeStats();}
@@ -2422,10 +2703,51 @@ function showEvaluasi(){
 function closeEvaluasi(){document.getElementById('evaluasiPanel').style.display='none';document.getElementById('btnCloseEval').style.display='none';}
 function showResetModal(){document.getElementById('resetModal').classList.add('show');}
 function closeResetModal(){document.getElementById('resetModal').classList.remove('show');}
+// ========== ACHIEVEMENT POPUP ==========
+let achQueue=[];
+let achShowing=false;
+let achUnlocked=JSON.parse(localStorage.getItem('achUnlocked')||'[]');
+
+function checkNewAchievements(){
+  const stats=getBadgeStats();
+  const newlyUnlocked=[];
+  BADGE_TIERS.forEach(tier=>{
+    tier.badges.forEach(b=>{
+      if(b.check(stats)&&!achUnlocked.includes(b.id)){
+        achUnlocked.push(b.id);
+        newlyUnlocked.push(b);
+      }
+    });
+  });
+  if(newlyUnlocked.length>0){
+    localStorage.setItem('achUnlocked',JSON.stringify(achUnlocked));
+    newlyUnlocked.forEach(b=>achQueue.push(b));
+    showNextAch();
+  }
+}
+
+function showNextAch(){
+  if(achShowing||achQueue.length===0)return;
+  achShowing=true;
+  const b=achQueue.shift();
+  document.getElementById('achPopupIcon').textContent=b.icon;
+  document.getElementById('achPopupName').textContent=b.name;
+  document.getElementById('achPopupDesc').textContent=b.desc;
+  const popup=document.getElementById('achPopup');
+  popup.style.display='block';
+  playSound('achPopup');
+  setTimeout(()=>{
+    popup.style.display='none';
+    achShowing=false;
+    if(achQueue.length>0)setTimeout(showNextAch,400);
+  },3500);
+}
+  
 function resetAllProgress(){
   for(let i=1;i<=5;i++){['bestScore','skorTWK','skorTIU','skorTKP'].forEach(k=>localStorage.removeItem(`${k}_latihan${i}`));localStorage.removeItem(`evalData_latihan${i}`);localStorage.removeItem(`paketUlangi_${i}`);}
   localStorage.removeItem('simulasi_last');localStorage.removeItem('simulasiCount');localStorage.removeItem('simulasiLulusBerturut');localStorage.removeItem('materiOpened');localStorage.removeItem('menuVisited');
   ['twk','tiu','tkp'].forEach(cat=>{[1,3,5,10].forEach(m=>localStorage.removeItem(`qcBest_${cat}_${m}m`));localStorage.removeItem(`qcTotalSesi_${cat}`);localStorage.removeItem(`qcStreakMax_${cat}`);localStorage.removeItem(`qcNoWrong_${cat}`);localStorage.removeItem(`qcAkurasi90_${cat}`);});
+  localStorage.removeItem('achUnlocked');achUnlocked=[];
   refreshQuizList();refreshHomeStats();closeResetModal();playSound('back');alert('✅ Semua progress telah direset!');
 }
 </script>
