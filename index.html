@@ -1522,6 +1522,9 @@ function playSound(type){
     else if(type==='timeout'){playTone(880,'square',.1,.2);playTone(440,'square',.1,.2,.15);playTone(880,'square',.1,.2,.30);}
     else if(type==='login'){playTone(440,'sine',.1,.15);playTone(554,'sine',.1,.15,.12);playTone(659,'sine',.12,.18,.24);}
     else if(type==='newbest'){playTone(523,'triangle',.1,.2);playTone(659,'triangle',.1,.2,.1);playTone(784,'triangle',.1,.2,.2);playTone(1047,'triangle',.15,.25,.32);playTone(1319,'triangle',.2,.3,.5);}
+    else if(type==='achPopup'){playTone(784,'triangle',.08,.2,0);playTone(1047,'triangle',.08,.2,.1);playTone(1319,'triangle',.08,.2,.2);playTone(1047,'triangle',.08,.18,.32);playTone(1319,'triangle',.15,.25,.44);}
+    else if(type==='skor_lulus'){playTone(523,'triangle',.1,.2,0);playTone(659,'triangle',.1,.2,.12);playTone(784,'triangle',.1,.2,.25);playTone(1047,'triangle',.2,.25,.4);}
+    else if(type==='skor_gagal'){playTone(330,'sine',.15,.2,0);playTone(262,'sine',.15,.2,.18);playTone(220,'sawtooth',.2,.2,.38);}
   }catch(e){}
 }
 
@@ -1768,7 +1771,7 @@ function refreshHomeStats(){
   const user=getLoggedInUser()||'—';
   const strip=document.getElementById('homeUsernameStrip');if(strip)strip.textContent=user;
   const gDay=document.getElementById('homeGreetingDay');
-  if(gDay){const h=new Date().getHours();gDay.textContent=h<11?'Selamat pagi, ':h<15?'Selamat siang, ':h<18?'Selamat sore, ':'Selamat malam, ';}
+  if(gDay){const h=new Date().getHours();gDay.textContent=h<5?'Selamat subuh, ':h<11?'Selamat pagi, ':h<15?'Selamat siang, ':h<18?'Selamat sore, ':'Selamat malam, ';}
   let best=[],done=0,totalSoalSelesai=0,totalSemuaSoal=0;
   for(let i=1;i<=5;i++){
     const twk=localStorage.getItem(`skorTWK_latihan${i}`);
@@ -2417,6 +2420,7 @@ function finishQuiz(){
   bannerEl.className=`pass-banner ${pass.all?'pass':'fail'}`;
   bannerEl.textContent=pass.all?'🎉 SELAMAT! Anda LULUS Passing Grade SKD!':'⚠️ Belum lulus passing grade. Terus semangat berlatih!';
   playSound(pass.all?'finish':'wrong');
+  setTimeout(()=>playSound(pass.all?'skor_lulus':'skor_gagal'),600);
   goTo('resultPage');
   checkNewAchievements();
 }
@@ -2469,7 +2473,7 @@ function showNextAch(){
   document.getElementById('achPopupDesc').textContent=b.desc;
   const popup=document.getElementById('achPopup');
   popup.style.display='block';
-  playSound('newbest');
+  playSound('achPopup');
   setTimeout(()=>{
     popup.style.display='none';
     achShowing=false;
