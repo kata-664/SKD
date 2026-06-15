@@ -2,122 +2,122 @@
 var paket4 = {
   twk: [
   { // No 1
-    q: "aaaa aaa aa aa aaaa aa aa aaa aaa aa aa aaa aaa aaa aaa  aaaa aaa aaa a aa a aaa a aaa a a aaa aaa a aaaaaa aaa aa aa aaaa aa aa aaa aaa aa aa aaa aaa aaa aaa  aaaa aaa aaa a aa a aaa a aaa a a aaa aaa a aaaaaa aaa aa aa aaaa aa aa aaa aaa aa aa aaa aaa aaa aaa  aaaa aaa aaa a aa a aaa a aaa a a aaa aaa a aaaaaa aaa aa aa aaaa aa aa aaa aaa aa aa aaa aaa aaa aaa  aaaa aaa aaa a aa a aaa a aaa a a aaa aaa a aaaaaa aaa aa aa aaaa aa aa aaa aaa aa aa aaa aaa aaa aaa  aaaa aaa aaa a aa a aaa a aaa a a aaa aaa a aaaaaa aaa aa aa aaaa aa aa aaa aaa aa aa aaa aaa aaa aaa  aaaa aaa aaa a aa a aaa a aaa a a aaa aaa a aaaaaa aaa aa aa aaaa aa aa aaa aaa aa aa aaa aaa aaa aaa  aaaa aaa aaa a aa a aaa a aaa a a aaa aaa a aaaaaa aaa aa aa aaaa aa aa aaa aaa aa aa aaa aaa aaa aaa  aaaa aaa aaa a aa a aaa a aaa a a aaa aaa a aaaaaa aaa aa aa aaaa aa aa aaa aaa aa aa aaa aaa aaa aaa  aaaa aaa aaa a aa a aaa a aaa a a aaa aaa a aaaaaa aaa aa aa aaaa aa aa aaa aaa aa aa aaa aaa aaa aaa  aaaa aaa aaa a aa a aaa a aaa a a aaa aaa a aaaaaa aaa aa aa aaaa aa aa aaa aaa aa aa aaa aaa aaa aaa  aaaa aaa aaa a aa a aaa a aaa a a aaa aaa a aa aaaa aaa aa aa aaaa aa aa aaa aaa aa aa aaa aaa aaa aaa  aaaa aaa aaa a aa a aaa a aaa a a aaa aaa a aa",
-    opt: ["","","","",""],
+    q: "Pancasila merupakan sumber dari segala sumber hukum. Hal tersebut mengandungmkonsekuensi ...",
+    opt: ["Pancasila adalah jati diri bangsa Indonesia.","Pancasila adalah kepribadian bangsa Indonesia.","Semua peraturan perundang-undangan tidak boleh bertentangan dengan Pancasila.","Hanya peraturan tertentu yang mengandung nilai-nilai Pancasila.","Peraturan pemerintah harus mengandung nilai-nilai Pancasila."],
     a: 4,
     pembahasan: ""
   },
   { // No 2
-    q: "",
-    opt: ["","","","",""],
+    q: "Pancasila menjadi kaidah negara yang fundamental. Pernyataan tersebut mengandung makna ....",
+    opt: ["menjadi aturan dasar yang mengatur kehidupan bagi setiap WNI dan lembagalembaga negara","Pancasila bersifat status terhadap perubahan","aturan atau norma yang berlaku untuk jangka waktu panjang","aturan pokok untuk mengatur kehidupan bagi setiap warga Negara Indonesia","kaidah negara yang berlaku selamanya"],
     a: 4,
     pembahasan: ""
   },
   { // No 3
-    q: "",
-    opt: ["","","","",""],
+    q: "Pancasila bersifat terbuka sehingga tetap aktual dan fungsional dalam mengantisipasi setiap tuntutan zaman serta tidak larut dan tenggelam dalam arus perubahan. Pernyataan tersebut sesuai dengan dimensi Pancasila ....",
+    opt: ["realitas","idealisme","fleksibilitas","kultural","sosial"],
     a: 4,
     pembahasan: ""
   },
   { // No 4
-    q: "",
-    opt: ["","","","",""],
+    q: "Pancasila mencerminkan kenyataan yang hidup dan berkembang dalam masyarakat. Pernyataan tersebut sesuai dengan dimensi Pancasila....",
+    opt: ["fleksibilitas","kultural","idealisme","sosial","realitas"],
     a: 4,
     pembahasan: ""
   },
   { // No 5
-    q: "",
-    opt: ["","","","",""],
+    q: "Pancasila sebagai pegangan masyarakat dalam bersikap dan berperilaku sehari-hari merupakan ....",
+    opt: ["dasar negara","sumber hukum bagi bangsa Indonesia","pandangan hidup bangsa","cita-cita dan tujuan bangsa","nilai-nilai luhur bangsa"],
     a: 4,
     pembahasan: ""
   },
   { // No 6
-    q: "",
-    opt: ["","","","",""],
+    q: "Pancasila sebagai kepribadian bangsa Indonesia tecermin dari ....",
+    opt: ["aneka kebudayaan yang dimiliki oleh bangsa Indonesia","tata urutan perundangan yang berlaku.","susunan pemerintahan bangsa Indonesia","nilai yang dimiliki oleh bangsa Indonesia","bentuk pemerintahan bangsa Indonesia."],
     a: 4,
     pembahasan: ""
   },
   { // No 7
-    q: "",
-    opt: ["","","","",""],
+    q: "Pancasila merupakan satu-satunya falsafah bangsa dan negara. Hal ini menyatakan perwujudan wawasan Nusantara dalam bidang....",
+    opt: ["sosial budaya","hukum","politik","ideologi","hankam"],
     a: 4,
     pembahasan: ""
   },
   { // No 8
-    q: "",
-    opt: ["","","","",""],
+    q: "Hubungan sosial yang selaras dan seimbang antara individu dan masyarakat dijiwai oleh nilai-nilai Pancasila, yaitu ....",
+    opt: ["sila kesatu","sila kedua","sila ketiga","sila keempat","sila kelima"],
     a: 4,
     pembahasan: ""
   },
   { // No 9
-    q: "",
-    opt: ["","","","",""],
+    q: "Berikut ini merupakan nilai-nilai dari Pancasila, sila kedua, kecuali ....",
+    opt: ["pengakuan terhadap martabat manusia","pengakuan yang adil terhadap sesama manusia","manusia yang beradab","musyawarah untuk mufakat dicapai dalam permusyawaratan wakil-wakil rakyat","manusia memiliki daya cipta, rasa, dan keyakinan sehingga jelas adanya perbedaan antara manusia dan hewan"],
     a: 4,
     pembahasan: ""
   },
   { // No 10
-    q: "",
-    opt: ["","","","",""],
+    q: "Sikap saling menghormati dan menghargai setiap kebudayaan yang dimiliki oleh tiap masyarakat, merupakan pengamalan dari sila ....",
+    opt: ["kesatu","kedua","ketiga","keempat","kelima"],
     a: 4,
     pembahasan: ""
   },
   { // No 11
-    q: "",
-    opt: ["","","","",""],
+    q: "Kebebasan dalam memiliki agama dan kepercayaan masing-masing merupakan bentuk pengamalan sila ....",
+    opt: ["kesatu","kedua","ketiga","keempat","kelima"],
     a: 4,
     pembahasan: ""
   },
   { // No 12
-    q: "",
-    opt: ["","","","",""],
+    q: "Perhatikan pernyataan berikut! (1) keseimbangan antara hak dan kewajiban; (2) pengakuan terhadap martabat manusia; (3) cinta akan kemajuan dan pembangunan; (4) kedaulatan negara di tangan rakyat. Yang termasuk nilai-nilai pada sila kelima adalah....",
+    opt: ["1 dan 2","1 dan 3","1 dan 4","2 dan 3","2 dan 4"],
     a: 4,
     pembahasan: ""
   },
   { // No 13
-    q: "",
-    opt: ["","","","",""],
+    q: "Pemilihan gubernur, bupati, dan wali kota masing-masing dilaksanakan secara ....",
+    opt: ["pemilihan langsung","usulan dari DPRD","pemilihan oleh parpol mayoritas","demokratis","ditunjuk oleh DPR"],
     a: 4,
     pembahasan: ""
   },
   { // No 14
-    q: "",
-    opt: ["","","","",""],
+    q: "Mekanisme pemilihan umum secara langsung, umum, bebas, rahasia, jujur, dan adil setiap lima tahun sekali tertuang dalam Pasal....",
+    opt: ["22 E Ayat 1","22 E Ayat 2","22 E Ayat 3","22 E Ayat 4","22 E Ayat 5"],
     a: 4,
     pembahasan: ""
   },
   { // No 15
-    q: "",
-    opt: ["","","","",""],
+    q: "Negara Indonesia merupakan negara kesatuan yang berbentuk republik. Pernyataan tersebut tercantum dalam UUD 1945 Pasal ...",
+    opt: ["1 Ayat 1","1 Ayat 2","1 Ayat 3","2 Ayat 1","2 Ayat 2"],
     a: 4,
     pembahasan: ""
   },
   { // No 16
-    q: "",
-    opt: ["","","","",""],
+    q: "Setiap orang berhak mengembangkan diri dan berhak memperoleh manfaat IPTEK. Hak untuk memperoleh pendidikan tercantum dalam UUD 1945 Pasal ....",
+    opt: ["28 B Ayat 1","28 B Ayat 2","28 C Ayat 1","28 C Ayat 2","28 D Ayat 1"],
     a: 4,
     pembahasan: ""
   },
   { // No 17
-    q: "",
-    opt: ["","","","",""],
+    q: "Seseorang dijamin kebebasannya dalam memilih agama, pendidikan, dan kewarganegaraan. Pernyataan tersebut sesuai dengan Pasal ....",
+    opt: ["28 D Ayat 2","28 D Ayat 3","28 E Ayat 1","28 E Ayat 2","28 E Ayat 3"],
     a: 4,
     pembahasan: ""
   },
   { // No 18
-    q: "",
-    opt: ["","","","",""],
+    q: "Dalam menjalankan hak dan kebebasannya, setiap orang wajib pada pembatasan yang ditetapkan dengan undang-undang, sebagaimana yang tercantum dalam Pasal 28 J Ayat 2. Makna dari pernyataan tersebut adalah ....",
+    opt: ["Negara membatasi seseorang untuk memperoleh hak dan kebebasannya.","Negara menjamin kebebasan bersyarat bagi setiap warganya.","Negara mengatur dan mengawasi segala aktivitas warganya serta melakukan pembatasan dengan cara koersif.","Negara menjamin pengakuan serta penghormatan atas hak dan kebebasan orang lain.","Negara menekan setiap orang untuk tunduk dan patuh pada peraturan yang berlaku."],
     a: 4,
     pembahasan: ""
   },
   { // No 19
-    q: "",
-    opt: ["","","","",""],
+    q: "Ketersediaan sarana kesehatan yang memadai seperti rumah sakit dan ruang terbuka hijau merupakan salah satu tanggung jawab negara sebagaimana tercantum dalam Pasal ....",
+    opt: ["33 Ayat 1","33 Ayat 3","33 Ayat 4","34 Ayat 3","34 Ayat 4"],
     a: 4,
     pembahasan: ""
   },
   { // No 20
-    q: "",
-    opt: ["","","","",""],
+    q: "Sistem jaminan sosial dan program pemberdayaan masyarakat merupakan upaya pemerintah dalam menciptakan kesejahteraan masyarakat. Pernyataan tersebut sesuai dengan Pasal 34 Ayat 2 yang merupakan hasil amandemen ke- ....",
+    opt: ["1","2","3","4","5"],
     a: 4,
     pembahasan: ""
   },
