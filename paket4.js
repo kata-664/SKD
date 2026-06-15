@@ -68,7 +68,7 @@ var paket4 = {
     pembahasan: ""
   },
   { // No 12
-    q: "Perhatikan pernyataan berikut! (1) keseimbangan antara hak dan kewajiban; (2) pengakuan terhadap martabat manusia; (3) cinta akan kemajuan dan pembangunan; (4) kedaulatan negara di tangan rakyat. Yang termasuk nilai-nilai pada sila kelima adalah....",
+    q: "Perhatikan pernyataan berikut! \n(1) keseimbangan antara hak dan kewajiban; \n(2) pengakuan terhadap martabat manusia; \n(3) cinta akan kemajuan dan pembangunan; \n(4) kedaulatan negara di tangan rakyat. \nYang termasuk nilai-nilai pada sila kelima adalah....",
     opt: ["1 dan 2","1 dan 3","1 dan 4","2 dan 3","2 dan 4"],
     a: 4,
     pembahasan: ""
