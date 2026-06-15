@@ -122,62 +122,62 @@ var paket4 = {
     pembahasan: ""
   },
   { // No 21
-    q: "",
-    opt: ["","","","",""],
+    q: "Sesuai Pasal 37 Ayat 2, cara pengajuan usul perubahan pasal-pasal Undang-Undang Dasar dilakukan secara ....",
+    opt: ["lisan","lisan dalam pelaksanaan sidang.","tertulis","tertulis dan ditunjukkan secara jelas bagian yang diusulkan","lisan dan tertulis dengan menulis secara terperinci tentang perubahan yang dimaksud"],
     a: 4,
     pembahasan: ""
   },
   { // No 22
-    q: "",
-    opt: ["","","","",""],
+    q: "Pemberian muatan lokal di sekolah seperti menari dan karawitan merupakan upaya melestarikan atau memelihara kebudayaan nasional. Pernyataan tersebut sesuai dengan Pasal....",
+    opt: ["32 Ayat 1","32 Ayat 2","31 Ayat 1","31 Ayat 2","31 Ayat 3"],
     a: 4,
     pembahasan: ""
   },
   { // No 23
-    q: "",
-    opt: ["","","","",""],
+    q: "Pemberian dana BOS dalam pendidikan merupakan salah satu upaya pemerintah untuk melaksanakan kewajibannya dalam membiayai pendidikan. Kewajiban pemerintah dalam pembiayaan pendidikan tercantum dalam Pasal ....",
+    opt: ["31 Ayat 1","31 Ayat 2","31 Ayat 3","31 Ayat 4","31 Ayat 5"],
     a: 4,
     pembahasan: ""
   },
   { // No 24
-    q: "",
-    opt: ["","","","",""],
+    q: "Tugas Kepolisian Negara Republik Indonesia adalah melindungi, mengayomi, melayani masyarakat, serta menegakkan hukum. Pernyataan tersebut sesuai dengan Pasal....",
+    opt: ["30 Ayat 1","30 Ayat 2","30 Ayat 3","30 Ayat 4","30 Ayat 5"],
     a: 4,
     pembahasan: ""
   },
   { // No 25
-    q: "",
-    opt: ["","","","",""],
+    q: "Hukum yang mengatur hubungan hukum antara negara dengan perseorangan atau dengan alat perlengkapan negara adalah ...",
+    opt: ["hukum publik","hukum privat","hukum materiil","hukum formal","hukum tertulis"],
     a: 4,
     pembahasan: ""
   },
   { // No 26
-    q: "",
-    opt: ["","","","",""],
+    q: "Kelebihan norma hukum dibandingkan dengan norma sosial lainnya adalah ....",
+    opt: ["tertulis dan memiliki sanksi tegas serta mengikat","bersifat memaksa dan bersumber pada UUD 1945","bersifat memaksa dan mengikat bagi semua masyarakat","bersifat mengatur dan memaksa","bersifat memaksa dan memiliki sanksi"],
     a: 4,
     pembahasan: ""
   },
   { // No 27
-    q: "",
-    opt: ["","","","",""],
+    q: "Persetujuan antara warga yang satu dengan negara lain dan negara-negara tersebut telah mengikat dirinya untuk menerima hak-hak dan kewajiban yang timbul dari perjanjian itu disebut dengan ....",
+    opt: ["undang-undang","yurisprudensi","traktat","kebiasaan","doktrin"],
     a: 4,
     pembahasan: ""
   },
   { // No 28
-    q: "",
-    opt: ["","","","",""],
+    q: "Makna warna merah pada bendera Merah Putih adalah ....",
+    opt: ["semangat","berani","kemarahan","keteguhan","kegigihan"],
     a: 4,
     pembahasan: ""
   },
   { // No 29
-    q: "",
-    opt: ["","","","",""],
+    q: "Lahirnya Orde Reformasi di Indonesia ditandai oleh mundurnya Soeharto sebagai Presiden RI pada ....",
+    opt: ["21 April 1999","20 April 1998","21 Mei 1998","20 Mei 1999","10 Mei 1998"],
     a: 4,
     pembahasan: ""
   },
   { // No 30
-    q: "",
-    opt: ["","","","",""],
+    q: "Lepasnya provinsi ke-27, yaitu Timor Timur dari NKRI pada era ....",
+    opt: ["Presiden Soeharto","Presiden Habibie","Presiden Gus Dur","Presiden Megawati Soekarno Putri","Presiden Susilo Bambang Yudhoyono"],
     a: 4,
     pembahasan: ""
   }
@@ -185,50 +185,50 @@ var paket4 = {
   
   tiu: [
     { // No 31
-    q: "",
-    opt: ["","","","",""],
+    q: "GENDEWA = ...",
+    opt: ["Gajah","Langit","Busur","Derita","Selatan"],
     a: 3,
     pembahasan: ""
   },
   { // No 32
-    q: "",
-    opt: ["","","","",""],
+    q: "IMLA = ...",
+    opt: ["Tertulis","Huruf","Dikte","Lisan","Bahasa"],
     a: 3,
     pembahasan: ""
   },
   { // No 33
-    q: "",
-    opt: ["","","","",""],
+    q: "TUNAKARYA >< ...",
+    opt: ["Pelaku","Oknum","Pemain","Pekerja","Penggerak"],
     a: 0,
     pembahasan: ""
   },
   { // No 34
-    q: "",
-    opt: ["","","","",""],
-    a: 1,
-    pembahasan: ""
-  },
-  { // No 35
-    q: "",
-    opt: ["","","","",""],
+    q: "PRIBUMI >< ...",
+    opt: ["Pendatang","Penjaga","Penemu","Penghuni","Pemelihara"],
     a: 0,
     pembahasan: ""
   },
+  { // No 35
+    q: "SAPI : SUSU = LEBAH : ...",
+    opt: ["Sengat","Bunga","Madu","Sarang","Serangga"],
+    a: 2,
+    pembahasan: ""
+  },
   { // No 36
-    q: "",
-    opt: ["","","","",""],
+    q: "... berhubungan dengan DINGIN, sebagaimana BENTENG berhubungan dengan ...",
+    opt: ["salju - prajurit","angin - istana","jaket - musuh","es - batu","hawa - jalan"],
     a: 4,
     pembahasan: ""
   },
   { // No 37
-    q: "",
-    opt: ["","","","",""],
+    q: "Mana yang tidak termasuk dalam kelompoknya?",
+    opt: ["Giok","Safir","Zamrud","Marmer","Opal"],
     a: 1,
     pembahasan: ""
   },
   { // No 38
-    q: "",
-    opt: ["","","","",""],
+    q: "Mana yang tidak termasuk dalam kelompoknya?",
+    opt: ["Gendang","Kolintang","Tifa","Gambus","Bonang"],
     a: 3,
     pembahasan: ""
   },
