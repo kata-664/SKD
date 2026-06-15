@@ -398,8 +398,8 @@ input:checked+.slider:before{transform:translateX(22px);}
 .evaluasi-item.belum{border-left-color:#F57C00;background:#FFF8E1;}
 .evaluasi-item .soal-teks{font-weight:700;margin-bottom:5px;font-size:13px;color:var(--dark);}
 .evaluasi-item .soal-isi{font-size:13px;margin-bottom:7px;color:#475569;line-height:1.5;text-align:justify;}
-.evaluasi-item .jawaban-user{font-size:13px;margin-bottom:4px;padding:7px 10px;border-radius:8px;background:#E2E8F0;}
-.evaluasi-item .jawaban-benar{font-size:13px;margin-bottom:4px;padding:7px 10px;border-radius:8px;background:#E0F2F1;color:#004D40;}
+.evaluasi-item .jawaban-user{font-size:13px;margin-bottom:4px;padding:7px 10px;border-radius:8px;background:#E2E8F0;text-align:justify;}
+.evaluasi-item .jawaban-benar{font-size:13px;margin-bottom:4px;padding:7px 10px;border-radius:8px;background:#E0F2F1;color:#004D40;text-align:justify;}
 .evaluasi-item .pembahasan-box{margin-top:8px;padding:10px 12px;border-radius:8px;background:#E3F2FD;border-left:3px solid var(--blue);font-size:12px;color:#0D47A1;line-height:1.6;}
 .pembahasan-box strong{display:block;margin-bottom:3px;font-size:11px;text-transform:uppercase;letter-spacing:.5px;}
 .score-summary-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:14px;}
@@ -433,7 +433,7 @@ input:checked+.slider:before{transform:translateX(22px);}
 .choice-letter{width:36px;height:36px;min-width:36px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;}
 .option input:checked+.choice-letter{background:#00897B;}
 .option:has(input:checked){background:#E0F2F1;border-color:#00897B;}
-.choice-text{flex:1;font-size:14px;color:#334155;}
+.choice-text{flex:1;font-size:14px;color:#334155;text-align:justify;}
 .quiz-nav{display:flex;gap:10px;margin-top:14px;padding-top:12px;border-top:1px solid var(--border);}
 .btn-prev,.btn-next,.btn-finish{flex:1;padding:12px;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;transition:.2s;}
 .btn-prev{background:#F1F5F9;color:var(--dark);}
@@ -684,7 +684,7 @@ input:checked+.slider:before{transform:translateX(22px);}
 .qc-opt.selected .qc-opt-letter{background:var(--blue);color:#fff;border-color:var(--blue);}
 .qc-opt.correct .qc-opt-letter{background:#00897B;color:#fff;border-color:#00897B;}
 .qc-opt.wrong .qc-opt-letter{background:#C62828;color:#fff;border-color:#C62828;}
-.qc-opt-text{flex:1;font-size:14px;color:#334155;}
+.qc-opt-text{flex:1;font-size:14px;color:#334155;text-align:justify;}
 .qc-feedback{padding:10px 14px;border-radius:10px;font-size:13px;font-weight:700;margin-bottom:8px;display:none;}
 .qc-feedback.benar{background:#E0F2F1;color:#004D40;display:block;}
 .qc-feedback.salah{background:#FFEBEE;color:#B71C1C;display:block;}
@@ -1531,6 +1531,19 @@ input:checked+.slider:before{transform:translateX(22px);}
     document.getElementById('errorMateriNotice').style.display='block';
 })();
 
+// ========== FORMAT TEKS ==========
+function formatSoal(teks) {
+  if (!teks) return '';
+  return teks
+    .replace(/&/g, '&amp;')           // escape HTML
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/\n\n/g, '</p><p style="margin-bottom:8px;text-align:justify;">')  // paragraf baru
+    .replace(/\n/g, '<br>')            // baris baru biasa
+    .replace(/^/, '<p style="margin-bottom:8px;text-align:justify;">')           // buka p
+    .replace(/$/, '</p>');             // tutup p
+}
+
 // ========== PROTECTION ==========
 document.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('keydown',e=>{
@@ -2287,7 +2300,7 @@ function renderQCQuestion(){
   document.getElementById('qcPlayScore').textContent=`Soal ke-${idx+1}`;
   document.getElementById('qcCorrectCount').textContent=`✅ ${qcState.benar} Benar`;
   document.getElementById('qcQNum').textContent=`SOAL ${idx+1}`;
-  document.getElementById('qcQTxt').innerHTML=d.q;
+  document.getElementById('qcQTxt').innerHTML=formatSoal(d.q);
   let optsHtml='';
   d.opt.forEach((o,i)=>{optsHtml+=`<div class="qc-opt" onclick="playSound('select');pilihQCJawaban(${i})"><div class="qc-opt-letter">${PREFIXES[i]}</div><div class="qc-opt-text">${o}</div></div>`;});
   document.getElementById('qcOpts').innerHTML=optsHtml;
@@ -2528,7 +2541,7 @@ function showEvaluasiFromList(setId){
     if(q.isTKP){const uS=(savedScores[i]!==undefined&&savedScores[i]!==null)?savedScores[i]:null;if(uS!==null){const idx=q.optionScores.findIndex(s=>s===uS);jawUser=idx>=0?`${PREFIXES[idx]}. ${q.options[idx]} (${uS}pt)`:'Tidak dijawab';const mS=Math.max(...q.optionScores),bIdx=q.optionScores.findIndex(s=>s===mS);jawBenar=`${PREFIXES[bIdx]}. ${q.options[bIdx]} (${mS}pt)`;stCls=uS===mS?'benar':'salah';stIcon=uS===mS?'✅':'❌';}}
     else{const uA=(savedAnswers[i]!==undefined&&savedAnswers[i]!==null)?savedAnswers[i]:null;if(uA!==null){jawUser=`${PREFIXES[uA]}. ${q.options[uA]}`;jawBenar=`${PREFIXES[q.answer]}. ${q.options[q.answer]}`;stCls=uA===q.answer?'benar':'salah';stIcon=uA===q.answer?'✅':'❌';}}
     let stLabel=stCls==='benar'?'<span style="color:#00897B;font-weight:700;font-size:12px;">✅ BENAR</span>':stCls==='salah'?'<span style="color:#C62828;font-weight:700;font-size:12px;">❌ SALAH</span>':'<span style="color:#F57C00;font-weight:700;font-size:12px;">⏳ BELUM</span>';
-    html+=`<div class="evaluasi-item ${stCls}"><div class="soal-teks">${stIcon} Soal ${n} [${cat.name}] — ${stLabel}</div><div class="soal-isi">${q.question}</div><div class="jawaban-user">📌 <strong>Jawaban Anda:</strong> ${jawUser}</div>${jawBenar?`<div class="jawaban-benar">✅ <strong>Jawaban Benar:</strong> ${jawBenar}</div>`:''}${pb?`<div class="pembahasan-box"><strong>💡 Pembahasan</strong><br>${pb}</div>`:''}</div>`;
+    html+=`<div class="evaluasi-item ${stCls}"><div class="soal-teks">${stIcon} Soal ${n} [${cat.name}] — ${stLabel}</div><div class="soal-isi">${formatSoal(q.question)}</div><div class="jawaban-user">📌 <strong>Jawaban Anda:</strong> ${jawUser}</div>${jawBenar?`<div class="jawaban-benar">✅ <strong>Jawaban Benar:</strong> ${jawBenar}</div>`:''}${pb?`<div class="pembahasan-box"><strong>💡 Pembahasan</strong><br>${pb}</div>`:''}</div>`;
   }
   document.getElementById('evalListContent').innerHTML=html;
   goTo('evaluasiListPage');
@@ -2608,7 +2621,7 @@ function startQuiz(setId){
 function loadQuestion(){
   const n=curQ+1;
   document.getElementById('quizProgress').textContent=`Soal ${n}/${questions.length}`;
-  document.getElementById('quizQuestion').innerHTML=questions[curQ].question;
+  document.getElementById('quizQuestion').innerHTML=formatSoal(questions[curQ].question);
   const kat=questions[curQ].kategori||getCat(n).name;
   const hc=document.getElementById('quizHeaderCat');hc.textContent=`📍 ${kat}`;hc.className=`cat-pill ${kat.toLowerCase()}`;
   let html='';
@@ -2711,7 +2724,7 @@ function showEvaluasi(){
     let jawUser='Tidak dijawab',jawBenar='',stCls='belum',stIcon='⏳';
     if(q.isTKP){if(userScores[i]!==null&&userScores[i]!==undefined){const uS=userScores[i],idx=q.optionScores.findIndex(s=>s===uS);jawUser=idx>=0?`${PREFIXES[idx]}. ${q.options[idx]} (${uS}pt)`:'Tidak dijawab';const mS=Math.max(...q.optionScores),bIdx=q.optionScores.findIndex(s=>s===mS);jawBenar=`${PREFIXES[bIdx]}. ${q.options[bIdx]} (${mS}pt)`;stCls=uS===mS?'benar':'salah';stIcon=uS===mS?'✅':'❌';}}
     else{if(userAnswers[i]!==null){jawUser=`${PREFIXES[userAnswers[i]]}. ${q.options[userAnswers[i]]}`;jawBenar=`${PREFIXES[q.answer]}. ${q.options[q.answer]}`;stCls=userAnswers[i]===q.answer?'benar':'salah';stIcon=userAnswers[i]===q.answer?'✅':'❌';}}
-    html+=`<div class="evaluasi-item ${stCls}"><div class="soal-teks">${stIcon} Soal ${n} [${katName}]</div><div class="soal-isi">${q.question}</div><div class="jawaban-user">📌 <strong>Jawaban Anda:</strong> ${jawUser}</div>${jawBenar?`<div class="jawaban-benar">✅ <strong>Jawaban Benar:</strong> ${jawBenar}</div>`:''}${pb?`<div class="pembahasan-box"><strong>💡 Pembahasan</strong><br>${pb}</div>`:''}</div>`;
+    html+=`<div class="evaluasi-item ${stCls}"><div class="soal-teks">${stIcon} Soal ${n} [${katName}]</div><div class="soal-isi">${formatSoal(q.question)}</div><div class="jawaban-user">📌 <strong>Jawaban Anda:</strong> ${jawUser}</div>${jawBenar?`<div class="jawaban-benar">✅ <strong>Jawaban Benar:</strong> ${jawBenar}</div>`:''}${pb?`<div class="pembahasan-box"><strong>💡 Pembahasan</strong><br>${pb}</div>`:''}</div>`;
   }
   panel.innerHTML=html;panel.style.display='block';document.getElementById('btnCloseEval').style.display='block';panel.scrollIntoView({behavior:'smooth',block:'start'});
 }
