@@ -1,0 +1,242 @@
+Berikut langkah lengkap menambahkan PWA ke app kamu:
+
+---
+
+## Langkah 1 — Buat file `manifest.json`
+
+Buat file baru bernama `manifest.json` di folder yang sama dengan `index.html`:
+
+```json
+{
+  "name": "Latihan SKD CPNS",
+  "short_name": "SKD CPNS",
+  "description": "Aplikasi latihan soal SKD CPNS - TWK, TIU, TKP",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#1565C0",
+  "background_color": "#F0F4FF",
+  "lang": "id",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
+```
+
+---
+
+## Langkah 2 — Buat file `service-worker.js`
+
+Buat file baru bernama `service-worker.js` di folder yang sama:
+
+```javascript
+const CACHE_NAME = 'skd-cpns-v1';
+
+// Semua file yang perlu disimpan offline
+const FILES_TO_CACHE = [
+  './index.html',
+  './manifest.json',
+  './images.js',
+  './daftarpengguna.js',
+  './twk.js',
+  './tiu.js',
+  './tkp.js',
+  './paket1.js',
+  './paket2.js',
+  './paket3.js',
+  './paket4.js',
+  './paket5.js',
+  './quiztwk.js',
+  './quiztiu.js',
+  './quiztkp.js',
+  './icon-192.png',
+  './icon-512.png',
+];
+
+// Install: simpan semua file ke cache
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(FILES_TO_CACHE);
+    })
+  );
+  self.skipWaiting();
+});
+
+// Activate: hapus cache lama
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(keys => {
+      return Promise.all(
+        keys
+          .filter(key => key !== CACHE_NAME)
+          .map(key => caches.delete(key))
+      );
+    })
+  );
+  self.clients.claim();
+});
+
+// Fetch: ambil dari cache dulu, baru internet
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request).then(response => {
+      if (response) return response;
+      return fetch(event.request).catch(() => {
+        // Jika offline dan tidak ada cache, tampilkan halaman utama
+        if (event.request.destination === 'document') {
+          return caches.match('./index.html');
+        }
+      });
+    })
+  );
+});
+```
+
+---
+
+## Langkah 3 — Tambah di `index.html`
+
+### Di bagian `<head>` (setelah baris `<meta name="viewport"...>`):
+
+```html
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1565C0">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SKD CPNS">
+<link rel="apple-touch-icon" href="icon-192.png">
+```
+
+### Di bagian paling bawah `<script>` (sebelum `</script>` terakhir):
+
+```javascript
+// ========== PWA SERVICE WORKER ==========
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js')
+      .then(reg => console.log('✅ SW terdaftar:', reg.scope))
+      .catch(err => console.log('❌ SW gagal:', err));
+  });
+}
+```
+
+---
+
+## Langkah 4 — Buat Icon
+
+Kamu perlu 2 file icon PNG:
+- `icon-192.png` ukuran 192×192 pixel
+- `icon-512.png` ukuran 512×512 pixel
+
+Cara cepat buat icon gratis bisa pakai salah satu dari:
+- **realfavicongenerator.net** — upload gambar, download semua ukuran
+- **favicon.io** — buat dari emoji atau teks
+- **pwa-image-generator.firebaseapp.com** — khusus PWA
+
+---
+
+## Langkah 5 — Upload ke Hosting HTTPS
+
+PWA **wajib HTTPS**, tidak bisa di `file://`. Pilihan hosting gratis:
+
+### Opsi A — GitHub Pages (Paling Mudah)
+```
+1. Buat akun GitHub (gratis)
+2. Buat repository baru
+3. Upload semua file (index.html, paket1.js, dst)
+4. Settings → Pages → pilih branch main
+5. URL otomatis: https://username.github.io/nama-repo
+```
+
+### Opsi B — Netlify (Drag & Drop)
+```
+1. Buka netlify.com
+2. Drag & drop folder project ke browser
+3. Langsung jadi — URL otomatis https://xxx.netlify.app
+```
+
+### Opsi C — Vercel
+```
+1. Buka vercel.com
+2. Import dari GitHub atau upload manual
+3. URL otomatis: https://xxx.vercel.app
+```
+
+---
+
+## Langkah 6 — Test PWA
+
+Setelah di-hosting, buka di Chrome/HP lalu:
+
+**Android:**
+```
+Buka URL → tunggu beberapa detik → 
+muncul banner "Tambahkan ke layar utama" → klik Install
+```
+
+**iOS Safari:**
+```
+Buka URL → tombol Share (kotak dengan panah) → 
+"Add to Home Screen" → Add
+```
+
+**Desktop Chrome:**
+```
+Buka URL → lihat icon install di address bar (kanan) → klik
+```
+
+---
+
+## Struktur Folder Akhir
+
+```
+📁 project/
+├── index.html          ← file utama
+├── manifest.json       ← identitas PWA (BARU)
+├── service-worker.js   ← cache offline (BARU)
+├── icon-192.png        ← icon kecil (BARU)
+├── icon-512.png        ← icon besar (BARU)
+├── images.js
+├── daftarpengguna.js
+├── twk.js
+├── tiu.js
+├── tkp.js
+├── paket1.js
+├── paket2.js
+├── paket3.js
+├── paket4.js
+├── paket5.js
+├── quiztwk.js
+├── quiztiu.js
+└── quiztkp.js
+```
+
+---
+
+## Cara Update Konten Setelah Install
+
+Kalau ada perubahan file (misal tambah paket baru), ubah nama cache di `service-worker.js`:
+
+```javascript
+// Ganti v1 → v2 setiap kali ada update
+const CACHE_NAME = 'skd-cpns-v2';
+
+// Dan tambahkan file baru ke daftar
+'./paket6.js',
+```
+
+User yang sudah install akan otomatis mendapat update saat buka app dalam kondisi ada internet.
