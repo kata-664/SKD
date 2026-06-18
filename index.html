@@ -676,6 +676,7 @@ input:checked+.slider:before{transform:translateX(22px);}
 .qc-question-card{background:#fff;border-radius:16px;padding:18px;box-shadow:var(--shadow);margin-bottom:10px;width:100%;box-sizing:border-box;}
 .qc-q-num{font-size:11px;color:var(--gray);font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;}
 .qc-q-txt{font-size:15px;font-weight:700;line-height:1.65;color:var(--dark);margin-bottom:14px;text-align:justify;word-break:break-word;width:100%;}
+.qc-q-txt img, .question-txt img, .evaluasi-item .soal-isi img{max-width:100%;height:auto;border-radius:10px;margin:8px 0;display:block;}
 .qc-options{display:flex;flex-direction:column;gap:8px;}
 .qc-opt{display:flex;align-items:center;gap:12px;padding:12px 14px;border:2px solid var(--border);border-radius:12px;cursor:pointer;transition:.15s;background:#fff;}
 .qc-opt:active{transform:scale(.98);}
@@ -1668,7 +1669,13 @@ input:checked+.slider:before{transform:translateX(22px);}
 // ========== FORMAT TEKS ==========
 function formatSoal(teks) {
   if (!teks) return '';
-  return teks
+  // Simpan tag <img> apa adanya dulu, supaya tidak ikut di-escape jadi teks &lt;img...&gt;
+  const imgTags = [];
+  let working = teks.replace(/<img[^>]*>/gi, function(match) {
+    imgTags.push(match);
+    return '\u0000IMG' + (imgTags.length - 1) + '\u0000';
+  });
+  working = working
     .replace(/&/g, '&amp;')           // escape HTML
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
@@ -1676,6 +1683,9 @@ function formatSoal(teks) {
     .replace(/\n/g, '<br>')            // baris baru biasa
     .replace(/^/, '<p style="margin-bottom:8px;text-align:justify;">')           // buka p
     .replace(/$/, '</p>');             // tutup p
+  // Kembalikan tag <img> aslinya ke posisi semula
+  working = working.replace(/\u0000IMG(\d+)\u0000/g, function(_, i) { return imgTags[parseInt(i, 10)]; });
+  return working;
 }
 
 // ========== PROTECTION ==========
