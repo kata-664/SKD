@@ -492,10 +492,12 @@ input:checked+.slider:before{transform:translateX(22px);}
 .result-table td:last-child{text-align:right;font-weight:700;color:var(--dark);}
 .result-table tr:last-child td{border-bottom:none;font-size:16px;color:var(--blue);}
 .pg-grid{display:flex;gap:8px;margin:14px 0;}
-.pg-card{flex:1;text-align:center;padding:10px 6px;border-radius:12px;font-size:12px;}
+.pg-card{flex:1;text-align:center;padding:10px 6px;border-radius:12px;font-size:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;}
 .pg-card.pass{background:#E0F2F1;color:#004D40;}
 .pg-card.fail{background:#FFEBEE;color:#B71C1C;}
-.pg-card strong{display:block;font-size:13px;font-weight:800;margin-top:4px;}
+.pg-card .ic-inline{display:inline-flex;align-items:center;gap:6px;font-weight:700;}
+.pg-card .pg-score{display:inline-flex;align-items:center;gap:6px;}
+.pg-card strong{display:inline-block;font-size:13px;font-weight:800;}
 .pass-banner{padding:12px;border-radius:12px;text-align:center;font-size:14px;font-weight:700;margin-bottom:14px;}
 .pass-banner.pass{background:#E0F2F1;color:#004D40;}
 .pass-banner.fail{background:#FFEBEE;color:#B71C1C;}
@@ -884,8 +886,8 @@ input:checked+.slider:before{transform:translateX(22px);}
 .ic-sm svg{width:16px;height:16px;}
 .qci-header-left{display:flex !important;align-items:center;}
 .qci-header-left svg{flex-shrink:0;}
-.result-detail-card h3, .pg-card{display:flex;align-items:center;gap:6px;}
-.pg-card{justify-content:center;}
+.result-detail-card h3{display:flex;align-items:center;gap:6px;}
+.pg-card{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;}
 .pg-card svg{width:15px;height:15px;flex-shrink:0;}
 .result-detail-card h3 svg{width:16px;height:16px;}
 .btn-r-ulangi,.btn-r-eval,.btn-mulai-simulasi,.btn-mulai-qc,.btn-reset,.btn-eval,.btn-logout,.notif-clear-btn button,.btn-back-secondary,.sidebar-header h3,.notif-panel-header h3{display:flex;align-items:center;justify-content:center;gap:7px;}
@@ -2850,9 +2852,9 @@ function finishQuiz(){
   document.getElementById('scoreDetail').innerHTML=`<h3>📊 Detail Skor</h3><table class="result-table"><tr><td><span class="ic-inline">${IMAGES.icon_twkm}TWK</span></td><td><strong>${s.twk}</strong> / ${mTWK}</td></tr><tr><td><span class="ic-inline">${IMAGES.icon_tium}TIU</span></td><td><strong>${s.tiu}</strong> / ${mTIU}</td></tr><tr><td><span class="ic-inline">${IMAGES.icon_tkpm}TKP</span></td><td><strong>${s.tkp}</strong> / ${mTKP}</td></tr><tr><td><strong>✅ TOTAL</strong></td><td><strong>${s.total}</strong> / ${mTot}</td></tr></table>`;
   const pass={twk:s.twk>=PASSING.TWK,tiu:s.tiu>=PASSING.TIU,tkp:s.tkp>=PASSING.TKP};pass.all=pass.twk&&pass.tiu&&pass.tkp;
   document.getElementById('pgGrid').innerHTML=`
-    <div class="pg-card ${pass.twk?'pass':'fail'}"><span class="ic-inline">${IMAGES.icon_twkm}TWK</span>: ${s.twk}/65<strong>${pass.twk?'✅ Lulus':'❌ Gagal'}</strong></div>
-    <div class="pg-card ${pass.tiu?'pass':'fail'}"><span class="ic-inline">${IMAGES.icon_tium}TIU</span>: ${s.tiu}/80<strong>${pass.tiu?'✅ Lulus':'❌ Gagal'}</strong></div>
-    <div class="pg-card ${pass.tkp?'pass':'fail'}"><span class="ic-inline">${IMAGES.icon_tkpm}TKP</span>: ${s.tkp}/166<strong>${pass.tkp?'✅ Lulus':'❌ Gagal'}</strong></div>`;
+    <div class="pg-card ${pass.twk?'pass':'fail'}"><span class="ic-inline">${IMAGES.icon_twkm}TWK</span><span class="pg-score">${s.twk}/65<strong>${pass.twk?'✅ Lulus':'❌ Gagal'}</strong></span></div>
+    <div class="pg-card ${pass.tiu?'pass':'fail'}"><span class="ic-inline">${IMAGES.icon_tium}TIU</span><span class="pg-score">${s.tiu}/80<strong>${pass.tiu?'✅ Lulus':'❌ Gagal'}</strong></span></div>
+    <div class="pg-card ${pass.tkp?'pass':'fail'}"><span class="ic-inline">${IMAGES.icon_tkpm}TKP</span><span class="pg-score">${s.tkp}/166<strong>${pass.tkp?'✅ Lulus':'❌ Gagal'}</strong></span></div>`;
   const bannerEl=document.getElementById('passBanner');
   bannerEl.className=`pass-banner ${pass.all?'pass':'fail'}`;
   bannerEl.textContent=pass.all?'🎉 SELAMAT! Anda LULUS Passing Grade SKD!':'⚠️ Belum lulus passing grade. Terus semangat berlatih!';
