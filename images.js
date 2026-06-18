@@ -122,7 +122,9 @@ var IMAGES = {
   icon_latihan: '<img src="images/journals.svg" style="width: 22px; height: 22px; object-fit: contain;">',
   icon_statistik: '<img src="images/graph-up-arrow.svg" style="width: 22px; height: 22px; object-fit: contain;">',
   icon_profil: '<img src="images/person.svg" style="width: 22px; height: 22px; object-fit: contain;">',
-  icon_tiu: '<img src="images/brain-bulb.jpg">',
+
+  // Icon Materi
+  icon_tium: '<img src="images/brain-bulb.jpg">',
   logo: '<img src="images/logo.svg" style="width: 100px; height: 100px;">',
 };
 
