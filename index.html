@@ -2175,14 +2175,40 @@ function getMateri(k){
 }
 function showMateri(k){
   markMateriOpened(k);
-  const m=getMateri(k);
-  document.getElementById('materiContentTitle').textContent=m.judul;
-  const cd=document.getElementById('materiContentFull');
-  const nl={twk:'📚 TWK',tiu:'🔢 TIU',tkp:'⭐ TKP'};
-  let nav='<div class="materi-nav-bottom">';
-  for(let x in nl){if(x!==k)nav+=`<button class="btn-${x}" onclick="playSound('menu');showMateri('${x}')">${nl[x]}</button>`;}
-  nav+='</div>';
-  cd.innerHTML=m.konten+nav;
+  const m = getMateri(k);
+  document.getElementById('materiContentTitle').textContent = m.judul;
+  const cd = document.getElementById('materiContentFull');
+
+  const nl = {
+    twk: { label: 'TWK', icon: 'icon_twkm' },
+    tiu: { label: 'TIU', icon: 'icon_tium' },
+    tkp: { label: 'TKP', icon: 'icon_tkpm' }
+  };
+
+  let nav = '<div class="materi-nav-bottom">';
+  for(let x in nl){
+    if(x !== k){
+      nav += `<button class="btn-${x}" onclick="playSound('menu');showMateri('${x}')">
+        <span data-icon="${nl[x].icon}"></span> ${nl[x].label}
+      </button>`;
+    }
+  }
+  nav += '</div>';
+
+  cd.innerHTML = m.konten + nav;
+
+  // Jalankan ulang auto-fill data-icon untuk elemen baru
+  cd.querySelectorAll('[data-icon]').forEach(function(el){
+    const key = el.getAttribute('data-icon');
+    const value = IMAGES[key];
+    if(!value) return;
+    if(value.includes('<img')){
+      el.innerHTML = value;
+    } else {
+      el.textContent = value;
+    }
+  });
+
   goTo('materiContentPage');
   checkNewAchievements();
 }
