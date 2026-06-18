@@ -124,14 +124,14 @@ var IMAGES = {
   icon_profil: '<img src="images/person.svg" style="width: 22px; height: 22px; object-fit: contain;">',
 
   // Icon Kuis
-  icon_twkm: '<img src="images/flag.svg" style="width: 22px; height: 22px; object-fit: contain;>',
-  icon_tium: '<img src="images/brain-bulb.svg" style="width: 22px; height: 22px; object-fit: contain;>',
-  icon_tkpm: '<img src="images/group-like.svg" style="width: 22px; height: 22px; object-fit: contain;>',
+  icon_twkm: '<img src="images/flag.svg" style="width: 22px; height: 22px; object-fit: contain;">',
+  icon_tium: '<img src="images/brain-bulb.svg" style="width: 22px; height: 22px; object-fit: contain;">',
+  icon_tkpm: '<img src="images/group-like.svg" style="width: 22px; height: 22px; object-fit: contain;">',
   
   // Icon Materi
-  icon_twkm: '<img src="images/flag.svg" style="width: 22px; height: 22px; object-fit: contain;>',
-  icon_tium: '<img src="images/brain-bulb.svg" style="width: 22px; height: 22px; object-fit: contain;>',
-  icon_tkpm: '<img src="images/group-like.svg" style="width: 22px; height: 22px; object-fit: contain;>',
+  icon_twkm: '<img src="images/flag.svg" style="width: 22px; height: 22px; object-fit: contain;">',
+  icon_tium: '<img src="images/brain-bulb.svg" style="width: 22px; height: 22px; object-fit: contain;">',
+  icon_tkpm: '<img src="images/group-like.svg" style="width: 22px; height: 22px; object-fit: contain;">',
   
   logo: '<img src="images/logo.svg" style="width: 100px; height: 100px;">',
 };
