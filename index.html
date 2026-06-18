@@ -403,6 +403,7 @@ input:checked+.slider:before{transform:translateX(22px);}
 .pembahasan-box strong{display:block;margin-bottom:3px;font-size:11px;text-transform:uppercase;letter-spacing:.5px;}
 .score-summary-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:14px;}
 .score-pill{padding:5px 12px;border-radius:20px;font-weight:700;font-size:12px;}
+.score-pill .ic-inline svg{width:13px;height:13px;}
 .score-pill.twk{background:#EDE7F6;color:#512DA8;}
 .score-pill.tiu{background:#FFF3E0;color:#E65100;}
 .score-pill.tkp{background:#E0F2F1;color:#004D40;}
@@ -487,6 +488,7 @@ input:checked+.slider:before{transform:translateX(22px);}
 .result-table{width:100%;border-collapse:collapse;}
 .result-table td{padding:8px 4px;border-bottom:1px solid var(--border);font-size:14px;}
 .result-table td:first-child{font-weight:700;color:#334155;}
+.result-table .ic-inline svg{width:15px;height:15px;}
 .result-table td:last-child{text-align:right;font-weight:700;color:var(--dark);}
 .result-table tr:last-child td{border-bottom:none;font-size:16px;color:var(--blue);}
 .pg-grid{display:flex;gap:8px;margin:14px 0;}
@@ -542,7 +544,6 @@ input:checked+.slider:before{transform:translateX(22px);}
 .stats-bar-fill.tiu{background:linear-gradient(90deg,#BF360C,#E64A19);}
 .stats-bar-fill.tkp{background:linear-gradient(90deg,#00695C,#00897B);}
 .stats-table{width:100%;border-collapse:collapse;font-size:12px;}
-.stats-table .ic-inline{display:inline-flex;align-items:center;vertical-align:middle;}
 .stats-table .ic-inline svg{width:14px;height:14px;}
 .stats-table th{background:var(--bg);padding:8px;text-align:center;font-size:11px;font-weight:700;color:#334155;}
 .stats-table td{padding:8px;text-align:center;border-bottom:1px solid var(--border);}
@@ -662,7 +663,6 @@ input:checked+.slider:before{transform:translateX(22px);}
 /* QC Play */
 .qc-play-header{background:#fff;border-radius:16px;padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shadow);}
 .qc-play-cat{font-weight:800;padding:4px 14px;border-radius:20px;font-size:13px;display:inline-flex;align-items:center;gap:5px;}
-.qc-play-cat .ic-inline{display:inline-flex;align-items:center;}
 .qc-play-cat .ic-inline svg{width:14px;height:14px;}
 .qc-play-cat.twk{background:#EDE7F6;color:#7B1FA2;}
 .qc-play-cat.tiu{background:#FFF3E0;color:#E65100;}
@@ -820,6 +820,8 @@ input:checked+.slider:before{transform:translateX(22px);}
   text-align:center;padding:48px 16px;color:var(--gray);
 }
 .notif-empty .ne-icon{font-size:48px;margin-bottom:12px;}
+.notif-empty .ne-icon{display:flex;align-items:center;justify-content:center;}
+.notif-empty .ne-icon svg{width:48px;height:48px;}
 .notif-empty p{font-size:13px;line-height:1.6;}
 .notif-clear-btn{
   padding:12px 16px;border-top:1px solid var(--border);flex-shrink:0;
@@ -843,6 +845,7 @@ input:checked+.slider:before{transform:translateX(22px);}
 
 /* ========== SVG ICON — WARNA & UKURAN UMUM ========== */
 [data-icon] svg, .ic-inline svg{display:block;}
+.ic-inline{display:inline-flex;align-items:center;gap:4px;vertical-align:middle;}
 .avatar{color:#fff;}
 .avatar svg{width:24px;height:24px;}
 .notif-btn{color:#fff;}
@@ -873,6 +876,8 @@ input:checked+.slider:before{transform:translateX(22px);}
 .qc-confirm-icon{display:flex;align-items:center;justify-content:center;}
 .qc-confirm-icon svg{width:48px;height:48px;}
 .stats-mini .mi-icon{display:flex;align-items:center;justify-content:center;}
+.stats-mini .mi-icon svg{width:24px;height:24px;}
+.stats-bar-label .ic-inline svg{width:14px;height:14px;}
 .page-header h2, [id$="Page"] h2{display:flex;align-items:center;gap:8px;}
 .hero-label span{display:inline-flex;align-items:center;gap:6px;}
 .ic-sm svg{width:16px;height:16px;}
@@ -2665,7 +2670,7 @@ function showEvaluasiFromList(setId){
   const sTot=sTWK+sTIU+sTKP;
   const mTWK=bank.twk.length*5,mTIU=bank.tiu.length*5,mTKP=bank.tkp.length*5,mTot=mTWK+mTIU+mTKP;
   document.getElementById('evalListTitle').textContent=`📖 Latihan SKD Paket ${setId}`;
-  document.getElementById('evalListScoreSummary').innerHTML=`<div class="score-summary-row"><span class="score-pill twk">📚 TWK: ${sTWK}/${mTWK}</span><span class="score-pill tiu">🔢 TIU: ${sTIU}/${mTIU}</span><span class="score-pill tkp">⭐ TKP: ${sTKP}/${mTKP}</span><span class="score-pill total">✅ Total: ${sTot}/${mTot}</span></div>`;
+  document.getElementById('evalListScoreSummary').innerHTML=`<div class="score-summary-row"><span class="score-pill twk"><span class="ic-inline">${IMAGES.icon_twkm}TWK</span>: ${sTWK}/${mTWK}</span><span class="score-pill tiu"><span class="ic-inline">${IMAGES.icon_tium}TIU</span>: ${sTIU}/${mTIU}</span><span class="score-pill tkp"><span class="ic-inline">${IMAGES.icon_tkpm}TKP</span>: ${sTKP}/${mTKP}</span><span class="score-pill total">✅ Total: ${sTot}/${mTot}</span></div>`;
   let html='<h3 style="color:var(--blue);margin-bottom:12px;font-size:15px;">📝 Evaluasi Jawaban & Pembahasan</h3>';
   for(let i=0;i<eq.length;i++){
     const n=i+1,cat=getCat(n),q=eq[i],pb=q.pembahasan||'';
@@ -2687,23 +2692,23 @@ function refreshStatistik(){
     if(twk&&tiu&&tkp){totalLatihan++;const t=parseInt(twk)||0,u=parseInt(tiu)||0,k=parseInt(tkp)||0,tot=t+u+k;const lulus=t>=65&&u>=80&&k>=166;if(lulus)totalLulus++;if(tot>bestOverall)bestOverall=tot;const bank=getSoalBank(i);rows.push({paket:i,twk:t,tiu:u,tkp:k,total:tot,lulus,max:bank.twk.length*5+bank.tiu.length*5+bank.tkp.length*5});}
   }
   document.getElementById('statsOverview').innerHTML=`
-    <div class="stats-mini"><div class="mi-icon">📝</div><div class="mi-val">${totalLatihan}/5</div><div class="mi-lbl">Paket Selesai</div></div>
-    <div class="stats-mini"><div class="mi-icon">🏆</div><div class="mi-val">${bestOverall||'-'}</div><div class="mi-lbl">Skor Terbaik</div></div>
-    <div class="stats-mini"><div class="mi-icon">🎯</div><div class="mi-val">${totalLulus}/${totalLatihan||1}</div><div class="mi-lbl">Lulus PG</div></div>`;
+    <div class="stats-mini"><div class="mi-icon">${IMAGES.icon_stat_latihan}</div><div class="mi-val">${totalLatihan}/5</div><div class="mi-lbl">Paket Selesai</div></div>
+    <div class="stats-mini"><div class="mi-icon">${IMAGES.icon_stat_best}</div><div class="mi-val">${bestOverall||'-'}</div><div class="mi-lbl">Skor Terbaik</div></div>
+    <div class="stats-mini"><div class="mi-icon">${IMAGES.icon_akun_lulus}</div><div class="mi-val">${totalLulus}/${totalLatihan||1}</div><div class="mi-lbl">Lulus PG</div></div>`;
   let mTWK=0,mTIU=0,mTKP=0;rows.forEach(r=>{if(r.twk>mTWK)mTWK=r.twk;if(r.tiu>mTIU)mTIU=r.tiu;if(r.tkp>mTKP)mTKP=r.tkp;});
   const twkP=mTWK>0?Math.round(mTWK/150*100):0,tiuP=mTIU>0?Math.round(mTIU/175*100):0,tkpP=mTKP>0?Math.round(mTKP/225*100):0;
   document.getElementById('statsBars').innerHTML=`
     <h4 style="margin-bottom:8px;color:var(--dark);font-size:13px;font-weight:700;">📊 Penguasaan per Kategori</h4>
-    <div class="stats-bar-container"><div class="stats-bar-label"><span>📚 TWK</span><span>${mTWK}/150 (${twkP}%)</span></div><div class="stats-bar"><div class="stats-bar-fill twk" style="width:${twkP}%">${twkP}%</div></div></div>
-    <div class="stats-bar-container"><div class="stats-bar-label"><span>🔢 TIU</span><span>${mTIU}/175 (${tiuP}%)</span></div><div class="stats-bar"><div class="stats-bar-fill tiu" style="width:${tiuP}%">${tiuP}%</div></div></div>
-    <div class="stats-bar-container"><div class="stats-bar-label"><span>⭐ TKP</span><span>${mTKP}/225 (${tkpP}%)</span></div><div class="stats-bar"><div class="stats-bar-fill tkp" style="width:${tkpP}%">${tkpP}%</div></div></div>`;
+    <div class="stats-bar-container"><div class="stats-bar-label"><span class="ic-inline">${IMAGES.icon_twkm}TWK</span><span>${mTWK}/150 (${twkP}%)</span></div><div class="stats-bar"><div class="stats-bar-fill twk" style="width:${twkP}%">${twkP}%</div></div></div>
+    <div class="stats-bar-container"><div class="stats-bar-label"><span class="ic-inline">${IMAGES.icon_tium}TIU</span><span>${mTIU}/175 (${tiuP}%)</span></div><div class="stats-bar"><div class="stats-bar-fill tiu" style="width:${tiuP}%">${tiuP}%</div></div></div>
+    <div class="stats-bar-container"><div class="stats-bar-label"><span class="ic-inline">${IMAGES.icon_tkpm}TKP</span><span>${mTKP}/225 (${tkpP}%)</span></div><div class="stats-bar"><div class="stats-bar-fill tkp" style="width:${tkpP}%">${tkpP}%</div></div></div>`;
   let hHtml='<h4 style="margin-bottom:8px;color:var(--dark);font-size:13px;font-weight:700;">📋 Riwayat Latihan</h4>';
   if(rows.length>0){hHtml+=`<table class="stats-table"><tr><th>Paket</th><th>TWK</th><th>TIU</th><th>TKP</th><th>Total</th><th>Status</th></tr>`;rows.forEach(r=>{hHtml+=`<tr><td>P${r.paket}</td><td>${r.twk}</td><td>${r.tiu}</td><td>${r.tkp}</td><td>${r.total}/${r.max}</td><td class="${r.lulus?'pass':'fail'}">${r.lulus?'✅':'❌'}</td></tr>`;});hHtml+='</table>';}
   else{hHtml+='<p style="color:#94A3B8;text-align:center;padding:16px;">Belum ada riwayat latihan.</p>';}
   document.getElementById('statsHistory').innerHTML=hHtml;
   let qcHtml='<h4 style="margin:14px 0 8px;color:var(--dark);font-size:13px;font-weight:700;">⚡ Rekor Kuis Cepat</h4>';
   qcHtml+=`<table class="stats-table"><tr><th>Kategori</th><th>1m</th><th>3m</th><th>5m</th><th>10m</th><th>Sesi</th></tr>`;
-  ['twk','tiu','tkp'].forEach(cat=>{const c=QC_CATS[cat];const sesi=getQCTotalSesi(cat);const b1=getQCBestScore(cat,1)||'-';const b3=getQCBestScore(cat,3)||'-';const b5=getQCBestScore(cat,5)||'-';const b10=getQCBestScore(cat,10)||'-';qcHtml+=`<tr><td style="font-weight:700;"><span class="ic-inline">${IMAGES[c.icon]}</span> ${c.name}</td><td>${b1}</td><td>${b3}</td><td>${b5}</td><td>${b10}</td><td>${sesi}</td></tr>`;});
+  ['twk','tiu','tkp'].forEach(cat=>{const c=QC_CATS[cat];const sesi=getQCTotalSesi(cat);const b1=getQCBestScore(cat,1)||'-';const b3=getQCBestScore(cat,3)||'-';const b5=getQCBestScore(cat,5)||'-';const b10=getQCBestScore(cat,10)||'-';qcHtml+=`<tr><td style="font-weight:700;"><span class="ic-inline">${IMAGES[c.icon]}${c.name}</span></td><td>${b1}</td><td>${b3}</td><td>${b5}</td><td>${b10}</td><td>${sesi}</td></tr>`;});
   qcHtml+='</table>';
   document.getElementById('statsQCHistory').innerHTML=qcHtml;
 }
@@ -2832,12 +2837,12 @@ function finishQuiz(){
   document.getElementById('resultSubtitle').textContent=wasSimulasi?'⏰ Hasil Simulasi SKD':`📝 Latihan SKD Paket ${activeSet}`;
   document.getElementById('resTotalScore').textContent=s.total;
   document.getElementById('resPct').textContent=`dari ${mTot} poin (${s.persen}%)`;
-  document.getElementById('scoreDetail').innerHTML=`<h3>📊 Detail Skor</h3><table class="result-table"><tr><td>📚 TWK</td><td><strong>${s.twk}</strong> / ${mTWK}</td></tr><tr><td>🔢 TIU</td><td><strong>${s.tiu}</strong> / ${mTIU}</td></tr><tr><td>⭐ TKP</td><td><strong>${s.tkp}</strong> / ${mTKP}</td></tr><tr><td><strong>✅ TOTAL</strong></td><td><strong>${s.total}</strong> / ${mTot}</td></tr></table>`;
+  document.getElementById('scoreDetail').innerHTML=`<h3>📊 Detail Skor</h3><table class="result-table"><tr><td><span class="ic-inline">${IMAGES.icon_twkm}TWK</span></td><td><strong>${s.twk}</strong> / ${mTWK}</td></tr><tr><td><span class="ic-inline">${IMAGES.icon_tium}TIU</span></td><td><strong>${s.tiu}</strong> / ${mTIU}</td></tr><tr><td><span class="ic-inline">${IMAGES.icon_tkpm}TKP</span></td><td><strong>${s.tkp}</strong> / ${mTKP}</td></tr><tr><td><strong>✅ TOTAL</strong></td><td><strong>${s.total}</strong> / ${mTot}</td></tr></table>`;
   const pass={twk:s.twk>=PASSING.TWK,tiu:s.tiu>=PASSING.TIU,tkp:s.tkp>=PASSING.TKP};pass.all=pass.twk&&pass.tiu&&pass.tkp;
   document.getElementById('pgGrid').innerHTML=`
-    <div class="pg-card ${pass.twk?'pass':'fail'}">📚 TWK: ${s.twk}/65<strong>${pass.twk?'✅ Lulus':'❌ Gagal'}</strong></div>
-    <div class="pg-card ${pass.tiu?'pass':'fail'}">🔢 TIU: ${s.tiu}/80<strong>${pass.tiu?'✅ Lulus':'❌ Gagal'}</strong></div>
-    <div class="pg-card ${pass.tkp?'pass':'fail'}">⭐ TKP: ${s.tkp}/166<strong>${pass.tkp?'✅ Lulus':'❌ Gagal'}</strong></div>`;
+    <div class="pg-card ${pass.twk?'pass':'fail'}"><span class="ic-inline">${IMAGES.icon_twkm}TWK</span>: ${s.twk}/65<strong>${pass.twk?'✅ Lulus':'❌ Gagal'}</strong></div>
+    <div class="pg-card ${pass.tiu?'pass':'fail'}"><span class="ic-inline">${IMAGES.icon_tium}TIU</span>: ${s.tiu}/80<strong>${pass.tiu?'✅ Lulus':'❌ Gagal'}</strong></div>
+    <div class="pg-card ${pass.tkp?'pass':'fail'}"><span class="ic-inline">${IMAGES.icon_tkpm}TKP</span>: ${s.tkp}/166<strong>${pass.tkp?'✅ Lulus':'❌ Gagal'}</strong></div>`;
   const bannerEl=document.getElementById('passBanner');
   bannerEl.className=`pass-banner ${pass.all?'pass':'fail'}`;
   bannerEl.textContent=pass.all?'🎉 SELAMAT! Anda LULUS Passing Grade SKD!':'⚠️ Belum lulus passing grade. Terus semangat berlatih!';
@@ -2971,7 +2976,7 @@ function renderNotifPanel(){
   if(log.length === 0){
     list.innerHTML = `
       <div class="notif-empty">
-        <div class="ne-icon">🔔</div>
+        <div class="ne-icon">${IMAGES.icon_notif}</div>
         <p>Belum ada aktivitas.<br>Mulai latihan untuk melihat riwayat di sini!</p>
       </div>`;
     return;
