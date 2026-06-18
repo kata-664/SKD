@@ -68,7 +68,6 @@ body{
 }
 .field-wrap input:focus{border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(21,101,192,.12);}
 .field-wrap input::placeholder{color:#B0BEC5;}
-.btn-eye{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:18px;color:var(--gray);padding:0;}
 .login-error{background:#FFEBEE;border:1px solid #FFCDD2;color:#B71C1C;padding:10px 14px;border-radius:10px;font-size:13px;font-weight:600;margin-bottom:14px;display:none;text-align:center;}
 .login-error.show{display:block;}
 .btn-masuk{
@@ -776,25 +775,20 @@ input:checked+.slider:before{transform:translateX(22px);}
 <div id="loginPage" class="page active">
   <div class="login-box">
     <div class="login-icon-wrap">
-      <span class="big-icon" data-icon="alarm_fill"></span>
+      <span class="big-icon">🎓</span>
       <h1>Latihan SKD CPNS</h1>
-      <p>Masuk untuk mulai belajar</p>
+      <p>Masukkan nama Anda untuk mulai belajar</p>
     </div>
-    <div id="loginError" class="login-error">⚠️ Username atau password salah!</div>
+    <div id="loginError" class="login-error">⚠️ Nama tidak boleh kosong!</div>
     <div class="field-group">
-      <label>Username</label>
+      <label>Nama Anda</label>
       <div class="field-wrap">
-        <input type="text" id="inputUsername" placeholder="Masukkan username" autocomplete="username" autocapitalize="none" spellcheck="false" onkeydown="if(event.key==='Enter')document.getElementById('inputPassword').focus()">
+        <input type="text" id="inputNama" placeholder="Contoh: Budi Santoso"
+          autocomplete="name" autocapitalize="words" spellcheck="false"
+          onkeydown="if(event.key==='Enter')doLogin()">
       </div>
     </div>
-    <div class="field-group">
-      <label>Password</label>
-      <div class="field-wrap">
-        <input type="password" id="inputPassword" placeholder="Masukkan password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
-        <button class="btn-eye" data-icon="icon_eyeon" onclick="togglePasswordVisibility()" id="btnEye" type="button"></button>
-      </div>
-    </div>
-    <button class="btn-masuk" onclick="doLogin()">Masuk</button>
+    <button class="btn-masuk" onclick="doLogin()">Masuk →</button>
     <div class="login-foot">Version 4.4 · © 2026 Latihan SKD · Hak Cipta Dilindungi</div>
   </div>
 </div>
@@ -971,7 +965,7 @@ input:checked+.slider:before{transform:translateX(22px);}
         <span class="akun-badge-pill">✅ Akun Aktif</span>
       </div>
       <div class="akun-info-card">
-        <div class="akun-row"><span class="akun-row-left">👤 Username</span><span class="akun-row-val" id="akunUsernameInfo">—</span></div>
+        <div class="akun-row"><span class="akun-row-left">👤 Nama</span><span class="akun-row-val" id="akunUsernameInfo">—</span></div>
         <div class="akun-row"><span class="akun-row-left">🏆 Skor Terbaik</span><span class="akun-row-val" id="akunBestScore">—</span></div>
         <div class="akun-row"><span class="akun-row-left">📝 Paket Selesai</span><span class="akun-row-val" id="akunPaketDone">0 / 5</span></div>
         <div class="akun-row"><span class="akun-row-left">🎯 Total Lulus PG</span><span class="akun-row-val" id="akunLulus">0</span></div>
@@ -1507,7 +1501,6 @@ input:checked+.slider:before{transform:translateX(22px);}
 
 <!-- ========== SCRIPTS ========== -->
 <script src="images.js"></script>
-<script src="daftarpengguna.js"></script>
 <script src="twk.js"></script>
 <script src="tiu.js"></script>
 <script src="tkp.js"></script>
@@ -1823,55 +1816,22 @@ function clearLoggedInUser(){localStorage.removeItem(SESSION_KEY);}
 function saveActivePage(p){if(!NON_RESTORABLE.includes(p))localStorage.setItem(ACTIVE_PAGE_KEY,p);}
 function getLastActivePage(){return localStorage.getItem(ACTIVE_PAGE_KEY)||'homePage';}
 
-// ========== AUTH UI ==========
-function togglePasswordVisibility(){
-  const inp = document.getElementById('inputPassword');
-  const btn = document.getElementById('btnEye');
-  
-  if(inp.type === 'password'){
-    inp.type = 'text';
-    btn.innerHTML = IMAGES['icon_eyeoff'];
-  } else {
-    inp.type = 'password';
-    btn.innerHTML = IMAGES['icon_eyeon'];
-  }
-}
-
 function doLogin(){
-  const u=document.getElementById('inputUsername').value.trim().toLowerCase();
-  const p=document.getElementById('inputPassword').value;
-  const errEl=document.getElementById('loginError');
-  if(!u||!p){errEl.textContent='⚠️ Username dan password tidak boleh kosong!';errEl.classList.add('show');return;}
-
-  // FIX: Ambil daftarPengguna, dengan fallback jika file JS tidak tersedia
-  let pengguna=[];
-  if(typeof daftarPengguna!=='undefined'&&Array.isArray(daftarPengguna)){
-    pengguna=daftarPengguna;
-  } else {
-    // Fallback default credentials jika daftarpengguna.js tidak ada
-    pengguna=[{username:'admin',password:'admin123'},{username:'user',password:'user123'}];
-  }
-
-  const match=pengguna.find(x=>x.username.toLowerCase()===u&&x.password===p);
-  if(match){
-    errEl.classList.remove('show');
-    setLoggedInUser(match.username);
-    document.getElementById('inputUsername').value='';
-    document.getElementById('inputPassword').value='';
-    document.getElementById('btnEye').innerHTML = IMAGES['icon_eyeon'];
-    document.getElementById('inputPassword').type='password';
-    playSound('login');
-    _showPage('homePage');
-    refreshHomeStats();
-    setRandomQuote();
-    updateHeaderAnim();
-  } else {
-    playSound('wrong');
-    errEl.textContent='⚠️ Username atau password salah!';
+  const nama = document.getElementById('inputNama').value.trim();
+  const errEl = document.getElementById('loginError');
+  if(!nama){
+    errEl.textContent = '⚠️ Nama tidak boleh kosong!';
     errEl.classList.add('show');
-    document.getElementById('inputPassword').value='';
-    document.getElementById('inputPassword').focus();
+    return;
   }
+  errEl.classList.remove('show');
+  setLoggedInUser(nama);
+  document.getElementById('inputNama').value = '';
+  playSound('login');
+  _showPage('homePage');
+  refreshHomeStats();
+  setRandomQuote();
+  updateHeaderAnim();
 }
 
 function showLogoutModal(){document.getElementById('logoutModal').classList.add('show');}
@@ -2004,22 +1964,29 @@ window.addEventListener('popstate',function(e){
 
 // ========== INIT ==========
 (function initApp(){
-  const user=getLoggedInUser();
+  const user = getLoggedInUser();
   if(user){
-    const lastPage=getLastActivePage();
-    const FORCE_HOME_ON_REFRESH=['quizlistPage','simulasiPage','pencapaianPage','statistikPage','materiPage','materiContentPage','quizCepatPage','quizCepatConfirmPage','quizCepatResultPage','akunPage','petunjukPage','tentangPage','resultPage','evaluasiListPage'];
-const restorable=PAGES.filter(p=>!NON_RESTORABLE.includes(p)&&!FORCE_HOME_ON_REFRESH.includes(p));
-const targetPage=restorable.includes(lastPage)?lastPage:'homePage';
+    const lastPage = getLastActivePage();
+    const FORCE_HOME_ON_REFRESH = [
+      'quizlistPage','simulasiPage','pencapaianPage','statistikPage',
+      'materiPage','materiContentPage','quizCepatPage','quizCepatConfirmPage',
+      'quizCepatResultPage','akunPage','petunjukPage','tentangPage',
+      'resultPage','evaluasiListPage'
+    ];
+    const restorable = PAGES.filter(p =>
+      !NON_RESTORABLE.includes(p) && !FORCE_HOME_ON_REFRESH.includes(p)
+    );
+    const targetPage = restorable.includes(lastPage) ? lastPage : 'homePage';
     _showPage(targetPage);
     refreshHomeStats();
     setRandomQuote();
     updateHeaderAnim();
-    if(targetPage==='quizlistPage')refreshQuizList();
-    if(targetPage==='statistikPage')refreshStatistik();
-    if(targetPage==='pencapaianPage')refreshPencapaian();
-    if(targetPage==='quizCepatPage')renderQuizCepatGrid();
-    if(targetPage==='akunPage')refreshAkunPage();
-    if(targetPage!=='homePage'){
+    if(targetPage === 'quizlistPage') refreshQuizList();
+    if(targetPage === 'statistikPage') refreshStatistik();
+    if(targetPage === 'pencapaianPage') refreshPencapaian();
+    if(targetPage === 'quizCepatPage') renderQuizCepatGrid();
+    if(targetPage === 'akunPage') refreshAkunPage();
+    if(targetPage !== 'homePage'){
       history.replaceState({page:'homePage'},'','');
       history.pushState({page:targetPage},'','');
     } else {
