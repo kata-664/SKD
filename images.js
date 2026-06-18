@@ -123,8 +123,16 @@ var IMAGES = {
   icon_statistik: '<img src="images/graph-up-arrow.svg" style="width: 22px; height: 22px; object-fit: contain;">',
   icon_profil: '<img src="images/person.svg" style="width: 22px; height: 22px; object-fit: contain;">',
 
+  // Icon Kuis
+  icon_twkm: '<img src="images/flag.svg">',
+  icon_tium: '<img src="images/brain-bulb.svg">',
+  icon_tkpm: '<img src="images/group-like.svg">',
+  
   // Icon Materi
-  icon_tium: '<img src="images/brain-bulb.jpg">',
+  icon_twkm: '<img src="images/flag.svg">',
+  icon_tium: '<img src="images/brain-bulb.svg">',
+  icon_tkpm: '<img src="images/group-like.svg">',
+  
   logo: '<img src="images/logo.svg" style="width: 100px; height: 100px;">',
 };
 
