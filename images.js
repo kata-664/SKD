@@ -57,10 +57,13 @@ var IMAGES = {
   // ===== LOGIN =====
   icon_login_app: `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" viewBox="0 0 16 16"><path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/><path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3z"/></svg>`,
 
+  // ===== STREAK (baru) =====
+  icon_fire: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0c-1 3-4 4.5-4 8.5a4 4 0 1 0 8 0C12 4.5 9 3 8 0z"/></svg>`,
+
 };
 
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('[data-icon]').forEach(function(el) {
+function fillIcons(root) {
+  (root || document).querySelectorAll('[data-icon]').forEach(function(el) {
     var key = el.getAttribute('data-icon');
     var value = IMAGES[key];
     if (!value) return;
@@ -70,4 +73,5 @@ document.addEventListener('DOMContentLoaded', function() {
       el.textContent = value;
     }
   });
-});
+}
+document.addEventListener('DOMContentLoaded', function() { fillIcons(); });
