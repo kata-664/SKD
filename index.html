@@ -542,6 +542,8 @@ input:checked+.slider:before{transform:translateX(22px);}
 .stats-bar-fill.tiu{background:linear-gradient(90deg,#BF360C,#E64A19);}
 .stats-bar-fill.tkp{background:linear-gradient(90deg,#00695C,#00897B);}
 .stats-table{width:100%;border-collapse:collapse;font-size:12px;}
+.stats-table .ic-inline{display:inline-flex;align-items:center;vertical-align:middle;}
+.stats-table .ic-inline svg{width:14px;height:14px;}
 .stats-table th{background:var(--bg);padding:8px;text-align:center;font-size:11px;font-weight:700;color:#334155;}
 .stats-table td{padding:8px;text-align:center;border-bottom:1px solid var(--border);}
 .stats-table .pass{color:#00695C;font-weight:700;}
@@ -2619,8 +2621,8 @@ function refreshPencapaian(){
 
 // ========== QUIZ LIST ==========
 const quizMeta=[
-  {id:1,name:'Paket 1'},{id:2,name:'Paket 2'},
-  {id:3,name:'Paket 3'},{id:4,name:'Paket 4'},{id:5,name:'Paket 5'}
+  {id:1,name:'Paket 1',icon:'icon_menu_latihan'},{id:2,name:'Paket 2',icon:'icon_menu_latihan'},
+  {id:3,name:'Paket 3',icon:'icon_menu_latihan'},{id:4,name:'Paket 4',icon:'icon_menu_latihan'},{id:5,name:'Paket 5',icon:'icon_menu_latihan'}
 ];
 function refreshQuizList(){
   const c=document.getElementById('quizListContainer');c.innerHTML='';
@@ -2636,7 +2638,7 @@ function refreshQuizList(){
     const badges=done?`<span class="qci-badge twk">TWK:${twk}/${mTWK}</span><span class="qci-badge tiu">TIU:${tiu}/${mTIU}</span><span class="qci-badge tkp">TKP:${tkp}/${mTKP}</span>`:`<span class="qci-badge belum">-</span><span class="qci-badge belum">-</span><span class="qci-badge belum">-</span>`;
     c.innerHTML+=`<div class="quiz-card-item">
       <div onclick="playSound('start');startQuiz(${m.id})">
-        <div class="qci-header"><div class="qci-header-left"><span style="font-size:20px;">${m.icon}</span><span>${m.name} (${total} soal)</span></div><div class="qci-badges">${badges}</div></div>
+        <div class="qci-header"><div class="qci-header-left"><span class="ic-sm" style="display:inline-flex;">${IMAGES[m.icon]}</span><span>${m.name} (${total} soal)</span></div><div class="qci-badges">${badges}</div></div>
         <div class="qci-footer">
           <div><span class="qci-total-label">Total Skor:</span> <span class="qci-total-val ${done?'done':''}">${tot} / ${mTot}</span></div>
           <span class="status-pill ${done?'done':'pending'}">${done?'✅ Selesai':'⏳ Belum'}</span>
@@ -2701,7 +2703,7 @@ function refreshStatistik(){
   document.getElementById('statsHistory').innerHTML=hHtml;
   let qcHtml='<h4 style="margin:14px 0 8px;color:var(--dark);font-size:13px;font-weight:700;">⚡ Rekor Kuis Cepat</h4>';
   qcHtml+=`<table class="stats-table"><tr><th>Kategori</th><th>1m</th><th>3m</th><th>5m</th><th>10m</th><th>Sesi</th></tr>`;
-  ['twk','tiu','tkp'].forEach(cat=>{const c=QC_CATS[cat];const sesi=getQCTotalSesi(cat);const b1=getQCBestScore(cat,1)||'-';const b3=getQCBestScore(cat,3)||'-';const b5=getQCBestScore(cat,5)||'-';const b10=getQCBestScore(cat,10)||'-';qcHtml+=`<tr><td style="font-weight:700;">${c.icon} ${c.name}</td><td>${b1}</td><td>${b3}</td><td>${b5}</td><td>${b10}</td><td>${sesi}</td></tr>`;});
+  ['twk','tiu','tkp'].forEach(cat=>{const c=QC_CATS[cat];const sesi=getQCTotalSesi(cat);const b1=getQCBestScore(cat,1)||'-';const b3=getQCBestScore(cat,3)||'-';const b5=getQCBestScore(cat,5)||'-';const b10=getQCBestScore(cat,10)||'-';qcHtml+=`<tr><td style="font-weight:700;"><span class="ic-inline">${IMAGES[c.icon]}</span> ${c.name}</td><td>${b1}</td><td>${b3}</td><td>${b5}</td><td>${b10}</td><td>${sesi}</td></tr>`;});
   qcHtml+='</table>';
   document.getElementById('statsQCHistory').innerHTML=qcHtml;
 }
