@@ -2,7 +2,7 @@
 var paket5 = {
   twk: [
   { // No 1
-    q: "",
+    q: "Statistika adalah cabang ilmu yang mempelajari metode dan teknik untuk mengumpulkan, mengolah, menganalisis, menyajikan, dan menafsirkan data sehingga dapat digunakan sebagai dasar pengambilan keputusan; melalui statistika, data yang beragam dapat diubah menjadi informasi yang bermakna dan mudah dipahami dalam bentuk tabel, diagram, grafik, maupun ukuran statistik seperti mean, median, modus, varians, dan simpangan baku, serta digunakan untuk mengetahui pola, tren, hubungan, dan karakteristik data guna membantu membuat prediksi atau kesimpulan yang lebih akurat. Statistika secara umum dibedakan menjadi statistika deskriptif yang berfungsi menggambarkan data dan statistika inferensial yang digunakan untuk menarik kesimpulan mengenai populasi berdasarkan sampel. Penerapannya sangat luas dalam bidang pendidikan, ekonomi, bisnis, kesehatan, teknologi, pemerintahan, dan penelitian ilmiah sehingga statistika berperan penting dalam membantu manusia memahami informasi, mengurangi ketidakpastian, serta mendukung pengambilan keputusan yang objektif, rasional, dan berdasarkan fakta.",
     opt: ["","","","",""],
     a: 4,
     pembahasan: ""
