@@ -659,7 +659,9 @@ input:checked+.slider:before{transform:translateX(22px);}
 
 /* QC Play */
 .qc-play-header{background:#fff;border-radius:16px;padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shadow);}
-.qc-play-cat{font-weight:800;padding:4px 14px;border-radius:20px;font-size:13px;}
+.qc-play-cat{font-weight:800;padding:4px 14px;border-radius:20px;font-size:13px;display:inline-flex;align-items:center;gap:5px;}
+.qc-play-cat .ic-inline{display:inline-flex;align-items:center;}
+.qc-play-cat .ic-inline svg{width:14px;height:14px;}
 .qc-play-cat.twk{background:#EDE7F6;color:#7B1FA2;}
 .qc-play-cat.tiu{background:#FFF3E0;color:#E65100;}
 .qc-play-cat.tkp{background:#E0F2F1;color:#00695C;}
@@ -1002,7 +1004,7 @@ input:checked+.slider:before{transform:translateX(22px);}
         <div class="menu-item-name">Latihan</div>
         <div class="menu-item-desc">Kerjakan soal berdasarkan kategori</div>
       </div>
-      <div class="menu-chevron">›</div>
+      <div class="menu-chevron" data-icon="icon_chevron"></div>
     </div>
     <div class="menu-item" onclick="playSound('menu');goTo('simulasiPage')">
       <div class="menu-item-left">
@@ -1010,7 +1012,7 @@ input:checked+.slider:before{transform:translateX(22px);}
         <div class="menu-item-name">Simulasi CAT</div>
         <div class="menu-item-desc">Pengalaman seperti ujian asli</div>
       </div>
-      <div class="menu-chevron">›</div>
+      <div class="menu-chevron" data-icon="icon_chevron"></div>
     </div>
     <div class="menu-item" onclick="playSound('menu');goTo('quizCepatPage')">
       <div class="menu-item-left">
@@ -1018,7 +1020,7 @@ input:checked+.slider:before{transform:translateX(22px);}
         <div class="menu-item-name">Kuis Cepat</div>
         <div class="menu-item-desc">Latihan singkat 5 menit</div>
       </div>
-      <div class="menu-chevron">›</div>
+      <div class="menu-chevron" data-icon="icon_chevron"></div>
     </div>
     <div class="menu-item" onclick="playSound('menu');goTo('materiPage')">
       <div class="menu-item-left">
@@ -1026,7 +1028,7 @@ input:checked+.slider:before{transform:translateX(22px);}
         <div class="menu-item-name">Materi</div>
         <div class="menu-item-desc">Ringkasan TWK, TIU, dan TKP</div>
       </div>
-      <div class="menu-chevron">›</div>
+      <div class="menu-chevron" data-icon="icon_chevron"></div>
     </div>
     <div class="menu-item" onclick="playSound('menu');goTo('pencapaianPage')">
       <div class="menu-item-left">
@@ -1034,7 +1036,7 @@ input:checked+.slider:before{transform:translateX(22px);}
         <div class="menu-item-name">Pencapaian</div>
         <div class="menu-item-desc">Lihat medali dan badge</div>
       </div>
-      <div class="menu-chevron">›</div>
+      <div class="menu-chevron" data-icon="icon_chevron"></div>
     </div>
     <div class="menu-item" onclick="playSound('menu');goTo('statistikPage')">
       <div class="menu-item-left">
@@ -1042,7 +1044,7 @@ input:checked+.slider:before{transform:translateX(22px);}
         <div class="menu-item-name">Statistik</div>
         <div class="menu-item-desc">Pantau perkembangan belajar</div>
       </div>
-      <div class="menu-chevron">›</div>
+      <div class="menu-chevron" data-icon="icon_chevron"></div>
     </div>
     <div class="menu-item" onclick="playSound('menu');goTo('petunjukPage')">
       <div class="menu-item-left">
@@ -1050,7 +1052,7 @@ input:checked+.slider:before{transform:translateX(22px);}
         <div class="menu-item-name">Petunjuk</div>
         <div class="menu-item-desc">Panduan penggunaan aplikasi</div>
       </div>
-      <div class="menu-chevron">›</div>
+      <div class="menu-chevron" data-icon="icon_chevron"></div>
     </div>
     <div class="menu-item" onclick="playSound('menu');goTo('tentangPage')">
       <div class="menu-item-left">
@@ -1058,7 +1060,7 @@ input:checked+.slider:before{transform:translateX(22px);}
         <div class="menu-item-name">Tentang</div>
         <div class="menu-item-desc">Informasi tentang aplikasi</div>
       </div>
-      <div class="menu-chevron">›</div>
+      <div class="menu-chevron" data-icon="icon_chevron"></div>
     </div>
   </div>
   <div style="height:20px;"></div>
@@ -1070,7 +1072,7 @@ input:checked+.slider:before{transform:translateX(22px);}
     
     <!-- HEADER FIXED -->
     <div style="position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:50;background:#fff;display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.05);">
-      <button class="btn-back" onclick="playSound('back');goTo('homePage')">←</button>
+      <button class="btn-back" data-icon="icon_back" onclick="playSound('back');goTo('homePage')"></button>
       <h2 style="font-size:17px;font-weight:800;color:var(--dark);flex:1;margin:0;"><span data-icon="icon_profil" class="ic-sm"></span> Profil Saya</h2>
     </div>
     
@@ -1112,7 +1114,7 @@ input:checked+.slider:before{transform:translateX(22px);}
     
     <!-- HEADER FIXED - TIDAK AKAN SCROLL -->
     <div style="position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:50;background:#fff;display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.05);">
-      <button class="btn-back" onclick="playSound('back');goTo('homePage')">←</button>
+      <button class="btn-back" data-icon="icon_back" onclick="playSound('back');goTo('homePage')"></button>
       <h2 style="font-size:17px;font-weight:800;color:var(--dark);flex:1;margin:0;"><span data-icon="icon_menu_latihan" class="ic-sm"></span> Pilih Latihan SKD</h2>
       <div style="display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;">
         <span class="timer-on" id="timerLabel">⏱️ ON</span>
@@ -1173,7 +1175,7 @@ input:checked+.slider:before{transform:translateX(22px);}
 <div id="evaluasiListPage" class="page">
   <div style="background:var(--bg);height:100vh;max-height:100vh;display:flex;flex-direction:column;overflow:hidden;">
     <div class="page-header" style="border-radius:0;margin-bottom:0;">
-      <button class="btn-back" onclick="playSound('back');goTo('quizlistPage')">←</button>
+      <button class="btn-back" data-icon="icon_back" onclick="playSound('back');goTo('quizlistPage')"></button>
       <h2><span data-icon="icon_result_eval" class="ic-sm"></span> Evaluasi Jawaban</h2>
     </div>
     <div style="padding:12px 16px 8px;flex-shrink:0;">
@@ -1188,7 +1190,7 @@ input:checked+.slider:before{transform:translateX(22px);}
 <div id="resultPage" class="page">
   <div style="background:var(--bg);min-height:100vh;padding-bottom:80px;">
     <div class="page-header">
-      <button class="btn-back" onclick="playSound('back');backToHome()">←</button>
+      <button class="btn-back" data-icon="icon_back" onclick="playSound('back');backToHome()"></button>
       <h2><span data-icon="icon_menu_statistik" class="ic-sm"></span> Hasil</h2>
     </div>
     <div class="result-wrap">
@@ -1217,7 +1219,7 @@ input:checked+.slider:before{transform:translateX(22px);}
     
     <!-- HEADER FIXED -->
     <div style="position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:50;background:#fff;display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.05);">
-      <button class="btn-back" onclick="playSound('back');goTo('homePage')">←</button>
+      <button class="btn-back" data-icon="icon_back" onclick="playSound('back');goTo('homePage')"></button>
       <h2 style="font-size:17px;font-weight:800;color:var(--dark);flex:1;margin:0;"><span data-icon="icon_menu_materi" class="ic-sm"></span> Materi SKD</h2>
     </div>
     
@@ -1240,7 +1242,7 @@ input:checked+.slider:before{transform:translateX(22px);}
     
     <!-- HEADER FIXED -->
     <div style="position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:50;background:#fff;display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.05);">
-      <button class="btn-back" onclick="playSound('back');goTo('materiPage')">←</button>
+      <button class="btn-back" data-icon="icon_back" onclick="playSound('back');goTo('materiPage')"></button>
       <h2 style="font-size:17px;font-weight:800;color:var(--dark);flex:1;margin:0;" id="materiContentTitle"><span data-icon="icon_menu_materi" class="ic-sm"></span> Materi</h2>
     </div>
     
@@ -1261,7 +1263,7 @@ input:checked+.slider:before{transform:translateX(22px);}
     
     <!-- HEADER FIXED -->
     <div style="position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:50;background:#fff;display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.05);">
-      <button class="btn-back" onclick="playSound('back');goTo('homePage')">←</button>
+      <button class="btn-back" data-icon="icon_back" onclick="playSound('back');goTo('homePage')"></button>
       <h2 style="font-size:17px;font-weight:800;color:var(--dark);flex:1;margin:0;"><span data-icon="icon_menu_statistik" class="ic-sm"></span> Statistik Belajar</h2>
     </div>
     
@@ -1285,7 +1287,7 @@ input:checked+.slider:before{transform:translateX(22px);}
     
     <!-- HEADER FIXED -->
     <div style="position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:50;background:#fff;display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.05);">
-      <button class="btn-back" onclick="playSound('back');goTo('homePage')">←</button>
+      <button class="btn-back" data-icon="icon_back" onclick="playSound('back');goTo('homePage')"></button>
       <h2 style="font-size:17px;font-weight:800;color:var(--dark);flex:1;margin:0;"><span data-icon="icon_menu_pencapaian" class="ic-sm"></span> Pencapaian</h2>
     </div>
     
@@ -1310,7 +1312,7 @@ input:checked+.slider:before{transform:translateX(22px);}
     
     <!-- HEADER FIXED -->
     <div style="position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:50;background:#fff;display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.05);">
-      <button class="btn-back" onclick="playSound('back');goTo('homePage')">←</button>
+      <button class="btn-back" data-icon="icon_back" onclick="playSound('back');goTo('homePage')"></button>
       <h2 style="font-size:17px;font-weight:800;color:var(--dark);flex:1;margin:0;"><span data-icon="icon_menu_simulasi" class="ic-sm"></span> Simulasi Ujian SKD</h2>
     </div>
     
@@ -1338,7 +1340,7 @@ input:checked+.slider:before{transform:translateX(22px);}
     
     <!-- HEADER FIXED -->
     <div style="position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:50;background:#fff;display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.05);">
-      <button class="btn-back" onclick="playSound('back');goTo('homePage')">←</button>
+      <button class="btn-back" data-icon="icon_back" onclick="playSound('back');goTo('homePage')"></button>
       <h2 style="font-size:17px;font-weight:800;color:var(--dark);flex:1;margin:0;"><span data-icon="icon_menu_petunjuk" class="ic-sm"></span> Petunjuk</h2>
     </div>
     
@@ -1376,7 +1378,7 @@ input:checked+.slider:before{transform:translateX(22px);}
     
     <!-- HEADER FIXED -->
     <div style="position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:50;background:#fff;display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.05);">
-      <button class="btn-back" onclick="playSound('back');goTo('homePage')">←</button>
+      <button class="btn-back" data-icon="icon_back" onclick="playSound('back');goTo('homePage')"></button>
       <h2 style="font-size:17px;font-weight:800;color:var(--dark);flex:1;margin:0;"><span data-icon="icon_menu_tentang" class="ic-sm"></span> Tentang Aplikasi</h2>
     </div>
     
@@ -1419,7 +1421,7 @@ input:checked+.slider:before{transform:translateX(22px);}
     
     <!-- HEADER FIXED -->
     <div style="position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:50;background:#fff;display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.05);">
-      <button class="btn-back" onclick="playSound('back');goTo('homePage')">←</button>
+      <button class="btn-back" data-icon="icon_back" onclick="playSound('back');goTo('homePage')"></button>
       <h2 style="font-size:17px;font-weight:800;color:var(--dark);flex:1;margin:0;"><span data-icon="icon_menu_kuis" class="ic-sm"></span> Kuis Cepat</h2>
     </div>
     
@@ -1440,7 +1442,7 @@ input:checked+.slider:before{transform:translateX(22px);}
     
     <!-- HEADER FIXED -->
     <div style="position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:50;background:#fff;display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.05);">
-      <button class="btn-back" onclick="playSound('back');goTo('quizCepatPage')">←</button>
+      <button class="btn-back" data-icon="icon_back" onclick="playSound('back');goTo('quizCepatPage')"></button>
       <h2 style="font-size:17px;font-weight:800;color:var(--dark);flex:1;margin:0;">Konfirmasi</h2>
     </div>
     
@@ -2374,18 +2376,19 @@ function renderQuizCepatGrid(){
     const bests=[1,3,5,10].map(m=>{const b=getQCBestScore(cat,m);return b>0?`<span class="qc-stat-pill">⏱️${m}m: ${b}</span>`:'';}).filter(x=>x).join('');
     html+=`<div class="qc-cat-card" onclick="playSound('menu');pilihanQC('${cat}')">
       <div class="qc-cat-header ${cat}">
-        <div class="qc-cat-icon">${c.icon}</div>
+        <div class="qc-cat-icon" data-icon="${c.icon}"></div>
         <div class="qc-cat-info"><div class="qc-cat-title">${c.name} — ${c.fullName}</div><div class="qc-cat-sub">${soalArr.length} soal tersedia · ${totalSesi} sesi</div></div>
       </div>
       <div class="qc-cat-stats">${bests||'<span class="qc-stat-pill" style="opacity:.7;">Belum ada rekor</span>'}</div>
     </div>`;
   });
   grid.innerHTML=html;
+  fillIcons(grid);
 }
 function pilihanQC(cat){
   qcState.cat=cat;qcState.timerMenit=1;
   const c=QC_CATS[cat];const soalArr=getQCSoal(cat);
-  document.getElementById('qcConfirmIcon').textContent=c.icon;
+  document.getElementById('qcConfirmIcon').innerHTML=IMAGES[c.icon];
   document.getElementById('qcConfirmTitle').textContent=`Kuis Cepat ${c.name}`;
   document.getElementById('qcConfirmSub').textContent=`Jawab soal ${c.fullName} sebanyak-banyaknya dalam waktu yang dipilih!`;
   const infoRow=document.getElementById('qcInfoRow');
@@ -2420,7 +2423,7 @@ function renderQCQuestion(){
   const soal=qcState.soal;const idx=qcState.curIdx;
   if(idx>=soal.length){finishQuizCepat();return;}
   const d=soal[idx];const c=QC_CATS[qcState.cat];
-  document.getElementById('qcPlayCat').textContent=`${c.icon} ${c.name}`;
+  document.getElementById('qcPlayCat').innerHTML=`<span class="ic-inline">${IMAGES[c.icon]}</span>${c.name}`;
   document.getElementById('qcPlayCat').className=`qc-play-cat ${qcState.cat}`;
   document.getElementById('qcPlayScore').textContent=`Soal ke-${idx+1}`;
   document.getElementById('qcCorrectCount').textContent=`✅ ${qcState.benar} Benar`;
