@@ -401,6 +401,17 @@ input:checked+.slider:before{transform:translateX(22px);}
 .evaluasi-item .jawaban-benar{font-size:13px;margin-bottom:4px;padding:7px 10px;border-radius:8px;background:#E0F2F1;color:#004D40;text-align:justify;}
 .evaluasi-item .pembahasan-box{margin-top:8px;padding:10px 12px;border-radius:8px;background:#E3F2FD;border-left:3px solid var(--blue);font-size:12px;color:#0D47A1;line-height:1.6;}
 .pembahasan-box strong{display:block;margin-bottom:3px;font-size:11px;text-transform:uppercase;letter-spacing:.5px;}
+.eval-opts{margin:8px 0;display:flex;flex-direction:column;gap:6px;}
+.eval-opt{display:flex;align-items:flex-start;gap:8px;padding:8px 10px;border-radius:8px;background:#fff;border:1.5px solid var(--border);font-size:12.5px;line-height:1.5;color:#334155;text-align:justify;}
+.eval-opt .eval-opt-letter{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:#E2E8F0;color:#475569;font-weight:700;font-size:11px;display:flex;align-items:center;justify-content:center;}
+.eval-opt .eval-opt-text{flex:1;padding-top:2px;}
+.eval-opt .eval-opt-tag{flex-shrink:0;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;white-space:nowrap;}
+.eval-opt.correct{border-color:#00897B;background:#E0F2F1;}
+.eval-opt.correct .eval-opt-letter{background:#00897B;color:#fff;}
+.eval-opt.correct .eval-opt-tag{background:#00897B;color:#fff;}
+.eval-opt.user-wrong{border-color:#C62828;background:#FFEBEE;}
+.eval-opt.user-wrong .eval-opt-letter{background:#C62828;color:#fff;}
+.eval-opt.user-wrong .eval-opt-tag{background:#C62828;color:#fff;}
 .score-summary-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:14px;}
 .score-pill{padding:5px 12px;border-radius:20px;font-weight:700;font-size:12px;}
 .score-pill .ic-inline svg{width:13px;height:13px;}
@@ -2687,10 +2698,11 @@ function showEvaluasiFromList(setId){
   for(let i=0;i<eq.length;i++){
     const n=i+1,cat=getCat(n),q=eq[i],pb=q.pembahasan||'';
     let jawUser='Tidak dijawab',jawBenar='',stCls='belum',stIcon='⏳';
-    if(q.isTKP){const uS=(savedScores[i]!==undefined&&savedScores[i]!==null)?savedScores[i]:null;if(uS!==null){const idx=q.optionScores.findIndex(s=>s===uS);jawUser=idx>=0?`${PREFIXES[idx]}. ${q.options[idx]} (${uS}pt)`:'Tidak dijawab';const mS=Math.max(...q.optionScores),bIdx=q.optionScores.findIndex(s=>s===mS);jawBenar=`${PREFIXES[bIdx]}. ${q.options[bIdx]} (${mS}pt)`;stCls=uS===mS?'benar':'salah';stIcon=uS===mS?'✅':'❌';}}
-    else{const uA=(savedAnswers[i]!==undefined&&savedAnswers[i]!==null)?savedAnswers[i]:null;if(uA!==null){jawUser=`${PREFIXES[uA]}. ${q.options[uA]}`;jawBenar=`${PREFIXES[q.answer]}. ${q.options[q.answer]}`;stCls=uA===q.answer?'benar':'salah';stIcon=uA===q.answer?'✅':'❌';}}
+    let userIdx=null;
+    if(q.isTKP){const uS=(savedScores[i]!==undefined&&savedScores[i]!==null)?savedScores[i]:null;if(uS!==null){const idx=q.optionScores.findIndex(s=>s===uS);userIdx=idx>=0?idx:null;const mS=Math.max(...q.optionScores);stCls=uS===mS?'benar':'salah';stIcon=uS===mS?'✅':'❌';}}
+    else{const uA=(savedAnswers[i]!==undefined&&savedAnswers[i]!==null)?savedAnswers[i]:null;if(uA!==null){userIdx=uA;stCls=uA===q.answer?'benar':'salah';stIcon=uA===q.answer?'✅':'❌';}}
     let stLabel=stCls==='benar'?'<span style="color:#00897B;font-weight:700;font-size:12px;">✅ BENAR</span>':stCls==='salah'?'<span style="color:#C62828;font-weight:700;font-size:12px;">❌ SALAH</span>':'<span style="color:#F57C00;font-weight:700;font-size:12px;">⏳ BELUM</span>';
-    html+=`<div class="evaluasi-item ${stCls}"><div class="soal-teks">${stIcon} Soal ${n} [${cat.name}] — ${stLabel}</div><div class="soal-isi">${formatSoal(q.question)}</div><div class="jawaban-user">📌 <strong>Jawaban Anda:</strong> ${jawUser}</div>${jawBenar?`<div class="jawaban-benar">✅ <strong>Jawaban Benar:</strong> ${jawBenar}</div>`:''}${pb?`<div class="pembahasan-box"><strong>💡 Pembahasan</strong><br>${pb}</div>`:''}</div>`;
+    html+=`<div class="evaluasi-item ${stCls}"><div class="soal-teks">${stIcon} Soal ${n} [${cat.name}] — ${stLabel}</div><div class="soal-isi">${formatSoal(q.question)}</div>${renderEvalOptions(q,userIdx)}${pb?`<div class="pembahasan-box"><strong>💡 Pembahasan</strong><br>${pb}</div>`:''}</div>`;
   }
   document.getElementById('evalListContent').innerHTML=html;
   goTo('evaluasiListPage');
@@ -2873,15 +2885,40 @@ if(!wasSimulasi){
 }
 function restartQuiz(){if(activeSet>0)startQuiz(activeSet);else goTo('homePage');}
 function backToHome(){if(timerInterval){clearInterval(timerInterval);timerInterval=null;}simulasiMode=false;goTo('homePage');refreshHomeStats();}
+function renderEvalOptions(q,userIdx){
+  if(q.isTKP){
+    const mS=Math.max(...q.optionScores);
+    return '<div class="eval-opts">'+q.options.map((o,i)=>{
+      const isBest=q.optionScores[i]===mS;
+      const isUser=userIdx!==null&&userIdx===i;
+      let cls='eval-opt';let tag='';
+      if(isBest){cls+=' correct';tag=`<span class="eval-opt-tag">✅ Terbaik (${q.optionScores[i]}pt)</span>`;}
+      else if(isUser){cls+=' user-wrong';tag=`<span class="eval-opt-tag">📌 Pilihan Anda (${q.optionScores[i]}pt)</span>`;}
+      else{tag=`<span class="eval-opt-tag" style="background:#E2E8F0;color:#475569;">${q.optionScores[i]}pt</span>`;}
+      if(isUser&&isBest){tag=`<span class="eval-opt-tag">📌✅ Pilihan Anda · Terbaik (${q.optionScores[i]}pt)</span>`;}
+      return `<div class="${cls}"><div class="eval-opt-letter">${PREFIXES[i]}</div><div class="eval-opt-text">${o}</div>${tag}</div>`;
+    }).join('')+'</div>';
+  }
+  return '<div class="eval-opts">'+q.options.map((o,i)=>{
+    const isCorrect=i===q.answer;
+    const isUser=userIdx!==null&&userIdx===i;
+    let cls='eval-opt';let tag='';
+    if(isCorrect){cls+=' correct';tag='<span class="eval-opt-tag">✅ Jawaban Benar</span>';}
+    else if(isUser){cls+=' user-wrong';tag='<span class="eval-opt-tag">📌 Pilihan Anda</span>';}
+    if(isUser&&isCorrect){tag='<span class="eval-opt-tag">📌✅ Pilihan Anda · Benar</span>';}
+    return `<div class="${cls}"><div class="eval-opt-letter">${PREFIXES[i]}</div><div class="eval-opt-text">${o}</div>${tag}</div>`;
+  }).join('')+'</div>';
+}
 function showEvaluasi(){
   const panel=document.getElementById('evaluasiPanel');let html='<h3 style="color:var(--blue);margin-bottom:12px;">📝 Evaluasi Jawaban</h3>';
   for(let i=0;i<questions.length;i++){
     const n=i+1;const katName=questions[i].kategori||getCat(n).name;
     const q=questions[i],pb=q.pembahasan||'';
     let jawUser='Tidak dijawab',jawBenar='',stCls='belum',stIcon='⏳';
-    if(q.isTKP){if(userScores[i]!==null&&userScores[i]!==undefined){const uS=userScores[i],idx=q.optionScores.findIndex(s=>s===uS);jawUser=idx>=0?`${PREFIXES[idx]}. ${q.options[idx]} (${uS}pt)`:'Tidak dijawab';const mS=Math.max(...q.optionScores),bIdx=q.optionScores.findIndex(s=>s===mS);jawBenar=`${PREFIXES[bIdx]}. ${q.options[bIdx]} (${mS}pt)`;stCls=uS===mS?'benar':'salah';stIcon=uS===mS?'✅':'❌';}}
-    else{if(userAnswers[i]!==null){jawUser=`${PREFIXES[userAnswers[i]]}. ${q.options[userAnswers[i]]}`;jawBenar=`${PREFIXES[q.answer]}. ${q.options[q.answer]}`;stCls=userAnswers[i]===q.answer?'benar':'salah';stIcon=userAnswers[i]===q.answer?'✅':'❌';}}
-    html+=`<div class="evaluasi-item ${stCls}"><div class="soal-teks">${stIcon} Soal ${n} [${katName}]</div><div class="soal-isi">${formatSoal(q.question)}</div><div class="jawaban-user">📌 <strong>Jawaban Anda:</strong> ${jawUser}</div>${jawBenar?`<div class="jawaban-benar">✅ <strong>Jawaban Benar:</strong> ${jawBenar}</div>`:''}${pb?`<div class="pembahasan-box"><strong>💡 Pembahasan</strong><br>${pb}</div>`:''}</div>`;
+    let userIdx=null;
+    if(q.isTKP){if(userScores[i]!==null&&userScores[i]!==undefined){const uS=userScores[i],idx=q.optionScores.findIndex(s=>s===uS);userIdx=idx>=0?idx:null;const mS=Math.max(...q.optionScores);stCls=uS===mS?'benar':'salah';stIcon=uS===mS?'✅':'❌';}}
+    else{if(userAnswers[i]!==null){userIdx=userAnswers[i];stCls=userAnswers[i]===q.answer?'benar':'salah';stIcon=userAnswers[i]===q.answer?'✅':'❌';}}
+    html+=`<div class="evaluasi-item ${stCls}"><div class="soal-teks">${stIcon} Soal ${n} [${katName}]</div><div class="soal-isi">${formatSoal(q.question)}</div>${renderEvalOptions(q,userIdx)}${pb?`<div class="pembahasan-box"><strong>💡 Pembahasan</strong><br>${pb}</div>`:''}</div>`;
   }
   panel.innerHTML=html;panel.style.display='block';document.getElementById('btnCloseEval').style.display='block';panel.scrollIntoView({behavior:'smooth',block:'start'});
 }
