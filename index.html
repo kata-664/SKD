@@ -413,7 +413,9 @@ input:checked+.slider:before{transform:translateX(22px);}
 .evaluasi-item .soal-isi{font-size:13px;margin-bottom:7px;color:#475569;line-height:1.5;text-align:justify;}
 .evaluasi-item .jawaban-user{font-size:13px;margin-bottom:4px;padding:7px 10px;border-radius:8px;background:#E2E8F0;text-align:justify;}
 .evaluasi-item .jawaban-benar{font-size:13px;margin-bottom:4px;padding:7px 10px;border-radius:8px;background:#E0F2F1;color:#004D40;text-align:justify;}
-.evaluasi-item .pembahasan-box{margin-top:8px;padding:10px 12px;border-radius:8px;background:#E3F2FD;border-left:3px solid var(--blue);font-size:12px;color:#0D47A1;line-height:1.6;}
+.evaluasi-item .pembahasan-box{margin-top:8px;padding:10px 12px;border-radius:8px;background:#E3F2FD;border-left:3px solid var(--blue);font-size:12px;color:#0D47A1;line-height:1.6;text-align:justify;}
+.pembahasan-box p{margin:4px 0 0;text-align:justify;}
+.pembahasan-box p:first-of-type{margin-top:4px;}
 .pembahasan-box strong{display:block;margin-bottom:3px;font-size:11px;text-transform:uppercase;letter-spacing:.5px;}
 .eval-opts{margin:8px 0;display:flex;flex-direction:column;gap:6px;}
 .eval-opt{display:flex;align-items:flex-start;gap:8px;padding:8px 10px;border-radius:8px;background:#fff;border:1.5px solid var(--border);font-size:12.5px;line-height:1.5;color:#334155;text-align:justify;}
@@ -1224,11 +1226,11 @@ input:checked+.slider:before{transform:translateX(22px);}
 <!-- =========== HASIL =========== -->
 <div id="resultPage" class="page">
   <div style="background:var(--bg);min-height:100vh;padding-bottom:80px;">
-    <div class="page-header">
+    <div style="position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:50;background:#fff;display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.05);">
       <button class="btn-back" data-icon="icon_back" onclick="playSound('back');backToHome()"></button>
-      <h2><span data-icon="icon_menu_statistik" class="ic-sm"></span> Hasil</h2>
+      <h2 style="font-size:17px;font-weight:800;color:var(--dark);flex:1;margin:0;"><span data-icon="icon_menu_statistik" class="ic-sm"></span> Hasil</h2>
     </div>
-    <div class="result-wrap">
+    <div class="result-wrap" style="padding-top:82px;">
       <div class="result-hero">
         <h2>Skor Kamu</h2>
         <p id="resultSubtitle">Latihan SKD</p>
@@ -1546,6 +1548,12 @@ input:checked+.slider:before{transform:translateX(22px);}
 <div id="quizCepatResultPage" class="page">
   <div style="background:var(--bg);min-height:100vh;padding:16px;padding-bottom:80px;">
     
+    <div style="position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:50;background:#fff;display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.05);margin:-16px -16px 0;">
+      <button class="btn-back" data-icon="icon_back" onclick="playSound('back');goTo('quizCepatPage')"></button>
+      <h2 style="font-size:17px;font-weight:800;color:var(--dark);flex:1;margin:0;"><span data-icon="icon_menu_statistik" class="ic-sm"></span> Hasil</h2>
+    </div>
+
+    <div style="padding-top:66px;">
     <div class="qc-result-header">
       <div class="qc-result-icon" id="qcResIcon">🏆</div>
       <div class="qc-result-title" id="qcResTitle">Quiz Selesai!</div>
@@ -1566,6 +1574,7 @@ input:checked+.slider:before{transform:translateX(22px);}
     <div class="qc-result-btns">
       <button class="btn-qc-ulang" onclick="playSound('start');ulangQuizCepat()">🔄 Ulangi</button>
       <button class="btn-qc-lain" onclick="playSound('back');goTo('quizCepatPage')">⚡ Lain</button>
+    </div>
     </div>
     
   </div>
@@ -2338,7 +2347,7 @@ function showMateri(k){
     const key = el.getAttribute('data-icon');
     const value = IMAGES[key];
     if(!value) return;
-    if(value.includes('<img')){
+    if(value.includes('<svg') || value.includes('<img')){
       el.innerHTML = value;
     } else {
       el.textContent = value;
@@ -2749,7 +2758,7 @@ function showEvaluasiFromList(setId){
     if(q.isTKP){const uS=(savedScores[i]!==undefined&&savedScores[i]!==null)?savedScores[i]:null;if(uS!==null){const idx=q.optionScores.findIndex(s=>s===uS);userIdx=idx>=0?idx:null;const mS=Math.max(...q.optionScores);stCls=uS===mS?'benar':'salah';stIcon=uS===mS?'✅':'❌';}}
     else{const uA=(savedAnswers[i]!==undefined&&savedAnswers[i]!==null)?savedAnswers[i]:null;if(uA!==null){userIdx=uA;stCls=uA===q.answer?'benar':'salah';stIcon=uA===q.answer?'✅':'❌';}}
     let stLabel=stCls==='benar'?'<span style="color:#00897B;font-weight:700;font-size:12px;">✅ BENAR</span>':stCls==='salah'?'<span style="color:#C62828;font-weight:700;font-size:12px;">❌ SALAH</span>':'<span style="color:#F57C00;font-weight:700;font-size:12px;">⏳ BELUM</span>';
-    html+=`<div class="evaluasi-item ${stCls}"><div class="soal-teks">${stIcon} Soal ${n} [${cat.name}] — ${stLabel}</div><div class="soal-isi">${formatSoal(q.question)}</div>${renderEvalOptions(q,userIdx)}${pb?`<div class="pembahasan-box"><strong>💡 Pembahasan</strong><br>${pb}</div>`:''}</div>`;
+    html+=`<div class="evaluasi-item ${stCls}"><div class="soal-teks">${stIcon} Soal ${n} [${cat.name}] — ${stLabel}</div><div class="soal-isi">${formatSoal(q.question)}</div>${renderEvalOptions(q,userIdx)}${pb?`<div class="pembahasan-box"><strong>💡 Pembahasan</strong>${formatSoal(pb)}</div>`:''}</div>`;
   }
   document.getElementById('evalListContent').innerHTML=html;
   goTo('evaluasiListPage');
@@ -2965,7 +2974,7 @@ function showEvaluasi(){
     let userIdx=null;
     if(q.isTKP){if(userScores[i]!==null&&userScores[i]!==undefined){const uS=userScores[i],idx=q.optionScores.findIndex(s=>s===uS);userIdx=idx>=0?idx:null;const mS=Math.max(...q.optionScores);stCls=uS===mS?'benar':'salah';stIcon=uS===mS?'✅':'❌';}}
     else{if(userAnswers[i]!==null){userIdx=userAnswers[i];stCls=userAnswers[i]===q.answer?'benar':'salah';stIcon=userAnswers[i]===q.answer?'✅':'❌';}}
-    html+=`<div class="evaluasi-item ${stCls}"><div class="soal-teks">${stIcon} Soal ${n} [${katName}]</div><div class="soal-isi">${formatSoal(q.question)}</div>${renderEvalOptions(q,userIdx)}${pb?`<div class="pembahasan-box"><strong>💡 Pembahasan</strong><br>${pb}</div>`:''}</div>`;
+    html+=`<div class="evaluasi-item ${stCls}"><div class="soal-teks">${stIcon} Soal ${n} [${katName}]</div><div class="soal-isi">${formatSoal(q.question)}</div>${renderEvalOptions(q,userIdx)}${pb?`<div class="pembahasan-box"><strong>💡 Pembahasan</strong>${formatSoal(pb)}</div>`:''}</div>`;
   }
   panel.innerHTML=html;panel.style.display='block';document.getElementById('btnCloseEval').style.display='block';panel.scrollIntoView({behavior:'smooth',block:'start'});
 }
