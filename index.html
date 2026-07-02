@@ -37,6 +37,16 @@ body{
   padding-bottom:80px;
   overflow-x:hidden;
 }
+/* Halaman fullscreen (quiz aktif dll) punya layout height:100vh sendiri.
+   padding-bottom 80px di atas membuat dokumen jadi lebih tinggi dari viewport
+   sehingga body bisa ke-scroll sungguhan (bukan cuma bounce), yang menyeret
+   header/soal ke atas saat daftar soal di-scroll sampai mentok. Nolkan di sini. */
+.app.fullscreen-page{
+  padding-bottom:0;
+  height:100vh;
+  height:100dvh;
+  overflow:hidden;
+}
 
 /* ========== PAGE SYSTEM ========== */
 /* FIX: semua .page disembunyikan, hanya .active yang tampil */
@@ -2052,6 +2062,7 @@ const PAGES=['homePage','quizlistPage','materiPage','materiContentPage','statist
   'petunjukPage','tentangPage','quizPage','resultPage','evaluasiListPage','pencapaianPage',
   'quizCepatPage','quizCepatConfirmPage','quizCepatPlayPage','quizCepatResultPage','akunPage','loginPage'];
 const PAGES_WITH_SIDEBAR=['quizPage'];
+const FULLSCREEN_PAGES=['quizPage','evaluasiListPage','quizCepatPlayPage'];
 let currentPage='loginPage';
 
 function _showPage(pageId){
@@ -2065,6 +2076,10 @@ function _showPage(pageId){
   if(target) target.classList.add('active');
   currentPage=pageId;
   window.scrollTo(0,0);
+
+  // Nolkan padding/scroll body khusus halaman fullscreen (quiz aktif dll)
+  const appEl=document.querySelector('.app');
+  if(appEl) appEl.classList.toggle('fullscreen-page',FULLSCREEN_PAGES.includes(pageId));
 
   // Kelola bottom nav
   const nav=document.getElementById('bottomNav');
