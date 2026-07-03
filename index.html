@@ -2897,7 +2897,7 @@ function finishQuiz(){
   saveAnswer();
   const wasSimulasi=simulasiMode;
   let s;
-  if(!wasSimulasi){s=hitungSkor();const bank=getSoalBank(activeSet);s.mTWK=bank.twk.length*5||150;s.mTIU=bank.tiu.length*5||175;s.mTKP=bank.tkp.length*5||225;s.mTot=s.mTWK+s.mTIU+s.mTKP;}
+  if(!wasSimulasi){s=hitungSkor();const bank=getSoalBank(activeSet);s.mTWK=bank.twk.length*5||150;s.mTIU=bank.tiu.length*5||175;s.mTKP=bank.tkp.length*5||225;s.mTot=s.mTWK+s.mTIU+s.mTKP;} 
   else{s=hitungSkorByKategori();}
   if(wasSimulasi){
     const simuCount=(parseInt(localStorage.getItem('simulasiCount')||'0'))+1;localStorage.setItem('simulasiCount',simuCount);
