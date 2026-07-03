@@ -114,7 +114,7 @@ var quizTWK= [
     pembahasan: ""
   },
   { // No 20
-    q: "ecara horizontal kebinekaan masyarakat Indonesia dapat dilihat dari ...",
+    q: "Secara horizontal kebinekaan masyarakat Indonesia dapat dilihat dari ...",
     opt: ["perbedaan kepemilikan kekayaan dan jenjang pendidikan","perbedaan kedudukan dan jabatan di tengah-tengah masyarakat","perbedaan ras, suku bangsa, serta agama.","perbedaan jenis kelamin, ras, dan tingkat pendidikan","perbedaan tingkat pendidikan, status sosial, dan kepemilikan lahan"],
     a: 2,
     pembahasan: ""
@@ -145,7 +145,7 @@ var quizTWK= [
   },
   { // No 25
     q: "Lima dasar negara yang diusulkan oleh Ir. Soekarno secara berurutan adalah ...",
-    opt: ["KetuhananYang Maha Esa, kesejahteraan sosial, mufakat atau demokrasi, internasionalisme atau perikemanusiaan, kebangsaan Indonesia","Ketuhanan Yang Maha Esa, kebangsaan Indonesia, kesejahteraan sosial, internasionalisme atau perikemanusiaan mufakat, atau demokrasi","Ketuhanan Yang Maha Esa, kebangsaan Indonesia, kesejahteraan sosial, mufakat atau demokrasi, internasionalisme atau perikemanusiaan","kebangsaan Indonesia, internasionalisme atau perikemanusiaan, mufakat atau demokrasi, kesejahteraan sosial, dan Ketuhanan Yang Maha Esa","kebangsaan Indonesia, internasionalisme atau perikemanusiaan, Ketuhanan Yang Maha Esa, kesejahteraan sosial, mufakat atau demokrasi"],
+    opt: ["Ketuhanan Yang Maha Esa, kesejahteraan sosial, mufakat atau demokrasi, internasionalisme atau perikemanusiaan, kebangsaan Indonesia","Ketuhanan Yang Maha Esa, kebangsaan Indonesia, kesejahteraan sosial, internasionalisme atau perikemanusiaan mufakat, atau demokrasi","Ketuhanan Yang Maha Esa, kebangsaan Indonesia, kesejahteraan sosial, mufakat atau demokrasi, internasionalisme atau perikemanusiaan","kebangsaan Indonesia, internasionalisme atau perikemanusiaan, mufakat atau demokrasi, kesejahteraan sosial, dan Ketuhanan Yang Maha Esa","kebangsaan Indonesia, internasionalisme atau perikemanusiaan, Ketuhanan Yang Maha Esa, kesejahteraan sosial, mufakat atau demokrasi"],
     a: 3,
     pembahasan: ""
   },
@@ -169,7 +169,7 @@ var quizTWK= [
   },
   { // No 29
     q: "Makna Pancasila ditinjau dari dimensi teologis adalah ...",
-    opt: ["dimensi Pancasila yang menunjukkan bahwa pembangunan mempunyai citacita Proklamasi 1945","dimensi yang menunjukkan bahwa dalam Pancasila manusia dan martabat manusia mempunyai kedudukan yang sentral","dimensi yang menempatkan manusia tidak secara individualis","dimensi yang berisi nilai-nilai luhur","dimensi yang berisi cita-cita atau pandangan hidup"],
+    opt: ["dimensi Pancasila yang menunjukkan bahwa pembangunan mempunyai cita-cita Proklamasi 1945","dimensi yang menunjukkan bahwa dalam Pancasila manusia dan martabat manusia mempunyai kedudukan yang sentral","dimensi yang menempatkan manusia tidak secara individualis","dimensi yang berisi nilai-nilai luhur","dimensi yang berisi cita-cita atau pandangan hidup"],
     a: 0,
     pembahasan: ""
   },
